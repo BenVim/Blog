@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.ku-cat.com/"/>
-  <updated>2018-03-31T01:31:33.587Z</updated>
+  <updated>2018-03-31T04:04:11.657Z</updated>
   <id>http://blog.ku-cat.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>sql语句的分组查询</title>
+    <link href="http://blog.ku-cat.com/2018/03/31/sql/"/>
+    <id>http://blog.ku-cat.com/2018/03/31/sql/</id>
+    <published>2018-03-31T03:32:25.000Z</published>
+    <updated>2018-03-31T04:04:11.657Z</updated>
+    
+    <content type="html"><![CDATA[<p>分组查询 按分组统计结果排序，然后再过滤统计结果的数量，然后分页</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> (<span class="keyword">select</span> t1.id,<span class="keyword">count</span>(*) <span class="keyword">as</span> total, t1.<span class="string">`player_num`</span></span><br><span class="line"><span class="keyword">from</span> house t1 <span class="keyword">left</span> <span class="keyword">join</span> player t2 <span class="keyword">on</span> t1.id=t2.house_id</span><br><span class="line"><span class="keyword">group</span>  <span class="keyword">by</span> t1.id</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> total <span class="keyword">desc</span>) a <span class="keyword">where</span> total &lt; player_num;</span><br></pre></td></tr></table></figure><p>增加条件</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> (<span class="keyword">select</span> t1.id,<span class="keyword">count</span>(*) <span class="keyword">as</span> total, t1.<span class="string">`player_num`</span>, t1.<span class="string">`union_id`</span></span><br><span class="line"><span class="keyword">from</span> house t1 <span class="keyword">left</span> <span class="keyword">join</span> player t2 <span class="keyword">on</span> t1.id=t2.house_id </span><br><span class="line"><span class="keyword">where</span> t1.union_id=<span class="number">40</span></span><br><span class="line"><span class="keyword">group</span>  <span class="keyword">by</span> t1.id</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> total <span class="keyword">desc</span>) a </span><br><span class="line"><span class="keyword">where</span> total&lt;player_num;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;分组查询 按分组统计结果排序，然后再过滤统计结果的数量，然后分页&lt;/p&gt;
+&lt;figure class=&quot;highlight sql&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;spa
+      
+    
+    </summary>
+    
+    
+      <category term="sql" scheme="http://blog.ku-cat.com/tags/sql/"/>
+    
+  </entry>
   
   <entry>
     <title>Hello World</title>
