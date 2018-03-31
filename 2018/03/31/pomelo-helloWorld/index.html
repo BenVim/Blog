@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="go," />
+  <meta name="keywords" content="pomelo, nodejs," />
 
 
 
@@ -81,18 +81,21 @@
 
 
 
-<meta name="description" content="用Go语言实现简单的sokcet服务。1.串行服务端；　　当客户端链接过来的时候，我们服务端可以给客户端回复特定的字符串等等。我们就以下面这段代码为例子： 1234567891011121314151617181920212223242526package mainimport (    &quot;net&quot;    &quot;log&quot;    &quot;time&quot;)func main() &amp;#123;    addr :=">
-<meta name="keywords" content="go">
+<meta name="description" content="新建项目使用pomelo的命令行工具可以快速创建一个项目，命令如下： 1$ pomelo init ./HelloWorld 或者你也可以使用下面的三个命令： 123$ mkdir HelloWorld$ cd HelloWorld$ pomelo init 这两种创建方式是等价的，更多关于pomelo命令行使用的文档，请参阅pomelo命令行工具使用。在初始化项目的时候，用户需要选择其底层使用的">
+<meta name="keywords" content="pomelo, nodejs">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Go 实现socket服务">
-<meta property="og:url" content="http://blog.ku-cat.com/2018/03/31/go-scoket/index.html">
+<meta property="og:title" content="pomelo框架学习（二）创建Hello World项目">
+<meta property="og:url" content="http://blog.ku-cat.com/2018/03/31/pomelo-helloWorld/index.html">
 <meta property="og:site_name" content="一纸墨迹">
-<meta property="og:description" content="用Go语言实现简单的sokcet服务。1.串行服务端；　　当客户端链接过来的时候，我们服务端可以给客户端回复特定的字符串等等。我们就以下面这段代码为例子： 1234567891011121314151617181920212223242526package mainimport (    &quot;net&quot;    &quot;log&quot;    &quot;time&quot;)func main() &amp;#123;    addr :=">
+<meta property="og:description" content="新建项目使用pomelo的命令行工具可以快速创建一个项目，命令如下： 1$ pomelo init ./HelloWorld 或者你也可以使用下面的三个命令： 123$ mkdir HelloWorld$ cd HelloWorld$ pomelo init 这两种创建方式是等价的，更多关于pomelo命令行使用的文档，请参阅pomelo命令行工具使用。在初始化项目的时候，用户需要选择其底层使用的">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-03-31T04:15:15.147Z">
+<meta property="og:image" content="http://blog.ku-cat.com/img/HelloWorldFolder.png">
+<meta property="og:image" content="http://blog.ku-cat.com/img/list_snapshot.png">
+<meta property="og:updated_time" content="2018-03-31T07:35:28.299Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Go 实现socket服务">
-<meta name="twitter:description" content="用Go语言实现简单的sokcet服务。1.串行服务端；　　当客户端链接过来的时候，我们服务端可以给客户端回复特定的字符串等等。我们就以下面这段代码为例子： 1234567891011121314151617181920212223242526package mainimport (    &quot;net&quot;    &quot;log&quot;    &quot;time&quot;)func main() &amp;#123;    addr :=">
+<meta name="twitter:title" content="pomelo框架学习（二）创建Hello World项目">
+<meta name="twitter:description" content="新建项目使用pomelo的命令行工具可以快速创建一个项目，命令如下： 1$ pomelo init ./HelloWorld 或者你也可以使用下面的三个命令： 123$ mkdir HelloWorld$ cd HelloWorld$ pomelo init 这两种创建方式是等价的，更多关于pomelo命令行使用的文档，请参阅pomelo命令行工具使用。在初始化项目的时候，用户需要选择其底层使用的">
+<meta name="twitter:image" content="http://blog.ku-cat.com/img/HelloWorldFolder.png">
 
 
 
@@ -122,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.ku-cat.com/2018/03/31/go-scoket/"/>
+  <link rel="canonical" href="http://blog.ku-cat.com/2018/03/31/pomelo-helloWorld/"/>
 
 
 
 
 
-  <title>Go 实现socket服务 | 一纸墨迹</title>
+  <title>pomelo框架学习（二）创建Hello World项目 | 一纸墨迹</title>
   
 
 
@@ -295,7 +298,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/03/31/go-scoket/">
+    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/03/31/pomelo-helloWorld/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben">
@@ -312,7 +315,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Go 实现socket服务</h1>
+          <h1 class="post-title" itemprop="name headline">pomelo框架学习（二）创建Hello World项目</h1>
         
 
         <div class="post-meta">
@@ -324,7 +327,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-31T12:09:23+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-31T15:22:26+08:00">
                 2018-03-31
               </time>
             
@@ -347,8 +350,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/go/" itemprop="url" rel="index">
-                    <span itemprop="name">go</span>
+                  <a href="/categories/pomelo/" itemprop="url" rel="index">
+                    <span itemprop="name">pomelo</span>
                   </a>
                 </span>
 
@@ -384,10 +387,49 @@
       
 
       
-        <p>用Go语言实现简单的sokcet服务。<br>1.串行服务端；<br>　　当客户端链接过来的时候，我们服务端可以给客户端回复特定的字符串等等。我们就以下面这段代码为例子：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"net"</span></span><br><span class="line">    <span class="string">"log"</span></span><br><span class="line">    <span class="string">"time"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    addr := <span class="string">"0.0.0.0:8080"</span> <span class="comment">//表示监听本地所有ip的8080端口，也可以这样写：addr := ":8080"</span></span><br><span class="line">    listener,err := net.Listen(<span class="string">"tcp"</span>,addr) <span class="comment">//使用协议是tcp，监听的地址是addr</span></span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        log.Fatal(err)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">defer</span> listener.Close() <span class="comment">//关闭监听的端口</span></span><br><span class="line">    <span class="keyword">for</span>  &#123;</span><br><span class="line">        conn,err := listener.Accept() <span class="comment">//用conn接收链接</span></span><br><span class="line">        <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">            log.Fatal(err)</span><br><span class="line">        &#125;</span><br><span class="line">        conn.Write([]<span class="keyword">byte</span>(<span class="string">"Yinzhengjie\n"</span>))  <span class="comment">//通过conn的wirte方法将这些数据返回给客户端。</span></span><br><span class="line">        conn.Write([]<span class="keyword">byte</span>(<span class="string">"hello Golang\n"</span>))</span><br><span class="line">        time.Sleep(time.Minute) <span class="comment">//在结束这个链接之前需要睡一分钟在结束当前循环。</span></span><br><span class="line">        conn.Close() <span class="comment">//与客户端断开连接。</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>2.并发服务端；</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"net"</span></span><br><span class="line">    <span class="string">"log"</span></span><br><span class="line">    <span class="string">"time"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Handle_conn</span><span class="params">(conn net.Conn)</span></span> &#123; <span class="comment">//这个是在处理客户端会阻塞的代码。</span></span><br><span class="line">    conn.Write([]<span class="keyword">byte</span>(<span class="string">"Yinzhengjie\n"</span>))  <span class="comment">//通过conn的wirte方法将这些数据返回给客户端。</span></span><br><span class="line">    conn.Write([]<span class="keyword">byte</span>(<span class="string">"尹正杰是一个好男孩！\n"</span>))</span><br><span class="line">    time.Sleep(time.Minute)</span><br><span class="line">    conn.Close() <span class="comment">//与客户端断开连接。</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    addr := <span class="string">"0.0.0.0:8080"</span> <span class="comment">//表示监听本地所有ip的8080端口，也可以这样写：addr := ":8080"</span></span><br><span class="line">    listener,err := net.Listen(<span class="string">"tcp"</span>,addr)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        log.Fatal(err)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">defer</span> listener.Close()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>  &#123;</span><br><span class="line">        conn,err := listener.Accept() <span class="comment">//用conn接收链接</span></span><br><span class="line">        <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">            log.Fatal(err)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">go</span> Handle_conn(conn)  <span class="comment">//开启多个协程。</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h3 id="新建项目"><a href="#新建项目" class="headerlink" title="新建项目"></a>新建项目</h3><p>使用pomelo的命令行工具可以快速创建一个项目，命令如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pomelo init ./HelloWorld</span><br></pre></td></tr></table></figure>
+<p>或者你也可以使用下面的三个命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir HelloWorld</span><br><span class="line">$ cd HelloWorld</span><br><span class="line">$ pomelo init</span><br></pre></td></tr></table></figure>
+<p>这两种创建方式是等价的，更多关于pomelo命令行使用的文档，请参阅pomelo命令行工具使用。在初始化项目的时候，用户需要选择其底层使用的通信协议，分为socket.io和websocket。</p>
+<p>然后，进入到HelloWorld文件夹，安装依赖包：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sh npm-install.sh</span><br></pre></td></tr></table></figure>
+<p>windows用户，可以直接运行 npm-install.bat</p>
+<h3 id="项目目录结构"><a href="#项目目录结构" class="headerlink" title="项目目录结构"></a>项目目录结构</h3><p>让我们来看看一个pomelo项目的大致结构</p>
+<p>新建立的项目结构如下图所示：<br><img src="/img/HelloWorldFolder.png" alt=""></p>
+<p>该目录结构很清楚地展示了游戏项目的前后端分层结构，分别在各个目录下填写相关代码，即可快速开发游戏。下面对各个目录进行简要分析：</p>
+<h4 id="game-server"><a href="#game-server" class="headerlink" title="game-server"></a>game-server</h4><p>game-server是用pomelo框架搭建的游戏服务器，以文件app.js作为入口，运行游戏的所有逻辑和功能。在接下来的开发中，所有游戏逻辑、功能、配置等都在该目录下进行。</p>
+<ul>
+<li><p>app子目录<br>这个目录下放置所有的游戏服务器代码的地方，用户在这里实现不同类型的服务器，添加对应的Handler，Remote等等。</p>
+</li>
+<li><p>config子目录<br>game-server下config包括了游戏服务器的所有配置信息。配置信息以JSON文件的格式进行定义，包含有日志、master、server等服务器的配置信息。该目录还可以进行扩展，对数据库配置信息、地图信息和数值表等信息进行定义。总而言之，这里是放着所有游戏服务器相关的配置信息的地方。</p>
+</li>
+<li><p>logs子目录<br>日志是项目中不可或缺的，可以对项目的运行情况进行很好的备份，也是系统运维的参考数据之一，logs存放了游戏服务器所有的日志信息。</p>
+</li>
+</ul>
+<h4 id="shared"><a href="#shared" class="headerlink" title="shared"></a>shared</h4><p>shared存放一些前后端、game-server与web-server共用代码，由于都是javascript代码，那么对于一些工具或者算法代码，就可以前后端共用，极大地提高了代码重用性。</p>
+<h4 id="web-server"><a href="#web-server" class="headerlink" title="web-server"></a>web-server</h4><p>web-server是用express 3.x框架搭建的web服务器，以文件app.js作为入口，当然开发者可以选择Nginx等其他web服务器。如果游戏的客户端不是web的话，如Android平台的话，这个目录就不是必须的了。当然，在这个例子中，我们的客户端是web，所以web服务器还是必须的。</p>
+<h3 id="启动项目"><a href="#启动项目" class="headerlink" title="启动项目"></a>启动项目</h3><p>对于我们这个例子来说，由于客户端是web，所以必须启动game-server(游戏服务器)和web-server(web服务器)</p>
+<p>启动game-server服务器：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd game-server</span><br><span class="line">$ pomelo start</span><br></pre></td></tr></table></figure>
+<p>启动web-server服务器：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd web-server</span><br><span class="line">$ node app</span><br></pre></td></tr></table></figure>
+<p>在启动过程中可能会有端口号冲突导致启动不成功，只需在config里面修改使用的端口号即可。如果上面的启动都没有问题的话，我们就可以对我们的HelloWorld进行测试了。用浏览器(推荐使用chrome)访问 <a href="http://localhost:3001或者" target="_blank" rel="noopener">http://localhost:3001或者</a> <a href="http://127.0.0.1:3001" target="_blank" rel="noopener">http://127.0.0.1:3001</a> 即可, 点击Test Game Server，提示 game server is ok 说明运行成功</p>
+<h3 id="查看服务器"><a href="#查看服务器" class="headerlink" title="查看服务器"></a>查看服务器</h3><p>可以使用pomelo list查看已经启动的服务器，如下图所示：</p>
+<p><img src="/img/list_snapshot.png" alt=""></p>
+<p>服务器状态可以查看5种状态信息：</p>
+<ul>
+<li>serverId：服务器的serverId，同config配置表中的id。</li>
+<li>serverType：服务器的serverType，同config配置表中的type。</li>
+<li>pid：服务器对应的进程pid。</li>
+<li>heapUsed：该服务器已经使用的堆大小（单位：兆）。</li>
+<li>uptime：该服务器启动时长（单位：分钟）。</li>
+</ul>
+<h3 id="关闭项目"><a href="#关闭项目" class="headerlink" title="关闭项目"></a>关闭项目</h3><p>可以使用以下两种方式关闭项目：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd game-server</span><br><span class="line">$ pomelo stop</span><br></pre></td></tr></table></figure>
+<p>或者<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd game-server</span><br><span class="line">$ pomelo kill</span><br></pre></td></tr></table></figure></p>
+<p>其中pomelo stop比较优雅，pomelo kill比较粗暴，安全性低，开发环境下可以使用，产品环境慎用，更详细的pomelo命令行用法请参阅pomelo命令行工具使用。</p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>到这里为止，我们已经成功安装了pomelo，并成功运行了HelloWorld。接下来，建议你看一下pomelo整体的一个较详细的概述。 如果你已经迫不及待地想写代码，可以去pomelo例子教程, 那里以一个chat应用为例，一步一步地向你展示如何来使用pomelo进行一个实际应用的开发，以及pomelo的一些API的使用方式等。</p>
 
       
     </div>
@@ -405,7 +447,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/go/" rel="tag"># go</a>
+            <a href="/tags/pomelo-nodejs/" rel="tag"># pomelo, nodejs</a>
           
         </div>
       
@@ -418,8 +460,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/31/sql/" rel="next" title="sql语句的分组查询">
-                <i class="fa fa-chevron-left"></i> sql语句的分组查询
+              <a href="/2018/03/31/pomelo-learn/" rel="next" title="pomelo框架学习（一）安装pomelo">
+                <i class="fa fa-chevron-left"></i> pomelo框架学习（一）安装pomelo
               </a>
             
           </div>
@@ -428,8 +470,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/03/31/poke/" rel="prev" title="扑克牌在计算机中的几种表示方法">
-                扑克牌在计算机中的几种表示方法 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/03/31/pomelo-cli-command/" rel="prev" title="pomelo框架学习（三）pomelo命令行工具的安装和使用">
+                pomelo框架学习（三）pomelo命令行工具的安装和使用 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -482,8 +524,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -590,6 +641,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#新建项目"><span class="nav-number">1.</span> <span class="nav-text">新建项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#项目目录结构"><span class="nav-number">2.</span> <span class="nav-text">项目目录结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#game-server"><span class="nav-number">2.1.</span> <span class="nav-text">game-server</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#shared"><span class="nav-number">2.2.</span> <span class="nav-text">shared</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#web-server"><span class="nav-number">2.3.</span> <span class="nav-text">web-server</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动项目"><span class="nav-number">3.</span> <span class="nav-text">启动项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看服务器"><span class="nav-number">4.</span> <span class="nav-text">查看服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关闭项目"><span class="nav-number">5.</span> <span class="nav-text">关闭项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">6.</span> <span class="nav-text">小结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
