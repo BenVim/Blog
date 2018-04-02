@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.ku-cat.com/"/>
-  <updated>2018-04-02T05:33:25.767Z</updated>
+  <updated>2018-04-02T13:54:11.428Z</updated>
   <id>http://blog.ku-cat.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>使用docker制作nginx环境</title>
+    <link href="http://blog.ku-cat.com/2018/04/02/docker-nginx/"/>
+    <id>http://blog.ku-cat.com/2018/04/02/docker-nginx/</id>
+    <published>2018-04-02T13:43:04.000Z</published>
+    <updated>2018-04-02T13:54:11.428Z</updated>
+    
+    <content type="html"><![CDATA[<p>使用docker构建开发运行环境有很多优势，能够保持本地与测试、生产环境的一致性。首先简单方法构建。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull nginx # 获取nginx镜像</span><br></pre></td></tr></table></figure><p>运行docker挂载工作目录</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker run --name myNginx -d -p 8080:80 -v /Users/ben/docker/nginx/www:/usr/share/nginx/html nginx</span><br><span class="line">b0167fd1d31bf7071589c10569e259392533c2ad0527ad0ccbb51ec9c62ecd6f</span><br><span class="line"></span><br><span class="line">docker ps</span><br><span class="line"></span><br><span class="line">CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                  NAMES</span><br><span class="line">b0167fd1d31b        nginx               &quot;nginx -g &apos;daemon of…&quot;   27 seconds ago      Up 21 seconds       0.0.0.0:8080-&gt;80/tcp   Nginx</span><br></pre></td></tr></table></figure><p>本地的mac目录/Users/ben/docker/nginx/www 与 容器的/usr/share/nginx/html绑定。我们可以修改 /Users/ben/docker/nginx/www 中的内容，在地址栏输入 <a href="http://127.0.0.1:8080/" target="_blank" rel="noopener">http://127.0.0.1:8080/</a> 可以直接测试。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;使用docker构建开发运行环境有很多优势，能够保持本地与测试、生产环境的一致性。首先简单方法构建。&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;li
+      
+    
+    </summary>
+    
+      <category term="docker" scheme="http://blog.ku-cat.com/categories/docker/"/>
+    
+    
+      <category term="docker" scheme="http://blog.ku-cat.com/tags/docker/"/>
+    
+  </entry>
   
   <entry>
     <title>Mac下挂载EFI分区</title>
