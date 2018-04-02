@@ -68,12 +68,10 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="mac,os," />
 
 
 
-
-  
 
 
   <link rel="alternate" href="/atom.xml" title="一纸墨迹" type="application/atom+xml" />
@@ -83,17 +81,18 @@
 
 
 
-<meta name="description" content="曾经沧海难为水，除却巫山不是云">
-<meta property="og:type" content="website">
-<meta property="og:title" content="about">
-<meta property="og:url" content="http://blog.ku-cat.com/about/index.html">
+<meta name="description" content="Mac EFI分区默认是隐藏的，如果需要访问可以使用如下的方法重新挂载EFI分区。  Discover the volume identifier for your EFI boot partition.  Run this command: 1diskutil list The output should look something like this: 123456/dev/disk0 #:">
+<meta name="keywords" content="mac,os">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mac下挂载EFI分区">
+<meta property="og:url" content="http://blog.ku-cat.com/2018/04/02/mac-os-efi/index.html">
 <meta property="og:site_name" content="一纸墨迹">
-<meta property="og:description" content="曾经沧海难为水，除却巫山不是云">
+<meta property="og:description" content="Mac EFI分区默认是隐藏的，如果需要访问可以使用如下的方法重新挂载EFI分区。  Discover the volume identifier for your EFI boot partition.  Run this command: 1diskutil list The output should look something like this: 123456/dev/disk0 #:">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-03-31T03:09:49.167Z">
+<meta property="og:updated_time" content="2018-04-02T05:33:25.767Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="about">
-<meta name="twitter:description" content="曾经沧海难为水，除却巫山不是云">
+<meta name="twitter:title" content="Mac下挂载EFI分区">
+<meta name="twitter:description" content="Mac EFI分区默认是隐藏的，如果需要访问可以使用如下的方法重新挂载EFI分区。  Discover the volume identifier for your EFI boot partition.  Run this command: 1diskutil list The output should look something like this: 123456/dev/disk0 #:">
 
 
 
@@ -123,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.ku-cat.com/about/"/>
+  <link rel="canonical" href="http://blog.ku-cat.com/2018/04/02/mac-os-efi/"/>
 
 
 
 
 
-  <title>about | 一纸墨迹</title>
+  <title>Mac下挂载EFI分区 | 一纸墨迹</title>
   
 
 
@@ -284,33 +283,185 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/02/mac-os-efi/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一纸墨迹">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">about</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
+          <h1 class="post-title" itemprop="name headline">Mac下挂载EFI分区</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-02T13:31:21+08:00">
+                2018-04-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-      </div>
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mac/" itemprop="url" rel="index">
+                    <span itemprop="name">mac</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <p>Mac EFI分区默认是隐藏的，如果需要访问可以使用如下的方法重新挂载EFI分区。</p>
+<ol>
+<li>Discover the volume identifier for your EFI boot partition.</li>
+</ol>
+<p>Run this command:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">diskutil list</span><br></pre></td></tr></table></figure>
+<p>The output should look something like this:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/dev/disk0</span><br><span class="line"> <span class="comment">#: TYPE                     NAME          SIZE       IDENTIFIER</span></span><br><span class="line"> 0: GUID_partition_scheme                  *251.0 GB  disk0</span><br><span class="line"> 1: EFI                                    209.7 MB   disk0s1</span><br><span class="line"> 2: Apple_HFS                Macintosh HD  250.1 GB   disk0s2</span><br><span class="line"> 3: Apple_Boot               Recovery HD   650.0 MB   disk0s3</span><br></pre></td></tr></table></figure>
+<p>In this case, the volume identifier of the EFI partition is disk0s1</p>
+<ol start="2">
+<li>Create a mount point.</li>
+</ol>
+<p>A mount point is a directory where a non-booted volume is mounted.  On Mac OS X, mount points are typically created in /Volumes.  We can create a directory called efi within /Volumes by running the following command:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir /Volumes/efi</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>Mount the EFI partition at the efi mount point.</li>
+</ol>
+<p>Run the command:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mount -t msdos /dev/disk0s1 /Volumes/efi</span><br></pre></td></tr></table></figure>
+<p>That’s it.  Your EFI volume will be mounted.  Modify it at your own risk.</p>
+
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/mac-os/" rel="tag"># mac,os</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/01/node-nvm/" rel="next" title="node.js 版本控制 nvm">
+                <i class="fa fa-chevron-left"></i> node.js 版本控制 nvm
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
