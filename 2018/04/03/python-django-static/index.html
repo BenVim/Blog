@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="sql," />
+  <meta name="keywords" content="python, django," />
 
 
 
@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="分组查询 按分组统计结果排序，然后再过滤统计结果的数量，然后分页 12345select * from (select t1.id,count(*) as total, t1.`player_num`from house t1 left join player t2 on t1.id=t2.house_idgroup  by t1.idorder by total desc) a where to">
-<meta name="keywords" content="sql">
+<meta name="description" content="django 中访问 css 等静态文件必须以 url 的形式去访问，即必须配置 urls.py 的访问路径首先在 settings.py 中添加： 1234567STATIC_ROOT = os.path.join(os.path.dirname(os.path.dirname(__file__)), &apos;static&apos;)STATICFILES_DIRS = [    (&apos;css&apos;, os.pat">
+<meta name="keywords" content="python, django">
 <meta property="og:type" content="article">
-<meta property="og:title" content="sql语句的分组查询">
-<meta property="og:url" content="http://blog.ku-cat.com/2018/03/31/sql/index.html">
+<meta property="og:title" content="django添加css等静态文件">
+<meta property="og:url" content="http://blog.ku-cat.com/2018/04/03/python-django-static/index.html">
 <meta property="og:site_name" content="一纸墨迹">
-<meta property="og:description" content="分组查询 按分组统计结果排序，然后再过滤统计结果的数量，然后分页 12345select * from (select t1.id,count(*) as total, t1.`player_num`from house t1 left join player t2 on t1.id=t2.house_idgroup  by t1.idorder by total desc) a where to">
+<meta property="og:description" content="django 中访问 css 等静态文件必须以 url 的形式去访问，即必须配置 urls.py 的访问路径首先在 settings.py 中添加： 1234567STATIC_ROOT = os.path.join(os.path.dirname(os.path.dirname(__file__)), &apos;static&apos;)STATICFILES_DIRS = [    (&apos;css&apos;, os.pat">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-03-31T04:06:48.679Z">
+<meta property="og:updated_time" content="2018-04-03T05:35:15.493Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="sql语句的分组查询">
-<meta name="twitter:description" content="分组查询 按分组统计结果排序，然后再过滤统计结果的数量，然后分页 12345select * from (select t1.id,count(*) as total, t1.`player_num`from house t1 left join player t2 on t1.id=t2.house_idgroup  by t1.idorder by total desc) a where to">
+<meta name="twitter:title" content="django添加css等静态文件">
+<meta name="twitter:description" content="django 中访问 css 等静态文件必须以 url 的形式去访问，即必须配置 urls.py 的访问路径首先在 settings.py 中添加： 1234567STATIC_ROOT = os.path.join(os.path.dirname(os.path.dirname(__file__)), &apos;static&apos;)STATICFILES_DIRS = [    (&apos;css&apos;, os.pat">
 
 
 
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.ku-cat.com/2018/03/31/sql/"/>
+  <link rel="canonical" href="http://blog.ku-cat.com/2018/04/03/python-django-static/"/>
 
 
 
 
 
-  <title>sql语句的分组查询 | 一纸墨迹</title>
+  <title>django添加css等静态文件 | 一纸墨迹</title>
   
 
 
@@ -295,7 +295,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/03/31/sql/">
+    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/03/python-django-static/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben">
@@ -312,7 +312,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">sql语句的分组查询</h1>
+          <h1 class="post-title" itemprop="name headline">django添加css等静态文件</h1>
         
 
         <div class="post-meta">
@@ -324,8 +324,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-31T11:32:25+08:00">
-                2018-03-31
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-03T13:16:03+08:00">
+                2018-04-03
               </time>
             
 
@@ -347,8 +347,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/sql/" itemprop="url" rel="index">
-                    <span itemprop="name">sql</span>
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
                   </a>
                 </span>
 
@@ -384,11 +384,15 @@
       
 
       
-        <p>分组查询 按分组统计结果排序，然后再过滤统计结果的数量，然后分页</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> (<span class="keyword">select</span> t1.id,<span class="keyword">count</span>(*) <span class="keyword">as</span> total, t1.<span class="string">`player_num`</span></span><br><span class="line"><span class="keyword">from</span> house t1 <span class="keyword">left</span> <span class="keyword">join</span> player t2 <span class="keyword">on</span> t1.id=t2.house_id</span><br><span class="line"><span class="keyword">group</span>  <span class="keyword">by</span> t1.id</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> total <span class="keyword">desc</span>) a <span class="keyword">where</span> total &lt; player_num;</span><br></pre></td></tr></table></figure>
-<p>增加条件</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> (<span class="keyword">select</span> t1.id,<span class="keyword">count</span>(*) <span class="keyword">as</span> total, t1.<span class="string">`player_num`</span>, t1.<span class="string">`union_id`</span></span><br><span class="line"><span class="keyword">from</span> house t1 <span class="keyword">left</span> <span class="keyword">join</span> player t2 <span class="keyword">on</span> t1.id=t2.house_id </span><br><span class="line"><span class="keyword">where</span> t1.union_id=<span class="number">40</span></span><br><span class="line"><span class="keyword">group</span>  <span class="keyword">by</span> t1.id</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> total <span class="keyword">desc</span>) a </span><br><span class="line"><span class="keyword">where</span> total&lt;player_num;</span><br></pre></td></tr></table></figure>
-
+        <p>django 中访问 css 等静态文件必须以 url 的形式去访问，即必须配置 urls.py 的访问路径<br>首先在 settings.py 中添加：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">STATIC_ROOT = os.path.join(os.path.dirname(os.path.dirname(__file__)), <span class="string">'static'</span>)</span><br><span class="line">STATICFILES_DIRS = [</span><br><span class="line">    (<span class="string">'css'</span>, os.path.join(STATIC_ROOT, <span class="string">'css'</span>).replace(<span class="string">'\\'</span>, <span class="string">'/'</span>)),</span><br><span class="line">    (<span class="string">'js'</span>, os.path.join(STATIC_ROOT, <span class="string">'js'</span>).replace(<span class="string">'\\'</span>, <span class="string">'/'</span>)),</span><br><span class="line">    (<span class="string">'image'</span>, os.path.join(STATIC_ROOT, <span class="string">'image'</span>).replace(<span class="string">'\\'</span>, <span class="string">'/'</span>)),</span><br><span class="line">    (<span class="string">'upload'</span>, os.path.join(STATIC_ROOT, <span class="string">'upload'</span>).replace(<span class="string">'\\'</span>, <span class="string">'/'</span>)),</span><br><span class="line"> ]</span><br></pre></td></tr></table></figure>
+<p>其中__file__ 指的是调用 css 的html 文件所在的路径</p>
+<p>然后在 urls.py 中添加</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">url(<span class="string">r'^static/(?P&lt;path&gt;.*)$'</span>, <span class="string">'django.views.static.serve'</span>, &#123;<span class="string">'document_root'</span>: settings.STATIC_ROOT&#125;)</span><br></pre></td></tr></table></figure>
+<p>最后在 register.html 中引用 css 文件</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel=<span class="string">"stylesheet"</span> type=<span class="string">"text/css"</span> href=<span class="string">"/static/css/register.css"</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>此处调用 django.views.static.serve 方法去解析具体的路径</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># …or create a new repository on the command line</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"# test1"</span> &gt;&gt; README.md</span><br><span class="line">git init</span><br><span class="line">git add README.md</span><br><span class="line">git commit -m <span class="string">"first commit"</span></span><br><span class="line">git remote add origin git@github.com:BenVim/test1.git</span><br><span class="line">git push -u origin master</span><br><span class="line"><span class="comment"># …or push an existing repository from the command line</span></span><br><span class="line">git remote add origin git@github.com:BenVim/test1.git</span><br><span class="line">git push -u origin master</span><br><span class="line"><span class="comment"># …or import code from another repository</span></span><br><span class="line">You can initialize this repository with code from a Subversion, Mercurial, or TFS project.</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -405,7 +409,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/sql/" rel="tag"># sql</a>
+            <a href="/tags/python-django/" rel="tag"># python, django</a>
           
         </div>
       
@@ -418,8 +422,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/31/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2018/04/03/python-virtualenv/" rel="next" title="python-virtualenv 创建独立的python运行环境。">
+                <i class="fa fa-chevron-left"></i> python-virtualenv 创建独立的python运行环境。
               </a>
             
           </div>
@@ -428,8 +432,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/03/31/go-scoket/" rel="prev" title="Go 实现socket服务">
-                Go 实现socket服务 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/04/03/python-md5/" rel="prev" title="Python 用hashlib求中文字符串的MD5值">
+                Python 用hashlib求中文字符串的MD5值 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

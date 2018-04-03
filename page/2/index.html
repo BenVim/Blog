@@ -294,6 +294,457 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/03/31/poke/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一纸墨迹">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/31/poke/" itemprop="url">扑克牌在计算机中的几种表示方法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-31T13:18:50+08:00">
+                2018-03-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>做棋牌类的游戏开发的时候，要考虑到数据存储的便捷性和数据的大小最小化，方便存储和传输，总之是越小越好。</p>
+<p>对于扑克牌有两种表示方法：</p>
+<ol>
+<li>二进制存储法</li>
+<li>map映射压缩法</li>
+</ol>
+<h3 id="1-二进制存储法"><a href="#1-二进制存储法" class="headerlink" title="1.二进制存储法"></a>1.二进制存储法</h3><p>首先对原始数据进行分析：扑克牌的主要属性是数值（A-K）和花色（黑、红、棉、方），A-K的数值最大是13。K 用二进制表示：1101 ，花色的表示更简单，黑桃0001、红桃 0010、梅花0011、方块 0100。也就是说数值和花色都可以用4位来表示。前4位为花色，后4位为数值，比如：黑桃A的二进制表示是黑桃 和 A 表示，即：00010001，16进制表示为11。又如：方块K的表示是 01001101，16进制表示为4D</p>
+<p>根据上面的理论，我们可以生成52张牌，不包括大鬼和小鬼。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">sendPlist</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        $plist = [];</span><br><span class="line">        <span class="keyword">for</span> ($i = <span class="number">1</span>; $i &lt; <span class="number">14</span>; $i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> ($k = <span class="number">1</span>; $k &lt; <span class="number">5</span>; $k++) &#123;<span class="comment">//生成4个花色。例如：花色黑桃0001</span></span><br><span class="line">                $a       = $k &lt;&lt; <span class="number">4</span>;<span class="comment">//左移4位。花色黑桃左移4位，00010000</span></span><br><span class="line">                $c       = $i | $a;<span class="comment">//或操作，花色黑桃与数值A合并 00010001</span></span><br><span class="line">                $p       = dechex($c);<span class="comment">//转换成16进制：11</span></span><br><span class="line">                $plist[] = $p;<span class="comment">//保存到数组</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        shuffle($plist); <span class="comment">//打乱，洗牌。</span></span><br><span class="line">        <span class="keyword">return</span> $plist;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>16进制牌的数据的解析成数值和花色。解析是生成的反操作。先把16进制表示的字符串转换成二进制，使用函数hexdec()转换。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$num = hexdec($hexNum);</span><br></pre></td></tr></table></figure>
+<p>转换后的数据是二进制的。比如：黑桃K的1十六进制是1D转换成二进制是00011101。下一步操作是把这个二进制结果右移4位，得到花色0001。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$suit = $num &gt;&gt; <span class="number">4</span>;</span><br></pre></td></tr></table></figure>
+<p>数值部分使用二进制和15的二进制进行与操作。00011101 &amp; 00001111结果是1101</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$n = $num &amp; <span class="number">15</span>;</span><br></pre></td></tr></table></figure>
+<p>所有转换代码如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NumberTransform</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">analysisWithHex</span><span class="params">($hexNum)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(is_array($hexNum) || $hexNum==<span class="string">""</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> [];</span><br><span class="line">        &#125;</span><br><span class="line">        $num = hexdec($hexNum);</span><br><span class="line">        $suit = $num &gt;&gt; <span class="number">4</span>;</span><br><span class="line">        $n = $num &amp; <span class="number">15</span>;</span><br><span class="line">        <span class="keyword">return</span> [<span class="string">'n'</span>=&gt;$n, <span class="string">'suit'</span>=&gt;$suit];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-map映射压缩法"><a href="#2-map映射压缩法" class="headerlink" title="2.map映射压缩法"></a>2.map映射压缩法</h3><p>map映射压缩法，这种方法优点数据理更小。更方便存储和传输，相对上面的二进制法更好一些。基本原理就是用整型数值表示牌，比如：黑桃A、红桃A、梅花A、方块A、黑桃2…对就的数值为1、2、3、4、5等等。这种原理比较简单。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//扑克牌基本数据</span></span><br><span class="line"><span class="keyword">var</span> Pokers = &#123;</span><br><span class="line"></span><br><span class="line">    table: &#123;</span><br><span class="line">        <span class="comment">//大小王</span></span><br><span class="line">        <span class="number">1</span>:  &#123;<span class="attr">symbol</span>: <span class="string">"red_joker"</span>,  <span class="attr">type</span>: <span class="number">4</span>, <span class="attr">num</span>: <span class="number">18</span>&#125;,</span><br><span class="line">        <span class="number">2</span>:  &#123;<span class="attr">symbol</span>: <span class="string">"black_joker"</span>,  <span class="attr">type</span>: <span class="number">3</span>, <span class="attr">num</span>: <span class="number">17</span>&#125;,</span><br><span class="line"></span><br><span class="line">        <span class="comment">//黑桃</span></span><br><span class="line">        <span class="number">3</span>:  &#123;<span class="attr">suit</span>: <span class="string">"spade"</span>, <span class="attr">symbol</span>: <span class="string">'3'</span>, <span class="attr">type</span>: <span class="number">4</span>, <span class="attr">num</span>: <span class="number">3</span>&#125;,</span><br><span class="line">        <span class="number">4</span>:  &#123;<span class="attr">suit</span>: <span class="string">"spade"</span>, <span class="attr">symbol</span>: <span class="string">'4'</span>, <span class="attr">type</span>: <span class="number">4</span>, <span class="attr">num</span>: <span class="number">4</span>&#125;,</span><br><span class="line">        <span class="number">5</span>:  &#123;<span class="attr">suit</span>: <span class="string">"spade"</span>, <span class="attr">symbol</span>: <span class="string">'5'</span>, <span class="attr">type</span>: <span class="number">4</span>, <span class="attr">num</span>: <span class="number">5</span>&#125;,</span><br><span class="line">        <span class="number">6</span>:  &#123;<span class="attr">suit</span>: <span class="string">"spade"</span>, <span class="attr">symbol</span>: <span class="string">'6'</span>, <span class="attr">type</span>: <span class="number">4</span>, <span class="attr">num</span>: <span class="number">6</span>&#125;,</span><br><span class="line">        <span class="number">7</span>:  &#123;<span class="attr">suit</span>: <span class="string">"spade"</span>, <span class="attr">symbol</span>: <span class="string">'7'</span>, <span class="attr">type</span>: <span class="number">4</span>, <span class="attr">num</span>: <span class="number">7</span>&#125;,</span><br><span class="line">        <span class="number">8</span>:  &#123;<span class="attr">suit</span>: <span class="string">"spade"</span>, <span class="attr">symbol</span>: <span class="string">'8'</span>, <span class="attr">type</span>: <span class="number">4</span>, <span class="attr">num</span>: <span class="number">8</span>&#125;,</span><br><span class="line">        <span class="number">9</span>:  &#123;<span class="attr">suit</span>: <span class="string">"spade"</span>, <span class="attr">symbol</span>: <span class="string">'9'</span>, <span class="attr">type</span>: <span class="number">4</span>, <span class="attr">num</span>: <span class="number">9</span>&#125;,</span><br><span class="line">        <span class="number">10</span>: &#123;<span class="attr">suit</span>: <span class="string">"spade"</span>, <span class="attr">symbol</span>: <span class="string">'10'</span>, <span class="attr">type</span>: <span class="number">4</span>, <span class="attr">num</span>: <span class="number">10</span>&#125;,</span><br><span class="line">        <span class="number">11</span>: &#123;<span class="attr">suit</span>: <span class="string">"spade"</span>, <span class="attr">symbol</span>: <span class="string">'J'</span>, <span class="attr">type</span>: <span class="number">4</span>, <span class="attr">num</span>: <span class="number">11</span>&#125;,</span><br><span class="line">        <span class="number">12</span>: &#123;<span class="attr">suit</span>: <span class="string">"spade"</span>, <span class="attr">symbol</span>: <span class="string">'Q'</span>, <span class="attr">type</span>: <span class="number">4</span>, <span class="attr">num</span>: <span class="number">12</span>&#125;,</span><br><span class="line">        <span class="number">13</span>: &#123;<span class="attr">suit</span>: <span class="string">"spade"</span>, <span class="attr">symbol</span>: <span class="string">'K'</span>, <span class="attr">type</span>: <span class="number">4</span>, <span class="attr">num</span>: <span class="number">13</span>&#125;,</span><br><span class="line">        <span class="number">14</span>: &#123;<span class="attr">suit</span>: <span class="string">"spade"</span>, <span class="attr">symbol</span>: <span class="string">'A'</span>, <span class="attr">type</span>: <span class="number">4</span>, <span class="attr">num</span>: <span class="number">14</span>&#125;,</span><br><span class="line">        <span class="number">15</span>: &#123;<span class="attr">suit</span>: <span class="string">"spade"</span>, <span class="attr">symbol</span>: <span class="string">'2'</span>, <span class="attr">type</span>: <span class="number">4</span>, <span class="attr">num</span>: <span class="number">16</span>&#125;,</span><br><span class="line">    </span><br><span class="line">    &#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>使用map映射压缩法，更简单明了，而且数据量会小于上面的方法。建议使用map映射压缩法做扑克牌的表示方法。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/03/31/go-scoket/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一纸墨迹">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/31/go-scoket/" itemprop="url">Go 实现socket服务</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-31T12:09:23+08:00">
+                2018-03-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/go/" itemprop="url" rel="index">
+                    <span itemprop="name">go</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>用Go语言实现简单的sokcet服务。<br>1.串行服务端；<br>　　当客户端链接过来的时候，我们服务端可以给客户端回复特定的字符串等等。我们就以下面这段代码为例子：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"net"</span></span><br><span class="line">    <span class="string">"log"</span></span><br><span class="line">    <span class="string">"time"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    addr := <span class="string">"0.0.0.0:8080"</span> <span class="comment">//表示监听本地所有ip的8080端口，也可以这样写：addr := ":8080"</span></span><br><span class="line">    listener,err := net.Listen(<span class="string">"tcp"</span>,addr) <span class="comment">//使用协议是tcp，监听的地址是addr</span></span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        log.Fatal(err)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">defer</span> listener.Close() <span class="comment">//关闭监听的端口</span></span><br><span class="line">    <span class="keyword">for</span>  &#123;</span><br><span class="line">        conn,err := listener.Accept() <span class="comment">//用conn接收链接</span></span><br><span class="line">        <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">            log.Fatal(err)</span><br><span class="line">        &#125;</span><br><span class="line">        conn.Write([]<span class="keyword">byte</span>(<span class="string">"Yinzhengjie\n"</span>))  <span class="comment">//通过conn的wirte方法将这些数据返回给客户端。</span></span><br><span class="line">        conn.Write([]<span class="keyword">byte</span>(<span class="string">"hello Golang\n"</span>))</span><br><span class="line">        time.Sleep(time.Minute) <span class="comment">//在结束这个链接之前需要睡一分钟在结束当前循环。</span></span><br><span class="line">        conn.Close() <span class="comment">//与客户端断开连接。</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2.并发服务端；</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"net"</span></span><br><span class="line">    <span class="string">"log"</span></span><br><span class="line">    <span class="string">"time"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Handle_conn</span><span class="params">(conn net.Conn)</span></span> &#123; <span class="comment">//这个是在处理客户端会阻塞的代码。</span></span><br><span class="line">    conn.Write([]<span class="keyword">byte</span>(<span class="string">"Yinzhengjie\n"</span>))  <span class="comment">//通过conn的wirte方法将这些数据返回给客户端。</span></span><br><span class="line">    conn.Write([]<span class="keyword">byte</span>(<span class="string">"尹正杰是一个好男孩！\n"</span>))</span><br><span class="line">    time.Sleep(time.Minute)</span><br><span class="line">    conn.Close() <span class="comment">//与客户端断开连接。</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    addr := <span class="string">"0.0.0.0:8080"</span> <span class="comment">//表示监听本地所有ip的8080端口，也可以这样写：addr := ":8080"</span></span><br><span class="line">    listener,err := net.Listen(<span class="string">"tcp"</span>,addr)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        log.Fatal(err)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">defer</span> listener.Close()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>  &#123;</span><br><span class="line">        conn,err := listener.Accept() <span class="comment">//用conn接收链接</span></span><br><span class="line">        <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">            log.Fatal(err)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">go</span> Handle_conn(conn)  <span class="comment">//开启多个协程。</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/03/31/sql/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一纸墨迹">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/31/sql/" itemprop="url">sql语句的分组查询</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-31T11:32:25+08:00">
+                2018-03-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sql/" itemprop="url" rel="index">
+                    <span itemprop="name">sql</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>分组查询 按分组统计结果排序，然后再过滤统计结果的数量，然后分页</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> (<span class="keyword">select</span> t1.id,<span class="keyword">count</span>(*) <span class="keyword">as</span> total, t1.<span class="string">`player_num`</span></span><br><span class="line"><span class="keyword">from</span> house t1 <span class="keyword">left</span> <span class="keyword">join</span> player t2 <span class="keyword">on</span> t1.id=t2.house_id</span><br><span class="line"><span class="keyword">group</span>  <span class="keyword">by</span> t1.id</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> total <span class="keyword">desc</span>) a <span class="keyword">where</span> total &lt; player_num;</span><br></pre></td></tr></table></figure>
+<p>增加条件</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> (<span class="keyword">select</span> t1.id,<span class="keyword">count</span>(*) <span class="keyword">as</span> total, t1.<span class="string">`player_num`</span>, t1.<span class="string">`union_id`</span></span><br><span class="line"><span class="keyword">from</span> house t1 <span class="keyword">left</span> <span class="keyword">join</span> player t2 <span class="keyword">on</span> t1.id=t2.house_id </span><br><span class="line"><span class="keyword">where</span> t1.union_id=<span class="number">40</span></span><br><span class="line"><span class="keyword">group</span>  <span class="keyword">by</span> t1.id</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> total <span class="keyword">desc</span>) a </span><br><span class="line"><span class="keyword">where</span> total&lt;player_num;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/03/31/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -459,7 +910,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -481,7 +932,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

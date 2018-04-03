@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="sql," />
+  <meta name="keywords" content="python,django," />
 
 
 
@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="分组查询 按分组统计结果排序，然后再过滤统计结果的数量，然后分页 12345select * from (select t1.id,count(*) as total, t1.`player_num`from house t1 left join player t2 on t1.id=t2.house_idgroup  by t1.idorder by total desc) a where to">
-<meta name="keywords" content="sql">
+<meta name="description" content="mac 下搭建django2.0的开发环境，mac上默认的python版本是2.7，django需要的是python3以上的版本。所以我们需要再安装一个python3.5的版本。python2.7和python3.5可以共存的。直接安装就可以了。 1python -V #查看python版本，默认的mac上的python版本是2.7 我们可以到https://www.python.org上下载安装">
+<meta name="keywords" content="python,django">
 <meta property="og:type" content="article">
-<meta property="og:title" content="sql语句的分组查询">
-<meta property="og:url" content="http://blog.ku-cat.com/2018/03/31/sql/index.html">
+<meta property="og:title" content="mac下搭建django2.0的开发环境">
+<meta property="og:url" content="http://blog.ku-cat.com/2018/04/03/python-django/index.html">
 <meta property="og:site_name" content="一纸墨迹">
-<meta property="og:description" content="分组查询 按分组统计结果排序，然后再过滤统计结果的数量，然后分页 12345select * from (select t1.id,count(*) as total, t1.`player_num`from house t1 left join player t2 on t1.id=t2.house_idgroup  by t1.idorder by total desc) a where to">
+<meta property="og:description" content="mac 下搭建django2.0的开发环境，mac上默认的python版本是2.7，django需要的是python3以上的版本。所以我们需要再安装一个python3.5的版本。python2.7和python3.5可以共存的。直接安装就可以了。 1python -V #查看python版本，默认的mac上的python版本是2.7 我们可以到https://www.python.org上下载安装">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-03-31T04:06:48.679Z">
+<meta property="og:updated_time" content="2018-04-03T13:45:56.495Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="sql语句的分组查询">
-<meta name="twitter:description" content="分组查询 按分组统计结果排序，然后再过滤统计结果的数量，然后分页 12345select * from (select t1.id,count(*) as total, t1.`player_num`from house t1 left join player t2 on t1.id=t2.house_idgroup  by t1.idorder by total desc) a where to">
+<meta name="twitter:title" content="mac下搭建django2.0的开发环境">
+<meta name="twitter:description" content="mac 下搭建django2.0的开发环境，mac上默认的python版本是2.7，django需要的是python3以上的版本。所以我们需要再安装一个python3.5的版本。python2.7和python3.5可以共存的。直接安装就可以了。 1python -V #查看python版本，默认的mac上的python版本是2.7 我们可以到https://www.python.org上下载安装">
 
 
 
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.ku-cat.com/2018/03/31/sql/"/>
+  <link rel="canonical" href="http://blog.ku-cat.com/2018/04/03/python-django/"/>
 
 
 
 
 
-  <title>sql语句的分组查询 | 一纸墨迹</title>
+  <title>mac下搭建django2.0的开发环境 | 一纸墨迹</title>
   
 
 
@@ -295,7 +295,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/03/31/sql/">
+    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/03/python-django/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben">
@@ -312,7 +312,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">sql语句的分组查询</h1>
+          <h1 class="post-title" itemprop="name headline">mac下搭建django2.0的开发环境</h1>
         
 
         <div class="post-meta">
@@ -324,8 +324,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-31T11:32:25+08:00">
-                2018-03-31
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-03T21:32:13+08:00">
+                2018-04-03
               </time>
             
 
@@ -347,8 +347,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/sql/" itemprop="url" rel="index">
-                    <span itemprop="name">sql</span>
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
                   </a>
                 </span>
 
@@ -384,10 +384,22 @@
       
 
       
-        <p>分组查询 按分组统计结果排序，然后再过滤统计结果的数量，然后分页</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> (<span class="keyword">select</span> t1.id,<span class="keyword">count</span>(*) <span class="keyword">as</span> total, t1.<span class="string">`player_num`</span></span><br><span class="line"><span class="keyword">from</span> house t1 <span class="keyword">left</span> <span class="keyword">join</span> player t2 <span class="keyword">on</span> t1.id=t2.house_id</span><br><span class="line"><span class="keyword">group</span>  <span class="keyword">by</span> t1.id</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> total <span class="keyword">desc</span>) a <span class="keyword">where</span> total &lt; player_num;</span><br></pre></td></tr></table></figure>
-<p>增加条件</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> (<span class="keyword">select</span> t1.id,<span class="keyword">count</span>(*) <span class="keyword">as</span> total, t1.<span class="string">`player_num`</span>, t1.<span class="string">`union_id`</span></span><br><span class="line"><span class="keyword">from</span> house t1 <span class="keyword">left</span> <span class="keyword">join</span> player t2 <span class="keyword">on</span> t1.id=t2.house_id </span><br><span class="line"><span class="keyword">where</span> t1.union_id=<span class="number">40</span></span><br><span class="line"><span class="keyword">group</span>  <span class="keyword">by</span> t1.id</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> total <span class="keyword">desc</span>) a </span><br><span class="line"><span class="keyword">where</span> total&lt;player_num;</span><br></pre></td></tr></table></figure>
+        <p>mac 下搭建django2.0的开发环境，mac上默认的python版本是2.7，django需要的是python3以上的版本。所以我们需要再安装一个python3.5的版本。python2.7和python3.5可以共存的。直接安装就可以了。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -V <span class="comment">#查看python版本，默认的mac上的python版本是2.7</span></span><br></pre></td></tr></table></figure>
+<p>我们可以到<a href="https://www.python.org上下载安装python3.0安装文件，是pyton-3.6.5-macos.pkg文件，双击安装即可。" target="_blank" rel="noopener">https://www.python.org上下载安装python3.0安装文件，是pyton-3.6.5-macos.pkg文件，双击安装即可。</a></p>
+<p>安装完成后，查看版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">➜  django python -V </span><br><span class="line">Python 2.7.10</span><br><span class="line">➜  django python -V</span><br><span class="line">Python 2.7.10</span><br><span class="line">➜  django python3 -V</span><br><span class="line">Python 3.6.5</span><br></pre></td></tr></table></figure>
+<p>如果没有安装pip，先安装pip</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">➜  django sudo easy_install pip</span><br><span class="line">Password:</span><br><span class="line">Searching for pip</span><br><span class="line">Reading https://pypi.python.org/simple/pip/</span><br><span class="line">....</span><br></pre></td></tr></table></figure>
+<p>这里的pip是2.7的pip，只能安装django1.x版本，要安装django2.0的版本需要安装pip3版本。安装pip3的方法如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl https://bootstrap.pypa.io/get-pip.py | python3</span><br></pre></td></tr></table></figure>
+<p>使用上面的命令用python3，安装pip3</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">➜  django curl https://bootstrap.pypa.io/get-pip.py | python3</span><br><span class="line">  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current</span><br><span class="line">                                 Dload  Upload   Total   Spent    Left  Speed</span><br><span class="line">100 1738k  100 1738k    0     0  1610k      0  0:00:01  0:00:01 --:--:-- 1612k</span><br><span class="line">Cache entry deserialization failed, entry ignored</span><br><span class="line">Requirement already up-to-date: pip in /Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages</span><br><span class="line">Collecting wheel</span><br><span class="line">  Downloading wheel-0.31.0-py2.py3-none-any.whl (41kB)</span><br><span class="line">    100% |████████████████████████████████| 51kB 533kB/s </span><br><span class="line">Installing collected packages: wheel</span><br><span class="line">Successfully installed wheel-0.31.0</span><br></pre></td></tr></table></figure>
+<p>安装成功后，检查版本</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">➜  django pip -V</span><br><span class="line">pip 10.0.0b2 from /Library/Python/2.7/site-packages/pip-10.0.0b2-py2.7.egg/pip (python 2.7)</span><br><span class="line">➜  django pip --version</span><br><span class="line">pip 10.0.0b2 from /Library/Python/2.7/site-packages/pip-10.0.0b2-py2.7.egg/pip (python 2.7)</span><br><span class="line">➜  django pip3</span><br></pre></td></tr></table></figure>
+<p>使用pip3 安装django pip3</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">➜  django pip3 install Django==2.0.4</span><br><span class="line">Collecting Django==2.0.4</span><br><span class="line">  Cache entry deserialization failed, entry ignored</span><br><span class="line">  Downloading Django-2.0.4-py3-none-any.whl (7.1MB)</span><br><span class="line">    100% |████████████████████████████████| 7.1MB 267kB/s </span><br><span class="line">Collecting pytz (from Django==2.0.4)</span><br><span class="line">  Downloading pytz-2018.3-py2.py3-none-any.whl (509kB)</span><br><span class="line">    100% |████████████████████████████████| 512kB 2.5MB/s </span><br><span class="line">Installing collected packages: pytz, Django</span><br><span class="line">Successfully installed Django-2.0.4 pytz-2018.3</span><br></pre></td></tr></table></figure>
+<p>成功安装django2.0.4版本。</p>
 
       
     </div>
@@ -405,7 +417,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/sql/" rel="tag"># sql</a>
+            <a href="/tags/python-django/" rel="tag"># python,django</a>
           
         </div>
       
@@ -418,8 +430,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/31/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2018/04/03/python-md5/" rel="next" title="Python 用hashlib求中文字符串的MD5值">
+                <i class="fa fa-chevron-left"></i> Python 用hashlib求中文字符串的MD5值
               </a>
             
           </div>
@@ -427,10 +439,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/03/31/go-scoket/" rel="prev" title="Go 实现socket服务">
-                Go 实现socket服务 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
