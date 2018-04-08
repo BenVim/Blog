@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="一纸墨迹">
 <meta property="og:description" content="python 在使用多线程的时候，我们有时需要对并发限制进行控制，即同一时间只能多少线程在工作，控制并发数，确保机器资源的有效利用。 信号量：class threading.Semaphore([value]) values是一个内部计数，values默认是1，如果小于0，则会抛出 ValueError 异常，可以用于控制线程数并发数1.acquire([blocking])2.release()">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-04-08T01:35:36.385Z">
+<meta property="og:updated_time" content="2018-04-08T01:40:12.184Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python多线程并发限制">
 <meta name="twitter:description" content="python 在使用多线程的时候，我们有时需要对并发限制进行控制，即同一时间只能多少线程在工作，控制并发数，确保机器资源的有效利用。 信号量：class threading.Semaphore([value]) values是一个内部计数，values默认是1，如果小于0，则会抛出 ValueError 异常，可以用于控制线程数并发数1.acquire([blocking])2.release()">
@@ -394,6 +394,8 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">pageAnalysis</span><span class="params">(self)</span>:</span></span><br><span class="line">    semlock = threading.BoundedSemaphore(self.maxconnections)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(self.queue.qsize()):</span><br><span class="line">        semlock.acquire() <span class="comment"># 开始时候计数</span></span><br><span class="line">        details = DetailsAnalysis() <span class="comment"># 该对象继承threading</span></span><br><span class="line">        details.initData(self.queue.get(), semlock)</span><br><span class="line">        details.start() <span class="comment">#线程开始</span></span><br></pre></td></tr></table></figure>
 <p>数据保存线程结束，调用self.semlock.release() 释放线程，进程继续进行。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">saveData</span><span class="params">(self)</span>:</span></span><br><span class="line">    cursor = self.db.cursor()</span><br><span class="line">    sql = <span class="string">"insert into company (company_name,name,mobile,phone,address) value ('"</span> + self.companyName + <span class="string">"','"</span> + self.name + <span class="string">"','"</span> + self.mobile + <span class="string">"','"</span> + self.telephone + <span class="string">"','"</span> + self.address + <span class="string">"')"</span></span><br><span class="line">    print(<span class="string">"sql:"</span>,sql)</span><br><span class="line">    cursor.execute(sql)</span><br><span class="line">    self.db.commit()</span><br><span class="line">    self.semlock.release() <span class="comment"># 当前任务完成，线程释放</span></span><br></pre></td></tr></table></figure>
+<p>以上的代码我们有self.queue.qsize()数量的任务需要去做，我们希望使用多线程并发的形式去处理这些任务，以达到高效的处理，但是由于资源是有限的，所以我们不能够有多少任务就创建多少线程，每个线程是需要占用内存和系统资源的，数量过大可能会消耗掉机器所有资源最终可能导致系统启机，我们肯定希望在同一时间有多少线程在运行是可控的。</p>
+<p>以上的方法可以有效的控制同一时间运行的线程数量。</p>
 
       
     </div>
