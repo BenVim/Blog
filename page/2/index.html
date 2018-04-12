@@ -294,6 +294,166 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/01/node-nvm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一纸墨迹">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/01/node-nvm/" itemprop="url">node.js 版本控制 nvm</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-01T19:40:22+08:00">
+                2018-04-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/nodejs/" itemprop="url" rel="index">
+                    <span itemprop="name">nodejs</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>node的版本实在是多，在两台mac上安装pomelo， 一台正常运行，一台运行报错，完全一样的代码，最后检查是node版本不一致，一个是9.3和9.8。后来安装nvm使用相同的9.3版后，一切正常了。</p>
+<h3 id="nvm版本控制的安装"><a href="#nvm版本控制的安装" class="headerlink" title="nvm版本控制的安装"></a>nvm版本控制的安装</h3><p>我们使用brew安装nvm</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install nvm</span><br></pre></td></tr></table></figure>
+<p>安装完成后，需要在bash或zsh配置文件中设置一下，否则当你重新启动终端，node，npm环境变量都会失效。</p>
+<p>安装好nvm后，输入如下命令，可以看到帮助信息。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew info nvm</span><br></pre></td></tr></table></figure>
+<p>输出如下信息</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">nvm: stable 0.33.8, HEAD</span><br><span class="line">Manage multiple Node.js versions</span><br><span class="line">https://github.com/creationix/nvm</span><br><span class="line">/usr/<span class="built_in">local</span>/Cellar/nvm/0.33.8 (7 files, 135.5KB) *</span><br><span class="line">  Built from <span class="built_in">source</span> on 2018-03-31 at 20:58:44</span><br><span class="line">From: https://github.com/Homebrew/homebrew-core/blob/master/Formula/nvm.rb</span><br><span class="line">==&gt; Options</span><br><span class="line">--HEAD</span><br><span class="line">	Install HEAD version</span><br><span class="line">==&gt; Caveats</span><br><span class="line">Please note that upstream has asked us to make explicit managing</span><br><span class="line">nvm via Homebrew is unsupported by them and you should check any</span><br><span class="line">problems against the standard nvm install method prior to reporting.</span><br><span class="line"></span><br><span class="line">You should create NVM<span class="string">'s working directory if it doesn'</span>t exist:</span><br><span class="line"></span><br><span class="line">  mkdir ~/.nvm</span><br><span class="line"></span><br><span class="line">Add the following to ~/.bash_profile or your desired shell</span><br><span class="line">configuration file:</span><br><span class="line"></span><br><span class="line">  <span class="built_in">export</span> NVM_DIR=<span class="string">"<span class="variable">$HOME</span>/.nvm"</span></span><br><span class="line">  . <span class="string">"/usr/local/opt/nvm/nvm.sh"</span></span><br><span class="line"></span><br><span class="line">You can <span class="built_in">set</span> <span class="variable">$NVM_DIR</span> to any location, but leaving it unchanged from</span><br><span class="line">/usr/<span class="built_in">local</span>/opt/nvm will destroy any nvm-installed Node installations</span><br><span class="line">upon upgrade/reinstall.</span><br><span class="line"></span><br><span class="line">Type `nvm <span class="built_in">help</span>` <span class="keyword">for</span> further information.</span><br><span class="line"></span><br><span class="line">Bash completion has been installed to:</span><br><span class="line">  /usr/<span class="built_in">local</span>/etc/bash_completion.d</span><br></pre></td></tr></table></figure>
+<p>我们需要按照上面提供的方法,首先在用户更目录下 创建 .nvm 文件</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~/.nvm</span><br></pre></td></tr></table></figure>
+<p>然后把 nvm-exec 文件拷贝到你刚才新建的 .nvm 目录下</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp $(brew --prefix nvm)/nvm-exec ~/.nvm/</span><br></pre></td></tr></table></figure>
+<p>然后去编辑你的 bash 配置文件 $HOME/.bashrc ,如果你  使用 zsh 那么编辑 $HOME/.zshrc 配置文件</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.bashrc</span><br><span class="line"><span class="comment"># 或</span></span><br><span class="line">vim ~/.zshrc</span><br></pre></td></tr></table></figure>
+<p>把下面的内容粘贴进去</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export NVM_DIR=~/.nvm</span><br><span class="line">source $(brew --prefix nvm)/nvm.sh</span><br></pre></td></tr></table></figure>
+<p>最后让你的 shell 配置及时生效</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">source ~/.bashrc</span><br><span class="line"># 或</span><br><span class="line">source ~/.zshrc</span><br></pre></td></tr></table></figure>
+<h3 id="nvm的使用"><a href="#nvm的使用" class="headerlink" title="nvm的使用"></a>nvm的使用</h3><p>nvm使用方法</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">nvm ls-remote <span class="comment"># 查看可以安装的版本</span></span><br><span class="line">nvm ls <span class="comment"># 查看已经安装的版本</span></span><br><span class="line">nvm install &lt;version&gt; <span class="comment"># 安装一个指定的版本</span></span><br><span class="line"><span class="comment"># 上面的 version 可以指定你在 nvm ls-remote 里面列出来的版本号即可</span></span><br><span class="line">nvm use &lt;version&gt; <span class="comment"># 使用指定版本</span></span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/03/31/pomelo-cli-command/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1453,7 +1613,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

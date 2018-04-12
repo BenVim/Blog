@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="docker," />
+  <meta name="keywords" content="python," />
 
 
 
@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="使用docker构建开发运行环境有很多优势，能够保持本地与测试、生产环境的一致性。首先简单方法构建。 1docker pull nginx # 获取nginx镜像 运行docker挂载工作目录 1234567docker run --name myNginx -d -p 8080:80 -v /Users/ben/docker/nginx/www:/usr/share/nginx/html ngi">
-<meta name="keywords" content="docker">
+<meta name="description" content="django1.7以后的版本，数据库迁移只有三个命令  migrate：用来迁移数据库 makemigrations：用来检测数据库变更和生成数据库迁移文件。 sqlmigrate：用来把数据库迁移文件转换成数据库语言(displays the SQL statements for a migratioin.）  1. makemigrations检查models更新创建initial.py文件的">
+<meta name="keywords" content="python">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用docker制作nginx环境">
-<meta property="og:url" content="http://blog.ku-cat.com/2018/04/02/docker-nginx/index.html">
+<meta property="og:title" content="django 数据库操作">
+<meta property="og:url" content="http://blog.ku-cat.com/2018/04/09/django-db/index.html">
 <meta property="og:site_name" content="一纸墨迹">
-<meta property="og:description" content="使用docker构建开发运行环境有很多优势，能够保持本地与测试、生产环境的一致性。首先简单方法构建。 1docker pull nginx # 获取nginx镜像 运行docker挂载工作目录 1234567docker run --name myNginx -d -p 8080:80 -v /Users/ben/docker/nginx/www:/usr/share/nginx/html ngi">
+<meta property="og:description" content="django1.7以后的版本，数据库迁移只有三个命令  migrate：用来迁移数据库 makemigrations：用来检测数据库变更和生成数据库迁移文件。 sqlmigrate：用来把数据库迁移文件转换成数据库语言(displays the SQL statements for a migratioin.）  1. makemigrations检查models更新创建initial.py文件的">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-04-02T13:54:11.428Z">
+<meta property="og:updated_time" content="2018-04-12T01:59:59.412Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用docker制作nginx环境">
-<meta name="twitter:description" content="使用docker构建开发运行环境有很多优势，能够保持本地与测试、生产环境的一致性。首先简单方法构建。 1docker pull nginx # 获取nginx镜像 运行docker挂载工作目录 1234567docker run --name myNginx -d -p 8080:80 -v /Users/ben/docker/nginx/www:/usr/share/nginx/html ngi">
+<meta name="twitter:title" content="django 数据库操作">
+<meta name="twitter:description" content="django1.7以后的版本，数据库迁移只有三个命令  migrate：用来迁移数据库 makemigrations：用来检测数据库变更和生成数据库迁移文件。 sqlmigrate：用来把数据库迁移文件转换成数据库语言(displays the SQL statements for a migratioin.）  1. makemigrations检查models更新创建initial.py文件的">
 
 
 
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.ku-cat.com/2018/04/02/docker-nginx/"/>
+  <link rel="canonical" href="http://blog.ku-cat.com/2018/04/09/django-db/"/>
 
 
 
 
 
-  <title>使用docker制作nginx环境 | 一纸墨迹</title>
+  <title>django 数据库操作 | 一纸墨迹</title>
   
 
 
@@ -295,7 +295,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/02/docker-nginx/">
+    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/09/django-db/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben">
@@ -312,7 +312,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">使用docker制作nginx环境</h1>
+          <h1 class="post-title" itemprop="name headline">django 数据库操作</h1>
         
 
         <div class="post-meta">
@@ -324,8 +324,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-02T21:43:04+08:00">
-                2018-04-02
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-09T09:08:05+08:00">
+                2018-04-09
               </time>
             
 
@@ -347,8 +347,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/docker/" itemprop="url" rel="index">
-                    <span itemprop="name">docker</span>
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
                   </a>
                 </span>
 
@@ -384,12 +384,21 @@
       
 
       
-        <p>使用docker构建开发运行环境有很多优势，能够保持本地与测试、生产环境的一致性。首先简单方法构建。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull nginx # 获取nginx镜像</span><br></pre></td></tr></table></figure>
-<p>运行docker挂载工作目录</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker run --name myNginx -d -p 8080:80 -v /Users/ben/docker/nginx/www:/usr/share/nginx/html nginx</span><br><span class="line">b0167fd1d31bf7071589c10569e259392533c2ad0527ad0ccbb51ec9c62ecd6f</span><br><span class="line"></span><br><span class="line">docker ps</span><br><span class="line"></span><br><span class="line">CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                  NAMES</span><br><span class="line">b0167fd1d31b        nginx               &quot;nginx -g &apos;daemon of…&quot;   27 seconds ago      Up 21 seconds       0.0.0.0:8080-&gt;80/tcp   Nginx</span><br></pre></td></tr></table></figure>
-<p>本地的mac目录/Users/ben/docker/nginx/www 与 容器的/usr/share/nginx/html绑定。我们可以修改 /Users/ben/docker/nginx/www 中的内容，在地址栏输入 <a href="http://127.0.0.1:8080/" target="_blank" rel="noopener">http://127.0.0.1:8080/</a> 可以直接测试。</p>
-
+        <p>django1.7以后的版本，数据库迁移只有三个命令</p>
+<ul>
+<li>migrate：用来迁移数据库</li>
+<li>makemigrations：用来检测数据库变更和生成数据库迁移文件。</li>
+<li>sqlmigrate：用来把数据库迁移文件转换成数据库语言(displays the SQL statements for a migratioin.）</li>
+</ul>
+<h3 id="1-makemigrations检查models更新创建initial-py文件的操作"><a href="#1-makemigrations检查models更新创建initial-py文件的操作" class="headerlink" title="1. makemigrations检查models更新创建initial.py文件的操作"></a>1. makemigrations检查models更新创建initial.py文件的操作</h3><p>django2.0和1.0对于数据库的操作有些区别了。比如我们对model进行修改，需要执行以下命令进行操作。相当于在bookApp目录下建立migrations目录，并记录下你所有关于modes.py的改动。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">python3 manage.py makemigrations bookApp <span class="comment"># bookApp为应用名称</span></span><br><span class="line"><span class="comment"># 运行显示如下内容：</span></span><br><span class="line">Migrations <span class="keyword">for</span> <span class="string">'bookApp'</span>:</span><br><span class="line">  bookApp/migrations/0003_auto_20180412_0846.py </span><br><span class="line">  <span class="comment"># 我这里已经是第3次修改了，所以是0003_auto_20180412_0846.py</span></span><br><span class="line">    - Alter field fontDomain on tunnel</span><br></pre></td></tr></table></figure>
+<p>执行以上的命令会在bookApp下创建migrations目录，并生成类似0001_initial.py的文件，但是这个改动还没有作用到数据。</p>
+<p>打开0001_initial.py文件显示如下内容。但并没有更新数据库。记录的是每次对数据库的修改，更像是<font color="red">数据库的版本控制</font></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Generated by Django 2.0.1 on 2018-04-11 06:45</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> migrations, models</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Migration</span><span class="params">(migrations.Migration)</span>:</span></span><br><span class="line"></span><br><span class="line">    initial = <span class="keyword">True</span></span><br><span class="line"></span><br><span class="line">    dependencies = [</span><br><span class="line">    ]</span><br><span class="line"></span><br><span class="line">    operations = [</span><br><span class="line">        migrations.CreateModel(</span><br><span class="line">            name=<span class="string">'PhoneVerify'</span>,</span><br><span class="line">            fields=[</span><br><span class="line">                (<span class="string">'id'</span>, models.AutoField(auto_created=<span class="keyword">True</span>, primary_key=<span class="keyword">True</span>, serialize=<span class="keyword">False</span>, verbose_name=<span class="string">'ID'</span>)),</span><br><span class="line">                (<span class="string">'phone'</span>, models.CharField(default=<span class="number">0</span>, max_length=<span class="number">11</span>)),</span><br><span class="line">                (<span class="string">'sendDate'</span>, models.DateField(auto_now=<span class="keyword">True</span>)),</span><br><span class="line">            ],</span><br><span class="line">        ),</span><br><span class="line">    ]</span><br></pre></td></tr></table></figure>
+<p>生成这个文件后下面我们可以执行migrate命令把变更更新到数据库。</p>
+<h3 id="2-migrate用来迁移数据库"><a href="#2-migrate用来迁移数据库" class="headerlink" title="2. migrate用来迁移数据库"></a>2. migrate用来迁移数据库</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py migrate     <span class="comment">#用来迁移数据库</span></span><br></pre></td></tr></table></figure>
+<p>数据操作</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">python3 manage.py makemigrations ngrokApp</span><br><span class="line"></span><br><span class="line">Migrations <span class="keyword">for</span> <span class="string">'ngrokApp'</span>:</span><br><span class="line">  ngrokApp/migrations/0002_domain_fans_flowpackage_message_recharge_score_tunnel.py</span><br><span class="line">    - Create model Domain</span><br><span class="line">    - Create model Fans</span><br><span class="line">    - Create model FlowPackage</span><br><span class="line">    - Create model Message</span><br><span class="line">    - Create model Recharge</span><br><span class="line">    - Create model Score</span><br><span class="line">    - Create model Tunnel</span><br><span class="line"></span><br><span class="line">python3 manage.py migrate</span><br><span class="line"></span><br><span class="line">Operations to perform:</span><br><span class="line">  Apply all migrations: admin, auth, contenttypes, ngrokApp, sessions</span><br><span class="line">Running migrations:</span><br><span class="line">  Applying ngrokApp.0002_domain_fans_flowpackage_message_recharge_score_tunnel... OK</span><br><span class="line">  </span><br><span class="line">python3 manage.py sqlmigrate ngrokApp 0002</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -406,7 +415,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/docker/" rel="tag"># docker</a>
+            <a href="/tags/python/" rel="tag"># python</a>
           
         </div>
       
@@ -419,8 +428,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/02/mac-os-efi/" rel="next" title="Mac下挂载EFI分区">
-                <i class="fa fa-chevron-left"></i> Mac下挂载EFI分区
+              <a href="/2018/04/08/python-Thread/" rel="next" title="python多线程并发数的控制">
+                <i class="fa fa-chevron-left"></i> python多线程并发数的控制
               </a>
             
           </div>
@@ -428,10 +437,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/04/03/python-virtualenv/" rel="prev" title="python-virtualenv 创建独立的python运行环境。">
-                python-virtualenv 创建独立的python运行环境。 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -483,8 +488,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -591,6 +605,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-makemigrations检查models更新创建initial-py文件的操作"><span class="nav-number">1.</span> <span class="nav-text">1. makemigrations检查models更新创建initial.py文件的操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-migrate用来迁移数据库"><span class="nav-number">2.</span> <span class="nav-text">2. migrate用来迁移数据库</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

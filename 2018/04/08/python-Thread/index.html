@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="python 在使用多线程的时候，我们有时需要对并发限制进行控制，即同一时间只能多少线程在工作，控制并发数，确保机器资源的有效利用。 信号量：class threading.Semaphore([value]) values是一个内部计数，values默认是1，如果小于0，则会抛出 ValueError 异常，可以用于控制线程数并发数1.acquire([blocking])2.release()">
+<meta name="description" content="多线程能够有效的提升执行效率，但是在我们压扎机器资源的时候也要适当进行，否则可能导致资源消耗过大，得不偿失，因此对并发的控制就变得很重要了。python正好有比较好的控制方法。使用semaphore进行控制。 信号量：class threading.Semaphore([value]) values是一个内部计数，values默认是1，如果小于0，则会抛出 ValueError 异常，可以用于控制">
 <meta name="keywords" content="python, thread">
 <meta property="og:type" content="article">
-<meta property="og:title" content="python多线程并发限制">
+<meta property="og:title" content="python多线程并发数的控制">
 <meta property="og:url" content="http://blog.ku-cat.com/2018/04/08/python-Thread/index.html">
 <meta property="og:site_name" content="一纸墨迹">
-<meta property="og:description" content="python 在使用多线程的时候，我们有时需要对并发限制进行控制，即同一时间只能多少线程在工作，控制并发数，确保机器资源的有效利用。 信号量：class threading.Semaphore([value]) values是一个内部计数，values默认是1，如果小于0，则会抛出 ValueError 异常，可以用于控制线程数并发数1.acquire([blocking])2.release()">
+<meta property="og:description" content="多线程能够有效的提升执行效率，但是在我们压扎机器资源的时候也要适当进行，否则可能导致资源消耗过大，得不偿失，因此对并发的控制就变得很重要了。python正好有比较好的控制方法。使用semaphore进行控制。 信号量：class threading.Semaphore([value]) values是一个内部计数，values默认是1，如果小于0，则会抛出 ValueError 异常，可以用于控制">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-04-08T01:40:12.184Z">
+<meta property="og:updated_time" content="2018-04-12T01:21:51.592Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="python多线程并发限制">
-<meta name="twitter:description" content="python 在使用多线程的时候，我们有时需要对并发限制进行控制，即同一时间只能多少线程在工作，控制并发数，确保机器资源的有效利用。 信号量：class threading.Semaphore([value]) values是一个内部计数，values默认是1，如果小于0，则会抛出 ValueError 异常，可以用于控制线程数并发数1.acquire([blocking])2.release()">
+<meta name="twitter:title" content="python多线程并发数的控制">
+<meta name="twitter:description" content="多线程能够有效的提升执行效率，但是在我们压扎机器资源的时候也要适当进行，否则可能导致资源消耗过大，得不偿失，因此对并发的控制就变得很重要了。python正好有比较好的控制方法。使用semaphore进行控制。 信号量：class threading.Semaphore([value]) values是一个内部计数，values默认是1，如果小于0，则会抛出 ValueError 异常，可以用于控制">
 
 
 
@@ -128,7 +128,7 @@
 
 
 
-  <title>python多线程并发限制 | 一纸墨迹</title>
+  <title>python多线程并发数的控制 | 一纸墨迹</title>
   
 
 
@@ -312,7 +312,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">python多线程并发限制</h1>
+          <h1 class="post-title" itemprop="name headline">python多线程并发数的控制</h1>
         
 
         <div class="post-meta">
@@ -384,7 +384,7 @@
       
 
       
-        <p>python 在使用多线程的时候，我们有时需要对并发限制进行控制，即同一时间只能多少线程在工作，控制并发数，确保机器资源的有效利用。</p>
+        <p>多线程能够有效的提升执行效率，但是在我们压扎机器资源的时候也要适当进行，否则可能导致资源消耗过大，得不偿失，因此对并发的控制就变得很重要了。python正好有比较好的控制方法。使用semaphore进行控制。</p>
 <h3 id="信号量：class-threading-Semaphore-value"><a href="#信号量：class-threading-Semaphore-value" class="headerlink" title="信号量：class threading.Semaphore([value])"></a>信号量：class threading.Semaphore([value])</h3><blockquote>
 <p>values是一个内部计数，values默认是1，如果小于0，则会抛出 ValueError 异常，可以用于控制线程数并发数<br>1.acquire([blocking])<br>2.release()</p>
 </blockquote>
@@ -435,6 +435,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/09/django-db/" rel="prev" title="django 数据库操作">
+                django 数据库操作 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -511,7 +515,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
