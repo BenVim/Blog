@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.ku-cat.com/"/>
-  <updated>2018-04-13T04:07:44.964Z</updated>
+  <updated>2018-04-20T14:51:57.450Z</updated>
   <id>http://blog.ku-cat.com/</id>
   
   <author>
@@ -15,6 +15,65 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>django on_delete 的报错修复</title>
+    <link href="http://blog.ku-cat.com/2018/04/20/django-bug/"/>
+    <id>http://blog.ku-cat.com/2018/04/20/django-bug/</id>
+    <published>2018-04-20T14:35:59.000Z</published>
+    <updated>2018-04-20T14:51:57.450Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="/2018/04/20/django-bug/80748597ffdd0b2bcd5f904d67bce3362e976f3271c3e-wi2iC3_fw658" alt=""></p><p>给model增加外键，后报如下的错误：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">userId = models.ForeignKey(User, on_delete=models.CASCADE)</span><br></pre></td></tr></table></figure><p>报以下的错误：</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">....</span><br><span class="line">  File <span class="string">"/Users/ben/django/ngrokProject/ngrok/ngrokApp/models.py"</span>, line 12, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    class Tunnel(models.Model):</span><br><span class="line">  File <span class="string">"/Users/ben/django/ngrokProject/ngrok/ngrokApp/models.py"</span>, line 14, <span class="keyword">in</span> Tunnel</span><br><span class="line">    userId = models.ForeignKey(User)</span><br><span class="line">TypeError: __init__() missing 1 required positional argument: <span class="string">'on_delete'</span></span><br><span class="line">Performing system checks...</span><br></pre></td></tr></table></figure><p>解决办法：<br>将第十一行的代码改为：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">herobook=models.ForeignKey(<span class="string">'BookInfo'</span>,on_delete=models.CASCADE,)</span><br></pre></td></tr></table></figure><p>即在外键值的后面加上 on_delete=models.CASCADE</p><p>目前还没有找到为什么。不过这样确实能解决问题，以后找到根本原因后再来补笔记。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;img src=&quot;/2018/04/20/django-bug/80748597ffdd0b2bcd5f904d67bce3362e976f3271c3e-wi2iC3_fw658&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;给model增加外键，后报如下的错误：&lt;/p&gt;
+&lt;figu
+      
+    
+    </summary>
+    
+      <category term="python" scheme="http://blog.ku-cat.com/categories/python/"/>
+    
+    
+      <category term="python" scheme="http://blog.ku-cat.com/tags/python/"/>
+    
+      <category term="django" scheme="http://blog.ku-cat.com/tags/django/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>django-rest-framework</title>
+    <link href="http://blog.ku-cat.com/2018/04/13/python-django-rest/"/>
+    <id>http://blog.ku-cat.com/2018/04/13/python-django-rest/</id>
+    <published>2018-04-13T07:50:59.000Z</published>
+    <updated>2018-04-13T07:55:29.673Z</updated>
+    
+    <content type="html"><![CDATA[<p>Django REST framework is a powerful and flexible toolkit for building Web APIs.</p><p>Some reasons you might want to use REST framework:</p><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pip install djangorestframework</span><br><span class="line">pip install markdown       <span class="comment"># Markdown support for the browsable API.</span></span><br><span class="line">pip install django-filter  <span class="comment"># Filtering support</span></span><br></pre></td></tr></table></figure><p>我使用的是python3.6, 所以使用pip3安装</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">➜  ngrok git:(master) pip3 install djangorestframework</span><br><span class="line">Collecting djangorestframework</span><br><span class="line">  Downloading djangorestframework-3.8.2-py2.py3-none-any.whl (923kB)</span><br><span class="line">    100% |████████████████████████████████| 931kB 1.1MB/s</span><br><span class="line">Installing collected packages: djangorestframework</span><br><span class="line">Successfully installed djangorestframework-3.8.2</span><br><span class="line">You are using pip version 9.0.1, however version 9.0.3 is available.</span><br><span class="line">You should consider upgrading via the <span class="string">'pip install --upgrade pip'</span> <span class="built_in">command</span>.</span><br><span class="line"></span><br><span class="line"><span class="comment"># ... 安装完成</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Django REST framework is a powerful and flexible toolkit for building Web APIs.&lt;/p&gt;
+&lt;p&gt;Some reasons you might want to use REST framework:
+      
+    
+    </summary>
+    
+      <category term="python" scheme="http://blog.ku-cat.com/categories/python/"/>
+    
+    
+      <category term="python" scheme="http://blog.ku-cat.com/tags/python/"/>
+    
+      <category term="django" scheme="http://blog.ku-cat.com/tags/django/"/>
+    
+      <category term="REST" scheme="http://blog.ku-cat.com/tags/REST/"/>
+    
+  </entry>
   
   <entry>
     <title>php调试技巧,使用debug_print_backtrace调用堆栈信息</title>
@@ -512,27 +571,6 @@
     
     
       <category term="sql" scheme="http://blog.ku-cat.com/tags/sql/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="http://blog.ku-cat.com/2018/03/31/hello-world/"/>
-    <id>http://blog.ku-cat.com/2018/03/31/hello-world/</id>
-    <published>2018-03-31T01:31:33.587Z</published>
-    <updated>2018-03-31T01:31:33.587Z</updated>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
-      
-    
-    </summary>
-    
     
   </entry>
   
