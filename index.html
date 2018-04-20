@@ -444,6 +444,161 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/17/django-debug-httpie/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一纸墨迹">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/17/django-debug-httpie/" itemprop="url">django-rest-framework调试工具 httpie</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-17T21:35:59+08:00">
+                2018-04-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="/img/b6bcf5049a0295911ad927e268c2a55e72fa42cd9cba8-e7WVRB_fw658.jpeg" alt=""></p>
+<p>使用django-rest-framework可以方便快捷的写出优美的restfull API，同样django也有非常方便的调试工具httpie。</p>
+<h3 id="安装httpie"><a href="#安装httpie" class="headerlink" title="安装httpie"></a>安装httpie</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install httpie</span><br></pre></td></tr></table></figure>
+<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><h2 id="使用GET"><a href="#使用GET" class="headerlink" title="使用GET"></a>使用GET</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http http://127.0.0.1:8000/domain/4/</span><br></pre></td></tr></table></figure>
+<p>返回的结果以非常友好的形式显示，而且还是彩色的！</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Allow: GET, POST, HEAD, OPTIONS</span><br><span class="line">Content-Length: 200</span><br><span class="line">Content-Type: application/json</span><br><span class="line">Date: Fri, 20 Apr 2018 15:02:48 GMT</span><br><span class="line">Server: WSGIServer/0.2 CPython/3.6.4</span><br><span class="line">Vary: Accept, Cookie</span><br><span class="line">X-Frame-Options: SAMEORIGIN</span><br><span class="line"></span><br><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">"ICP"</span>: null,</span><br><span class="line">        <span class="string">"ICP_master"</span>: null,</span><br><span class="line">        <span class="string">"ICP_type"</span>: null,</span><br><span class="line">        <span class="string">"addDate"</span>: <span class="string">"2018-04-12T15:31:03.291517+08:00"</span>,</span><br><span class="line">        <span class="string">"domain"</span>: <span class="string">"acc.s1.ilaputa.cn"</span>,</span><br><span class="line">        <span class="string">"expire"</span>: <span class="string">"2018-04-12T15:31:03.291571+08:00"</span>,</span><br><span class="line">        <span class="string">"status"</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="string">"type"</span>: 3,</span><br><span class="line">        <span class="string">"userId"</span>: 4</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>可以指定返回的数据格式。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">http http://127.0.0.1:8000/domain/4/ Accept:text/html</span><br><span class="line"><span class="comment"># 返回网页形式，是django-rest-framework的界面代码</span></span><br><span class="line">http http://127.0.0.1:8000/domain/4/ Accept:application/json</span><br><span class="line"><span class="comment"># 返回json格式</span></span><br></pre></td></tr></table></figure>
+<h2 id="使用POST方法"><a href="#使用POST方法" class="headerlink" title="使用POST方法"></a>使用POST方法</h2><p>调试post接口如下使用</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http --form POST http://127.0.0.1:8000/user/ username=18657986877 password=123456 verify=abc</span><br></pre></td></tr></table></figure>
+<p>返回结果</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">HTTP/1.1 400 Bad Request</span><br><span class="line">Allow: POST, OPTIONS</span><br><span class="line">Content-Length: 59</span><br><span class="line">Content-Type: application/json</span><br><span class="line">Date: Fri, 20 Apr 2018 15:08:38 GMT</span><br><span class="line">Server: WSGIServer/0.2 CPython/3.6.4</span><br><span class="line">Vary: Accept, Cookie</span><br><span class="line">X-Frame-Options: SAMEORIGIN</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"username"</span>: [</span><br><span class="line">        <span class="string">"已存在一位使用该名字的用户。"</span></span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>调用登录信息的使用方法</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http -a admin:admin123 POST http://127.0.0.1:8000/user/</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/13/python-django-rest/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -537,7 +692,7 @@
       
         
           
-            <p><img src="/img/logo.png" alt=""></p>
+            <p><img src="/img/logo2.png" alt=""></p>
 <p>Django REST framework is a powerful and flexible toolkit for building Web APIs.</p>
 <p>Some reasons you might want to use REST framework:</p>
 <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pip install djangorestframework</span><br><span class="line">pip install markdown       <span class="comment"># Markdown support for the browsable API.</span></span><br><span class="line">pip install django-filter  <span class="comment"># Filtering support</span></span><br></pre></td></tr></table></figure>
@@ -1665,155 +1820,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/03/python-django-static/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ben">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一纸墨迹">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/03/python-django-static/" itemprop="url">django添加css等静态文件</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-03T13:16:03+08:00">
-                2018-04-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>django 中访问 css 等静态文件必须以 url 的形式去访问，即必须配置 urls.py 的访问路径<br>首先在 settings.py 中添加：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">STATIC_ROOT = os.path.join(os.path.dirname(os.path.dirname(__file__)), <span class="string">'static'</span>)</span><br><span class="line">STATICFILES_DIRS = [</span><br><span class="line">    (<span class="string">'css'</span>, os.path.join(STATIC_ROOT, <span class="string">'css'</span>).replace(<span class="string">'\\'</span>, <span class="string">'/'</span>)),</span><br><span class="line">    (<span class="string">'js'</span>, os.path.join(STATIC_ROOT, <span class="string">'js'</span>).replace(<span class="string">'\\'</span>, <span class="string">'/'</span>)),</span><br><span class="line">    (<span class="string">'image'</span>, os.path.join(STATIC_ROOT, <span class="string">'image'</span>).replace(<span class="string">'\\'</span>, <span class="string">'/'</span>)),</span><br><span class="line">    (<span class="string">'upload'</span>, os.path.join(STATIC_ROOT, <span class="string">'upload'</span>).replace(<span class="string">'\\'</span>, <span class="string">'/'</span>)),</span><br><span class="line"> ]</span><br></pre></td></tr></table></figure>
-<p>其中__file__ 指的是调用 css 的html 文件所在的路径</p>
-<p>然后在 urls.py 中添加</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">url(<span class="string">r'^static/(?P&lt;path&gt;.*)$'</span>, <span class="string">'django.views.static.serve'</span>, &#123;<span class="string">'document_root'</span>: settings.STATIC_ROOT&#125;)</span><br></pre></td></tr></table></figure>
-<p>最后在 register.html 中引用 css 文件</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel=<span class="string">"stylesheet"</span> type=<span class="string">"text/css"</span> href=<span class="string">"/static/css/register.css"</span>&gt;</span><br></pre></td></tr></table></figure>
-<p>此处调用 django.views.static.serve 方法去解析具体的路径</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># …or create a new repository on the command line</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"# test1"</span> &gt;&gt; README.md</span><br><span class="line">git init</span><br><span class="line">git add README.md</span><br><span class="line">git commit -m <span class="string">"first commit"</span></span><br><span class="line">git remote add origin git@github.com:BenVim/test1.git</span><br><span class="line">git push -u origin master</span><br><span class="line"><span class="comment"># …or push an existing repository from the command line</span></span><br><span class="line">git remote add origin git@github.com:BenVim/test1.git</span><br><span class="line">git push -u origin master</span><br><span class="line"><span class="comment"># …or import code from another repository</span></span><br><span class="line">You can initialize this repository with code from a Subversion, Mercurial, or TFS project.</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1864,7 +1870,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1886,7 +1892,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

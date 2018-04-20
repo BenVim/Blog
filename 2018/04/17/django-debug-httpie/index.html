@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="python," />
+  <meta name="keywords" content="python,django,httpie," />
 
 
 
@@ -81,18 +81,20 @@
 
 
 
-<meta name="description" content="使用过hashlib库的遇到过以下的错误: 1Unicode-objects must be encoded before hashing 意思是在进行md5哈希运算前，需要对数据进行编码。而且在不同版本的Python下还有所不同。hashlib.md5(data)函数中，data参数的类型应该是bytes。也就是说我们在进行hash前必须把数据转换成bytes类型，对于C程序而言似乎没有类似问题">
-<meta name="keywords" content="python">
+<meta name="description" content="使用django-rest-framework可以方便快捷的写出优美的restfull API，同样django也有非常方便的调试工具httpie。 安装httpie1pip3 install httpie 使用方法使用GET1http http://127.0.0.1:8000/domain/4/ 返回的结果以非常友好的形式显示，而且还是彩色的！ 12345678910111213141516">
+<meta name="keywords" content="python,django,httpie">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Python 用hashlib求中文字符串的MD5值">
-<meta property="og:url" content="http://blog.ku-cat.com/2018/04/03/python-md5/index.html">
+<meta property="og:title" content="django-rest-framework调试工具 httpie">
+<meta property="og:url" content="http://blog.ku-cat.com/2018/04/17/django-debug-httpie/index.html">
 <meta property="og:site_name" content="一纸墨迹">
-<meta property="og:description" content="使用过hashlib库的遇到过以下的错误: 1Unicode-objects must be encoded before hashing 意思是在进行md5哈希运算前，需要对数据进行编码。而且在不同版本的Python下还有所不同。hashlib.md5(data)函数中，data参数的类型应该是bytes。也就是说我们在进行hash前必须把数据转换成bytes类型，对于C程序而言似乎没有类似问题">
+<meta property="og:description" content="使用django-rest-framework可以方便快捷的写出优美的restfull API，同样django也有非常方便的调试工具httpie。 安装httpie1pip3 install httpie 使用方法使用GET1http http://127.0.0.1:8000/domain/4/ 返回的结果以非常友好的形式显示，而且还是彩色的！ 12345678910111213141516">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-04-03T11:11:09.219Z">
+<meta property="og:image" content="http://blog.ku-cat.com/img/b6bcf5049a0295911ad927e268c2a55e72fa42cd9cba8-e7WVRB_fw658.jpeg">
+<meta property="og:updated_time" content="2018-04-20T15:18:59.651Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Python 用hashlib求中文字符串的MD5值">
-<meta name="twitter:description" content="使用过hashlib库的遇到过以下的错误: 1Unicode-objects must be encoded before hashing 意思是在进行md5哈希运算前，需要对数据进行编码。而且在不同版本的Python下还有所不同。hashlib.md5(data)函数中，data参数的类型应该是bytes。也就是说我们在进行hash前必须把数据转换成bytes类型，对于C程序而言似乎没有类似问题">
+<meta name="twitter:title" content="django-rest-framework调试工具 httpie">
+<meta name="twitter:description" content="使用django-rest-framework可以方便快捷的写出优美的restfull API，同样django也有非常方便的调试工具httpie。 安装httpie1pip3 install httpie 使用方法使用GET1http http://127.0.0.1:8000/domain/4/ 返回的结果以非常友好的形式显示，而且还是彩色的！ 12345678910111213141516">
+<meta name="twitter:image" content="http://blog.ku-cat.com/img/b6bcf5049a0295911ad927e268c2a55e72fa42cd9cba8-e7WVRB_fw658.jpeg">
 
 
 
@@ -122,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.ku-cat.com/2018/04/03/python-md5/"/>
+  <link rel="canonical" href="http://blog.ku-cat.com/2018/04/17/django-debug-httpie/"/>
 
 
 
 
 
-  <title>Python 用hashlib求中文字符串的MD5值 | 一纸墨迹</title>
+  <title>django-rest-framework调试工具 httpie | 一纸墨迹</title>
   
 
 
@@ -295,7 +297,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/03/python-md5/">
+    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/17/django-debug-httpie/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben">
@@ -312,7 +314,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Python 用hashlib求中文字符串的MD5值</h1>
+          <h1 class="post-title" itemprop="name headline">django-rest-framework调试工具 httpie</h1>
         
 
         <div class="post-meta">
@@ -324,8 +326,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-03T19:06:03+08:00">
-                2018-04-03
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-17T21:35:59+08:00">
+                2018-04-17
               </time>
             
 
@@ -384,11 +386,20 @@
       
 
       
-        <p>使用过hashlib库的遇到过以下的错误:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Unicode-objects must be encoded before hashing</span><br></pre></td></tr></table></figure>
-<p>意思是在进行md5哈希运算前，需要对数据进行编码。而且在不同版本的Python下还有所不同。hashlib.md5(data)函数中，data参数的类型应该是bytes。也就是说我们在进行hash前必须把数据转换成bytes类型，对于C程序而言似乎没有类似问题，指针强制转换就OK了。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">def md5(str):</span><br><span class="line">    m2 = hashlib.md5()</span><br><span class="line">    m2.update(str.encode(&apos;utf8&apos;))</span><br><span class="line">    return m2.hexdigest()</span><br></pre></td></tr></table></figure>
-<p>先简单处理一下。</p>
+        <p><img src="/img/b6bcf5049a0295911ad927e268c2a55e72fa42cd9cba8-e7WVRB_fw658.jpeg" alt=""></p>
+<p>使用django-rest-framework可以方便快捷的写出优美的restfull API，同样django也有非常方便的调试工具httpie。</p>
+<h3 id="安装httpie"><a href="#安装httpie" class="headerlink" title="安装httpie"></a>安装httpie</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install httpie</span><br></pre></td></tr></table></figure>
+<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><h2 id="使用GET"><a href="#使用GET" class="headerlink" title="使用GET"></a>使用GET</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http http://127.0.0.1:8000/domain/4/</span><br></pre></td></tr></table></figure>
+<p>返回的结果以非常友好的形式显示，而且还是彩色的！</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Allow: GET, POST, HEAD, OPTIONS</span><br><span class="line">Content-Length: 200</span><br><span class="line">Content-Type: application/json</span><br><span class="line">Date: Fri, 20 Apr 2018 15:02:48 GMT</span><br><span class="line">Server: WSGIServer/0.2 CPython/3.6.4</span><br><span class="line">Vary: Accept, Cookie</span><br><span class="line">X-Frame-Options: SAMEORIGIN</span><br><span class="line"></span><br><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">"ICP"</span>: null,</span><br><span class="line">        <span class="string">"ICP_master"</span>: null,</span><br><span class="line">        <span class="string">"ICP_type"</span>: null,</span><br><span class="line">        <span class="string">"addDate"</span>: <span class="string">"2018-04-12T15:31:03.291517+08:00"</span>,</span><br><span class="line">        <span class="string">"domain"</span>: <span class="string">"acc.s1.ilaputa.cn"</span>,</span><br><span class="line">        <span class="string">"expire"</span>: <span class="string">"2018-04-12T15:31:03.291571+08:00"</span>,</span><br><span class="line">        <span class="string">"status"</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="string">"type"</span>: 3,</span><br><span class="line">        <span class="string">"userId"</span>: 4</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>可以指定返回的数据格式。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">http http://127.0.0.1:8000/domain/4/ Accept:text/html</span><br><span class="line"><span class="comment"># 返回网页形式，是django-rest-framework的界面代码</span></span><br><span class="line">http http://127.0.0.1:8000/domain/4/ Accept:application/json</span><br><span class="line"><span class="comment"># 返回json格式</span></span><br></pre></td></tr></table></figure>
+<h2 id="使用POST方法"><a href="#使用POST方法" class="headerlink" title="使用POST方法"></a>使用POST方法</h2><p>调试post接口如下使用</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http --form POST http://127.0.0.1:8000/user/ username=18657986877 password=123456 verify=abc</span><br></pre></td></tr></table></figure>
+<p>返回结果</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">HTTP/1.1 400 Bad Request</span><br><span class="line">Allow: POST, OPTIONS</span><br><span class="line">Content-Length: 59</span><br><span class="line">Content-Type: application/json</span><br><span class="line">Date: Fri, 20 Apr 2018 15:08:38 GMT</span><br><span class="line">Server: WSGIServer/0.2 CPython/3.6.4</span><br><span class="line">Vary: Accept, Cookie</span><br><span class="line">X-Frame-Options: SAMEORIGIN</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"username"</span>: [</span><br><span class="line">        <span class="string">"已存在一位使用该名字的用户。"</span></span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>调用登录信息的使用方法</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http -a admin:admin123 POST http://127.0.0.1:8000/user/</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -408,6 +419,10 @@
           
             <a href="/tags/python/" rel="tag"># python</a>
           
+            <a href="/tags/django/" rel="tag"># django</a>
+          
+            <a href="/tags/httpie/" rel="tag"># httpie</a>
+          
         </div>
       
 
@@ -419,8 +434,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/03/python-django-static/" rel="next" title="django添加css等静态文件">
-                <i class="fa fa-chevron-left"></i> django添加css等静态文件
+              <a href="/2018/04/13/python-django-rest/" rel="next" title="django-rest-framework">
+                <i class="fa fa-chevron-left"></i> django-rest-framework
               </a>
             
           </div>
@@ -429,8 +444,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/04/03/python-django/" rel="prev" title="mac下搭建django2.0的开发环境">
-                mac下搭建django2.0的开发环境 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/04/20/django-bug/" rel="prev" title="django on_delete 的报错修复">
+                django on_delete 的报错修复 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -483,8 +498,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -591,6 +615,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装httpie"><span class="nav-number">1.</span> <span class="nav-text">安装httpie</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用方法"><span class="nav-number">2.</span> <span class="nav-text">使用方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用GET"><span class="nav-number"></span> <span class="nav-text">使用GET</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用POST方法"><span class="nav-number"></span> <span class="nav-text">使用POST方法</span></a></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
