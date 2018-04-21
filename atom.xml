@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.ku-cat.com/"/>
-  <updated>2018-04-20T14:56:04.477Z</updated>
+  <updated>2018-04-21T03:14:33.514Z</updated>
   <id>http://blog.ku-cat.com/</id>
   
   <author>
@@ -21,17 +21,17 @@
     <link href="http://blog.ku-cat.com/2018/04/20/django-bug/"/>
     <id>http://blog.ku-cat.com/2018/04/20/django-bug/</id>
     <published>2018-04-20T14:35:59.000Z</published>
-    <updated>2018-04-20T14:56:04.477Z</updated>
+    <updated>2018-04-21T03:14:33.514Z</updated>
     
-    <content type="html"><![CDATA[<p><img src="/img/80748597ffdd0b2bcd5f904d67bce3362e976f3271c3e-wi2iC3_fw658.jpeg" alt=""></p><p>给model增加外键，后报如下的错误：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">userId = models.ForeignKey(User, on_delete=models.CASCADE)</span><br></pre></td></tr></table></figure><p>报以下的错误：</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">....</span><br><span class="line">  File <span class="string">"/Users/ben/django/ngrokProject/ngrok/ngrokApp/models.py"</span>, line 12, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    class Tunnel(models.Model):</span><br><span class="line">  File <span class="string">"/Users/ben/django/ngrokProject/ngrok/ngrokApp/models.py"</span>, line 14, <span class="keyword">in</span> Tunnel</span><br><span class="line">    userId = models.ForeignKey(User)</span><br><span class="line">TypeError: __init__() missing 1 required positional argument: <span class="string">'on_delete'</span></span><br><span class="line">Performing system checks...</span><br></pre></td></tr></table></figure><p>解决办法：<br>将第十一行的代码改为：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">herobook=models.ForeignKey(<span class="string">'BookInfo'</span>,on_delete=models.CASCADE,)</span><br></pre></td></tr></table></figure><p>即在外键值的后面加上 on_delete=models.CASCADE</p><p>目前还没有找到为什么。不过这样确实能解决问题，以后找到根本原因后再来补笔记。</p>]]></content>
+    <content type="html"><![CDATA[<p><img src="/img/12.jpg" alt=""></p><p>给model增加外键，后报如下的错误：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">userId = models.ForeignKey(User, on_delete=models.CASCADE)</span><br></pre></td></tr></table></figure><p>报以下的错误：</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">....</span><br><span class="line">  File <span class="string">"/Users/ben/django/ngrokProject/ngrok/ngrokApp/models.py"</span>, line 12, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    class Tunnel(models.Model):</span><br><span class="line">  File <span class="string">"/Users/ben/django/ngrokProject/ngrok/ngrokApp/models.py"</span>, line 14, <span class="keyword">in</span> Tunnel</span><br><span class="line">    userId = models.ForeignKey(User)</span><br><span class="line">TypeError: __init__() missing 1 required positional argument: <span class="string">'on_delete'</span></span><br><span class="line">Performing system checks...</span><br></pre></td></tr></table></figure><p>解决办法：<br>将第十一行的代码改为：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">herobook=models.ForeignKey(<span class="string">'BookInfo'</span>,on_delete=models.CASCADE,)</span><br></pre></td></tr></table></figure><p>即在外键值的后面加上 on_delete=models.CASCADE</p><p>目前还没有找到为什么。不过这样确实能解决问题，以后找到根本原因后再来补笔记。</p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;&lt;img src=&quot;/img/80748597ffdd0b2bcd5f904d67bce3362e976f3271c3e-wi2iC3_fw658.jpeg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+        &lt;p&gt;&lt;img src=&quot;/img/12.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 &lt;p&gt;给model增加外键，后报如下的错误：&lt;/p&gt;
-&lt;figure class=&quot;hig
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span c
       
     
     </summary>
