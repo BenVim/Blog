@@ -294,6 +294,169 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/21/django-nginx-uWSGI/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一纸墨迹">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/21/django-nginx-uWSGI/" itemprop="url">nginx+uWSGI搭建python环境运行REST-Framework</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-21T18:04:46+08:00">
+                2018-04-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>uWSGI是一个Web应用服务器，它具有应用服务器，代理，进程管理及应用监控等功能。它支持WSGI协议，同时它也支持自有的uWSGI协议，该协议据说性能非常高，而且内存占用率低，为mod_wsgi的一半左右，它还支持多应用的管理及应用的性能监控。虽然uWSGI本身就可以直接用来当Web服务器，但一般建议将其作为应用服务器配合Nginx一起使用，这样可以更好的发挥Nginx在Web端的强大功能。</p>
+<h2 id="安装uWSGI"><a href="#安装uWSGI" class="headerlink" title="安装uWSGI"></a>安装uWSGI</h2><p>安装比较简单直接使用pip就可以安装了</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install uwsgi</span><br></pre></td></tr></table></figure>
+<p>安装成功后，你可以查看下当前的uwsgi的版本：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ uwsgi --version</span><br></pre></td></tr></table></figure>
+<p>如果是python3 ，要查看一下uwsgi使用的python版本</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">uwsgi --python-version</span><br><span class="line">3.5.0 <span class="comment"># 我这里使用的是django2.0版本，必须是要python3.5以上才支持。</span></span><br></pre></td></tr></table></figure>
+<h2 id="启动uWSGI"><a href="#启动uWSGI" class="headerlink" title="启动uWSGI"></a>启动uWSGI</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uwsgi --http :9090 --wsgi-file ngrok/wsgi.py</span><br></pre></td></tr></table></figure>
+<p>也可以使用配置文件启动。这样更方便一些。<a href="https://docs.djangoproject.com/en/1.11/howto/deployment/wsgi/uwsgi/#uwsgi-model" target="_blank" rel="noopener">参考djaong官方文档</a> 配置信息如下</p>
+<p>官方命令行直接启动参数</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">uwsgi --<span class="built_in">chdir</span>=/path/to/your/project \</span><br><span class="line">    --module=mysite.wsgi:application \</span><br><span class="line">    --env DJANGO_SETTINGS_MODULE=mysite.settings \</span><br><span class="line">    --master --pidfile=/tmp/project-master.pid \</span><br><span class="line">    --socket=127.0.0.1:49152 \      <span class="comment"># can also be a file</span></span><br><span class="line">    --processes=5 \                 <span class="comment"># number of worker processes</span></span><br><span class="line">    --uid=1000 --gid=2000 \         <span class="comment"># if root, uwsgi can drop privileges</span></span><br><span class="line">    --harakiri=20 \                 <span class="comment"># respawn processes taking more than 20 seconds</span></span><br><span class="line">    --max-requests=5000 \           <span class="comment"># respawn processes after serving 5000 requests</span></span><br><span class="line">    --vacuum \                      <span class="comment"># clear environment on exit</span></span><br><span class="line">    --home=/path/to/virtual/env \   <span class="comment"># optional path to a virtualenv</span></span><br><span class="line">    --daemonize=/var/<span class="built_in">log</span>/uwsgi/yourproject.log      <span class="comment"># background the process</span></span><br></pre></td></tr></table></figure>
+<p>配置文件启动参数</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[uwsgi]</span><br><span class="line"><span class="built_in">chdir</span>=/path/to/your/project <span class="comment">#项目目录</span></span><br><span class="line">module=mysite.wsgi:application <span class="comment">#模块wsgi.py</span></span><br><span class="line">master=True</span><br><span class="line">pidfile=/tmp/project-master.pid</span><br><span class="line">vacuum=True</span><br><span class="line">max-requests=5000</span><br><span class="line">daemonize=/var/<span class="built_in">log</span>/uwsgi/yourproject.log <span class="comment">#守护进程就加这行，日志输出文件</span></span><br></pre></td></tr></table></figure>
+<p>将uWSGI的HTTP端口监听改为socket端口监听，即将配置文件中的”http”项去掉，改为”socket”项：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">socket=127.0.0.1:3031 <span class="comment"># 主要用nginx转发到这个端口用的</span></span><br></pre></td></tr></table></figure>
+<p>启动方法：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uwsgi --ini uwsgi.ini</span><br></pre></td></tr></table></figure>
+<h2 id="配置Nginx"><a href="#配置Nginx" class="headerlink" title="配置Nginx"></a>配置Nginx</h2><p>Nginx的安装在此省略，nginx的配置如下：这段配置表明Nginx会将收到的所有请求都转发到”127.0.0.1:3031″端口上，即uWSGI服务器上。现在让我们重启Nginx，并启动uWSGI服务器：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">    include uwsgi_params;</span><br><span class="line">    uwsgi_pass 127.0.0.1:3031;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>重启</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo service nginx restart</span><br><span class="line">$ uwsgi uwsgi.ini</span><br></pre></td></tr></table></figure>
+<p>详情可以参考 <a href="http://www.bjhee.com/nginx-uwsgi.html" target="_blank" rel="noopener">使用Nginx和uWSGI来运行Python应用</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/20/django-bug/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1674,152 +1837,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/03/python-md5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ben">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一纸墨迹">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/03/python-md5/" itemprop="url">Python 用hashlib求中文字符串的MD5值</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-03T19:06:03+08:00">
-                2018-04-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>使用过hashlib库的遇到过以下的错误:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Unicode-objects must be encoded before hashing</span><br></pre></td></tr></table></figure>
-<p>意思是在进行md5哈希运算前，需要对数据进行编码。而且在不同版本的Python下还有所不同。hashlib.md5(data)函数中，data参数的类型应该是bytes。也就是说我们在进行hash前必须把数据转换成bytes类型，对于C程序而言似乎没有类似问题，指针强制转换就OK了。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">def md5(str):</span><br><span class="line">    m2 = hashlib.md5()</span><br><span class="line">    m2.update(str.encode(&apos;utf8&apos;))</span><br><span class="line">    return m2.hexdigest()</span><br></pre></td></tr></table></figure>
-<p>先简单处理一下。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1870,7 +1887,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1892,7 +1909,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

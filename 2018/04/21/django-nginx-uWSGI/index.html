@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="nodejs,pomelo," />
+  <meta name="keywords" content="nginx,python,uWSGI," />
 
 
 
@@ -81,20 +81,18 @@
 
 
 
-<meta name="description" content="一、安装pomelopomelo是基于Node.js的，目前pomelo已经完全支持Windows、Linux、Mac等多种平台。 准备 确保你的机器可以上网,因为安装pomelo的过程需要从网上下载其依赖的包。 确保你的系统上已经要安装了Node，目前最新的Node提供了已经编译好的二进制安装包，包括Windows，Mac和Linux等平台。想省事的话，直接去这里下载对应的安装包，直接安装就好">
-<meta name="keywords" content="nodejs,pomelo">
+<meta name="description" content="uWSGI是一个Web应用服务器，它具有应用服务器，代理，进程管理及应用监控等功能。它支持WSGI协议，同时它也支持自有的uWSGI协议，该协议据说性能非常高，而且内存占用率低，为mod_wsgi的一半左右，它还支持多应用的管理及应用的性能监控。虽然uWSGI本身就可以直接用来当Web服务器，但一般建议将其作为应用服务器配合Nginx一起使用，这样可以更好的发挥Nginx在Web端的强大功能。 安">
+<meta name="keywords" content="nginx,python,uWSGI">
 <meta property="og:type" content="article">
-<meta property="og:title" content="pomelo框架学习（一）安装pomelo">
-<meta property="og:url" content="http://blog.ku-cat.com/2018/03/31/pomelo-learn/index.html">
+<meta property="og:title" content="nginx+uWSGI搭建python环境运行REST-Framework">
+<meta property="og:url" content="http://blog.ku-cat.com/2018/04/21/django-nginx-uWSGI/index.html">
 <meta property="og:site_name" content="一纸墨迹">
-<meta property="og:description" content="一、安装pomelopomelo是基于Node.js的，目前pomelo已经完全支持Windows、Linux、Mac等多种平台。 准备 确保你的机器可以上网,因为安装pomelo的过程需要从网上下载其依赖的包。 确保你的系统上已经要安装了Node，目前最新的Node提供了已经编译好的二进制安装包，包括Windows，Mac和Linux等平台。想省事的话，直接去这里下载对应的安装包，直接安装就好">
+<meta property="og:description" content="uWSGI是一个Web应用服务器，它具有应用服务器，代理，进程管理及应用监控等功能。它支持WSGI协议，同时它也支持自有的uWSGI协议，该协议据说性能非常高，而且内存占用率低，为mod_wsgi的一半左右，它还支持多应用的管理及应用的性能监控。虽然uWSGI本身就可以直接用来当Web服务器，但一般建议将其作为应用服务器配合Nginx一起使用，这样可以更好的发挥Nginx在Web端的强大功能。 安">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://blog.ku-cat.com/img/logo.png">
-<meta property="og:updated_time" content="2018-04-13T04:00:59.588Z">
+<meta property="og:updated_time" content="2018-04-21T10:23:56.845Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="pomelo框架学习（一）安装pomelo">
-<meta name="twitter:description" content="一、安装pomelopomelo是基于Node.js的，目前pomelo已经完全支持Windows、Linux、Mac等多种平台。 准备 确保你的机器可以上网,因为安装pomelo的过程需要从网上下载其依赖的包。 确保你的系统上已经要安装了Node，目前最新的Node提供了已经编译好的二进制安装包，包括Windows，Mac和Linux等平台。想省事的话，直接去这里下载对应的安装包，直接安装就好">
-<meta name="twitter:image" content="http://blog.ku-cat.com/img/logo.png">
+<meta name="twitter:title" content="nginx+uWSGI搭建python环境运行REST-Framework">
+<meta name="twitter:description" content="uWSGI是一个Web应用服务器，它具有应用服务器，代理，进程管理及应用监控等功能。它支持WSGI协议，同时它也支持自有的uWSGI协议，该协议据说性能非常高，而且内存占用率低，为mod_wsgi的一半左右，它还支持多应用的管理及应用的性能监控。虽然uWSGI本身就可以直接用来当Web服务器，但一般建议将其作为应用服务器配合Nginx一起使用，这样可以更好的发挥Nginx在Web端的强大功能。 安">
 
 
 
@@ -124,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.ku-cat.com/2018/03/31/pomelo-learn/"/>
+  <link rel="canonical" href="http://blog.ku-cat.com/2018/04/21/django-nginx-uWSGI/"/>
 
 
 
 
 
-  <title>pomelo框架学习（一）安装pomelo | 一纸墨迹</title>
+  <title>nginx+uWSGI搭建python环境运行REST-Framework | 一纸墨迹</title>
   
 
 
@@ -297,7 +295,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/03/31/pomelo-learn/">
+    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/21/django-nginx-uWSGI/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben">
@@ -314,7 +312,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">pomelo框架学习（一）安装pomelo</h1>
+          <h1 class="post-title" itemprop="name headline">nginx+uWSGI搭建python环境运行REST-Framework</h1>
         
 
         <div class="post-meta">
@@ -326,8 +324,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-31T14:58:43+08:00">
-                2018-03-31
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-21T18:04:46+08:00">
+                2018-04-21
               </time>
             
 
@@ -349,8 +347,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/pomelo/" itemprop="url" rel="index">
-                    <span itemprop="name">pomelo</span>
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
                   </a>
                 </span>
 
@@ -386,28 +384,28 @@
       
 
       
-        <p><img src="/img/logo.png" alt=""></p>
-<h3 id="一、安装pomelo"><a href="#一、安装pomelo" class="headerlink" title="一、安装pomelo"></a>一、安装pomelo</h3><p>pomelo是基于Node.js的，目前pomelo已经完全支持Windows、Linux、Mac等多种平台。</p>
-<h4 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h4><ul>
-<li>确保你的机器可以上网,因为安装pomelo的过程需要从网上下载其依赖的包。</li>
-<li>确保你的系统上已经要安装了Node，目前最新的Node提供了已经编译好的二进制安装包，包括Windows，Mac和Linux等平台。想省事的话，直接去这里下载对应的安装包，直接安装就好了。Node同时也提供了传统的从源码编译的方式安装，不过比起直接使用二进制的方式要麻烦。</li>
-<li>确保你的系统中安装有python(2.5 &lt; version &lt; 3.0)以及C++的编译器。Node的源码主要由C++代码和JavaScript代码构成，但是却用gyp工具来做源码的项目管理，该工具采用Python语言写成的。对于非windows平台，一般都会预装Python以及C++编译工具；对于Windows系统，请确保你的Windows系统包含源码编译工具。在Windows平台上，Node.js采用gyp来生成Visual Studio Solution文件，最终通过VC++的编译器将其编译为二进制文件。</li>
-<li><p>虽然pomelo是用Javascript写成，但是pomelo依赖的库中，有使用了C++语言写的扩展，因此安装pomelo的过程中会使用到C++编译器。 所以，在安装之前请确保你的Windows系统满足以下两个条件：</p>
-<ul>
-<li>python(2.5&lt;version&lt;3.0)。</li>
-<li>VC++ 编译器，包含在Visual Studio 2010中（VC++ 2010 Express亦可）。对于windows8的用户，需要安装Microsoft Visual Studio C++ 2012。</li>
-</ul>
-</li>
-<li><p>如果你使用的是Mac OS X系统, 则需要安装Xcode Command Line Tools或者Xcode的完整包以及make工具.</p>
-</li>
-</ul>
-<h4 id="安装pomelo"><a href="#安装pomelo" class="headerlink" title="安装pomelo"></a>安装pomelo</h4><p>使用npm(node包管理工具)全局安装pomelo:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install pomelo -g</span><br></pre></td></tr></table></figure>
-<p>可以通过如下命令下载源代码的方式安装</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git clone https://github.com/NetEase/pomelo.git</span><br><span class="line">$ cd pomelo</span><br><span class="line">$ npm install -g</span><br></pre></td></tr></table></figure>
-<p>其中-g表示全局安装，关于npm的使用问题，可以参考npm的文档，里面有详细的npm使用的介绍。如果安装过程中没有报错误，说明安装成功。</p>
-<p>windows下安装经验：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1. node,vs2010 和 python(2.5&lt;v&lt;3) 都是32位或者都是64位的。</span><br><span class="line">2. 配置  PYTHON=d:\Python27\python.exe(设置成你自己的路径)。注意不是path里面,而是和path同级的，直接在全局或者当前用户下配置。</span><br><span class="line">3. 保证环境变量path里面有 %SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem;</span><br><span class="line">  注： 这三个环境变量中貌似只有%SystemRoot%\system32这个环境变量有用，没具体试（没有他会报CreateProcessW找不到的错误)。</span><br><span class="line">4. 如果在命令行界面安装pomelo失败，可以在Visual Studio的命令行界面安装。</span><br></pre></td></tr></table></figure>
+        <p>uWSGI是一个Web应用服务器，它具有应用服务器，代理，进程管理及应用监控等功能。它支持WSGI协议，同时它也支持自有的uWSGI协议，该协议据说性能非常高，而且内存占用率低，为mod_wsgi的一半左右，它还支持多应用的管理及应用的性能监控。虽然uWSGI本身就可以直接用来当Web服务器，但一般建议将其作为应用服务器配合Nginx一起使用，这样可以更好的发挥Nginx在Web端的强大功能。</p>
+<h2 id="安装uWSGI"><a href="#安装uWSGI" class="headerlink" title="安装uWSGI"></a>安装uWSGI</h2><p>安装比较简单直接使用pip就可以安装了</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install uwsgi</span><br></pre></td></tr></table></figure>
+<p>安装成功后，你可以查看下当前的uwsgi的版本：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ uwsgi --version</span><br></pre></td></tr></table></figure>
+<p>如果是python3 ，要查看一下uwsgi使用的python版本</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">uwsgi --python-version</span><br><span class="line">3.5.0 <span class="comment"># 我这里使用的是django2.0版本，必须是要python3.5以上才支持。</span></span><br></pre></td></tr></table></figure>
+<h2 id="启动uWSGI"><a href="#启动uWSGI" class="headerlink" title="启动uWSGI"></a>启动uWSGI</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uwsgi --http :9090 --wsgi-file ngrok/wsgi.py</span><br></pre></td></tr></table></figure>
+<p>也可以使用配置文件启动。这样更方便一些。<a href="https://docs.djangoproject.com/en/1.11/howto/deployment/wsgi/uwsgi/#uwsgi-model" target="_blank" rel="noopener">参考djaong官方文档</a> 配置信息如下</p>
+<p>官方命令行直接启动参数</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">uwsgi --<span class="built_in">chdir</span>=/path/to/your/project \</span><br><span class="line">    --module=mysite.wsgi:application \</span><br><span class="line">    --env DJANGO_SETTINGS_MODULE=mysite.settings \</span><br><span class="line">    --master --pidfile=/tmp/project-master.pid \</span><br><span class="line">    --socket=127.0.0.1:49152 \      <span class="comment"># can also be a file</span></span><br><span class="line">    --processes=5 \                 <span class="comment"># number of worker processes</span></span><br><span class="line">    --uid=1000 --gid=2000 \         <span class="comment"># if root, uwsgi can drop privileges</span></span><br><span class="line">    --harakiri=20 \                 <span class="comment"># respawn processes taking more than 20 seconds</span></span><br><span class="line">    --max-requests=5000 \           <span class="comment"># respawn processes after serving 5000 requests</span></span><br><span class="line">    --vacuum \                      <span class="comment"># clear environment on exit</span></span><br><span class="line">    --home=/path/to/virtual/env \   <span class="comment"># optional path to a virtualenv</span></span><br><span class="line">    --daemonize=/var/<span class="built_in">log</span>/uwsgi/yourproject.log      <span class="comment"># background the process</span></span><br></pre></td></tr></table></figure>
+<p>配置文件启动参数</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[uwsgi]</span><br><span class="line"><span class="built_in">chdir</span>=/path/to/your/project <span class="comment">#项目目录</span></span><br><span class="line">module=mysite.wsgi:application <span class="comment">#模块wsgi.py</span></span><br><span class="line">master=True</span><br><span class="line">pidfile=/tmp/project-master.pid</span><br><span class="line">vacuum=True</span><br><span class="line">max-requests=5000</span><br><span class="line">daemonize=/var/<span class="built_in">log</span>/uwsgi/yourproject.log <span class="comment">#守护进程就加这行，日志输出文件</span></span><br></pre></td></tr></table></figure>
+<p>将uWSGI的HTTP端口监听改为socket端口监听，即将配置文件中的”http”项去掉，改为”socket”项：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">socket=127.0.0.1:3031 <span class="comment"># 主要用nginx转发到这个端口用的</span></span><br></pre></td></tr></table></figure>
+<p>启动方法：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uwsgi --ini uwsgi.ini</span><br></pre></td></tr></table></figure>
+<h2 id="配置Nginx"><a href="#配置Nginx" class="headerlink" title="配置Nginx"></a>配置Nginx</h2><p>Nginx的安装在此省略，nginx的配置如下：这段配置表明Nginx会将收到的所有请求都转发到”127.0.0.1:3031″端口上，即uWSGI服务器上。现在让我们重启Nginx，并启动uWSGI服务器：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">    include uwsgi_params;</span><br><span class="line">    uwsgi_pass 127.0.0.1:3031;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>重启</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo service nginx restart</span><br><span class="line">$ uwsgi uwsgi.ini</span><br></pre></td></tr></table></figure>
+<p>详情可以参考 <a href="http://www.bjhee.com/nginx-uwsgi.html" target="_blank" rel="noopener">使用Nginx和uWSGI来运行Python应用</a></p>
 
       
     </div>
@@ -425,9 +423,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/nodejs/" rel="tag"># nodejs</a>
+            <a href="/tags/nginx/" rel="tag"># nginx</a>
           
-            <a href="/tags/pomelo/" rel="tag"># pomelo</a>
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/uWSGI/" rel="tag"># uWSGI</a>
           
         </div>
       
@@ -440,8 +440,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/31/poke/" rel="next" title="扑克牌在计算机中的几种表示方法">
-                <i class="fa fa-chevron-left"></i> 扑克牌在计算机中的几种表示方法
+              <a href="/2018/04/20/django-bug/" rel="next" title="django on_delete 的报错修复">
+                <i class="fa fa-chevron-left"></i> django on_delete 的报错修复
               </a>
             
           </div>
@@ -449,10 +449,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/03/31/pomelo-helloWorld/" rel="prev" title="pomelo框架学习（二）创建Hello World项目">
-                pomelo框架学习（二）创建Hello World项目 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -631,7 +627,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、安装pomelo"><span class="nav-number">1.</span> <span class="nav-text">一、安装pomelo</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#准备"><span class="nav-number">1.1.</span> <span class="nav-text">准备</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装pomelo"><span class="nav-number">1.2.</span> <span class="nav-text">安装pomelo</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装uWSGI"><span class="nav-number">1.</span> <span class="nav-text">安装uWSGI</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动uWSGI"><span class="nav-number">2.</span> <span class="nav-text">启动uWSGI</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置Nginx"><span class="nav-number">3.</span> <span class="nav-text">配置Nginx</span></a></li></ol></div>
             
 
           </div>

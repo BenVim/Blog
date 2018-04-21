@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.ku-cat.com/"/>
-  <updated>2018-04-21T03:14:33.514Z</updated>
+  <updated>2018-04-21T10:23:56.845Z</updated>
   <id>http://blog.ku-cat.com/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>nginx+uWSGI搭建python环境运行REST-Framework</title>
+    <link href="http://blog.ku-cat.com/2018/04/21/django-nginx-uWSGI/"/>
+    <id>http://blog.ku-cat.com/2018/04/21/django-nginx-uWSGI/</id>
+    <published>2018-04-21T10:04:46.000Z</published>
+    <updated>2018-04-21T10:23:56.845Z</updated>
+    
+    <content type="html"><![CDATA[<p>uWSGI是一个Web应用服务器，它具有应用服务器，代理，进程管理及应用监控等功能。它支持WSGI协议，同时它也支持自有的uWSGI协议，该协议据说性能非常高，而且内存占用率低，为mod_wsgi的一半左右，它还支持多应用的管理及应用的性能监控。虽然uWSGI本身就可以直接用来当Web服务器，但一般建议将其作为应用服务器配合Nginx一起使用，这样可以更好的发挥Nginx在Web端的强大功能。</p><h2 id="安装uWSGI"><a href="#安装uWSGI" class="headerlink" title="安装uWSGI"></a>安装uWSGI</h2><p>安装比较简单直接使用pip就可以安装了</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install uwsgi</span><br></pre></td></tr></table></figure><p>安装成功后，你可以查看下当前的uwsgi的版本：</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ uwsgi --version</span><br></pre></td></tr></table></figure><p>如果是python3 ，要查看一下uwsgi使用的python版本</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">uwsgi --python-version</span><br><span class="line">3.5.0 <span class="comment"># 我这里使用的是django2.0版本，必须是要python3.5以上才支持。</span></span><br></pre></td></tr></table></figure><h2 id="启动uWSGI"><a href="#启动uWSGI" class="headerlink" title="启动uWSGI"></a>启动uWSGI</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uwsgi --http :9090 --wsgi-file ngrok/wsgi.py</span><br></pre></td></tr></table></figure><p>也可以使用配置文件启动。这样更方便一些。<a href="https://docs.djangoproject.com/en/1.11/howto/deployment/wsgi/uwsgi/#uwsgi-model" target="_blank" rel="noopener">参考djaong官方文档</a> 配置信息如下</p><p>官方命令行直接启动参数</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">uwsgi --<span class="built_in">chdir</span>=/path/to/your/project \</span><br><span class="line">    --module=mysite.wsgi:application \</span><br><span class="line">    --env DJANGO_SETTINGS_MODULE=mysite.settings \</span><br><span class="line">    --master --pidfile=/tmp/project-master.pid \</span><br><span class="line">    --socket=127.0.0.1:49152 \      <span class="comment"># can also be a file</span></span><br><span class="line">    --processes=5 \                 <span class="comment"># number of worker processes</span></span><br><span class="line">    --uid=1000 --gid=2000 \         <span class="comment"># if root, uwsgi can drop privileges</span></span><br><span class="line">    --harakiri=20 \                 <span class="comment"># respawn processes taking more than 20 seconds</span></span><br><span class="line">    --max-requests=5000 \           <span class="comment"># respawn processes after serving 5000 requests</span></span><br><span class="line">    --vacuum \                      <span class="comment"># clear environment on exit</span></span><br><span class="line">    --home=/path/to/virtual/env \   <span class="comment"># optional path to a virtualenv</span></span><br><span class="line">    --daemonize=/var/<span class="built_in">log</span>/uwsgi/yourproject.log      <span class="comment"># background the process</span></span><br></pre></td></tr></table></figure><p>配置文件启动参数</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[uwsgi]</span><br><span class="line"><span class="built_in">chdir</span>=/path/to/your/project <span class="comment">#项目目录</span></span><br><span class="line">module=mysite.wsgi:application <span class="comment">#模块wsgi.py</span></span><br><span class="line">master=True</span><br><span class="line">pidfile=/tmp/project-master.pid</span><br><span class="line">vacuum=True</span><br><span class="line">max-requests=5000</span><br><span class="line">daemonize=/var/<span class="built_in">log</span>/uwsgi/yourproject.log <span class="comment">#守护进程就加这行，日志输出文件</span></span><br></pre></td></tr></table></figure><p>将uWSGI的HTTP端口监听改为socket端口监听，即将配置文件中的”http”项去掉，改为”socket”项：</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">socket=127.0.0.1:3031 <span class="comment"># 主要用nginx转发到这个端口用的</span></span><br></pre></td></tr></table></figure><p>启动方法：</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uwsgi --ini uwsgi.ini</span><br></pre></td></tr></table></figure><h2 id="配置Nginx"><a href="#配置Nginx" class="headerlink" title="配置Nginx"></a>配置Nginx</h2><p>Nginx的安装在此省略，nginx的配置如下：这段配置表明Nginx会将收到的所有请求都转发到”127.0.0.1:3031″端口上，即uWSGI服务器上。现在让我们重启Nginx，并启动uWSGI服务器：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">    include uwsgi_params;</span><br><span class="line">    uwsgi_pass 127.0.0.1:3031;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>重启</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo service nginx restart</span><br><span class="line">$ uwsgi uwsgi.ini</span><br></pre></td></tr></table></figure><p>详情可以参考 <a href="http://www.bjhee.com/nginx-uwsgi.html" target="_blank" rel="noopener">使用Nginx和uWSGI来运行Python应用</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;uWSGI是一个Web应用服务器，它具有应用服务器，代理，进程管理及应用监控等功能。它支持WSGI协议，同时它也支持自有的uWSGI协议，该协议据说性能非常高，而且内存占用率低，为mod_wsgi的一半左右，它还支持多应用的管理及应用的性能监控。虽然uWSGI本身就可以直接
+      
+    
+    </summary>
+    
+      <category term="python" scheme="http://blog.ku-cat.com/categories/python/"/>
+    
+    
+      <category term="nginx" scheme="http://blog.ku-cat.com/tags/nginx/"/>
+    
+      <category term="python" scheme="http://blog.ku-cat.com/tags/python/"/>
+    
+      <category term="uWSGI" scheme="http://blog.ku-cat.com/tags/uWSGI/"/>
+    
+  </entry>
   
   <entry>
     <title>django on_delete 的报错修复</title>
@@ -551,32 +580,6 @@
     
     
       <category term="php" scheme="http://blog.ku-cat.com/tags/php/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Go 实现socket服务</title>
-    <link href="http://blog.ku-cat.com/2018/03/31/go-scoket/"/>
-    <id>http://blog.ku-cat.com/2018/03/31/go-scoket/</id>
-    <published>2018-03-31T04:09:23.000Z</published>
-    <updated>2018-03-31T04:15:15.147Z</updated>
-    
-    <content type="html"><![CDATA[<p>用Go语言实现简单的sokcet服务。<br>1.串行服务端；<br>　　当客户端链接过来的时候，我们服务端可以给客户端回复特定的字符串等等。我们就以下面这段代码为例子：</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"net"</span></span><br><span class="line">    <span class="string">"log"</span></span><br><span class="line">    <span class="string">"time"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    addr := <span class="string">"0.0.0.0:8080"</span> <span class="comment">//表示监听本地所有ip的8080端口，也可以这样写：addr := ":8080"</span></span><br><span class="line">    listener,err := net.Listen(<span class="string">"tcp"</span>,addr) <span class="comment">//使用协议是tcp，监听的地址是addr</span></span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        log.Fatal(err)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">defer</span> listener.Close() <span class="comment">//关闭监听的端口</span></span><br><span class="line">    <span class="keyword">for</span>  &#123;</span><br><span class="line">        conn,err := listener.Accept() <span class="comment">//用conn接收链接</span></span><br><span class="line">        <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">            log.Fatal(err)</span><br><span class="line">        &#125;</span><br><span class="line">        conn.Write([]<span class="keyword">byte</span>(<span class="string">"Yinzhengjie\n"</span>))  <span class="comment">//通过conn的wirte方法将这些数据返回给客户端。</span></span><br><span class="line">        conn.Write([]<span class="keyword">byte</span>(<span class="string">"hello Golang\n"</span>))</span><br><span class="line">        time.Sleep(time.Minute) <span class="comment">//在结束这个链接之前需要睡一分钟在结束当前循环。</span></span><br><span class="line">        conn.Close() <span class="comment">//与客户端断开连接。</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>2.并发服务端；</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"net"</span></span><br><span class="line">    <span class="string">"log"</span></span><br><span class="line">    <span class="string">"time"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Handle_conn</span><span class="params">(conn net.Conn)</span></span> &#123; <span class="comment">//这个是在处理客户端会阻塞的代码。</span></span><br><span class="line">    conn.Write([]<span class="keyword">byte</span>(<span class="string">"Yinzhengjie\n"</span>))  <span class="comment">//通过conn的wirte方法将这些数据返回给客户端。</span></span><br><span class="line">    conn.Write([]<span class="keyword">byte</span>(<span class="string">"尹正杰是一个好男孩！\n"</span>))</span><br><span class="line">    time.Sleep(time.Minute)</span><br><span class="line">    conn.Close() <span class="comment">//与客户端断开连接。</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    addr := <span class="string">"0.0.0.0:8080"</span> <span class="comment">//表示监听本地所有ip的8080端口，也可以这样写：addr := ":8080"</span></span><br><span class="line">    listener,err := net.Listen(<span class="string">"tcp"</span>,addr)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        log.Fatal(err)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">defer</span> listener.Close()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>  &#123;</span><br><span class="line">        conn,err := listener.Accept() <span class="comment">//用conn接收链接</span></span><br><span class="line">        <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">            log.Fatal(err)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">go</span> Handle_conn(conn)  <span class="comment">//开启多个协程。</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;用Go语言实现简单的sokcet服务。&lt;br&gt;1.串行服务端；&lt;br&gt;　　当客户端链接过来的时候，我们服务端可以给客户端回复特定的字符串等等。我们就以下面这段代码为例子：&lt;/p&gt;
-&lt;figure class=&quot;highlight go&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td cla
-      
-    
-    </summary>
-    
-      <category term="go" scheme="http://blog.ku-cat.com/categories/go/"/>
-    
-    
-      <category term="go" scheme="http://blog.ku-cat.com/tags/go/"/>
     
   </entry>
   
