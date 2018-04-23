@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="python,django," />
+  <meta name="keywords" content="python,captcha," />
 
 
 
@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="django 中访问 css 等静态文件必须以 url 的形式去访问，即必须配置 urls.py 的访问路径首先在 settings.py 中添加： 1234567STATIC_ROOT = os.path.join(os.path.dirname(os.path.dirname(__file__)), &apos;static&apos;)STATICFILES_DIRS = [    (&apos;css&apos;, os.pat">
-<meta name="keywords" content="python,django">
+<meta name="description" content="captcha模块是专门用于生成图形验证码和语音验证码的Python三方库。图形验证码支持数字和英文单词。 安装可以直接使用 pip 安装，或者到项目地址下载安装。 1pip install captcha 模块依赖由于 captcha 模块内部是采用 PIL 模块生成图片，所以需要安装 PIL 模块才可以正常使用。 生成验证码一般方法使用其中 image 模块中的 ImageCaptcha 类生">
+<meta name="keywords" content="python,captcha">
 <meta property="og:type" content="article">
-<meta property="og:title" content="django添加css等静态文件">
-<meta property="og:url" content="http://blog.ku-cat.com/2018/04/03/python-django-static/index.html">
+<meta property="og:title" content="python使用captcha模块生成图形验证码">
+<meta property="og:url" content="http://blog.ku-cat.com/2018/04/23/python-captcha/index.html">
 <meta property="og:site_name" content="一纸墨迹">
-<meta property="og:description" content="django 中访问 css 等静态文件必须以 url 的形式去访问，即必须配置 urls.py 的访问路径首先在 settings.py 中添加： 1234567STATIC_ROOT = os.path.join(os.path.dirname(os.path.dirname(__file__)), &apos;static&apos;)STATICFILES_DIRS = [    (&apos;css&apos;, os.pat">
+<meta property="og:description" content="captcha模块是专门用于生成图形验证码和语音验证码的Python三方库。图形验证码支持数字和英文单词。 安装可以直接使用 pip 安装，或者到项目地址下载安装。 1pip install captcha 模块依赖由于 captcha 模块内部是采用 PIL 模块生成图片，所以需要安装 PIL 模块才可以正常使用。 生成验证码一般方法使用其中 image 模块中的 ImageCaptcha 类生">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-04-13T04:01:30.170Z">
+<meta property="og:updated_time" content="2018-04-23T08:10:50.064Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="django添加css等静态文件">
-<meta name="twitter:description" content="django 中访问 css 等静态文件必须以 url 的形式去访问，即必须配置 urls.py 的访问路径首先在 settings.py 中添加： 1234567STATIC_ROOT = os.path.join(os.path.dirname(os.path.dirname(__file__)), &apos;static&apos;)STATICFILES_DIRS = [    (&apos;css&apos;, os.pat">
+<meta name="twitter:title" content="python使用captcha模块生成图形验证码">
+<meta name="twitter:description" content="captcha模块是专门用于生成图形验证码和语音验证码的Python三方库。图形验证码支持数字和英文单词。 安装可以直接使用 pip 安装，或者到项目地址下载安装。 1pip install captcha 模块依赖由于 captcha 模块内部是采用 PIL 模块生成图片，所以需要安装 PIL 模块才可以正常使用。 生成验证码一般方法使用其中 image 模块中的 ImageCaptcha 类生">
 
 
 
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.ku-cat.com/2018/04/03/python-django-static/"/>
+  <link rel="canonical" href="http://blog.ku-cat.com/2018/04/23/python-captcha/"/>
 
 
 
 
 
-  <title>django添加css等静态文件 | 一纸墨迹</title>
+  <title>python使用captcha模块生成图形验证码 | 一纸墨迹</title>
   
 
 
@@ -295,7 +295,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/03/python-django-static/">
+    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/23/python-captcha/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben">
@@ -312,7 +312,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">django添加css等静态文件</h1>
+          <h1 class="post-title" itemprop="name headline">python使用captcha模块生成图形验证码</h1>
         
 
         <div class="post-meta">
@@ -324,8 +324,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-03T13:16:03+08:00">
-                2018-04-03
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-23T16:05:52+08:00">
+                2018-04-23
               </time>
             
 
@@ -384,15 +384,27 @@
       
 
       
-        <p>django 中访问 css 等静态文件必须以 url 的形式去访问，即必须配置 urls.py 的访问路径<br>首先在 settings.py 中添加：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">STATIC_ROOT = os.path.join(os.path.dirname(os.path.dirname(__file__)), <span class="string">'static'</span>)</span><br><span class="line">STATICFILES_DIRS = [</span><br><span class="line">    (<span class="string">'css'</span>, os.path.join(STATIC_ROOT, <span class="string">'css'</span>).replace(<span class="string">'\\'</span>, <span class="string">'/'</span>)),</span><br><span class="line">    (<span class="string">'js'</span>, os.path.join(STATIC_ROOT, <span class="string">'js'</span>).replace(<span class="string">'\\'</span>, <span class="string">'/'</span>)),</span><br><span class="line">    (<span class="string">'image'</span>, os.path.join(STATIC_ROOT, <span class="string">'image'</span>).replace(<span class="string">'\\'</span>, <span class="string">'/'</span>)),</span><br><span class="line">    (<span class="string">'upload'</span>, os.path.join(STATIC_ROOT, <span class="string">'upload'</span>).replace(<span class="string">'\\'</span>, <span class="string">'/'</span>)),</span><br><span class="line"> ]</span><br></pre></td></tr></table></figure>
-<p>其中__file__ 指的是调用 css 的html 文件所在的路径</p>
-<p>然后在 urls.py 中添加</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">url(<span class="string">r'^static/(?P&lt;path&gt;.*)$'</span>, <span class="string">'django.views.static.serve'</span>, &#123;<span class="string">'document_root'</span>: settings.STATIC_ROOT&#125;)</span><br></pre></td></tr></table></figure>
-<p>最后在 register.html 中引用 css 文件</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel=<span class="string">"stylesheet"</span> type=<span class="string">"text/css"</span> href=<span class="string">"/static/css/register.css"</span>&gt;</span><br></pre></td></tr></table></figure>
-<p>此处调用 django.views.static.serve 方法去解析具体的路径</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># …or create a new repository on the command line</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"# test1"</span> &gt;&gt; README.md</span><br><span class="line">git init</span><br><span class="line">git add README.md</span><br><span class="line">git commit -m <span class="string">"first commit"</span></span><br><span class="line">git remote add origin git@github.com:BenVim/test1.git</span><br><span class="line">git push -u origin master</span><br><span class="line"><span class="comment"># …or push an existing repository from the command line</span></span><br><span class="line">git remote add origin git@github.com:BenVim/test1.git</span><br><span class="line">git push -u origin master</span><br><span class="line"><span class="comment"># …or import code from another repository</span></span><br><span class="line">You can initialize this repository with code from a Subversion, Mercurial, or TFS project.</span><br></pre></td></tr></table></figure>
+        <p>captcha模块是专门用于生成图形验证码和语音验证码的Python三方库。图形验证码支持数字和英文单词。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>可以直接使用 pip 安装，或者到<a href="https://github.com/lepture/captcha" target="_blank" rel="noopener">项目地址</a>下载安装。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install captcha</span><br></pre></td></tr></table></figure>
+<h2 id="模块依赖"><a href="#模块依赖" class="headerlink" title="模块依赖"></a>模块依赖</h2><p>由于 captcha 模块内部是采用 PIL 模块生成图片，所以需要安装 PIL 模块才可以正常使用。</p>
+<h2 id="生成验证码"><a href="#生成验证码" class="headerlink" title="生成验证码"></a>生成验证码</h2><h4 id="一般方法"><a href="#一般方法" class="headerlink" title="一般方法"></a>一般方法</h4><p>使用其中 image 模块中的 ImageCaptcha 类生成图形验证码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">from captcha.image import ImageCaptcha</span><br><span class="line"></span><br><span class="line">img = ImageCaptcha()</span><br><span class="line">image = img.generate_image(&apos;python&apos;)</span><br><span class="line">image.show()</span><br><span class="line">image.save(&apos;python.jpg&apos;)</span><br></pre></td></tr></table></figure>
+<p>generate_image（） 方法接收一个字符串参数，将生成次字符串内容的验证码，返回的是 PIL 模块中的 Image 对象。可以使用 PIL 模块中 Image 对象的任何支持方法对其操作。例子中的 image.show() 和 image.save() 均是 PIL 模块的方法。</p>
+<h4 id="具体参数"><a href="#具体参数" class="headerlink" title="具体参数"></a>具体参数</h4><p>ImageCaptcha(width=160, height=60, fonts=None, font_sizes=None) 类实例化时，还可传入四个参数:</p>
+<ul>
+<li>width: 生成验证码图片的宽度，默认为160个像素；</li>
+<li>height： 生成验证码图片的高度，默认为60个像素；</li>
+<li>fonts： 字体文件路径，用于生成验证码时的字体，默认使用模块自带 DroidSansMono.ttf 字体，你可以将字体文件放入list或者tuple传入,生成验证码时将随机使用;</li>
+<li>font_sizes： 控制验证码字体大小，同fonts一样，接收一个list或者tuple,随机使用。</li>
+</ul>
+<h4 id="主要方法"><a href="#主要方法" class="headerlink" title="主要方法"></a>主要方法</h4><ul>
+<li>generate_image(chars) 生成验证码的核心方法，生成chars内容的验证码图片的Image对象。</li>
+<li>create_captcha_image(chars, color, background) generate_image的实现方法，可以通过重写此方法来实现自定义验证码样式。</li>
+<li>create_noise_dots(image, color, width=3, number=30) 生成验证码干扰点。</li>
+<li>create_noise_curve(image, color) 生成验证码干扰曲线。</li>
+</ul>
+
       
     </div>
     
@@ -411,7 +423,7 @@
           
             <a href="/tags/python/" rel="tag"># python</a>
           
-            <a href="/tags/django/" rel="tag"># django</a>
+            <a href="/tags/captcha/" rel="tag"># captcha</a>
           
         </div>
       
@@ -424,8 +436,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/03/python-virtualenv/" rel="next" title="python-virtualenv 创建独立的python运行环境。">
-                <i class="fa fa-chevron-left"></i> python-virtualenv 创建独立的python运行环境。
+              <a href="/2018/04/21/django-nginx-uWSGI/" rel="next" title="nginx+uWSGI搭建python环境运行REST-Framework">
+                <i class="fa fa-chevron-left"></i> nginx+uWSGI搭建python环境运行REST-Framework
               </a>
             
           </div>
@@ -433,10 +445,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/04/03/python-md5/" rel="prev" title="Python 用hashlib求中文字符串的MD5值">
-                Python 用hashlib求中文字符串的MD5值 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -488,8 +496,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -596,6 +613,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模块依赖"><span class="nav-number">2.</span> <span class="nav-text">模块依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生成验证码"><span class="nav-number">3.</span> <span class="nav-text">生成验证码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一般方法"><span class="nav-number">3.0.1.</span> <span class="nav-text">一般方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#具体参数"><span class="nav-number">3.0.2.</span> <span class="nav-text">具体参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#主要方法"><span class="nav-number">3.0.3.</span> <span class="nav-text">主要方法</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

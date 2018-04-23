@@ -294,6 +294,167 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/23/python-captcha/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一纸墨迹">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/23/python-captcha/" itemprop="url">python使用captcha模块生成图形验证码</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-23T16:05:52+08:00">
+                2018-04-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>captcha模块是专门用于生成图形验证码和语音验证码的Python三方库。图形验证码支持数字和英文单词。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>可以直接使用 pip 安装，或者到<a href="https://github.com/lepture/captcha" target="_blank" rel="noopener">项目地址</a>下载安装。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install captcha</span><br></pre></td></tr></table></figure>
+<h2 id="模块依赖"><a href="#模块依赖" class="headerlink" title="模块依赖"></a>模块依赖</h2><p>由于 captcha 模块内部是采用 PIL 模块生成图片，所以需要安装 PIL 模块才可以正常使用。</p>
+<h2 id="生成验证码"><a href="#生成验证码" class="headerlink" title="生成验证码"></a>生成验证码</h2><h4 id="一般方法"><a href="#一般方法" class="headerlink" title="一般方法"></a>一般方法</h4><p>使用其中 image 模块中的 ImageCaptcha 类生成图形验证码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">from captcha.image import ImageCaptcha</span><br><span class="line"></span><br><span class="line">img = ImageCaptcha()</span><br><span class="line">image = img.generate_image(&apos;python&apos;)</span><br><span class="line">image.show()</span><br><span class="line">image.save(&apos;python.jpg&apos;)</span><br></pre></td></tr></table></figure>
+<p>generate_image（） 方法接收一个字符串参数，将生成次字符串内容的验证码，返回的是 PIL 模块中的 Image 对象。可以使用 PIL 模块中 Image 对象的任何支持方法对其操作。例子中的 image.show() 和 image.save() 均是 PIL 模块的方法。</p>
+<h4 id="具体参数"><a href="#具体参数" class="headerlink" title="具体参数"></a>具体参数</h4><p>ImageCaptcha(width=160, height=60, fonts=None, font_sizes=None) 类实例化时，还可传入四个参数:</p>
+<ul>
+<li>width: 生成验证码图片的宽度，默认为160个像素；</li>
+<li>height： 生成验证码图片的高度，默认为60个像素；</li>
+<li>fonts： 字体文件路径，用于生成验证码时的字体，默认使用模块自带 DroidSansMono.ttf 字体，你可以将字体文件放入list或者tuple传入,生成验证码时将随机使用;</li>
+<li>font_sizes： 控制验证码字体大小，同fonts一样，接收一个list或者tuple,随机使用。</li>
+</ul>
+<h4 id="主要方法"><a href="#主要方法" class="headerlink" title="主要方法"></a>主要方法</h4><ul>
+<li>generate_image(chars) 生成验证码的核心方法，生成chars内容的验证码图片的Image对象。</li>
+<li>create_captcha_image(chars, color, background) generate_image的实现方法，可以通过重写此方法来实现自定义验证码样式。</li>
+<li>create_noise_dots(image, color, width=3, number=30) 生成验证码干扰点。</li>
+<li>create_noise_curve(image, color) 生成验证码干扰曲线。</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/21/django-nginx-uWSGI/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -404,6 +565,14 @@
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">socket=127.0.0.1:3031 <span class="comment"># 主要用nginx转发到这个端口用的</span></span><br></pre></td></tr></table></figure>
 <p>启动方法：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uwsgi --ini uwsgi.ini</span><br></pre></td></tr></table></figure>
+<h3 id="重启uWSGI服务器"><a href="#重启uWSGI服务器" class="headerlink" title="重启uWSGI服务器"></a>重启uWSGI服务器</h3><p>在服务端修改了pyton代码，需要重启uWSGI</p>
+<h5 id="1-使用kill发送信号"><a href="#1-使用kill发送信号" class="headerlink" title="1.使用kill发送信号"></a>1.使用kill发送信号</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># using kill to send the signal</span><br><span class="line">#使用kill发送信号</span><br><span class="line">kill -HUP `cat /tmp/project-master.pid`    # (好用）</span><br></pre></td></tr></table></figure>
+<h5 id="2-或者使用简单选项-–reload"><a href="#2-或者使用简单选项-–reload" class="headerlink" title="2.或者使用简单选项 –reload"></a>2.或者使用简单选项 –reload</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># or the convenience option --reload</span><br><span class="line">#或者使用简单选项 --reload</span><br><span class="line">uwsgi --reload /tmp/project-master.pid</span><br></pre></td></tr></table></figure>
+<h5 id="3-或者，如果uwsgi是使用touch-reload-tmp-somefile启动"><a href="#3-或者，如果uwsgi是使用touch-reload-tmp-somefile启动" class="headerlink" title="3.或者，如果uwsgi是使用touch-reload=/tmp/somefile启动"></a>3.或者，如果uwsgi是使用touch-reload=/tmp/somefile启动</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># or if uwsgi was started with touch-reload=/tmp/somefile</span><br><span class="line">#或者，如果uwsgi是使用touch-reload=/tmp/somefile启动</span><br><span class="line"></span><br><span class="line">touch /tmp/somefile</span><br></pre></td></tr></table></figure>
+<h5 id="4-或者在Python程序里："><a href="#4-或者在Python程序里：" class="headerlink" title="4.或者在Python程序里："></a>4.或者在Python程序里：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Or from your application, in Python:</span><br><span class="line">或者在Python程序里：</span><br><span class="line">uwsgi.reload()</span><br></pre></td></tr></table></figure>
+<p>注意，如果要使用pid，需要在uwsgi启动参数中指定 –pidfile，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#/etc/rc.local 修改自启动</span><br><span class="line">/usr/local/bin/uwsgi /var/www/html/mz_uwsgi.ini --pidfile /tmp/uwsgi.pid</span><br></pre></td></tr></table></figure>
+<p>比reboot服务器方便。</p>
 <h2 id="配置Nginx"><a href="#配置Nginx" class="headerlink" title="配置Nginx"></a>配置Nginx</h2><p>Nginx的安装在此省略，nginx的配置如下：这段配置表明Nginx会将收到的所有请求都转发到”127.0.0.1:3031″端口上，即uWSGI服务器上。现在让我们重启Nginx，并启动uWSGI服务器：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">    include uwsgi_params;</span><br><span class="line">    uwsgi_pass 127.0.0.1:3031;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>重启</p>
@@ -1680,163 +1849,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/03/python-django/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ben">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一纸墨迹">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/03/python-django/" itemprop="url">mac下搭建django2.0的开发环境</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-03T21:32:13+08:00">
-                2018-04-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>mac 下搭建django2.0的开发环境，mac上默认的python版本是2.7，django需要的是python3以上的版本。所以我们需要再安装一个python3.5的版本。python2.7和python3.5可以共存的。直接安装就可以了。</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -V <span class="comment">#查看python版本，默认的mac上的python版本是2.7</span></span><br></pre></td></tr></table></figure>
-<p>我们可以到<a href="https://www.python.org上下载安装python3.0安装文件，是pyton-3.6.5-macos.pkg文件，双击安装即可。" target="_blank" rel="noopener">https://www.python.org上下载安装python3.0安装文件，是pyton-3.6.5-macos.pkg文件，双击安装即可。</a></p>
-<p>安装完成后，查看版本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">➜  django python -V</span><br><span class="line">Python 2.7.10</span><br><span class="line">➜  django python -V</span><br><span class="line">Python 2.7.10</span><br><span class="line">➜  django python3 -V</span><br><span class="line">Python 3.6.5</span><br></pre></td></tr></table></figure>
-<p>如果没有安装pip，先安装pip</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">➜  django sudo easy_install pip</span><br><span class="line">Password:</span><br><span class="line">Searching for pip</span><br><span class="line">Reading https://pypi.python.org/simple/pip/</span><br><span class="line">....</span><br></pre></td></tr></table></figure>
-<p>这里的pip是2.7的pip，只能安装django1.x版本，要安装django2.0的版本需要安装pip3版本。安装pip3的方法如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl https://bootstrap.pypa.io/get-pip.py | python3</span><br></pre></td></tr></table></figure>
-<p>使用上面的命令用python3，安装pip3</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">➜  django curl https://bootstrap.pypa.io/get-pip.py | python3</span><br><span class="line">  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current</span><br><span class="line">                                 Dload  Upload   Total   Spent    Left  Speed</span><br><span class="line">100 1738k  100 1738k    0     0  1610k      0  0:00:01  0:00:01 --:--:-- 1612k</span><br><span class="line">Cache entry deserialization failed, entry ignored</span><br><span class="line">Requirement already up-to-date: pip in /Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages</span><br><span class="line">Collecting wheel</span><br><span class="line">  Downloading wheel-0.31.0-py2.py3-none-any.whl (41kB)</span><br><span class="line">    100% |████████████████████████████████| 51kB 533kB/s </span><br><span class="line">Installing collected packages: wheel</span><br><span class="line">Successfully installed wheel-0.31.0</span><br></pre></td></tr></table></figure>
-<p>安装成功后，检查版本</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">➜  django pip -V</span><br><span class="line">pip 10.0.0b2 from /Library/Python/2.7/site-packages/pip-10.0.0b2-py2.7.egg/pip (python 2.7)</span><br><span class="line">➜  django pip --version</span><br><span class="line">pip 10.0.0b2 from /Library/Python/2.7/site-packages/pip-10.0.0b2-py2.7.egg/pip (python 2.7)</span><br><span class="line">➜  django pip3</span><br></pre></td></tr></table></figure>
-<p>使用pip3 安装django pip3</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">➜  django pip3 install Django==2.0.4</span><br><span class="line">Collecting Django==2.0.4</span><br><span class="line">  Cache entry deserialization failed, entry ignored</span><br><span class="line">  Downloading Django-2.0.4-py3-none-any.whl (7.1MB)</span><br><span class="line">    100% |████████████████████████████████| 7.1MB 267kB/s </span><br><span class="line">Collecting pytz (from Django==2.0.4)</span><br><span class="line">  Downloading pytz-2018.3-py2.py3-none-any.whl (509kB)</span><br><span class="line">    100% |████████████████████████████████| 512kB 2.5MB/s </span><br><span class="line">Installing collected packages: pytz, Django</span><br><span class="line">Successfully installed Django-2.0.4 pytz-2018.3</span><br></pre></td></tr></table></figure>
-<p>成功安装django2.0.4版本。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1887,7 +1899,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1909,7 +1921,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

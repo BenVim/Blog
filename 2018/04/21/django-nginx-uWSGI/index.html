@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="nginx,python,uWSGI," />
+  <meta name="keywords" content="python,nginx,uWSGI," />
 
 
 
@@ -82,14 +82,14 @@
 
 
 <meta name="description" content="uWSGI是一个Web应用服务器，它具有应用服务器，代理，进程管理及应用监控等功能。它支持WSGI协议，同时它也支持自有的uWSGI协议，该协议据说性能非常高，而且内存占用率低，为mod_wsgi的一半左右，它还支持多应用的管理及应用的性能监控。虽然uWSGI本身就可以直接用来当Web服务器，但一般建议将其作为应用服务器配合Nginx一起使用，这样可以更好的发挥Nginx在Web端的强大功能。 安">
-<meta name="keywords" content="nginx,python,uWSGI">
+<meta name="keywords" content="python,nginx,uWSGI">
 <meta property="og:type" content="article">
 <meta property="og:title" content="nginx+uWSGI搭建python环境运行REST-Framework">
 <meta property="og:url" content="http://blog.ku-cat.com/2018/04/21/django-nginx-uWSGI/index.html">
 <meta property="og:site_name" content="一纸墨迹">
 <meta property="og:description" content="uWSGI是一个Web应用服务器，它具有应用服务器，代理，进程管理及应用监控等功能。它支持WSGI协议，同时它也支持自有的uWSGI协议，该协议据说性能非常高，而且内存占用率低，为mod_wsgi的一半左右，它还支持多应用的管理及应用的性能监控。虽然uWSGI本身就可以直接用来当Web服务器，但一般建议将其作为应用服务器配合Nginx一起使用，这样可以更好的发挥Nginx在Web端的强大功能。 安">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-04-21T10:23:56.845Z">
+<meta property="og:updated_time" content="2018-04-23T06:19:41.139Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="nginx+uWSGI搭建python环境运行REST-Framework">
 <meta name="twitter:description" content="uWSGI是一个Web应用服务器，它具有应用服务器，代理，进程管理及应用监控等功能。它支持WSGI协议，同时它也支持自有的uWSGI协议，该协议据说性能非常高，而且内存占用率低，为mod_wsgi的一半左右，它还支持多应用的管理及应用的性能监控。虽然uWSGI本身就可以直接用来当Web服务器，但一般建议将其作为应用服务器配合Nginx一起使用，这样可以更好的发挥Nginx在Web端的强大功能。 安">
@@ -401,6 +401,14 @@
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">socket=127.0.0.1:3031 <span class="comment"># 主要用nginx转发到这个端口用的</span></span><br></pre></td></tr></table></figure>
 <p>启动方法：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uwsgi --ini uwsgi.ini</span><br></pre></td></tr></table></figure>
+<h3 id="重启uWSGI服务器"><a href="#重启uWSGI服务器" class="headerlink" title="重启uWSGI服务器"></a>重启uWSGI服务器</h3><p>在服务端修改了pyton代码，需要重启uWSGI</p>
+<h5 id="1-使用kill发送信号"><a href="#1-使用kill发送信号" class="headerlink" title="1.使用kill发送信号"></a>1.使用kill发送信号</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># using kill to send the signal</span><br><span class="line">#使用kill发送信号</span><br><span class="line">kill -HUP `cat /tmp/project-master.pid`    # (好用）</span><br></pre></td></tr></table></figure>
+<h5 id="2-或者使用简单选项-–reload"><a href="#2-或者使用简单选项-–reload" class="headerlink" title="2.或者使用简单选项 –reload"></a>2.或者使用简单选项 –reload</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># or the convenience option --reload</span><br><span class="line">#或者使用简单选项 --reload</span><br><span class="line">uwsgi --reload /tmp/project-master.pid</span><br></pre></td></tr></table></figure>
+<h5 id="3-或者，如果uwsgi是使用touch-reload-tmp-somefile启动"><a href="#3-或者，如果uwsgi是使用touch-reload-tmp-somefile启动" class="headerlink" title="3.或者，如果uwsgi是使用touch-reload=/tmp/somefile启动"></a>3.或者，如果uwsgi是使用touch-reload=/tmp/somefile启动</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># or if uwsgi was started with touch-reload=/tmp/somefile</span><br><span class="line">#或者，如果uwsgi是使用touch-reload=/tmp/somefile启动</span><br><span class="line"></span><br><span class="line">touch /tmp/somefile</span><br></pre></td></tr></table></figure>
+<h5 id="4-或者在Python程序里："><a href="#4-或者在Python程序里：" class="headerlink" title="4.或者在Python程序里："></a>4.或者在Python程序里：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Or from your application, in Python:</span><br><span class="line">或者在Python程序里：</span><br><span class="line">uwsgi.reload()</span><br></pre></td></tr></table></figure>
+<p>注意，如果要使用pid，需要在uwsgi启动参数中指定 –pidfile，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#/etc/rc.local 修改自启动</span><br><span class="line">/usr/local/bin/uwsgi /var/www/html/mz_uwsgi.ini --pidfile /tmp/uwsgi.pid</span><br></pre></td></tr></table></figure>
+<p>比reboot服务器方便。</p>
 <h2 id="配置Nginx"><a href="#配置Nginx" class="headerlink" title="配置Nginx"></a>配置Nginx</h2><p>Nginx的安装在此省略，nginx的配置如下：这段配置表明Nginx会将收到的所有请求都转发到”127.0.0.1:3031″端口上，即uWSGI服务器上。现在让我们重启Nginx，并启动uWSGI服务器：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">    include uwsgi_params;</span><br><span class="line">    uwsgi_pass 127.0.0.1:3031;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>重启</p>
@@ -423,9 +431,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/nginx/" rel="tag"># nginx</a>
-          
             <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/nginx/" rel="tag"># nginx</a>
           
             <a href="/tags/uWSGI/" rel="tag"># uWSGI</a>
           
@@ -449,6 +457,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/23/python-captcha/" rel="prev" title="python使用captcha模块生成图形验证码">
+                python使用captcha模块生成图形验证码 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -525,7 +537,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -547,7 +559,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -627,7 +639,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装uWSGI"><span class="nav-number">1.</span> <span class="nav-text">安装uWSGI</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动uWSGI"><span class="nav-number">2.</span> <span class="nav-text">启动uWSGI</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置Nginx"><span class="nav-number">3.</span> <span class="nav-text">配置Nginx</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装uWSGI"><span class="nav-number">1.</span> <span class="nav-text">安装uWSGI</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动uWSGI"><span class="nav-number">2.</span> <span class="nav-text">启动uWSGI</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#重启uWSGI服务器"><span class="nav-number">2.1.</span> <span class="nav-text">重启uWSGI服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-使用kill发送信号"><span class="nav-number">2.1.0.1.</span> <span class="nav-text">1.使用kill发送信号</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-或者使用简单选项-–reload"><span class="nav-number">2.1.0.2.</span> <span class="nav-text">2.或者使用简单选项 –reload</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-或者，如果uwsgi是使用touch-reload-tmp-somefile启动"><span class="nav-number">2.1.0.3.</span> <span class="nav-text">3.或者，如果uwsgi是使用touch-reload=/tmp/somefile启动</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-或者在Python程序里："><span class="nav-number">2.1.0.4.</span> <span class="nav-text">4.或者在Python程序里：</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置Nginx"><span class="nav-number">3.</span> <span class="nav-text">配置Nginx</span></a></li></ol></div>
             
 
           </div>
