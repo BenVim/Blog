@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.ku-cat.com/"/>
-  <updated>2018-04-29T15:52:41.259Z</updated>
+  <updated>2018-04-29T16:23:05.319Z</updated>
   <id>http://blog.ku-cat.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>code-x</title>
+    <link href="http://blog.ku-cat.com/2018/04/30/code-x/"/>
+    <id>http://blog.ku-cat.com/2018/04/30/code-x/</id>
+    <published>2018-04-29T16:21:32.000Z</published>
+    <updated>2018-04-29T16:23:05.319Z</updated>
+    
+    <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0.0.0.0 account.jetbrains.com # add host</span><br></pre></td></tr></table></figure><p>激活码</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EB101IWSWD-eyJsaWNlbnNlSWQiOiJFQjEwMUlXU1dEIiwibGljZW5zZWVOYW1lIjoibGFuIHl1IiwiYXNzaWduZWVOYW1lIjoiIiwiYXNzaWduZWVFbWFpbCI6IiIsImxpY2Vuc2VSZXN0cmljdGlvbiI6IkZvciBlZHVjYXRpb25hbCB1c2Ugb25seSIsImNoZWNrQ29uY3VycmVudFVzZSI6ZmFsc2UsInByb2R1Y3RzIjpbeyJjb2RlIjoiSUkiLCJwYWlkVXBUbyI6IjIwMTgtMTAtMTQifSx7ImNvZGUiOiJSUzAiLCJwYWlkVXBUbyI6IjIwMTgtMTAtMTQifSx7ImNvZGUiOiJXUyIsInBhaWRVcFRvIjoiMjAxOC0xMC0xNCJ9LHsiY29kZSI6IlJEIiwicGFpZFVwVG8iOiIyMDE4LTEwLTE0In0seyJjb2RlIjoiUkMiLCJwYWlkVXBUbyI6IjIwMTgtMTAtMTQifSx7ImNvZGUiOiJEQyIsInBhaWRVcFRvIjoiMjAxOC0xMC0xNCJ9LHsiY29kZSI6IkRCIiwicGFpZFVwVG8iOiIyMDE4LTEwLTE0In0seyJjb2RlIjoiUk0iLCJwYWlkVXBUbyI6IjIwMTgtMTAtMTQifSx7ImNvZGUiOiJETSIsInBhaWRVcFRvIjoiMjAxOC0xMC0xNCJ9LHsiY29kZSI6IkFDIiwicGFpZFVwVG8iOiIyMDE4LTEwLTE0In0seyJjb2RlIjoiRFBOIiwicGFpZFVwVG8iOiIyMDE4LTEwLTE0In0seyJjb2RlIjoiUFMiLCJwYWlkVXBUbyI6IjIwMTgtMTAtMTQifSx7ImNvZGUiOiJDTCIsInBhaWRVcFRvIjoiMjAxOC0xMC0xNCJ9LHsiY29kZSI6IlBDIiwicGFpZFVwVG8iOiIyMDE4LTEwLTE0In0seyJjb2RlIjoiUlNVIiwicGFpZFVwVG8iOiIyMDE4LTEwLTE0In1dLCJoYXNoIjoiNjk0NDAzMi8wIiwiZ3JhY2VQZXJpb2REYXlzIjowLCJhdXRvUHJvbG9uZ2F0ZWQiOmZhbHNlLCJpc0F1dG9Qcm9sb25nYXRlZCI6ZmFsc2V9-Gbb7jeR8JWOVxdUFaXfJzVU/O7c7xHQyaidCnhYLp7v32zdeXiHUU7vlrrm5y9ZX0lmQk3plCCsW+phrC9gGAPd6WDKhkal10qVNg0larCR2tQ3u8jfv1t2JAvWrMOJfFG9kKsJuw1P4TozZ/E7Qvj1cupf/rldhoOmaXMyABxNN1af1RV3bVhe4FFZe0p7xlIJF/ctZkFK62HYmh8V3AyhUNTzrvK2k+t/tlDJz2LnW7nYttBLHld8LabPlEEjpTHswhzlthzhVqALIgvF0uNbIJ5Uwpb7NqR4U/2ob0Z+FIcRpFUIAHEAw+RLGwkCge5DyZKfx+RoRJ/In4q/UpA==-MIIEPjCCAiagAwIBAgIBBTANBgkqhkiG9w0BAQsFADAYMRYwFAYDVQQDDA1KZXRQcm9maWxlIENBMB4XDTE1MTEwMjA4MjE0OFoXDTE4MTEwMTA4MjE0OFowETEPMA0GA1UEAwwGcHJvZDN5MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxcQkq+zdxlR2mmRYBPzGbUNdMN6OaXiXzxIWtMEkrJMO/5oUfQJbLLuMSMK0QHFmaI37WShyxZcfRCidwXjot4zmNBKnlyHodDij/78TmVqFl8nOeD5+07B8VEaIu7c3E1N+e1doC6wht4I4+IEmtsPAdoaj5WCQVQbrI8KeT8M9VcBIWX7fD0fhexfg3ZRt0xqwMcXGNp3DdJHiO0rCdU+Itv7EmtnSVq9jBG1usMSFvMowR25mju2JcPFp1+I4ZI+FqgR8gyG8oiNDyNEoAbsR3lOpI7grUYSvkB/xVy/VoklPCK2h0f0GJxFjnye8NT1PAywoyl7RmiAVRE/EKwIDAQABo4GZMIGWMAkGA1UdEwQCMAAwHQYDVR0OBBYEFGEpG9oZGcfLMGNBkY7SgHiMGgTcMEgGA1UdIwRBMD+AFKOetkhnQhI2Qb1t4Lm0oFKLl/GzoRykGjAYMRYwFAYDVQQDDA1KZXRQcm9maWxlIENBggkA0myxg7KDeeEwEwYDVR0lBAwwCgYIKwYBBQUHAwEwCwYDVR0PBAQDAgWgMA0GCSqGSIb3DQEBCwUAA4ICAQC9WZuYgQedSuOc5TOUSrRigMw4/+wuC5EtZBfvdl4HT/8vzMW/oUlIP4YCvA0XKyBaCJ2iX+ZCDKoPfiYXiaSiH+HxAPV6J79vvouxKrWg2XV6ShFtPLP+0gPdGq3x9R3+kJbmAm8w+FOdlWqAfJrLvpzMGNeDU14YGXiZ9bVzmIQbwrBA+c/F4tlK/DV07dsNExihqFoibnqDiVNTGombaU2dDup2gwKdL81ua8EIcGNExHe82kjF4zwfadHk3bQVvbfdAwxcDy4xBjs3L4raPLU3yenSzr/OEur1+jfOxnQSmEcMXKXgrAQ9U55gwjcOFKrgOxEdek/Sk1VfOjvS+nuM4eyEruFMfaZHzoQiuw4IqgGc45ohFH0UUyjYcuFxxDSU9lMCv8qdHKm+wnPRb0l9l5vXsCBDuhAGYD6ss+Ga+aDY6f/qXZuUCEUOH3QUNbbCUlviSz6+GiRnt1kA9N2Qachl+2yBfaqUqr8h7Z2gsx5LcIf5kYNsqJ0GavXTVyWh7PYiKX4bs354ZQLUwwa/cG++2+wNWP+HtBhVxMRNTdVhSm38AknZlD+PTAsWGu9GyLmhti2EnVwGybSD2Dxmhxk3IPCkhKAK+pl0eWYGZWG3tJ9mZ7SowcXLWDFAk0lRJnKGFMTggrWjV8GYpw5bq23VmIqqDLgkNzuoog==</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span cla
+      
+    
+    </summary>
+    
+    
+      <category term="python" scheme="http://blog.ku-cat.com/tags/python/"/>
+    
+  </entry>
   
   <entry>
     <title>swoole 创建数据库连接的问题以及如何配置 task_worker_num</title>
@@ -550,32 +573,6 @@
       <category term="mac" scheme="http://blog.ku-cat.com/tags/mac/"/>
     
       <category term="os" scheme="http://blog.ku-cat.com/tags/os/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>node.js 版本控制 nvm</title>
-    <link href="http://blog.ku-cat.com/2018/04/01/node-nvm/"/>
-    <id>http://blog.ku-cat.com/2018/04/01/node-nvm/</id>
-    <published>2018-04-01T11:40:22.000Z</published>
-    <updated>2018-04-01T11:41:49.490Z</updated>
-    
-    <content type="html"><![CDATA[<p>node的版本实在是多，在两台mac上安装pomelo， 一台正常运行，一台运行报错，完全一样的代码，最后检查是node版本不一致，一个是9.3和9.8。后来安装nvm使用相同的9.3版后，一切正常了。</p><h3 id="nvm版本控制的安装"><a href="#nvm版本控制的安装" class="headerlink" title="nvm版本控制的安装"></a>nvm版本控制的安装</h3><p>我们使用brew安装nvm</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install nvm</span><br></pre></td></tr></table></figure><p>安装完成后，需要在bash或zsh配置文件中设置一下，否则当你重新启动终端，node，npm环境变量都会失效。</p><p>安装好nvm后，输入如下命令，可以看到帮助信息。</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew info nvm</span><br></pre></td></tr></table></figure><p>输出如下信息</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">nvm: stable 0.33.8, HEAD</span><br><span class="line">Manage multiple Node.js versions</span><br><span class="line">https://github.com/creationix/nvm</span><br><span class="line">/usr/<span class="built_in">local</span>/Cellar/nvm/0.33.8 (7 files, 135.5KB) *</span><br><span class="line">  Built from <span class="built_in">source</span> on 2018-03-31 at 20:58:44</span><br><span class="line">From: https://github.com/Homebrew/homebrew-core/blob/master/Formula/nvm.rb</span><br><span class="line">==&gt; Options</span><br><span class="line">--HEAD</span><br><span class="line">Install HEAD version</span><br><span class="line">==&gt; Caveats</span><br><span class="line">Please note that upstream has asked us to make explicit managing</span><br><span class="line">nvm via Homebrew is unsupported by them and you should check any</span><br><span class="line">problems against the standard nvm install method prior to reporting.</span><br><span class="line"></span><br><span class="line">You should create NVM<span class="string">'s working directory if it doesn'</span>t exist:</span><br><span class="line"></span><br><span class="line">  mkdir ~/.nvm</span><br><span class="line"></span><br><span class="line">Add the following to ~/.bash_profile or your desired shell</span><br><span class="line">configuration file:</span><br><span class="line"></span><br><span class="line">  <span class="built_in">export</span> NVM_DIR=<span class="string">"<span class="variable">$HOME</span>/.nvm"</span></span><br><span class="line">  . <span class="string">"/usr/local/opt/nvm/nvm.sh"</span></span><br><span class="line"></span><br><span class="line">You can <span class="built_in">set</span> <span class="variable">$NVM_DIR</span> to any location, but leaving it unchanged from</span><br><span class="line">/usr/<span class="built_in">local</span>/opt/nvm will destroy any nvm-installed Node installations</span><br><span class="line">upon upgrade/reinstall.</span><br><span class="line"></span><br><span class="line">Type `nvm <span class="built_in">help</span>` <span class="keyword">for</span> further information.</span><br><span class="line"></span><br><span class="line">Bash completion has been installed to:</span><br><span class="line">  /usr/<span class="built_in">local</span>/etc/bash_completion.d</span><br></pre></td></tr></table></figure><p>我们需要按照上面提供的方法,首先在用户更目录下 创建 .nvm 文件</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~/.nvm</span><br></pre></td></tr></table></figure><p>然后把 nvm-exec 文件拷贝到你刚才新建的 .nvm 目录下</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp $(brew --prefix nvm)/nvm-exec ~/.nvm/</span><br></pre></td></tr></table></figure><p>然后去编辑你的 bash 配置文件 $HOME/.bashrc ,如果你  使用 zsh 那么编辑 $HOME/.zshrc 配置文件</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.bashrc</span><br><span class="line"><span class="comment"># 或</span></span><br><span class="line">vim ~/.zshrc</span><br></pre></td></tr></table></figure><p>把下面的内容粘贴进去</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export NVM_DIR=~/.nvm</span><br><span class="line">source $(brew --prefix nvm)/nvm.sh</span><br></pre></td></tr></table></figure><p>最后让你的 shell 配置及时生效</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">source ~/.bashrc</span><br><span class="line"># 或</span><br><span class="line">source ~/.zshrc</span><br></pre></td></tr></table></figure><h3 id="nvm的使用"><a href="#nvm的使用" class="headerlink" title="nvm的使用"></a>nvm的使用</h3><p>nvm使用方法</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">nvm ls-remote <span class="comment"># 查看可以安装的版本</span></span><br><span class="line">nvm ls <span class="comment"># 查看已经安装的版本</span></span><br><span class="line">nvm install &lt;version&gt; <span class="comment"># 安装一个指定的版本</span></span><br><span class="line"><span class="comment"># 上面的 version 可以指定你在 nvm ls-remote 里面列出来的版本号即可</span></span><br><span class="line">nvm use &lt;version&gt; <span class="comment"># 使用指定版本</span></span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;node的版本实在是多，在两台mac上安装pomelo， 一台正常运行，一台运行报错，完全一样的代码，最后检查是node版本不一致，一个是9.3和9.8。后来安装nvm使用相同的9.3版后，一切正常了。&lt;/p&gt;
-&lt;h3 id=&quot;nvm版本控制的安装&quot;&gt;&lt;a href=&quot;#n
-      
-    
-    </summary>
-    
-      <category term="nodejs" scheme="http://blog.ku-cat.com/categories/nodejs/"/>
-    
-    
-      <category term="node" scheme="http://blog.ku-cat.com/tags/node/"/>
     
   </entry>
   
