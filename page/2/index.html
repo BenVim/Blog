@@ -294,6 +294,486 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/08/python-Thread/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一纸墨迹">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/08/python-Thread/" itemprop="url">python多线程并发数的控制</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-08T09:08:05+08:00">
+                2018-04-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>多线程能够有效的提升执行效率，但是在我们压扎机器资源的时候也要适当进行，否则可能导致资源消耗过大，得不偿失，因此对并发的控制就变得很重要了。python正好有比较好的控制方法。使用semaphore进行控制。</p>
+<h3 id="信号量：class-threading-Semaphore-value"><a href="#信号量：class-threading-Semaphore-value" class="headerlink" title="信号量：class threading.Semaphore([value])"></a>信号量：class threading.Semaphore([value])</h3><blockquote>
+<p>values是一个内部计数，values默认是1，如果小于0，则会抛出 ValueError 异常，可以用于控制线程数并发数<br>1.acquire([blocking])<br>2.release()</p>
+</blockquote>
+<p>例：数据库的连接数控制</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">maxconnections = <span class="number">5</span> <span class="comment"># 最多5个线程同时运行</span></span><br><span class="line">...</span><br><span class="line">pool_sema = BoundedSemaphore(value=maxconnections)</span><br><span class="line"></span><br><span class="line">pool_sema.acquire() <span class="comment"># 开始时候计数</span></span><br><span class="line">conn = connectdb()</span><br><span class="line"><span class="meta">... </span>use connection ...</span><br><span class="line">conn.close()</span><br><span class="line">pool_sema.release() <span class="comment"># 完成释放，新的线程可以继续运行</span></span><br></pre></td></tr></table></figure>
+<p>SpiderRobot类的pageAnalysis函数创建队列中数量的线程。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">pageAnalysis</span><span class="params">(self)</span>:</span></span><br><span class="line">    semlock = threading.BoundedSemaphore(self.maxconnections)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(self.queue.qsize()):</span><br><span class="line">        semlock.acquire() <span class="comment"># 开始时候计数</span></span><br><span class="line">        details = DetailsAnalysis() <span class="comment"># 该对象继承threading</span></span><br><span class="line">        details.initData(self.queue.get(), semlock)</span><br><span class="line">        details.start() <span class="comment">#线程开始</span></span><br></pre></td></tr></table></figure>
+<p>数据保存线程结束，调用self.semlock.release() 释放线程，进程继续进行。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">saveData</span><span class="params">(self)</span>:</span></span><br><span class="line">    cursor = self.db.cursor()</span><br><span class="line">    sql = <span class="string">"insert into company (company_name,name,mobile,phone,address) value ('"</span> + self.companyName + <span class="string">"','"</span> + self.name + <span class="string">"','"</span> + self.mobile + <span class="string">"','"</span> + self.telephone + <span class="string">"','"</span> + self.address + <span class="string">"')"</span></span><br><span class="line">    print(<span class="string">"sql:"</span>,sql)</span><br><span class="line">    cursor.execute(sql)</span><br><span class="line">    self.db.commit()</span><br><span class="line">    self.semlock.release() <span class="comment"># 当前任务完成，线程释放</span></span><br></pre></td></tr></table></figure>
+<p>以上的代码我们有self.queue.qsize()数量的任务需要去做，我们希望使用多线程并发的形式去处理这些任务，以达到高效的处理，但是由于资源是有限的，所以我们不能够有多少任务就创建多少线程，每个线程是需要占用内存和系统资源的，数量过大可能会消耗掉机器所有资源最终可能导致系统启机，我们肯定希望在同一时间有多少线程在运行是可控的。</p>
+<p>以上的方法可以有效的控制同一时间运行的线程数量。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/04/nodejs-process/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一纸墨迹">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/04/nodejs-process/" itemprop="url">nodejs的process.nextTick()的原理及应用场景</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-04T16:17:42+08:00">
+                2018-04-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/nodejs/" itemprop="url" rel="index">
+                    <span itemprop="name">nodejs</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>nodejs的API原型：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">process.nextTick(callback[, ...args])</span><br></pre></td></tr></table></figure>
+<ul>
+<li>callback  \&lt;Function> </li>
+<li>…args <any> 调用 callback时传递给它的额外参数</any></li>
+</ul>
+<p>说明：process.nextTick()方法将 callback 添加到”next tick 队列”。 一旦当前事件轮询队列的任务全部完成，在next tick队列中的所有callbacks会被依次调用。</p>
+<p>这种方式不是setTimeout(fn, 0)的别名。它更加有效率。事件轮询随后的ticks 调用，会在任何I/O事件（包括定时器）之前运行。</p>
+<p>以上的是API的原文说明，说得比较明白了。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'start'</span>);</span><br><span class="line">process.nextTick(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'nextTick callback'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'scheduled'</span>);</span><br><span class="line"><span class="comment">// Output:</span></span><br><span class="line"><span class="comment">// start </span></span><br><span class="line"><span class="comment">// scheduled</span></span><br><span class="line"><span class="comment">// nextTick callback 最后执行，nextTick的callback被放到任务队列的最后面。要到下一次tick时被执行。</span></span><br></pre></td></tr></table></figure>
+<p>Node.js是单线程的，除了系统IO之外，在它的事件轮询过程中，同一时间只会处理一个事件。你可以把事件轮询想象成一个大的队列，在每个时间点上，系统只会处理一个事件。即使你的电脑有多个CPU核心，你也无法同时并行的处理多个事件。但也就是这种特性使得node.js适合处理I／O型的应用，不适合那种CPU运算型的应用。在每个I／O型的应用中，你只需要给每一个输入输出定义一个回调函数即可，他们会自动加入到事件轮询的处理队列里。当I／O操作完成后，这个回调函数会被触发。然后系统会继续处理其他的请求。</p>
+<p>–</p>
+<p>在这种处理模式下，process.nextTick()的意思就是定义出一个动作，并且让这个动作在下一个事件轮询的时间点上执行。我们来看一个例子。例子中有一个foo()，你想在下一个时间点上调用他，可以这么做：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.error(<span class="string">'foo'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">process.nextTick(foo);</span><br><span class="line"><span class="built_in">console</span>.error(<span class="string">'bar'</span>);</span><br></pre></td></tr></table></figure>
+<p>运行上面的代码，你从下面终端打印的信息会看到，”bar”的输出在“foo”的前面。这就验证了上面的说法，foo()是在下一个时间点运行的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bar</span><br><span class="line">foo</span><br></pre></td></tr></table></figure>
+<p>你也可以使用setTimeout()函数来达到貌似同样的执行效果：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(foo, <span class="number">0</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'bar'</span>);</span><br></pre></td></tr></table></figure>
+<p>但在内部的处理机制上，process.nextTick()和setTimeout(fn, 0)是不同的，process.nextTick()不是一个单纯的延时，他有更多的特性。</p>
+<p><strong>更精确的说</strong>：<font color="red">process.nextTick()定义的调用会创建一个新的子堆栈。在当前的栈里，你可以执行任意多的操作。但一旦调用netxTick，函数就必须返回到父堆栈。然后事件轮询机制又重新等待处理新的事件，如果发现nextTick的调用，就会创建一个新的栈。</font></p>
+<h3 id="应用场景：-什么情况下使用process-nextTick-："><a href="#应用场景：-什么情况下使用process-nextTick-：" class="headerlink" title="应用场景： 什么情况下使用process.nextTick()："></a>应用场景： 什么情况下使用process.nextTick()：</h3><h4 id="1-在多个事件里交叉执行CPU运算密集型的任务："><a href="#1-在多个事件里交叉执行CPU运算密集型的任务：" class="headerlink" title="1. 在多个事件里交叉执行CPU运算密集型的任务："></a>1. 在多个事件里交叉执行CPU运算密集型的任务：</h4><p>在下面的例子里有一个compute()，我们希望这个函数尽可能持续的执行，来进行一些运算密集的任务。</p>
+<p>但与此同时，我们还希望系统不要被这个函数堵塞住，还需要能响应处理别的事件。这个应用模式就像一个单线程的web服务server。在这里我们就可以使用process.nextTick()来交叉执行compute()和正常的事件响应。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">compute</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// performs complicated calculations continuously</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    process.nextTick(compute);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">http.createServer(<span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">     res.writeHead(<span class="number">200</span>, &#123;<span class="string">'Content-Type'</span>: <span class="string">'text/plain'</span>&#125;);</span><br><span class="line">     res.end(<span class="string">'Hello World'</span>);</span><br><span class="line">&#125;).listen(<span class="number">5000</span>, <span class="string">'127.0.0.1'</span>);</span><br><span class="line"></span><br><span class="line">compute();</span><br></pre></td></tr></table></figure>
+<p>在这种模式下，我们不需要递归的调用compute()，我们只需要在事件循环中使用process.nextTick()定义compute()在下一个时间点执行即可。在这个过程中，如果有新的http请求进来，事件循环机制会先处理新的请求，然后再调用compute()。反之，如果你把compute()放在一个递归调用里，那系统就会一直阻塞在compute()里，无法处理新的http请求了。你可以自己试试。</p>
+<p>当然，我们无法通过process.nextTick()来获得多CPU下并行执行的真正好处，这只是模拟同一个应用在CPU上分段执行而已。</p>
+<h4 id="2-保持回调函数异步执行的原则"><a href="#2-保持回调函数异步执行的原则" class="headerlink" title="2. 保持回调函数异步执行的原则"></a>2. 保持回调函数异步执行的原则</h4><p>当你给一个函数定义一个回调函数时，你要确保这个回调是被异步执行的。下面我们看一个例子，例子中的回调违反了这一原则：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">asyncFake</span>(<span class="params">data, callback</span>) </span>&#123;        </span><br><span class="line">    <span class="keyword">if</span>(data === <span class="string">'foo'</span>) callback(<span class="literal">true</span>);</span><br><span class="line">    <span class="keyword">else</span> callback(<span class="literal">false</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">asyncFake(<span class="string">'bar'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// this callback is actually called synchronously!</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>为什么这样不好呢？我们来看Node.js 文档里一段代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> client = net.connect(<span class="number">8124</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'client connected'</span>);</span><br><span class="line">    client.write(<span class="string">'world!\r\n'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>在上面的代码里，如果因为某种原因，net.connect()变成同步执行的了，回调函数就会被立刻执行，因此回调函数写到客户端的变量就永远不会被初始化了。</p>
+<p>这种情况下我们就可以使用process.nextTick()把上面asyncFake()改成异步执行的：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">asyncReal</span>(<span class="params">data, callback</span>) </span>&#123;</span><br><span class="line">    process.nextTick(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        callback(data === <span class="string">'foo'</span>);       </span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="3-用在事件触发过程中"><a href="#3-用在事件触发过程中" class="headerlink" title="3.用在事件触发过程中"></a>3.用在事件触发过程中</h4><p>来看一个例子，你想写一个库实现这样的功能：从源文件里读取数据，当读取完毕后，触发一个事件同时传递读取的数据。可能你会这样写：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> EventEmitter = <span class="built_in">require</span>(<span class="string">'events'</span>).EventEmitter;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">StreamLibrary</span>(<span class="params">resourceName</span>) </span>&#123; </span><br><span class="line">    <span class="keyword">this</span>.emit(<span class="string">'start'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// read from the file, and for every chunk read, do:        </span></span><br><span class="line">    <span class="keyword">this</span>.emit(<span class="string">'data'</span>, chunkRead);       </span><br><span class="line">&#125;</span><br><span class="line">StreamLibrary.prototype.__proto__ = EventEmitter.prototype;   <span class="comment">// inherit from EventEmitter</span></span><br></pre></td></tr></table></figure>
+<p>下面是一段调用这个库的客户端程序，我们想在程序中监听这些事件：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> stream = <span class="keyword">new</span> StreamLibrary(<span class="string">'fooResource'</span>);</span><br><span class="line"></span><br><span class="line">stream.on(<span class="string">'start'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Reading has started'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">stream.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">chunk</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Received: '</span> + chunk);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>但是上面的代码中，将永远接收不到“start”事件，因为在这个库实例化的时候，“start”事件会被立刻触发执行，但此时事件的回调函数还没有准备好，所以在客户端根本无法接收到这个事件。同样，我们可以用process.nextTick()来改写事件触发的过程，下面是一个正确的版本：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">StreamLibrary</span>(<span class="params">resourceName</span>) </span>&#123;      </span><br><span class="line">    <span class="keyword">var</span> self = <span class="keyword">this</span>;</span><br><span class="line"></span><br><span class="line">    process.nextTick(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        self.emit(<span class="string">'start'</span>);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// read from the file, and for every chunk read, do:        </span></span><br><span class="line">    <span class="keyword">this</span>.emit(<span class="string">'data'</span>, chunkRead);       </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这就是process.nextTick()的基本用法。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/04/python-django-session/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一纸墨迹">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/04/python-django-session/" itemprop="url">django登录写入session的操作</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-04T08:25:42+08:00">
+                2018-04-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>用户登录是需要把用户的相关数据写入session的，在django中用户登录的操作代码如下所示：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">checkuser</span><span class="params">(request)</span>:</span>  </span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">'POST'</span>:  </span><br><span class="line">        user = request.POST.get(<span class="string">'username'</span>)  </span><br><span class="line">        passwd = request.POST.get(<span class="string">'password'</span>)  </span><br><span class="line">        <span class="keyword">print</span> user,passwd  </span><br><span class="line">        <span class="keyword">try</span>:  </span><br><span class="line">            passwd_db = User.objects.get(username=user).password  </span><br><span class="line">        <span class="keyword">except</span>:  </span><br><span class="line">            messages.add_message(request,messages.WARNING,<span class="string">'找不到用户'</span>)  </span><br><span class="line">            <span class="keyword">return</span> render(request, <span class="string">'showdb/login.html'</span>,&#123;<span class="string">'login_info_list'</span>:<span class="string">"请使用正确的账号密码登陆"</span>&#125;,)  </span><br><span class="line">        <span class="keyword">if</span> passwd == passwd_db :  </span><br><span class="line">            request.session[<span class="string">'username'</span>] = user  </span><br><span class="line">            request.session.set_expiry(<span class="number">600</span>)  </span><br><span class="line">            <span class="keyword">return</span> render(request, <span class="string">'showdb/index.html'</span>,&#123;  </span><br><span class="line">            <span class="string">'welcome'</span>:<span class="string">"欢迎你"</span>&#125;)  </span><br><span class="line">        <span class="keyword">else</span>:  </span><br><span class="line">            messages.add_message(request,messages.WARNING,<span class="string">'密码错误'</span>)  </span><br><span class="line">            <span class="keyword">return</span> render(request, <span class="string">'showdb/login.html'</span>,&#123;<span class="string">'login_info_list'</span>:<span class="string">"请使用正确的账号密码登陆"</span>&#125;,)</span><br></pre></td></tr></table></figure>
+<p>以上是登录部分的代码，写入session的部分</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">request.session[<span class="string">'username'</span>] = user  <span class="comment"># 用户名写入session</span></span><br><span class="line">request.session.set_expiry(<span class="number">600</span>) <span class="comment"># 设置session有效时间。</span></span><br></pre></td></tr></table></figure>
+<p>前端代码示例</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;% <span class="keyword">if</span> request.session.username %&#125;  </span><br><span class="line">    &lt;h4 style='font-family:楷体;'&gt;&#123;&#123; welcome&#125;&#125; &#123;&#123; request.session.username &#125;&#125; &lt;/h4&gt;  </span><br><span class="line">&#123;% <span class="keyword">else</span> %&#125;  </span><br><span class="line">    &lt;h3 style='font-family:楷体;'&gt;请重新登陆&lt;/h3&gt;  </span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/03/python-django/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1362,549 +1842,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/03/31/pomelo-cli-command/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ben">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一纸墨迹">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/31/pomelo-cli-command/" itemprop="url">pomelo框架学习（三）pomelo命令行工具的安装和使用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-31T15:38:24+08:00">
-                2018-03-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/pomelo/" itemprop="url" rel="index">
-                    <span itemprop="name">pomelo</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>命令行工具pomelo是Pomelo框架提供的一个小工具，该工具能够帮助开发者更便捷、更有效率地进行应用开发。该工具包括的命令支持绝大多数的应用开发操作，包括创建初始项目、启动应用、停止应用、关闭应用等。用户可以通过pomelo –help命令查询相关命令及其使用说明。</p>
-<h3 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h3><p>当使用如下命令安装Pomelo的时候，pomelo会自动安装在相应的bin目录下:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install pomelo -g</span><br></pre></td></tr></table></figure>
-<h3 id="命令介绍"><a href="#命令介绍" class="headerlink" title="命令介绍"></a>命令介绍</h3><p>目前pomelo支持如下命令及选项:</p>
-<ul>
-<li>init: 创建一个新项目，该项目中包含创建pomelo应用的基本文件及pomelo应用的简单示例。</li>
-<li>start: 启动应用及服务器。</li>
-<li>list: 列出当前应用开启的所有服务器的信息，包括服务器Id、服务器类型、pid、堆使用情况、启动时长。</li>
-<li>stop: 关闭应用及服务器或者停止指定的服务器。</li>
-<li>kill: 强制关闭应用及服务器。</li>
-<li>add: 运行时动态添加服务器。</li>
-<li>masterha: 当启用masterha高可用的时候，用来启动master服务器的slave节点。</li>
-<li>–version：列出当前使用pomelo的版本信息。</li>
-<li>–help：列出所有pomelo支持的命令及使用说明。</li>
-</ul>
-<h3 id="命令使用说明"><a href="#命令使用说明" class="headerlink" title="命令使用说明"></a>命令使用说明</h3><h4 id="init"><a href="#init" class="headerlink" title="init"></a>init</h4><p>根据给出的路径或文件名创建新项目，支持相对路径和绝对路径。默认情况下为当前路径，项目名称为当前文件夹名称,命令如下：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pomelo init [dirname]</span><br></pre></td></tr></table></figure>
-<p>在创建新项目时，需要选择新项目使用的与客户端通信时使用的connector,</p>
-<ol>
-<li>代表 Websocket(native socket), </li>
-<li>代表socket.io。当当前目录下有同名文件夹存在时，会提示是否覆盖，还是取消创建。</li>
-</ol>
-<h4 id="start"><a href="#start" class="headerlink" title="start"></a>start</h4><p>该命令用来启动Pomelo应用，命令格式如下:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pomelo start [-e,--env &lt;env&gt;] [-d,--directory &lt;code directory&gt;]</span><br><span class="line">             [-D,--daemon]</span><br></pre></td></tr></table></figure>
-<ul>
-<li>-e 用来选择启动时使用的env，如production，development，stress-test等;  </li>
-<li>-d 用来指定项目目录；   </li>
-<li>-D 用来开启daemon模式启动，如果开启了daemon，那么进程将转入后台运行, 所有的日志将不再打印到console上，只能通过对应的日志文件查看日志。 </li>
-</ul>
-<p>在0.7及以前的版本中，对于env的使用，没有使用-e选项，而是直接作为一个参数来使用的，这里需要注意一下。</p>
-<p>用户可以在</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;project_dir&gt;/game-server/config/servers.json</span><br></pre></td></tr></table></figure>
-<p>中为不同的服务器中添加不同参数，这些参数是node和v8支持的参数，是用来指定和影响node及v8的行为的。例如，当我们想对某一个服务器开启调试的时候，就可以在服务器配置中，增加args配置项，并在args中配置开启调试的端口等，示例如下:</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">"connector"</span>:[&#123;<span class="attr">"id"</span>:<span class="string">"connector-server-1"</span>, <span class="attr">"host"</span>:<span class="string">"127.0.0.1"</span>, <span class="attr">"port"</span>:<span class="number">4050</span>, </span><br><span class="line"><span class="attr">"clientPort"</span>:<span class="number">3050</span>, <span class="attr">"args"</span>:<span class="string">"--debug=[port]"</span>&#125;]&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="list"><a href="#list" class="headerlink" title="list"></a>list</h4><p>当应用启动后，该命令列出所有服务器信息。由于当执行此操作时，pomelo是作为监控管理框架的一个客户端的，在连接注册到master上的时候，需要进行身份验证。默认生成的项目中，有一个默认的用户名admin，口令也为admin，因此在不指定用户名和口令的时候，默认使用的用户名和口令均为admin，下面的stop命令和kill命令均需要使用用户名和口令验证，默认值与此处相同。应用的管理用户可以通过修改config/adminUser.json文件进行配置,具体的配置格式可以参考pomelo init生成的项目中的相关配置。</p>
-<p>执行本命令时，还需要指定master服务器的ip和port, 这样可以是的pomelo list可以在任意地方执行。pomelo stop/kill/add等也同样需要指定master服务器的ip和port，默认使用127.0.0.1:3005作为master服务器的地址。</p>
-<p>命令格式如下:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pomelo list [-u,--username &lt;username&gt;] [-p,--password &lt;password&gt;]</span><br><span class="line">            [-h,--host &lt;master-host&gt;] [-P,--port &lt;master-port&gt;]</span><br></pre></td></tr></table></figure>
-<h4 id="stop"><a href="#stop" class="headerlink" title="stop"></a>stop</h4><p>stop用来停止当前应用，优雅地关闭应用。和kill命令不同，这种关闭首先会切断客户端与服务器的连接，然后逐一关闭所有服务器。如果指定了服务器serverId的话，则会关闭特定的服务器，而不是关闭所有的服务器。与list命令一样，需要权限验证，默认的用户名和密码均为admin,也需要指定master服务器的位置, 跟pomelo list一样，默认使用127.0.0.1:3005。</p>
-<p>命令格式如下:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">pomelo stop [-u,--username &lt;username&gt;] [-p,--password &lt;password&gt;]</span><br><span class="line">            [-h,--host &lt;master-host&gt;] [-P,--port &lt;master-port&gt;]</span><br><span class="line">            [&lt;serverIds&gt;...]</span><br></pre></td></tr></table></figure>
-<h4 id="kill"><a href="#kill" class="headerlink" title="kill"></a>kill</h4><p>该命令强制关闭应用。在本地进行应用开发过程中，如果遇到kill之后还有服务器进程没有关闭的情况，可以增加–force选项，强制关闭所有服务器进程。该操作相当地暴力，可能产生数据丢失等不好的影响，可以在开发调试时使用，不推荐在线上使用该命令。该命令同样也需要进行身份验证以及指定master服务器的位置，具体方式同list和stop。</p>
-<p>该命令需在项目的根目录或game-server下使用，命令格式如下:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pomelo kill [-u,--username &lt;username&gt;] [-p,--password &lt;password&gt;]</span><br><span class="line">            [-h,--host &lt;master-host&gt;] [-P,--port &lt;master-port&gt;]</span><br><span class="line">            [-f,--force]</span><br></pre></td></tr></table></figure>
-<h4 id="add"><a href="#add" class="headerlink" title="add"></a>add</h4><p>该命令用来运行时动态增加服务器，与pomelo list等命令类似，pomelo add也需要身份验证以及指定master服务器的地址。具体命令格式如下:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pomelo add [-u,--username &lt;username&gt;] [-p,--password &lt;password&gt;]</span><br><span class="line">           [-h,--host &lt;master-host&gt;] [-P,--port &lt;master-port&gt;]</span><br><span class="line">           [&lt;server-args&gt;...]</span><br></pre></td></tr></table></figure>
-<p>args参数是用来指定新增服务器的参数的，包括服务器类型，服务器id等， 支持一次增加一台或多台同类型的服务器，例子如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pomelo add host=127.0.0.1 port=8000++ clientPort=9000++ frontend=true clusterCount=3 serverType=connector </span><br><span class="line">pomelo add host=127.0.0.1 port=8000 clientPort=9000 frontend=true serverType=connector id=added-connector-server masterha</span><br></pre></td></tr></table></figure>
-<p>当启用了master服务器的高可用后，该命令用来启动master服务器的slave节点，需要在game-server/config目录下配置masterha.json。其他的命令行参数类似于pomelo start，格式如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pomelo masterha [-d,--direcotry &lt;code directory&gt;]</span><br></pre></td></tr></table></figure>
-<h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><p>查看当前Pomelo的版本时，可以使用如下命令:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pomelo --version</span><br></pre></td></tr></table></figure>
-<p>查看pomelo命令行工具的帮助时，可以使用如下命令:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pomelo --help</span><br><span class="line">pomelo add --help</span><br><span class="line">pomelo start --help</span><br></pre></td></tr></table></figure>
-<p>注:<br>一般来说在开发环境中，master服务器的地址会一直是127.0.0.1:3005,使用的管理用户的username和password直接使用默认的admin即可，这样的话，开发调试时，在执行具体的pomelo命令的时候，maser服务器的地址信息以及管理用户信息都可以省略。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/03/31/pomelo-helloWorld/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ben">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一纸墨迹">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/31/pomelo-helloWorld/" itemprop="url">pomelo框架学习（二）创建Hello World项目</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-31T15:22:26+08:00">
-                2018-03-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/pomelo/" itemprop="url" rel="index">
-                    <span itemprop="name">pomelo</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="新建项目"><a href="#新建项目" class="headerlink" title="新建项目"></a>新建项目</h3><p>使用pomelo的命令行工具可以快速创建一个项目，命令如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pomelo init ./HelloWorld</span><br></pre></td></tr></table></figure>
-<p>或者你也可以使用下面的三个命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir HelloWorld</span><br><span class="line">$ cd HelloWorld</span><br><span class="line">$ pomelo init</span><br></pre></td></tr></table></figure>
-<p>这两种创建方式是等价的，更多关于pomelo命令行使用的文档，请参阅pomelo命令行工具使用。在初始化项目的时候，用户需要选择其底层使用的通信协议，分为socket.io和websocket。</p>
-<p>然后，进入到HelloWorld文件夹，安装依赖包：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sh npm-install.sh</span><br></pre></td></tr></table></figure>
-<p>windows用户，可以直接运行 npm-install.bat</p>
-<h3 id="项目目录结构"><a href="#项目目录结构" class="headerlink" title="项目目录结构"></a>项目目录结构</h3><p>让我们来看看一个pomelo项目的大致结构</p>
-<p>新建立的项目结构如下图所示：<br><img src="/img/HelloWorldFolder.png" alt=""></p>
-<p>该目录结构很清楚地展示了游戏项目的前后端分层结构，分别在各个目录下填写相关代码，即可快速开发游戏。下面对各个目录进行简要分析：</p>
-<h4 id="game-server"><a href="#game-server" class="headerlink" title="game-server"></a>game-server</h4><p>game-server是用pomelo框架搭建的游戏服务器，以文件app.js作为入口，运行游戏的所有逻辑和功能。在接下来的开发中，所有游戏逻辑、功能、配置等都在该目录下进行。</p>
-<ul>
-<li><p>app子目录<br>这个目录下放置所有的游戏服务器代码的地方，用户在这里实现不同类型的服务器，添加对应的Handler，Remote等等。</p>
-</li>
-<li><p>config子目录<br>game-server下config包括了游戏服务器的所有配置信息。配置信息以JSON文件的格式进行定义，包含有日志、master、server等服务器的配置信息。该目录还可以进行扩展，对数据库配置信息、地图信息和数值表等信息进行定义。总而言之，这里是放着所有游戏服务器相关的配置信息的地方。</p>
-</li>
-<li><p>logs子目录<br>日志是项目中不可或缺的，可以对项目的运行情况进行很好的备份，也是系统运维的参考数据之一，logs存放了游戏服务器所有的日志信息。</p>
-</li>
-</ul>
-<h4 id="shared"><a href="#shared" class="headerlink" title="shared"></a>shared</h4><p>shared存放一些前后端、game-server与web-server共用代码，由于都是javascript代码，那么对于一些工具或者算法代码，就可以前后端共用，极大地提高了代码重用性。</p>
-<h4 id="web-server"><a href="#web-server" class="headerlink" title="web-server"></a>web-server</h4><p>web-server是用express 3.x框架搭建的web服务器，以文件app.js作为入口，当然开发者可以选择Nginx等其他web服务器。如果游戏的客户端不是web的话，如Android平台的话，这个目录就不是必须的了。当然，在这个例子中，我们的客户端是web，所以web服务器还是必须的。</p>
-<h3 id="启动项目"><a href="#启动项目" class="headerlink" title="启动项目"></a>启动项目</h3><p>对于我们这个例子来说，由于客户端是web，所以必须启动game-server(游戏服务器)和web-server(web服务器)</p>
-<p>启动game-server服务器：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd game-server</span><br><span class="line">$ pomelo start</span><br></pre></td></tr></table></figure>
-<p>启动web-server服务器：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd web-server</span><br><span class="line">$ node app</span><br></pre></td></tr></table></figure>
-<p>在启动过程中可能会有端口号冲突导致启动不成功，只需在config里面修改使用的端口号即可。如果上面的启动都没有问题的话，我们就可以对我们的HelloWorld进行测试了。用浏览器(推荐使用chrome)访问 <a href="http://localhost:3001或者" target="_blank" rel="noopener">http://localhost:3001或者</a> <a href="http://127.0.0.1:3001" target="_blank" rel="noopener">http://127.0.0.1:3001</a> 即可, 点击Test Game Server，提示 game server is ok 说明运行成功</p>
-<h3 id="查看服务器"><a href="#查看服务器" class="headerlink" title="查看服务器"></a>查看服务器</h3><p>可以使用pomelo list查看已经启动的服务器，如下图所示：</p>
-<p><img src="/img/list_snapshot.png" alt=""></p>
-<p>服务器状态可以查看5种状态信息：</p>
-<ul>
-<li>serverId：服务器的serverId，同config配置表中的id。</li>
-<li>serverType：服务器的serverType，同config配置表中的type。</li>
-<li>pid：服务器对应的进程pid。</li>
-<li>heapUsed：该服务器已经使用的堆大小（单位：兆）。</li>
-<li>uptime：该服务器启动时长（单位：分钟）。</li>
-</ul>
-<h3 id="关闭项目"><a href="#关闭项目" class="headerlink" title="关闭项目"></a>关闭项目</h3><p>可以使用以下两种方式关闭项目：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd game-server</span><br><span class="line">$ pomelo stop</span><br></pre></td></tr></table></figure>
-<p>或者<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd game-server</span><br><span class="line">$ pomelo kill</span><br></pre></td></tr></table></figure></p>
-<p>其中pomelo stop比较优雅，pomelo kill比较粗暴，安全性低，开发环境下可以使用，产品环境慎用，更详细的pomelo命令行用法请参阅pomelo命令行工具使用。</p>
-<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>到这里为止，我们已经成功安装了pomelo，并成功运行了HelloWorld。接下来，建议你看一下pomelo整体的一个较详细的概述。 如果你已经迫不及待地想写代码，可以去pomelo例子教程, 那里以一个chat应用为例，一步一步地向你展示如何来使用pomelo进行一个实际应用的开发，以及pomelo的一些API的使用方式等。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/03/31/pomelo-learn/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ben">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一纸墨迹">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/31/pomelo-learn/" itemprop="url">pomelo框架学习（一）安装pomelo</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-31T14:58:43+08:00">
-                2018-03-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/pomelo/" itemprop="url" rel="index">
-                    <span itemprop="name">pomelo</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><img src="/img/logo.png" alt=""></p>
-<h3 id="一、安装pomelo"><a href="#一、安装pomelo" class="headerlink" title="一、安装pomelo"></a>一、安装pomelo</h3><p>pomelo是基于Node.js的，目前pomelo已经完全支持Windows、Linux、Mac等多种平台。</p>
-<h4 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h4><ul>
-<li>确保你的机器可以上网,因为安装pomelo的过程需要从网上下载其依赖的包。</li>
-<li>确保你的系统上已经要安装了Node，目前最新的Node提供了已经编译好的二进制安装包，包括Windows，Mac和Linux等平台。想省事的话，直接去这里下载对应的安装包，直接安装就好了。Node同时也提供了传统的从源码编译的方式安装，不过比起直接使用二进制的方式要麻烦。</li>
-<li>确保你的系统中安装有python(2.5 &lt; version &lt; 3.0)以及C++的编译器。Node的源码主要由C++代码和JavaScript代码构成，但是却用gyp工具来做源码的项目管理，该工具采用Python语言写成的。对于非windows平台，一般都会预装Python以及C++编译工具；对于Windows系统，请确保你的Windows系统包含源码编译工具。在Windows平台上，Node.js采用gyp来生成Visual Studio Solution文件，最终通过VC++的编译器将其编译为二进制文件。</li>
-<li><p>虽然pomelo是用Javascript写成，但是pomelo依赖的库中，有使用了C++语言写的扩展，因此安装pomelo的过程中会使用到C++编译器。 所以，在安装之前请确保你的Windows系统满足以下两个条件：</p>
-<ul>
-<li>python(2.5&lt;version&lt;3.0)。</li>
-<li>VC++ 编译器，包含在Visual Studio 2010中（VC++ 2010 Express亦可）。对于windows8的用户，需要安装Microsoft Visual Studio C++ 2012。</li>
-</ul>
-</li>
-<li><p>如果你使用的是Mac OS X系统, 则需要安装Xcode Command Line Tools或者Xcode的完整包以及make工具.</p>
-</li>
-</ul>
-<h4 id="安装pomelo"><a href="#安装pomelo" class="headerlink" title="安装pomelo"></a>安装pomelo</h4><p>使用npm(node包管理工具)全局安装pomelo:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install pomelo -g</span><br></pre></td></tr></table></figure>
-<p>可以通过如下命令下载源代码的方式安装</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git clone https://github.com/NetEase/pomelo.git</span><br><span class="line">$ cd pomelo</span><br><span class="line">$ npm install -g</span><br></pre></td></tr></table></figure>
-<p>其中-g表示全局安装，关于npm的使用问题，可以参考npm的文档，里面有详细的npm使用的介绍。如果安装过程中没有报错误，说明安装成功。</p>
-<p>windows下安装经验：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1. node,vs2010 和 python(2.5&lt;v&lt;3) 都是32位或者都是64位的。</span><br><span class="line">2. 配置  PYTHON=d:\Python27\python.exe(设置成你自己的路径)。注意不是path里面,而是和path同级的，直接在全局或者当前用户下配置。</span><br><span class="line">3. 保证环境变量path里面有 %SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem;</span><br><span class="line">  注： 这三个环境变量中貌似只有%SystemRoot%\system32这个环境变量有用，没具体试（没有他会报CreateProcessW找不到的错误)。</span><br><span class="line">4. 如果在命令行界面安装pomelo失败，可以在Visual Studio的命令行界面安装。</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1955,7 +1892,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">27</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1966,7 +1903,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -1977,7 +1914,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

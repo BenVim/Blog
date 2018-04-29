@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.ku-cat.com/"/>
-  <updated>2018-04-23T08:12:34.394Z</updated>
+  <updated>2018-04-29T15:52:41.259Z</updated>
   <id>http://blog.ku-cat.com/</id>
   
   <author>
@@ -15,6 +15,88 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>swoole 创建数据库连接的问题以及如何配置 task_worker_num</title>
+    <link href="http://blog.ku-cat.com/2018/04/29/swoole-mysql-redis-connection/"/>
+    <id>http://blog.ku-cat.com/2018/04/29/swoole-mysql-redis-connection/</id>
+    <published>2018-04-29T15:30:26.000Z</published>
+    <updated>2018-04-29T15:52:41.259Z</updated>
+    
+    <content type="html"><![CDATA[<p>swoole是多进程的运行的，共用1个redis或mysql连接，那么返回的结果无法保证被哪个进程处理。持有连接的进程理论上都可以对这个连接进行读写，这样数据就发生错乱了。所以是不能共用1个连接的。</p><h6 id="所以在多个进程之间，一定不能共用连接"><a href="#所以在多个进程之间，一定不能共用连接" class="headerlink" title="所以在多个进程之间，一定不能共用连接"></a>所以在多个进程之间，一定不能共用连接</h6><ul><li>在swoole_server中，应当在 <code>onWorkerStart</code> 中创建连接对象</li><li>在swoole_process中，应当在 <code>swoole_process-&gt;start</code> 后，子进程的回调函数中创建连接对象</li><li>对使用<code>pcntl_fork</code>的程序同样有效</li></ul><h3 id="示例："><a href="#示例：" class="headerlink" title="示例："></a>示例：</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$serv = <span class="keyword">new</span> swoole_server(<span class="string">"0.0.0.0"</span>, <span class="number">9502</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//必须在onWorkerStart回调中创建redis/mysql连接</span></span><br><span class="line">$serv-&gt;on(<span class="string">'workerstart'</span>, <span class="function"><span class="keyword">function</span><span class="params">($serv, $id)</span> </span>&#123;</span><br><span class="line">    $redis = <span class="keyword">new</span> redis;</span><br><span class="line">    $redis-&gt;connect(<span class="string">'127.0.0.1'</span>, <span class="number">6379</span>);</span><br><span class="line">    $serv-&gt;redis = $redis;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">$serv-&gt;on(<span class="string">'receive'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(swoole_server $serv, $fd, $from_id, $data)</span> </span>&#123; </span><br><span class="line">    $value = $serv-&gt;redis-&gt;get(<span class="string">"key"</span>);</span><br><span class="line">    $serv-&gt;send($fd, <span class="string">"Swoole: "</span>.$value);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">$serv-&gt;start();</span><br></pre></td></tr></table></figure><p>task进程也是worker进程的一种,上面的案例中给每个worker进程分配一个redis链接并保存到了serv对象中,你在ontask回调函数中,参数第一个就是serv,和worker一样,直接在函数体内进行调用就可以了。</p><p>不管是<code>event worker</code> 还是 <code>task workder</code> 启动的时候都会触发 <code>onWorkStart</code> 事件。</p><h2 id="如何配置-task-worker-num-参数"><a href="#如何配置-task-worker-num-参数" class="headerlink" title="如何配置 task_worker_num 参数"></a>如何配置 <code>task_worker_num</code> 参数</h2><p>配置Task进程的数量，配置此参数后将会启用task功能。所以Server务必要注册onTask、onFinish2个事件回调函数。如果没有注册，服务器程序将无法启动。</p><p>Task进程是同步阻塞的，配置方式与Worker同步模式一致。</p><h4 id="计算方法"><a href="#计算方法" class="headerlink" title="计算方法"></a>计算方法</h4><ul><li>单个task的处理耗时，如100ms，那一个进程1秒就可以处理1/0.1=10个task</li><li>task投递的速度，如每秒产生2000个task</li><li>2000/10=200，需要设置task_worker_num =&gt; 200，启用200个task进程</li></ul><blockquote><p>Task进程内不能使用swoole_server-&gt;task<br>Task进程内不能使用swoole_mysql、swoole_redis、swoole_event等异步IO函数</p></blockquote><hr><h2 id="优化连接数，提高swoole对mysql或redis连接资源的性能优化"><a href="#优化连接数，提高swoole对mysql或redis连接资源的性能优化" class="headerlink" title="优化连接数，提高swoole对mysql或redis连接资源的性能优化"></a>优化连接数，提高swoole对mysql或redis连接资源的性能优化</h2><p>优化连接数的性能方面的操作有以下几个步骤</p><ol><li>mysql需要有断线重连的功能设计</li><li>创建连接必须在onWorkStart方法中创建连接，确保一个进程只使用一个连接</li><li>根据项目计算并设置合理的<code>task_worker_num</code>参数值</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;swoole是多进程的运行的，共用1个redis或mysql连接，那么返回的结果无法保证被哪个进程处理。持有连接的进程理论上都可以对这个连接进行读写，这样数据就发生错乱了。所以是不能共用1个连接的。&lt;/p&gt;
+&lt;h6 id=&quot;所以在多个进程之间，一定不能共用连接&quot;&gt;&lt;a hr
+      
+    
+    </summary>
+    
+      <category term="swoole" scheme="http://blog.ku-cat.com/categories/swoole/"/>
+    
+    
+      <category term="php" scheme="http://blog.ku-cat.com/tags/php/"/>
+    
+      <category term="swoole" scheme="http://blog.ku-cat.com/tags/swoole/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>如何识别swoole的worker进程和task进程</title>
+    <link href="http://blog.ku-cat.com/2018/04/29/swoole-worker-task/"/>
+    <id>http://blog.ku-cat.com/2018/04/29/swoole-worker-task/</id>
+    <published>2018-04-29T15:18:58.000Z</published>
+    <updated>2018-04-29T15:29:53.922Z</updated>
+    
+    <content type="html"><![CDATA[<p>本质上workder和task进程是没有什么区别的，只是在设计上各自分工不同，在使用的过程中，我们可以通过<code>worker_id</code>来区分当前的进程是worker进程还是task进程。分析源码可以知道<code>$worker_id</code> <code>&gt;=</code> <code>$serv-&gt;setting[&#39;worker_num&#39;]</code>都是<strong>task workder</strong>进程，否则都 <strong>event worker</strong></p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">my_onWorkerStart</span><span class="params">($serv, $worker_id)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">global</span> $argv;  </span><br><span class="line">    <span class="keyword">if</span> ($worker_id &gt;= $serv-&gt;setting[<span class="string">'worker_num'</span>]) &#123;  </span><br><span class="line">        swoole_set_process_name(<span class="string">"php &#123;$argv[0]&#125; task worker"</span>);  </span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;  </span><br><span class="line">        swoole_set_process_name(<span class="string">"php &#123;$argv[0]&#125; event worker"</span>);  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="comment">//echo "WorkerStart|MasterPid=&#123;$serv-&gt;master_pid&#125;|Manager_pid=&#123;$serv-&gt;manager_pid&#125;|WorkerId=$worker_id\n";  </span></span><br><span class="line">    <span class="comment">//$serv-&gt;addtimer(500); //500ms  </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h5 id="不管是event-worker-还是-task-workder-启动的时候都会触发-onWorkStart-事件。"><a href="#不管是event-worker-还是-task-workder-启动的时候都会触发-onWorkStart-事件。" class="headerlink" title="不管是event worker 还是 task workder 启动的时候都会触发 onWorkStart 事件。"></a>不管是event worker 还是 task workder 启动的时候都会触发 <code>onWorkStart</code> 事件。</h5>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;本质上workder和task进程是没有什么区别的，只是在设计上各自分工不同，在使用的过程中，我们可以通过&lt;code&gt;worker_id&lt;/code&gt;来区分当前的进程是worker进程还是task进程。分析源码可以知道&lt;code&gt;$worker_id&lt;/code&gt; &lt;cod
+      
+    
+    </summary>
+    
+      <category term="swoole" scheme="http://blog.ku-cat.com/categories/swoole/"/>
+    
+    
+      <category term="php" scheme="http://blog.ku-cat.com/tags/php/"/>
+    
+      <category term="swoole" scheme="http://blog.ku-cat.com/tags/swoole/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>pomelo 组件概述</title>
+    <link href="http://blog.ku-cat.com/2018/04/26/nodejs-pomelo-monitor/"/>
+    <id>http://blog.ku-cat.com/2018/04/26/nodejs-pomelo-monitor/</id>
+    <published>2018-04-26T11:41:06.000Z</published>
+    <updated>2018-04-29T15:19:23.089Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="组件概述"><a href="#组件概述" class="headerlink" title="组件概述"></a>组件概述</h1><p>我们知道，pomelo的应用程序执行的全部过程，就是对其相应组件的生命周期的管理，实际的所有逻辑功能均由pomelo组件提供。pomelo内建提供了十多个组件，这些组件适用于不同的服务器，提供不同的功能。有些组件提供的功能比较复杂，有些则比较简单。下面我们将以提供的功能为主线来阐述pomelo提供的内建组件。</p><h2 id="master组件"><a href="#master组件" class="headerlink" title="master组件"></a>master组件</h2><p>它主要的功能包括启动所有的应用服务器、管理和监控所有的应用服务器和接受管理客户端的请求与响应。</p><h2 id="monitor监控组件"><a href="#monitor监控组件" class="headerlink" title="monitor监控组件"></a>monitor监控组件</h2><p>monitor组件由所有的包括master服务器在内的服务器都会加载，它的主要功能就是与master建立连接进行通信，从而对整个应用服务器群进行管理和监控。master服务器本身也会加载monitor服务器，因为master服务器也会收集其本身自己的监控信息。</p><h2 id="connector组件"><a href="#connector组件" class="headerlink" title="connector组件"></a>connector组件</h2><p>connector组件是一个重量级的组件，它会依赖于session组件，server组件，pushScheduler组件和connection组件。</p><p>connector组件仅仅被前端服务器加载，它主要用来管理客户端的连接。<br>connector组件会加载底层的connector，创建端口监听，绑定事件响应。</p><p>当有客户端连接请求时，connector组件会请求session组件，获得当前连接的session，如果session组件中没有相应的session的话，session组件会为这个新连接创建新的session，并维护相应的连接；</p><p>然后connector组件还会向connection组件上报连接信息，供统计使用；</p><p>最后，将拿到的session以及客户端的请求，一起抛给server组件，由server组件进行请求处理。</p><p>当server组件处理完请求后，又会通过connector组件将响应返回给客户端。</p><p>在返回响应给客户端的时候，connector组件做了一个缓存选择，这个缓存实现依赖于pushScheduler组件，也就是说connector组件并不是直接将响应发给客户端，而是将响应给pushScheduler组件。</p><p>pushScheduler组件根据相应调度策略，可能不缓存直接通过session组件维护的连接，将响应发出去，也可能进行缓存，并按时flush。这是可以配置的。</p><h2 id="session组件"><a href="#session组件" class="headerlink" title="session组件"></a>session组件</h2><p>session组件跟connector相关，也是仅仅被前端服务器加载，为sessionService提供一个组件包装, 加载session组件后，会在app的上下文中增加sessionService，可以通过app.get(‘sessionService’)获取。它主要用来维护客户端的连接信息，以及生成session并维护session。</p><p>session组件支持如下配置项:</p><p><strong>singleSession： 如果这个配置项配置为true的话，那么将将不允许一个用户同时绑定到多个session，在绑定用户一次后，后面的绑定将会失败</strong></p><h2 id="connection组件"><a href="#connection组件" class="headerlink" title="connection组件"></a>connection组件</h2><p>connection组件是一个功能相对简单的组件，也是仅仅被前端服务器加载,为connectionService提供一个组件包装,他主要进行连接信息的统计,connector组件接收到客户端连接请求以及有客户端离线时，以及用户登录下线等等情况，都会向其汇报。</p><h2 id="server组件"><a href="#server组件" class="headerlink" title="server组件"></a>server组件</h2><p>server组件也是一个功能比较复杂的组件，它被除master外的服务器加载。server组件会加载并维护自身的Filter信息和Handler信息。server组件会从connector组件的回调里获得到相应的客户端请求或者通知，然后会使用自己的before filters对其消息进行过滤，再次调用自己的相应Handler进行请求的逻辑处理，然后将响应通过回调的方式发给connector处理。最后调用after filters进行一些清理处理。</p><ul><li>server组件 由前端服务器发起RPC调用</li><li>有多台相同的server服务，需要用router分派</li><li>server组件无前用户的，只提供相应的服务。比如计算相关的</li></ul><p>有两层路由进行分布式，由gateserver分配前端服务connector连接</p><h2 id="pushScheduler组件"><a href="#pushScheduler组件" class="headerlink" title="pushScheduler组件"></a>pushScheduler组件</h2><p>pushScheduler组件也是一个功能较为简单的组件，它仅仅被前端服务器加载，与connector组件的关系密切。</p><p>当connector组件收到server组件的对客户端请求的响应后，connector并不直接将此响应返回给客户端，而是将这个给客户端发送响应的操作调度给scheduler组件。</p><p>pushScheduler组件完成最后通过session组件拿到具体的客户端连接并将请求的响应发送给客户端的任务。</p><p>因此，通过pushScheduler组件可以对发给用户的响应进行缓冲，从而提高通信效率。</p><p>pomelo实现了两种调度策略，一种是不进行任何缓冲，直接将响应发送给客户端，一种是进行缓冲，并定时地将已缓冲的响应发送给对应的客户端。</p><h2 id="proxy组件"><a href="#proxy组件" class="headerlink" title="proxy组件"></a>proxy组件</h2><p><strong>proxy组件是一个重量级的组件，它被除master外的所有服务器加载。</strong></p><p>proxy组件会扫描具体应用服务器的目录，抽取其中的remote部分，由于javascript语言的动态性，可以很轻易地获得到remote中的关于远程调用的元信息，生成stub，并将这些调用都挂到app.rpc下面，当用户发起rpc调用时，proxy组件会查看其扫描到的stub信息，以此决定此远程调用是否合法。</p><p>同时，proxy又会创建一个RpcClient，当发起远程调用时，负责与远端的remote进行通信，并得到远程调用的结果供调用者使用。</p><p>当进行远程调用时，由于同类型的远程服务器可能有多个，所以这里同样需要配置相应的router。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;组件概述&quot;&gt;&lt;a href=&quot;#组件概述&quot; class=&quot;headerlink&quot; title=&quot;组件概述&quot;&gt;&lt;/a&gt;组件概述&lt;/h1&gt;&lt;p&gt;我们知道，pomelo的应用程序执行的全部过程，就是对其相应组件的生命周期的管理，实际的所有逻辑功能均由pomelo组件提供
+      
+    
+    </summary>
+    
+      <category term="pomelo" scheme="http://blog.ku-cat.com/categories/pomelo/"/>
+    
+    
+      <category term="nodejs" scheme="http://blog.ku-cat.com/tags/nodejs/"/>
+    
+      <category term="pomelo" scheme="http://blog.ku-cat.com/tags/pomelo/"/>
+    
+  </entry>
   
   <entry>
     <title>python使用captcha模块生成图形验证码</title>
@@ -494,89 +576,6 @@
     
     
       <category term="node" scheme="http://blog.ku-cat.com/tags/node/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>pomelo框架学习（三）pomelo命令行工具的安装和使用</title>
-    <link href="http://blog.ku-cat.com/2018/03/31/pomelo-cli-command/"/>
-    <id>http://blog.ku-cat.com/2018/03/31/pomelo-cli-command/</id>
-    <published>2018-03-31T07:38:24.000Z</published>
-    <updated>2018-04-13T04:00:30.844Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>命令行工具pomelo是Pomelo框架提供的一个小工具，该工具能够帮助开发者更便捷、更有效率地进行应用开发。该工具包括的命令支持绝大多数的应用开发操作，包括创建初始项目、启动应用、停止应用、关闭应用等。用户可以通过pomelo –help命令查询相关命令及其使用说明。</p><h3 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h3><p>当使用如下命令安装Pomelo的时候，pomelo会自动安装在相应的bin目录下:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install pomelo -g</span><br></pre></td></tr></table></figure><h3 id="命令介绍"><a href="#命令介绍" class="headerlink" title="命令介绍"></a>命令介绍</h3><p>目前pomelo支持如下命令及选项:</p><ul><li>init: 创建一个新项目，该项目中包含创建pomelo应用的基本文件及pomelo应用的简单示例。</li><li>start: 启动应用及服务器。</li><li>list: 列出当前应用开启的所有服务器的信息，包括服务器Id、服务器类型、pid、堆使用情况、启动时长。</li><li>stop: 关闭应用及服务器或者停止指定的服务器。</li><li>kill: 强制关闭应用及服务器。</li><li>add: 运行时动态添加服务器。</li><li>masterha: 当启用masterha高可用的时候，用来启动master服务器的slave节点。</li><li>–version：列出当前使用pomelo的版本信息。</li><li>–help：列出所有pomelo支持的命令及使用说明。</li></ul><h3 id="命令使用说明"><a href="#命令使用说明" class="headerlink" title="命令使用说明"></a>命令使用说明</h3><h4 id="init"><a href="#init" class="headerlink" title="init"></a>init</h4><p>根据给出的路径或文件名创建新项目，支持相对路径和绝对路径。默认情况下为当前路径，项目名称为当前文件夹名称,命令如下：</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pomelo init [dirname]</span><br></pre></td></tr></table></figure><p>在创建新项目时，需要选择新项目使用的与客户端通信时使用的connector,</p><ol><li>代表 Websocket(native socket), </li><li>代表socket.io。当当前目录下有同名文件夹存在时，会提示是否覆盖，还是取消创建。</li></ol><h4 id="start"><a href="#start" class="headerlink" title="start"></a>start</h4><p>该命令用来启动Pomelo应用，命令格式如下:</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pomelo start [-e,--env &lt;env&gt;] [-d,--directory &lt;code directory&gt;]</span><br><span class="line">             [-D,--daemon]</span><br></pre></td></tr></table></figure><ul><li>-e 用来选择启动时使用的env，如production，development，stress-test等;  </li><li>-d 用来指定项目目录；   </li><li>-D 用来开启daemon模式启动，如果开启了daemon，那么进程将转入后台运行, 所有的日志将不再打印到console上，只能通过对应的日志文件查看日志。 </li></ul><p>在0.7及以前的版本中，对于env的使用，没有使用-e选项，而是直接作为一个参数来使用的，这里需要注意一下。</p><p>用户可以在</p><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;project_dir&gt;/game-server/config/servers.json</span><br></pre></td></tr></table></figure><p>中为不同的服务器中添加不同参数，这些参数是node和v8支持的参数，是用来指定和影响node及v8的行为的。例如，当我们想对某一个服务器开启调试的时候，就可以在服务器配置中，增加args配置项，并在args中配置开启调试的端口等，示例如下:</p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">"connector"</span>:[&#123;<span class="attr">"id"</span>:<span class="string">"connector-server-1"</span>, <span class="attr">"host"</span>:<span class="string">"127.0.0.1"</span>, <span class="attr">"port"</span>:<span class="number">4050</span>, </span><br><span class="line"><span class="attr">"clientPort"</span>:<span class="number">3050</span>, <span class="attr">"args"</span>:<span class="string">"--debug=[port]"</span>&#125;]&#125;</span><br></pre></td></tr></table></figure><h4 id="list"><a href="#list" class="headerlink" title="list"></a>list</h4><p>当应用启动后，该命令列出所有服务器信息。由于当执行此操作时，pomelo是作为监控管理框架的一个客户端的，在连接注册到master上的时候，需要进行身份验证。默认生成的项目中，有一个默认的用户名admin，口令也为admin，因此在不指定用户名和口令的时候，默认使用的用户名和口令均为admin，下面的stop命令和kill命令均需要使用用户名和口令验证，默认值与此处相同。应用的管理用户可以通过修改config/adminUser.json文件进行配置,具体的配置格式可以参考pomelo init生成的项目中的相关配置。</p><p>执行本命令时，还需要指定master服务器的ip和port, 这样可以是的pomelo list可以在任意地方执行。pomelo stop/kill/add等也同样需要指定master服务器的ip和port，默认使用127.0.0.1:3005作为master服务器的地址。</p><p>命令格式如下:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pomelo list [-u,--username &lt;username&gt;] [-p,--password &lt;password&gt;]</span><br><span class="line">            [-h,--host &lt;master-host&gt;] [-P,--port &lt;master-port&gt;]</span><br></pre></td></tr></table></figure><h4 id="stop"><a href="#stop" class="headerlink" title="stop"></a>stop</h4><p>stop用来停止当前应用，优雅地关闭应用。和kill命令不同，这种关闭首先会切断客户端与服务器的连接，然后逐一关闭所有服务器。如果指定了服务器serverId的话，则会关闭特定的服务器，而不是关闭所有的服务器。与list命令一样，需要权限验证，默认的用户名和密码均为admin,也需要指定master服务器的位置, 跟pomelo list一样，默认使用127.0.0.1:3005。</p><p>命令格式如下:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">pomelo stop [-u,--username &lt;username&gt;] [-p,--password &lt;password&gt;]</span><br><span class="line">            [-h,--host &lt;master-host&gt;] [-P,--port &lt;master-port&gt;]</span><br><span class="line">            [&lt;serverIds&gt;...]</span><br></pre></td></tr></table></figure><h4 id="kill"><a href="#kill" class="headerlink" title="kill"></a>kill</h4><p>该命令强制关闭应用。在本地进行应用开发过程中，如果遇到kill之后还有服务器进程没有关闭的情况，可以增加–force选项，强制关闭所有服务器进程。该操作相当地暴力，可能产生数据丢失等不好的影响，可以在开发调试时使用，不推荐在线上使用该命令。该命令同样也需要进行身份验证以及指定master服务器的位置，具体方式同list和stop。</p><p>该命令需在项目的根目录或game-server下使用，命令格式如下:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pomelo kill [-u,--username &lt;username&gt;] [-p,--password &lt;password&gt;]</span><br><span class="line">            [-h,--host &lt;master-host&gt;] [-P,--port &lt;master-port&gt;]</span><br><span class="line">            [-f,--force]</span><br></pre></td></tr></table></figure><h4 id="add"><a href="#add" class="headerlink" title="add"></a>add</h4><p>该命令用来运行时动态增加服务器，与pomelo list等命令类似，pomelo add也需要身份验证以及指定master服务器的地址。具体命令格式如下:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pomelo add [-u,--username &lt;username&gt;] [-p,--password &lt;password&gt;]</span><br><span class="line">           [-h,--host &lt;master-host&gt;] [-P,--port &lt;master-port&gt;]</span><br><span class="line">           [&lt;server-args&gt;...]</span><br></pre></td></tr></table></figure><p>args参数是用来指定新增服务器的参数的，包括服务器类型，服务器id等， 支持一次增加一台或多台同类型的服务器，例子如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pomelo add host=127.0.0.1 port=8000++ clientPort=9000++ frontend=true clusterCount=3 serverType=connector </span><br><span class="line">pomelo add host=127.0.0.1 port=8000 clientPort=9000 frontend=true serverType=connector id=added-connector-server masterha</span><br></pre></td></tr></table></figure><p>当启用了master服务器的高可用后，该命令用来启动master服务器的slave节点，需要在game-server/config目录下配置masterha.json。其他的命令行参数类似于pomelo start，格式如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pomelo masterha [-d,--direcotry &lt;code directory&gt;]</span><br></pre></td></tr></table></figure><h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><p>查看当前Pomelo的版本时，可以使用如下命令:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pomelo --version</span><br></pre></td></tr></table></figure><p>查看pomelo命令行工具的帮助时，可以使用如下命令:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pomelo --help</span><br><span class="line">pomelo add --help</span><br><span class="line">pomelo start --help</span><br></pre></td></tr></table></figure><p>注:<br>一般来说在开发环境中，master服务器的地址会一直是127.0.0.1:3005,使用的管理用户的username和password直接使用默认的admin即可，这样的话，开发调试时，在执行具体的pomelo命令的时候，maser服务器的地址信息以及管理用户信息都可以省略。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h3&gt;&lt;p&gt;命令行工具pomelo是Pomelo框架提供的一个小工具，该工具能够帮助开发者更便捷、更有效率地进行应用开发。该工具包括的命令支持绝大多数的
-      
-    
-    </summary>
-    
-      <category term="pomelo" scheme="http://blog.ku-cat.com/categories/pomelo/"/>
-    
-    
-      <category term="nodejs" scheme="http://blog.ku-cat.com/tags/nodejs/"/>
-    
-      <category term="pomelo" scheme="http://blog.ku-cat.com/tags/pomelo/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>pomelo框架学习（二）创建Hello World项目</title>
-    <link href="http://blog.ku-cat.com/2018/03/31/pomelo-helloWorld/"/>
-    <id>http://blog.ku-cat.com/2018/03/31/pomelo-helloWorld/</id>
-    <published>2018-03-31T07:22:26.000Z</published>
-    <updated>2018-04-13T04:00:46.165Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="新建项目"><a href="#新建项目" class="headerlink" title="新建项目"></a>新建项目</h3><p>使用pomelo的命令行工具可以快速创建一个项目，命令如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pomelo init ./HelloWorld</span><br></pre></td></tr></table></figure><p>或者你也可以使用下面的三个命令：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir HelloWorld</span><br><span class="line">$ cd HelloWorld</span><br><span class="line">$ pomelo init</span><br></pre></td></tr></table></figure><p>这两种创建方式是等价的，更多关于pomelo命令行使用的文档，请参阅pomelo命令行工具使用。在初始化项目的时候，用户需要选择其底层使用的通信协议，分为socket.io和websocket。</p><p>然后，进入到HelloWorld文件夹，安装依赖包：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sh npm-install.sh</span><br></pre></td></tr></table></figure><p>windows用户，可以直接运行 npm-install.bat</p><h3 id="项目目录结构"><a href="#项目目录结构" class="headerlink" title="项目目录结构"></a>项目目录结构</h3><p>让我们来看看一个pomelo项目的大致结构</p><p>新建立的项目结构如下图所示：<br><img src="/img/HelloWorldFolder.png" alt=""></p><p>该目录结构很清楚地展示了游戏项目的前后端分层结构，分别在各个目录下填写相关代码，即可快速开发游戏。下面对各个目录进行简要分析：</p><h4 id="game-server"><a href="#game-server" class="headerlink" title="game-server"></a>game-server</h4><p>game-server是用pomelo框架搭建的游戏服务器，以文件app.js作为入口，运行游戏的所有逻辑和功能。在接下来的开发中，所有游戏逻辑、功能、配置等都在该目录下进行。</p><ul><li><p>app子目录<br>这个目录下放置所有的游戏服务器代码的地方，用户在这里实现不同类型的服务器，添加对应的Handler，Remote等等。</p></li><li><p>config子目录<br>game-server下config包括了游戏服务器的所有配置信息。配置信息以JSON文件的格式进行定义，包含有日志、master、server等服务器的配置信息。该目录还可以进行扩展，对数据库配置信息、地图信息和数值表等信息进行定义。总而言之，这里是放着所有游戏服务器相关的配置信息的地方。</p></li><li><p>logs子目录<br>日志是项目中不可或缺的，可以对项目的运行情况进行很好的备份，也是系统运维的参考数据之一，logs存放了游戏服务器所有的日志信息。</p></li></ul><h4 id="shared"><a href="#shared" class="headerlink" title="shared"></a>shared</h4><p>shared存放一些前后端、game-server与web-server共用代码，由于都是javascript代码，那么对于一些工具或者算法代码，就可以前后端共用，极大地提高了代码重用性。</p><h4 id="web-server"><a href="#web-server" class="headerlink" title="web-server"></a>web-server</h4><p>web-server是用express 3.x框架搭建的web服务器，以文件app.js作为入口，当然开发者可以选择Nginx等其他web服务器。如果游戏的客户端不是web的话，如Android平台的话，这个目录就不是必须的了。当然，在这个例子中，我们的客户端是web，所以web服务器还是必须的。</p><h3 id="启动项目"><a href="#启动项目" class="headerlink" title="启动项目"></a>启动项目</h3><p>对于我们这个例子来说，由于客户端是web，所以必须启动game-server(游戏服务器)和web-server(web服务器)</p><p>启动game-server服务器：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd game-server</span><br><span class="line">$ pomelo start</span><br></pre></td></tr></table></figure><p>启动web-server服务器：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd web-server</span><br><span class="line">$ node app</span><br></pre></td></tr></table></figure><p>在启动过程中可能会有端口号冲突导致启动不成功，只需在config里面修改使用的端口号即可。如果上面的启动都没有问题的话，我们就可以对我们的HelloWorld进行测试了。用浏览器(推荐使用chrome)访问 <a href="http://localhost:3001或者" target="_blank" rel="noopener">http://localhost:3001或者</a> <a href="http://127.0.0.1:3001" target="_blank" rel="noopener">http://127.0.0.1:3001</a> 即可, 点击Test Game Server，提示 game server is ok 说明运行成功</p><h3 id="查看服务器"><a href="#查看服务器" class="headerlink" title="查看服务器"></a>查看服务器</h3><p>可以使用pomelo list查看已经启动的服务器，如下图所示：</p><p><img src="/img/list_snapshot.png" alt=""></p><p>服务器状态可以查看5种状态信息：</p><ul><li>serverId：服务器的serverId，同config配置表中的id。</li><li>serverType：服务器的serverType，同config配置表中的type。</li><li>pid：服务器对应的进程pid。</li><li>heapUsed：该服务器已经使用的堆大小（单位：兆）。</li><li>uptime：该服务器启动时长（单位：分钟）。</li></ul><h3 id="关闭项目"><a href="#关闭项目" class="headerlink" title="关闭项目"></a>关闭项目</h3><p>可以使用以下两种方式关闭项目：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd game-server</span><br><span class="line">$ pomelo stop</span><br></pre></td></tr></table></figure><p>或者<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd game-server</span><br><span class="line">$ pomelo kill</span><br></pre></td></tr></table></figure></p><p>其中pomelo stop比较优雅，pomelo kill比较粗暴，安全性低，开发环境下可以使用，产品环境慎用，更详细的pomelo命令行用法请参阅pomelo命令行工具使用。</p><h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>到这里为止，我们已经成功安装了pomelo，并成功运行了HelloWorld。接下来，建议你看一下pomelo整体的一个较详细的概述。 如果你已经迫不及待地想写代码，可以去pomelo例子教程, 那里以一个chat应用为例，一步一步地向你展示如何来使用pomelo进行一个实际应用的开发，以及pomelo的一些API的使用方式等。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;新建项目&quot;&gt;&lt;a href=&quot;#新建项目&quot; class=&quot;headerlink&quot; title=&quot;新建项目&quot;&gt;&lt;/a&gt;新建项目&lt;/h3&gt;&lt;p&gt;使用pomelo的命令行工具可以快速创建一个项目，命令如下：&lt;/p&gt;
-&lt;figure class=&quot;highlight pl
-      
-    
-    </summary>
-    
-      <category term="pomelo" scheme="http://blog.ku-cat.com/categories/pomelo/"/>
-    
-    
-      <category term="nodejs" scheme="http://blog.ku-cat.com/tags/nodejs/"/>
-    
-      <category term="pomelo" scheme="http://blog.ku-cat.com/tags/pomelo/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>pomelo框架学习（一）安装pomelo</title>
-    <link href="http://blog.ku-cat.com/2018/03/31/pomelo-learn/"/>
-    <id>http://blog.ku-cat.com/2018/03/31/pomelo-learn/</id>
-    <published>2018-03-31T06:58:43.000Z</published>
-    <updated>2018-04-13T04:00:59.588Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="/img/logo.png" alt=""></p><h3 id="一、安装pomelo"><a href="#一、安装pomelo" class="headerlink" title="一、安装pomelo"></a>一、安装pomelo</h3><p>pomelo是基于Node.js的，目前pomelo已经完全支持Windows、Linux、Mac等多种平台。</p><h4 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h4><ul><li>确保你的机器可以上网,因为安装pomelo的过程需要从网上下载其依赖的包。</li><li>确保你的系统上已经要安装了Node，目前最新的Node提供了已经编译好的二进制安装包，包括Windows，Mac和Linux等平台。想省事的话，直接去这里下载对应的安装包，直接安装就好了。Node同时也提供了传统的从源码编译的方式安装，不过比起直接使用二进制的方式要麻烦。</li><li>确保你的系统中安装有python(2.5 &lt; version &lt; 3.0)以及C++的编译器。Node的源码主要由C++代码和JavaScript代码构成，但是却用gyp工具来做源码的项目管理，该工具采用Python语言写成的。对于非windows平台，一般都会预装Python以及C++编译工具；对于Windows系统，请确保你的Windows系统包含源码编译工具。在Windows平台上，Node.js采用gyp来生成Visual Studio Solution文件，最终通过VC++的编译器将其编译为二进制文件。</li><li><p>虽然pomelo是用Javascript写成，但是pomelo依赖的库中，有使用了C++语言写的扩展，因此安装pomelo的过程中会使用到C++编译器。 所以，在安装之前请确保你的Windows系统满足以下两个条件：</p><ul><li>python(2.5&lt;version&lt;3.0)。</li><li>VC++ 编译器，包含在Visual Studio 2010中（VC++ 2010 Express亦可）。对于windows8的用户，需要安装Microsoft Visual Studio C++ 2012。</li></ul></li><li><p>如果你使用的是Mac OS X系统, 则需要安装Xcode Command Line Tools或者Xcode的完整包以及make工具.</p></li></ul><h4 id="安装pomelo"><a href="#安装pomelo" class="headerlink" title="安装pomelo"></a>安装pomelo</h4><p>使用npm(node包管理工具)全局安装pomelo:</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install pomelo -g</span><br></pre></td></tr></table></figure><p>可以通过如下命令下载源代码的方式安装</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git clone https://github.com/NetEase/pomelo.git</span><br><span class="line">$ cd pomelo</span><br><span class="line">$ npm install -g</span><br></pre></td></tr></table></figure><p>其中-g表示全局安装，关于npm的使用问题，可以参考npm的文档，里面有详细的npm使用的介绍。如果安装过程中没有报错误，说明安装成功。</p><p>windows下安装经验：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1. node,vs2010 和 python(2.5&lt;v&lt;3) 都是32位或者都是64位的。</span><br><span class="line">2. 配置  PYTHON=d:\Python27\python.exe(设置成你自己的路径)。注意不是path里面,而是和path同级的，直接在全局或者当前用户下配置。</span><br><span class="line">3. 保证环境变量path里面有 %SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem;</span><br><span class="line">  注： 这三个环境变量中貌似只有%SystemRoot%\system32这个环境变量有用，没具体试（没有他会报CreateProcessW找不到的错误)。</span><br><span class="line">4. 如果在命令行界面安装pomelo失败，可以在Visual Studio的命令行界面安装。</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;&lt;img src=&quot;/img/logo.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;h3 id=&quot;一、安装pomelo&quot;&gt;&lt;a href=&quot;#一、安装pomelo&quot; class=&quot;headerlink&quot; title=&quot;一、安装pomelo&quot;&gt;&lt;/a&gt;一、安装pomelo&lt;/h3&gt;&lt;
-      
-    
-    </summary>
-    
-      <category term="pomelo" scheme="http://blog.ku-cat.com/categories/pomelo/"/>
-    
-    
-      <category term="nodejs" scheme="http://blog.ku-cat.com/tags/nodejs/"/>
-    
-      <category term="pomelo" scheme="http://blog.ku-cat.com/tags/pomelo/"/>
     
   </entry>
   
