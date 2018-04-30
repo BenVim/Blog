@@ -1,0 +1,604 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+
+    
+  <url>
+    <loc>http://blog.ku-cat.com/2018/04/30/code-x/</loc>
+    <lastmod>2018-04-29T16:23:05.319Z</lastmod>
+    <data>
+        <display>
+        <title>code-x</title>
+        <pubTime>2018-04-29T16:21:32.000Z</pubTime>
+        
+        <tag>python</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.ku-cat.com/2018/04/29/swoole-mysql-redis-connection/</loc>
+    <lastmod>2018-04-29T15:52:41.259Z</lastmod>
+    <data>
+        <display>
+        <title>swoole 创建数据库连接的问题以及如何配置 task_worker_num</title>
+        <pubTime>2018-04-29T15:30:26.000Z</pubTime>
+        
+        <tag>php</tag>
+         
+        <tag>swoole</tag>
+         
+         
+           
+             
+              <breadCrumb title="swoole" url="http://blog.ku-cat.com/categories/swoole/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.ku-cat.com/2018/04/29/swoole-worker-task/</loc>
+    <lastmod>2018-04-29T15:29:53.922Z</lastmod>
+    <data>
+        <display>
+        <title>如何识别swoole的worker进程和task进程</title>
+        <pubTime>2018-04-29T15:18:58.000Z</pubTime>
+        
+        <tag>php</tag>
+         
+        <tag>swoole</tag>
+         
+         
+           
+             
+              <breadCrumb title="swoole" url="http://blog.ku-cat.com/categories/swoole/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.ku-cat.com/2018/04/26/nodejs-pomelo-monitor/</loc>
+    <lastmod>2018-04-29T15:19:23.089Z</lastmod>
+    <data>
+        <display>
+        <title>pomelo 组件概述</title>
+        <pubTime>2018-04-26T11:41:06.000Z</pubTime>
+        
+        <tag>nodejs</tag>
+         
+        <tag>pomelo</tag>
+         
+         
+           
+             
+              <breadCrumb title="pomelo" url="http://blog.ku-cat.com/categories/pomelo/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.ku-cat.com/2018/04/23/python-captcha/</loc>
+    <lastmod>2018-04-23T08:12:34.394Z</lastmod>
+    <data>
+        <display>
+        <title>python使用captcha模块生成图形验证码</title>
+        <pubTime>2018-04-23T08:05:52.000Z</pubTime>
+        
+        <tag>python</tag>
+         
+        <tag>captcha</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://blog.ku-cat.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.ku-cat.com/2018/04/21/django-nginx-uWSGI/</loc>
+    <lastmod>2018-04-23T06:19:41.139Z</lastmod>
+    <data>
+        <display>
+        <title>nginx+uWSGI搭建python环境运行REST-Framework</title>
+        <pubTime>2018-04-21T10:04:46.000Z</pubTime>
+        
+        <tag>python</tag>
+         
+        <tag>nginx</tag>
+         
+        <tag>uWSGI</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://blog.ku-cat.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.ku-cat.com/2018/04/20/django-bug/</loc>
+    <lastmod>2018-04-21T03:14:33.514Z</lastmod>
+    <data>
+        <display>
+        <title>django on_delete 的报错修复</title>
+        <pubTime>2018-04-20T14:35:59.000Z</pubTime>
+        
+        <tag>python</tag>
+         
+        <tag>django</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://blog.ku-cat.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.ku-cat.com/2018/04/17/django-debug-httpie/</loc>
+    <lastmod>2018-04-21T03:06:07.071Z</lastmod>
+    <data>
+        <display>
+        <title>django-rest-framework调试工具 httpie</title>
+        <pubTime>2018-04-17T13:35:59.000Z</pubTime>
+        
+        <tag>python</tag>
+         
+        <tag>django</tag>
+         
+        <tag>httpie</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://blog.ku-cat.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.ku-cat.com/2018/04/13/python-django-rest/</loc>
+    <lastmod>2018-04-20T14:57:06.377Z</lastmod>
+    <data>
+        <display>
+        <title>django-rest-framework</title>
+        <pubTime>2018-04-13T07:50:59.000Z</pubTime>
+        
+        <tag>python</tag>
+         
+        <tag>django</tag>
+         
+        <tag>REST</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://blog.ku-cat.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.ku-cat.com/2018/04/13/php-debug-print-backtrace/</loc>
+    <lastmod>2018-04-13T04:07:44.964Z</lastmod>
+    <data>
+        <display>
+        <title>php调试技巧,使用debug_print_backtrace调用堆栈信息</title>
+        <pubTime>2018-04-13T03:41:58.000Z</pubTime>
+        
+        <tag>php</tag>
+         
+         
+           
+             
+              <breadCrumb title="php" url="http://blog.ku-cat.com/categories/php/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.ku-cat.com/2018/03/31/sql/</loc>
+    <lastmod>2018-04-13T04:02:23.873Z</lastmod>
+    <data>
+        <display>
+        <title>sql语句的分组查询</title>
+        <pubTime>2018-03-31T03:32:25.000Z</pubTime>
+        
+        <tag>sql</tag>
+         
+         
+           
+             
+              <breadCrumb title="mysql" url="http://blog.ku-cat.com/categories/mysql/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.ku-cat.com/2018/04/03/python-virtualenv/</loc>
+    <lastmod>2018-04-13T04:02:08.922Z</lastmod>
+    <data>
+        <display>
+        <title>python-virtualenv 创建独立的python运行环境。</title>
+        <pubTime>2018-04-03T02:27:40.000Z</pubTime>
+        
+        <tag>python</tag>
+         
+        <tag>virtualenv</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://blog.ku-cat.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.ku-cat.com/2018/04/08/python-Thread/</loc>
+    <lastmod>2018-04-13T04:01:53.673Z</lastmod>
+    <data>
+        <display>
+        <title>python多线程并发数的控制</title>
+        <pubTime>2018-04-08T01:08:05.000Z</pubTime>
+        
+        <tag>python</tag>
+         
+        <tag>thread</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://blog.ku-cat.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.ku-cat.com/2018/04/03/python-django/</loc>
+    <lastmod>2018-04-13T04:01:39.828Z</lastmod>
+    <data>
+        <display>
+        <title>mac下搭建django2.0的开发环境</title>
+        <pubTime>2018-04-03T13:32:13.000Z</pubTime>
+        
+        <tag>python</tag>
+         
+        <tag>django</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://blog.ku-cat.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.ku-cat.com/2018/04/03/python-django-static/</loc>
+    <lastmod>2018-04-13T04:01:30.170Z</lastmod>
+    <data>
+        <display>
+        <title>django添加css等静态文件</title>
+        <pubTime>2018-04-03T05:16:03.000Z</pubTime>
+        
+        <tag>python</tag>
+         
+        <tag>django</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://blog.ku-cat.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.ku-cat.com/2018/04/04/python-django-session/</loc>
+    <lastmod>2018-04-13T04:01:15.435Z</lastmod>
+    <data>
+        <display>
+        <title>django登录写入session的操作</title>
+        <pubTime>2018-04-04T00:25:42.000Z</pubTime>
+        
+        <tag>python</tag>
+         
+        <tag>django</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://blog.ku-cat.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.ku-cat.com/2018/03/31/pomelo-learn/</loc>
+    <lastmod>2018-04-13T04:00:59.588Z</lastmod>
+    <data>
+        <display>
+        <title>pomelo框架学习（一）安装pomelo</title>
+        <pubTime>2018-03-31T06:58:43.000Z</pubTime>
+        
+        <tag>nodejs</tag>
+         
+        <tag>pomelo</tag>
+         
+         
+           
+             
+              <breadCrumb title="pomelo" url="http://blog.ku-cat.com/categories/pomelo/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.ku-cat.com/2018/03/31/pomelo-helloWorld/</loc>
+    <lastmod>2018-04-13T04:00:46.165Z</lastmod>
+    <data>
+        <display>
+        <title>pomelo框架学习（二）创建Hello World项目</title>
+        <pubTime>2018-03-31T07:22:26.000Z</pubTime>
+        
+        <tag>nodejs</tag>
+         
+        <tag>pomelo</tag>
+         
+         
+           
+             
+              <breadCrumb title="pomelo" url="http://blog.ku-cat.com/categories/pomelo/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.ku-cat.com/2018/03/31/pomelo-cli-command/</loc>
+    <lastmod>2018-04-13T04:00:30.844Z</lastmod>
+    <data>
+        <display>
+        <title>pomelo框架学习（三）pomelo命令行工具的安装和使用</title>
+        <pubTime>2018-03-31T07:38:24.000Z</pubTime>
+        
+        <tag>nodejs</tag>
+         
+        <tag>pomelo</tag>
+         
+         
+           
+             
+              <breadCrumb title="pomelo" url="http://blog.ku-cat.com/categories/pomelo/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.ku-cat.com/2018/04/04/nodejs-process/</loc>
+    <lastmod>2018-04-13T04:00:11.222Z</lastmod>
+    <data>
+        <display>
+        <title>nodejs的process.nextTick()的原理及应用场景</title>
+        <pubTime>2018-04-04T08:17:42.000Z</pubTime>
+        
+        <tag>nodejs</tag>
+         
+        <tag>process</tag>
+         
+        <tag>nextTick</tag>
+         
+         
+           
+             
+              <breadCrumb title="nodejs" url="http://blog.ku-cat.com/categories/nodejs/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.ku-cat.com/2018/04/02/mac-os-efi/</loc>
+    <lastmod>2018-04-13T03:57:00.418Z</lastmod>
+    <data>
+        <display>
+        <title>Mac下挂载EFI分区</title>
+        <pubTime>2018-04-02T05:31:21.000Z</pubTime>
+        
+        <tag>mac</tag>
+         
+        <tag>os</tag>
+         
+         
+           
+             
+              <breadCrumb title="mac" url="http://blog.ku-cat.com/categories/mac/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.ku-cat.com/2018/04/09/django-db/</loc>
+    <lastmod>2018-04-12T01:59:59.412Z</lastmod>
+    <data>
+        <display>
+        <title>django 数据库操作</title>
+        <pubTime>2018-04-09T01:08:05.000Z</pubTime>
+        
+        <tag>python</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://blog.ku-cat.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.ku-cat.com/2018/03/31/poke/</loc>
+    <lastmod>2018-04-05T02:07:32.751Z</lastmod>
+    <data>
+        <display>
+        <title>扑克牌在计算机中的几种表示方法</title>
+        <pubTime>2018-03-31T05:18:50.000Z</pubTime>
+        
+        <tag>php</tag>
+         
+         
+           
+             
+              <breadCrumb title="php" url="http://blog.ku-cat.com/categories/php/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.ku-cat.com/2018/04/03/python-md5/</loc>
+    <lastmod>2018-04-03T11:11:09.219Z</lastmod>
+    <data>
+        <display>
+        <title>Python 用hashlib求中文字符串的MD5值</title>
+        <pubTime>2018-04-03T11:06:03.000Z</pubTime>
+        
+        <tag>python</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://blog.ku-cat.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.ku-cat.com/2018/04/02/docker-nginx/</loc>
+    <lastmod>2018-04-02T13:54:11.428Z</lastmod>
+    <data>
+        <display>
+        <title>使用docker制作nginx环境</title>
+        <pubTime>2018-04-02T13:43:04.000Z</pubTime>
+        
+        <tag>docker</tag>
+         
+         
+           
+             
+              <breadCrumb title="docker" url="http://blog.ku-cat.com/categories/docker/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.ku-cat.com/2018/04/01/node-nvm/</loc>
+    <lastmod>2018-04-01T11:41:49.490Z</lastmod>
+    <data>
+        <display>
+        <title>node.js 版本控制 nvm</title>
+        <pubTime>2018-04-01T11:40:22.000Z</pubTime>
+        
+        <tag>node</tag>
+         
+         
+           
+             
+              <breadCrumb title="nodejs" url="http://blog.ku-cat.com/categories/nodejs/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.ku-cat.com/2018/03/31/go-scoket/</loc>
+    <lastmod>2018-03-31T04:15:15.147Z</lastmod>
+    <data>
+        <display>
+        <title>Go 实现socket服务</title>
+        <pubTime>2018-03-31T04:09:23.000Z</pubTime>
+        
+        <tag>go</tag>
+         
+         
+           
+             
+              <breadCrumb title="go" url="http://blog.ku-cat.com/categories/go/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
+    
+    
+  <url>
+    <loc>http://blog.ku-cat.com/2018/03/31/hello-world/</loc>
+    <lastmod>2018-03-31T01:31:33.587Z</lastmod>
+    <data>
+        <display>
+        <title>Hello World</title>
+        <pubTime>2018-03-31T01:31:33.587Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+</urlset>
