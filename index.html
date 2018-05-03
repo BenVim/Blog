@@ -580,7 +580,7 @@
       
         
           
-            <p><a href="http://www.django-rest-framework.org/api-guide/authentication/" target="_blank" rel="noopener">官方文档</a></p>
+            <p><a href="http://www.django-rest-framework.org/api-guide/authentication/" target="_blank" rel="noopener">官方文档原文</a></p>
 <h2 id="Authentication"><a href="#Authentication" class="headerlink" title="Authentication"></a>Authentication</h2><blockquote>
 <p>Auth needs to be pluggable.</p>
 </blockquote>
@@ -591,7 +591,7 @@
 <p>注意：不要忘记，身份验证本身不允许或禁止传入请求，它只是标识请求的凭据。<br>有关如何为您的API设置权限策略的信息，<a href="http://www.django-rest-framework.org/api-guide/permissions/" target="_blank" rel="noopener">请参阅权限文档</a>。</p>
 </blockquote>
 <h2 id="身份验证是如何决定的"><a href="#身份验证是如何决定的" class="headerlink" title="身份验证是如何决定的"></a>身份验证是如何决定的</h2><p>认证方案总是被定义为一个类的列表。 REST框架将尝试使用列表中的每个类进行认证，并将使用成功认证的第一个类的返回值设置<code>request.use</code>r和<code>request.auth</code>。</p>
-<p>如果没有类进行身份验证，<code>request.user</code>将被设置为<code>django.contrib.auth.models.AnonymousUser</code>的实例，<code>request.auth</code>将被设置为<code>None</code>。</p>
+<p>如果没有类进行身份验证：<br><code>request.user</code>将被设置为<code>django.contrib.auth.models.AnonymousUser</code>的实例。<br><code>request.auth</code>将被设置为<code>None</code>。</p>
 <p>可以使用<code>UNAUTHENTICATED_USER</code>和<code>UNAUTHENTICATED_TOKEN</code>设置修改未经身份验证的请求的<code>request.user</code>和<code>request.auth</code>的值。</p>
 <h2 id="设置身份验证方案"><a href="#设置身份验证方案" class="headerlink" title="设置身份验证方案"></a>设置身份验证方案</h2><p>默认的认证方案可以使用<code>DEFAULT_AUTHENTICATION_CLASSES</code>进行全局设置。例如：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">REST_FRAMEWORK = &#123;</span><br><span class="line">    <span class="string">'DEFAULT_AUTHENTICATION_CLASSES'</span>: (</span><br><span class="line">        <span class="string">'rest_framework.authentication.BasicAuthentication'</span>,</span><br><span class="line">        <span class="string">'rest_framework.authentication.SessionAuthentication'</span>,</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
