@@ -324,6 +324,523 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/17/django-debug-httpie/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一纸墨迹">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/17/django-debug-httpie/" itemprop="url">django-rest-framework调试工具 httpie</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-17T21:35:59+08:00">
+                2018-04-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/04/17/django-debug-httpie/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/04/17/django-debug-httpie/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/04/17/django-debug-httpie/" class="leancloud_visitors" data-flag-title="django-rest-framework调试工具 httpie">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="/img/city.jpg" alt=""></p>
+<p>使用django-rest-framework可以方便快捷的写出优美的restfull API，同样django也有非常方便的调试工具httpie。</p>
+<h3 id="安装httpie"><a href="#安装httpie" class="headerlink" title="安装httpie"></a>安装httpie</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install httpie</span><br></pre></td></tr></table></figure>
+<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><h2 id="使用GET"><a href="#使用GET" class="headerlink" title="使用GET"></a>使用GET</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http http://127.0.0.1:8000/domain/4/</span><br></pre></td></tr></table></figure>
+<p>返回的结果以非常友好的形式显示，而且还是彩色的！</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Allow: GET, POST, HEAD, OPTIONS</span><br><span class="line">Content-Length: 200</span><br><span class="line">Content-Type: application/json</span><br><span class="line">Date: Fri, 20 Apr 2018 15:02:48 GMT</span><br><span class="line">Server: WSGIServer/0.2 CPython/3.6.4</span><br><span class="line">Vary: Accept, Cookie</span><br><span class="line">X-Frame-Options: SAMEORIGIN</span><br><span class="line"></span><br><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">"ICP"</span>: null,</span><br><span class="line">        <span class="string">"ICP_master"</span>: null,</span><br><span class="line">        <span class="string">"ICP_type"</span>: null,</span><br><span class="line">        <span class="string">"addDate"</span>: <span class="string">"2018-04-12T15:31:03.291517+08:00"</span>,</span><br><span class="line">        <span class="string">"domain"</span>: <span class="string">"acc.s1.ilaputa.cn"</span>,</span><br><span class="line">        <span class="string">"expire"</span>: <span class="string">"2018-04-12T15:31:03.291571+08:00"</span>,</span><br><span class="line">        <span class="string">"status"</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="string">"type"</span>: 3,</span><br><span class="line">        <span class="string">"userId"</span>: 4</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>可以指定返回的数据格式。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">http http://127.0.0.1:8000/domain/4/ Accept:text/html</span><br><span class="line"><span class="comment"># 返回网页形式，是django-rest-framework的界面代码</span></span><br><span class="line">http http://127.0.0.1:8000/domain/4/ Accept:application/json</span><br><span class="line"><span class="comment"># 返回json格式</span></span><br></pre></td></tr></table></figure>
+<h2 id="使用POST方法"><a href="#使用POST方法" class="headerlink" title="使用POST方法"></a>使用POST方法</h2><p>调试post接口如下使用</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http --form POST http://127.0.0.1:8000/user/ username=18657986877 password=123456 verify=abc</span><br></pre></td></tr></table></figure>
+<p>返回结果</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">HTTP/1.1 400 Bad Request</span><br><span class="line">Allow: POST, OPTIONS</span><br><span class="line">Content-Length: 59</span><br><span class="line">Content-Type: application/json</span><br><span class="line">Date: Fri, 20 Apr 2018 15:08:38 GMT</span><br><span class="line">Server: WSGIServer/0.2 CPython/3.6.4</span><br><span class="line">Vary: Accept, Cookie</span><br><span class="line">X-Frame-Options: SAMEORIGIN</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"username"</span>: [</span><br><span class="line">        <span class="string">"已存在一位使用该名字的用户。"</span></span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>调用登录信息的使用方法</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http -a admin:admin123 POST http://127.0.0.1:8000/user/</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/13/python-django-rest/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一纸墨迹">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/13/python-django-rest/" itemprop="url">django-rest-framework</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-13T15:50:59+08:00">
+                2018-04-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/04/13/python-django-rest/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/04/13/python-django-rest/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/04/13/python-django-rest/" class="leancloud_visitors" data-flag-title="django-rest-framework">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="/img/logo2.png" alt=""></p>
+<p>Django REST framework is a powerful and flexible toolkit for building Web APIs.</p>
+<p>Some reasons you might want to use REST framework:</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pip install djangorestframework</span><br><span class="line">pip install markdown       <span class="comment"># Markdown support for the browsable API.</span></span><br><span class="line">pip install django-filter  <span class="comment"># Filtering support</span></span><br></pre></td></tr></table></figure>
+<p>我使用的是python3.6, 所以使用pip3安装</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">➜  ngrok git:(master) pip3 install djangorestframework</span><br><span class="line">Collecting djangorestframework</span><br><span class="line">  Downloading djangorestframework-3.8.2-py2.py3-none-any.whl (923kB)</span><br><span class="line">    100% |████████████████████████████████| 931kB 1.1MB/s</span><br><span class="line">Installing collected packages: djangorestframework</span><br><span class="line">Successfully installed djangorestframework-3.8.2</span><br><span class="line">You are using pip version 9.0.1, however version 9.0.3 is available.</span><br><span class="line">You should consider upgrading via the <span class="string">'pip install --upgrade pip'</span> <span class="built_in">command</span>.</span><br><span class="line"></span><br><span class="line"><span class="comment"># ... 安装完成</span></span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/13/php-debug-print-backtrace/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一纸墨迹">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/13/php-debug-print-backtrace/" itemprop="url">php调试技巧,使用debug_print_backtrace调用堆栈信息</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-13T11:41:58+08:00">
+                2018-04-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/php/" itemprop="url" rel="index">
+                    <span itemprop="name">php</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/04/13/php-debug-print-backtrace/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/04/13/php-debug-print-backtrace/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/04/13/php-debug-print-backtrace/" class="leancloud_visitors" data-flag-title="php调试技巧,使用debug_print_backtrace调用堆栈信息">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="/img/v2-02ee40eb71cae2a6b06657fea246f70f_1200x500.jpg" alt=""></p>
+<p>很语言在调试的时候都有堆栈信息显示，调试起来很方便，php使用断点调试也可以显示堆栈信息，但是环境配置有点麻烦。最简单的办法就是使用debug_print_backtrace()函数，直接打印出堆栈，方便快捷，最重要的是比较符合广大php开发人员的习惯（用输出进行调试）</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//在需要调试的地方使用该函数</span></span><br><span class="line">debug_print_backtrace();</span><br></pre></td></tr></table></figure>
+<p>我这里是swoole控制台的程序，所以在控制台打印结果信息。这里要查的问题是operateLock()方法被连接调用了两次的bug。调用堆栈信息，一切都很清楚了。</p>
+<p>打印显示Command类的方法被调用两次。第一次是QuickStartCommand.php对象里面调用了。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#0  lib\core\Command-&gt;operateLock(197) called at [/home/niuniu/crazyService/src/command/QuickStartCommand.php:27]</span></span><br><span class="line"><span class="comment">#1  src\command\QuickStartCommand-&gt;logicalProcessing() called at [/home/niuniu/crazyService/lib/core/Command.php:74]</span></span><br><span class="line"><span class="comment">#2  lib\core\Command-&gt;receiveCommand() called at [/home/niuniu/crazyService/src/GameMain.php:167]</span></span><br></pre></td></tr></table></figure>
+<p>第二次是JoinCommand.php调用了该方法，</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#0  lib\core\Command-&gt;operateLock(197) called at [/home/niuniu/crazyService/src/command/JoinCommand.php:27]</span></span><br><span class="line"><span class="comment">#1  src\command\JoinCommand-&gt;logicalProcessing() called at [/home/niuniu/crazyService/lib/core/Command.php:74]</span></span><br><span class="line"><span class="comment">#2  lib\core\Command-&gt;receiveCommand() called at [/home/niuniu/crazyService/src/command/QuickStartCommand.php:110]</span></span><br><span class="line"><span class="comment">#3  src\command\QuickStartCommand-&gt;joinRoom(880460) called at [/home/niuniu/crazyService/src/command/QuickStartCommand.php:47]</span></span><br><span class="line"><span class="comment">#4  src\command\QuickStartCommand-&gt;logicalProcessing() called at [/home/niuniu/crazyService/lib/core/Command.php:74]</span></span><br><span class="line"><span class="comment">#5  lib\core\Command-&gt;receiveCommand() called at [/home/niuniu/crazyService/src/GameMain.php:167]</span></span><br></pre></td></tr></table></figure>
+<p>问题找到，fix bug就是很easy的事情了。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/09/django-db/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1552,546 +2069,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/03/python-virtualenv/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ben">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/img/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一纸墨迹">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/03/python-virtualenv/" itemprop="url">python-virtualenv 创建独立的python运行环境。</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-03T10:27:40+08:00">
-                2018-04-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/04/03/python-virtualenv/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/04/03/python-virtualenv/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2018/04/03/python-virtualenv/" class="leancloud_visitors" data-flag-title="python-virtualenv 创建独立的python运行环境。">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>在开发Python应用程序的时候，系统安装的Python3只有一个版本：3.4。所有第三方的包都会被pip安装到Python3的site-packages目录下。如果要开发2.7版本的应用的话，则需要2.7的环境，这种情况可以使用virtualenv创建各自独立的运行环境。</p>
-<p>首先安装 virtualenv</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pip3 install virtualenv</span><br></pre></td></tr></table></figure>
-<p>然后，假如我们要开发一个新的项目，需要一套独立的python运行环境，可以这么做：</p>
-<p>第一步：创建目录</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">➜  django mkdir ngrokProject</span><br><span class="line">➜  django <span class="built_in">cd</span> ngrokProject</span><br></pre></td></tr></table></figure>
-<p>第二步，创建一个独立的Python运行环境，命名为venv</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">➜  ngrokProject virtualenv --no-site-packages venv</span><br><span class="line">New python executable <span class="keyword">in</span> /Users/ben/django/ngrokProject/venv/bin/python</span><br><span class="line">Installing setuptools, pip, wheel...done.</span><br></pre></td></tr></table></figure>
-<p>命令virtualenv就可以创建一个独立的Python运行环境，我们还加上了参数–no-site-packages，这样，已经安装到系统Python环境中的所有第三方包都不会复制过来，这样，我们就得到了一个不带任何第三方包的“干净”的Python运行环境。</p>
-<p>新建的Python环境被放到当前目录下的venv目录。有了venv这个Python环境，可以用source进入该环境：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">➜  ngrokProject <span class="built_in">source</span> venv/bin/activate</span><br><span class="line">(venv) ➜  ngrokProject</span><br></pre></td></tr></table></figure>
-<p>注意到命令提示符变了，有个(venv)前缀，表示当前环境是一个名为venv的Python环境。</p>
-<p>下面正常安装各种第三方包，并运行python命令：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(venv)Mac:myproject michael$ pip install jinja2</span><br><span class="line">...</span><br><span class="line">Successfully installed jinja2-2.7.3 markupsafe-0.23</span><br><span class="line">(venv)Mac:myproject michael$ python myapp.py</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<p>在venv环境下，用pip安装的包都被安装到venv这个环境下，系统Python环境不受任何影响。也就是说，venv环境是专门针对myproject这个应用创建的。</p>
-<p>退出当前的venv环境，使用deactivate命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(venv)Mac:myproject michael$ deactivate </span><br><span class="line">Mac:myproject michael$</span><br></pre></td></tr></table></figure>
-<p>此时就回到了正常的环境，现在pip或python均是在系统Python环境下执行。</p>
-<p>完全可以针对每个应用创建独立的Python运行环境，这样就可以对每个应用的Python环境进行隔离。</p>
-<p>virtualenv是如何创建“独立”的Python运行环境的呢？原理很简单，就是把系统Python复制一份到virtualenv的环境，用命令source venv/bin/activate进入一个virtualenv环境时，virtualenv会修改相关环境变量，让命令python和pip均指向当前的virtualenv环境。</p>
-<p>virtualenv为应用提供了隔离的Python运行环境，解决了不同应用间多版本的冲突问题。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/02/docker-nginx/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ben">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/img/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一纸墨迹">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/02/docker-nginx/" itemprop="url">使用docker制作nginx环境</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-02T21:43:04+08:00">
-                2018-04-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/docker/" itemprop="url" rel="index">
-                    <span itemprop="name">docker</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/04/02/docker-nginx/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/04/02/docker-nginx/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2018/04/02/docker-nginx/" class="leancloud_visitors" data-flag-title="使用docker制作nginx环境">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>使用docker构建开发运行环境有很多优势，能够保持本地与测试、生产环境的一致性。首先简单方法构建。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull nginx # 获取nginx镜像</span><br></pre></td></tr></table></figure>
-<p>运行docker挂载工作目录</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker run --name myNginx -d -p 8080:80 -v /Users/ben/docker/nginx/www:/usr/share/nginx/html nginx</span><br><span class="line">b0167fd1d31bf7071589c10569e259392533c2ad0527ad0ccbb51ec9c62ecd6f</span><br><span class="line"></span><br><span class="line">docker ps</span><br><span class="line"></span><br><span class="line">CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                  NAMES</span><br><span class="line">b0167fd1d31b        nginx               &quot;nginx -g &apos;daemon of…&quot;   27 seconds ago      Up 21 seconds       0.0.0.0:8080-&gt;80/tcp   Nginx</span><br></pre></td></tr></table></figure>
-<p>本地的mac目录/Users/ben/docker/nginx/www 与 容器的/usr/share/nginx/html绑定。我们可以修改 /Users/ben/docker/nginx/www 中的内容，在地址栏输入 <a href="http://127.0.0.1:8080/" target="_blank" rel="noopener">http://127.0.0.1:8080/</a> 可以直接测试。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/02/mac-os-efi/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ben">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/img/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一纸墨迹">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/02/mac-os-efi/" itemprop="url">Mac下挂载EFI分区</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-02T13:31:21+08:00">
-                2018-04-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/mac/" itemprop="url" rel="index">
-                    <span itemprop="name">mac</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/04/02/mac-os-efi/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/04/02/mac-os-efi/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2018/04/02/mac-os-efi/" class="leancloud_visitors" data-flag-title="Mac下挂载EFI分区">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Mac EFI分区默认是隐藏的，如果需要访问可以使用如下的方法重新挂载EFI分区。</p>
-<ol>
-<li>Discover the volume identifier for your EFI boot partition.</li>
-</ol>
-<p>Run this command:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">diskutil list</span><br></pre></td></tr></table></figure>
-<p>The output should look something like this:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/dev/disk0</span><br><span class="line"> <span class="comment">#: TYPE                     NAME          SIZE       IDENTIFIER</span></span><br><span class="line"> 0: GUID_partition_scheme                  *251.0 GB  disk0</span><br><span class="line"> 1: EFI                                    209.7 MB   disk0s1</span><br><span class="line"> 2: Apple_HFS                Macintosh HD  250.1 GB   disk0s2</span><br><span class="line"> 3: Apple_Boot               Recovery HD   650.0 MB   disk0s3</span><br></pre></td></tr></table></figure>
-<p>In this case, the volume identifier of the EFI partition is disk0s1</p>
-<ol start="2">
-<li>Create a mount point.</li>
-</ol>
-<p>A mount point is a directory where a non-booted volume is mounted.  On Mac OS X, mount points are typically created in /Volumes.  We can create a directory called efi within /Volumes by running the following command:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir /Volumes/efi</span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li>Mount the EFI partition at the efi mount point.</li>
-</ol>
-<p>Run the command:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mount -t msdos /dev/disk0s1 /Volumes/efi</span><br></pre></td></tr></table></figure>
-<p>That’s it.  Your EFI volume will be mounted.  Modify it at your own risk.</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2141,7 +2123,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2163,7 +2145,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

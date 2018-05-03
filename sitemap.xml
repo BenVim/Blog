@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.ku-cat.com/2018/05/03/python-django-Authentication/</loc>
+    
+    <lastmod>2018-05-03T15:31:11.367Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.ku-cat.com/2018/05/03/Paxos/</loc>
+    
+    <lastmod>2018-05-03T10:21:46.931Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.ku-cat.com/2018/05/02/nodejs-pm2/</loc>
+    
+    <lastmod>2018-05-03T05:14:34.566Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.ku-cat.com/2018/04/30/code-x/</loc>
     
     <lastmod>2018-04-29T16:23:05.319Z</lastmod>

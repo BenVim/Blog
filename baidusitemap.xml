@@ -4,6 +4,67 @@
 
     
   <url>
+    <loc>http://blog.ku-cat.com/2018/05/03/python-django-Authentication/</loc>
+    <lastmod>2018-05-03T15:31:11.367Z</lastmod>
+    <data>
+        <display>
+        <title>django授权Authentication</title>
+        <pubTime>2018-05-03T05:13:59.000Z</pubTime>
+        
+        <tag>python</tag>
+         
+        <tag>django</tag>
+         
+        <tag>rest-framework</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://blog.ku-cat.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.ku-cat.com/2018/05/03/Paxos/</loc>
+    <lastmod>2018-05-03T10:21:46.931Z</lastmod>
+    <data>
+        <display>
+        <title>Paxos</title>
+        <pubTime>2018-05-03T10:21:46.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.ku-cat.com/2018/05/02/nodejs-pm2/</loc>
+    <lastmod>2018-05-03T05:14:34.566Z</lastmod>
+    <data>
+        <display>
+        <title>nodejs pm2的简单应用</title>
+        <pubTime>2018-05-02T09:01:41.000Z</pubTime>
+        
+        <tag>nodejs</tag>
+         
+        <tag>pm2</tag>
+         
+         
+           
+             
+              <breadCrumb title="nodejs" url="http://blog.ku-cat.com/categories/nodejs/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://blog.ku-cat.com/2018/04/30/code-x/</loc>
     <lastmod>2018-04-29T16:23:05.319Z</lastmod>
     <data>
