@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="官方文档原文 Authentication Auth needs to be pluggable.  身份验证是将传入请求与一组识别凭证（例如请求来自的用户或其签名的令牌）相关联的机制。然后，权限和限制策略可以使用这些凭据来确定请求是否应该被允许. REST框架提供了许多开箱即用的身份验证方案，还允许您实施自定义方案。在许可和节流检查发生之前，在允许任何其他代码继续之前，验证总是在视图的开始运行。">
+<meta name="description" content="官方文档原文 身份验证是将传入请求与一组识别凭证（例如请求来自的用户或其签名的令牌）相关联的机制。然后，权限和限制策略可以使用这些凭据来确定请求是否应该被允许. REST框架提供了许多开箱即用的身份验证方案，还允许您实施自定义方案。在许可和节流检查发生之前，在允许任何其他代码继续之前，验证总是在视图的开始运行。 request.user属性通常会设置为contrib.auth包的User类的一个实">
 <meta name="keywords" content="python,django,rest-framework">
 <meta property="og:type" content="article">
 <meta property="og:title" content="django REST-Framework的授权Authentication方案">
 <meta property="og:url" content="http://blog.ku-cat.com/2018/05/03/python-django-Authentication/index.html">
 <meta property="og:site_name" content="一纸墨迹">
-<meta property="og:description" content="官方文档原文 Authentication Auth needs to be pluggable.  身份验证是将传入请求与一组识别凭证（例如请求来自的用户或其签名的令牌）相关联的机制。然后，权限和限制策略可以使用这些凭据来确定请求是否应该被允许. REST框架提供了许多开箱即用的身份验证方案，还允许您实施自定义方案。在许可和节流检查发生之前，在允许任何其他代码继续之前，验证总是在视图的开始运行。">
+<meta property="og:description" content="官方文档原文 身份验证是将传入请求与一组识别凭证（例如请求来自的用户或其签名的令牌）相关联的机制。然后，权限和限制策略可以使用这些凭据来确定请求是否应该被允许. REST框架提供了许多开箱即用的身份验证方案，还允许您实施自定义方案。在许可和节流检查发生之前，在允许任何其他代码继续之前，验证总是在视图的开始运行。 request.user属性通常会设置为contrib.auth包的User类的一个实">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-05-04T01:34:09.403Z">
+<meta property="og:updated_time" content="2018-05-04T05:45:03.251Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="django REST-Framework的授权Authentication方案">
-<meta name="twitter:description" content="官方文档原文 Authentication Auth needs to be pluggable.  身份验证是将传入请求与一组识别凭证（例如请求来自的用户或其签名的令牌）相关联的机制。然后，权限和限制策略可以使用这些凭据来确定请求是否应该被允许. REST框架提供了许多开箱即用的身份验证方案，还允许您实施自定义方案。在许可和节流检查发生之前，在允许任何其他代码继续之前，验证总是在视图的开始运行。">
+<meta name="twitter:description" content="官方文档原文 身份验证是将传入请求与一组识别凭证（例如请求来自的用户或其签名的令牌）相关联的机制。然后，权限和限制策略可以使用这些凭据来确定请求是否应该被允许. REST框架提供了许多开箱即用的身份验证方案，还允许您实施自定义方案。在许可和节流检查发生之前，在允许任何其他代码继续之前，验证总是在视图的开始运行。 request.user属性通常会设置为contrib.auth包的User类的一个实">
 
 
 
@@ -437,6 +437,10 @@
 
       
         <p><a href="http://www.django-rest-framework.org/api-guide/authentication/" target="_blank" rel="noopener">官方文档原文</a></p>
+<p>身份验证是将传入请求与一组识别凭证（例如请求来自的用户或其签名的令牌）相关联的机制。然后，权限和限制策略可以使用这些凭据来确定请求是否应该被允许.</p>
+<p>REST框架提供了许多开箱即用的身份验证方案，还允许您实施自定义方案。<br>在许可和节流检查发生之前，在允许任何其他代码继续之前，验证总是在视图的开始运行。</p>
+<p><code>request.user</code>属性通常会设置为<code>contrib.auth</code>包的<code>User</code>类的一个实例。<br><code>request.auth</code>属性用于任何其他身份验证信息，例如，它可以用来表示请求已签名的身份验证令牌。</p>
+<a id="more"></a>
 <h2 id="Authentication"><a href="#Authentication" class="headerlink" title="Authentication"></a>Authentication</h2><blockquote>
 <p>Auth needs to be pluggable.</p>
 </blockquote>
