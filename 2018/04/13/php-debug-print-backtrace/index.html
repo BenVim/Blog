@@ -81,19 +81,20 @@
 
 
 
-<meta name="description" content="很语言在调试的时候都有堆栈信息显示，调试起来很方便，php使用断点调试也可以显示堆栈信息，但是环境配置有点麻烦。最简单的办法就是使用debug_print_backtrace()函数，直接打印出堆栈，方便快捷，最重要的是比较符合广大php开发人员的习惯（用输出进行调试） 12//在需要调试的地方使用该函数debug_print_backtrace(); 我这里是swoole控制台的程序，所以在控">
+<meta name="description" content="很语言在调试的时候都有堆栈信息显示，调试起来很方便，php使用断点调试也可以显示堆栈信息，但是环境配置有点麻烦。最简单的办法就是使用debug_print_backtrace()函数，直接打印出堆栈，方便快捷，最重要的是比较符合广大php开发人员的习惯（用输出进行调试）">
 <meta name="keywords" content="php">
 <meta property="og:type" content="article">
 <meta property="og:title" content="php调试技巧,使用debug_print_backtrace调用堆栈信息">
 <meta property="og:url" content="http://blog.ku-cat.com/2018/04/13/php-debug-print-backtrace/index.html">
 <meta property="og:site_name" content="一纸墨迹">
-<meta property="og:description" content="很语言在调试的时候都有堆栈信息显示，调试起来很方便，php使用断点调试也可以显示堆栈信息，但是环境配置有点麻烦。最简单的办法就是使用debug_print_backtrace()函数，直接打印出堆栈，方便快捷，最重要的是比较符合广大php开发人员的习惯（用输出进行调试） 12//在需要调试的地方使用该函数debug_print_backtrace(); 我这里是swoole控制台的程序，所以在控">
+<meta property="og:description" content="很语言在调试的时候都有堆栈信息显示，调试起来很方便，php使用断点调试也可以显示堆栈信息，但是环境配置有点麻烦。最简单的办法就是使用debug_print_backtrace()函数，直接打印出堆栈，方便快捷，最重要的是比较符合广大php开发人员的习惯（用输出进行调试）">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://blog.ku-cat.com/img/v2-02ee40eb71cae2a6b06657fea246f70f_1200x500.jpg">
-<meta property="og:updated_time" content="2018-04-13T04:07:44.964Z">
+<meta property="og:image" content="http://blog.ku-cat.com/img/v2-02ee40eb71cae2a6b06657fea246f70f_1200x500.jpg">
+<meta property="og:updated_time" content="2018-05-04T05:49:29.378Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="php调试技巧,使用debug_print_backtrace调用堆栈信息">
-<meta name="twitter:description" content="很语言在调试的时候都有堆栈信息显示，调试起来很方便，php使用断点调试也可以显示堆栈信息，但是环境配置有点麻烦。最简单的办法就是使用debug_print_backtrace()函数，直接打印出堆栈，方便快捷，最重要的是比较符合广大php开发人员的习惯（用输出进行调试） 12//在需要调试的地方使用该函数debug_print_backtrace(); 我这里是swoole控制台的程序，所以在控">
+<meta name="twitter:description" content="很语言在调试的时候都有堆栈信息显示，调试起来很方便，php使用断点调试也可以显示堆栈信息，但是环境配置有点麻烦。最简单的办法就是使用debug_print_backtrace()函数，直接打印出堆栈，方便快捷，最重要的是比较符合广大php开发人员的习惯（用输出进行调试）">
 <meta name="twitter:image" content="http://blog.ku-cat.com/img/v2-02ee40eb71cae2a6b06657fea246f70f_1200x500.jpg">
 
 
@@ -439,6 +440,9 @@
 
       
         <p><img src="/img/v2-02ee40eb71cae2a6b06657fea246f70f_1200x500.jpg" alt=""></p>
+<p>很语言在调试的时候都有堆栈信息显示，调试起来很方便，php使用断点调试也可以显示堆栈信息，但是环境配置有点麻烦。最简单的办法就是使用debug_print_backtrace()函数，直接打印出堆栈，方便快捷，最重要的是比较符合广大php开发人员的习惯（用输出进行调试）</p>
+<a id="more"></a>
+<p><img src="/img/v2-02ee40eb71cae2a6b06657fea246f70f_1200x500.jpg" alt=""></p>
 <p>很语言在调试的时候都有堆栈信息显示，调试起来很方便，php使用断点调试也可以显示堆栈信息，但是环境配置有点麻烦。最简单的办法就是使用debug_print_backtrace()函数，直接打印出堆栈，方便快捷，最重要的是比较符合广大php开发人员的习惯（用输出进行调试）</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//在需要调试的地方使用该函数</span></span><br><span class="line">debug_print_backtrace();</span><br></pre></td></tr></table></figure>
 <p>我这里是swoole控制台的程序，所以在控制台打印结果信息。这里要查的问题是operateLock()方法被连接调用了两次的bug。调用堆栈信息，一切都很清楚了。</p>

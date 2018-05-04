@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="组件概述我们知道，pomelo的应用程序执行的全部过程，就是对其相应组件的生命周期的管理，实际的所有逻辑功能均由pomelo组件提供。pomelo内建提供了十多个组件，这些组件适用于不同的服务器，提供不同的功能。有些组件提供的功能比较复杂，有些则比较简单。下面我们将以提供的功能为主线来阐述pomelo提供的内建组件。 master组件它主要的功能包括启动所有的应用服务器、管理和监控所有的应用服务器">
+<meta name="description" content="我们知道，pomelo的应用程序执行的全部过程，就是对其相应组件的生命周期的管理，实际的所有逻辑功能均由pomelo组件提供。pomelo内建提供了十多个组件，这些组件适用于不同的服务器，提供不同的功能。有些组件提供的功能比较复杂，有些则比较简单。下面我们将以提供的功能为主线来阐述pomelo提供的内建组件。">
 <meta name="keywords" content="nodejs,pomelo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="pomelo 组件概述">
 <meta property="og:url" content="http://blog.ku-cat.com/2018/04/26/nodejs-pomelo-monitor/index.html">
 <meta property="og:site_name" content="一纸墨迹">
-<meta property="og:description" content="组件概述我们知道，pomelo的应用程序执行的全部过程，就是对其相应组件的生命周期的管理，实际的所有逻辑功能均由pomelo组件提供。pomelo内建提供了十多个组件，这些组件适用于不同的服务器，提供不同的功能。有些组件提供的功能比较复杂，有些则比较简单。下面我们将以提供的功能为主线来阐述pomelo提供的内建组件。 master组件它主要的功能包括启动所有的应用服务器、管理和监控所有的应用服务器">
+<meta property="og:description" content="我们知道，pomelo的应用程序执行的全部过程，就是对其相应组件的生命周期的管理，实际的所有逻辑功能均由pomelo组件提供。pomelo内建提供了十多个组件，这些组件适用于不同的服务器，提供不同的功能。有些组件提供的功能比较复杂，有些则比较简单。下面我们将以提供的功能为主线来阐述pomelo提供的内建组件。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-04-29T15:19:23.089Z">
+<meta property="og:updated_time" content="2018-05-04T05:47:24.841Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="pomelo 组件概述">
-<meta name="twitter:description" content="组件概述我们知道，pomelo的应用程序执行的全部过程，就是对其相应组件的生命周期的管理，实际的所有逻辑功能均由pomelo组件提供。pomelo内建提供了十多个组件，这些组件适用于不同的服务器，提供不同的功能。有些组件提供的功能比较复杂，有些则比较简单。下面我们将以提供的功能为主线来阐述pomelo提供的内建组件。 master组件它主要的功能包括启动所有的应用服务器、管理和监控所有的应用服务器">
+<meta name="twitter:description" content="我们知道，pomelo的应用程序执行的全部过程，就是对其相应组件的生命周期的管理，实际的所有逻辑功能均由pomelo组件提供。pomelo内建提供了十多个组件，这些组件适用于不同的服务器，提供不同的功能。有些组件提供的功能比较复杂，有些则比较简单。下面我们将以提供的功能为主线来阐述pomelo提供的内建组件。">
 
 
 
@@ -436,7 +436,9 @@
       
 
       
-        <h1 id="组件概述"><a href="#组件概述" class="headerlink" title="组件概述"></a>组件概述</h1><p>我们知道，pomelo的应用程序执行的全部过程，就是对其相应组件的生命周期的管理，实际的所有逻辑功能均由pomelo组件提供。pomelo内建提供了十多个组件，这些组件适用于不同的服务器，提供不同的功能。有些组件提供的功能比较复杂，有些则比较简单。下面我们将以提供的功能为主线来阐述pomelo提供的内建组件。</p>
+        <p>我们知道，pomelo的应用程序执行的全部过程，就是对其相应组件的生命周期的管理，实际的所有逻辑功能均由pomelo组件提供。pomelo内建提供了十多个组件，这些组件适用于不同的服务器，提供不同的功能。有些组件提供的功能比较复杂，有些则比较简单。下面我们将以提供的功能为主线来阐述pomelo提供的内建组件。</p>
+<a id="more"></a>
+<h1 id="组件概述"><a href="#组件概述" class="headerlink" title="组件概述"></a>组件概述</h1><p>我们知道，pomelo的应用程序执行的全部过程，就是对其相应组件的生命周期的管理，实际的所有逻辑功能均由pomelo组件提供。pomelo内建提供了十多个组件，这些组件适用于不同的服务器，提供不同的功能。有些组件提供的功能比较复杂，有些则比较简单。下面我们将以提供的功能为主线来阐述pomelo提供的内建组件。</p>
 <h2 id="master组件"><a href="#master组件" class="headerlink" title="master组件"></a>master组件</h2><p>它主要的功能包括启动所有的应用服务器、管理和监控所有的应用服务器和接受管理客户端的请求与响应。</p>
 <h2 id="monitor监控组件"><a href="#monitor监控组件" class="headerlink" title="monitor监控组件"></a>monitor监控组件</h2><p>monitor组件由所有的包括master服务器在内的服务器都会加载，它的主要功能就是与master建立连接进行通信，从而对整个应用服务器群进行管理和监控。master服务器本身也会加载monitor服务器，因为master服务器也会收集其本身自己的监控信息。</p>
 <h2 id="connector组件"><a href="#connector组件" class="headerlink" title="connector组件"></a>connector组件</h2><p>connector组件是一个重量级的组件，它会依赖于session组件，server组件，pushScheduler组件和connection组件。</p>

@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="uWSGI是一个Web应用服务器，它具有应用服务器，代理，进程管理及应用监控等功能。它支持WSGI协议，同时它也支持自有的uWSGI协议，该协议据说性能非常高，而且内存占用率低，为mod_wsgi的一半左右，它还支持多应用的管理及应用的性能监控。虽然uWSGI本身就可以直接用来当Web服务器，但一般建议将其作为应用服务器配合Nginx一起使用，这样可以更好的发挥Nginx在Web端的强大功能。 安">
+<meta name="description" content="uWSGI是一个Web应用服务器，它具有应用服务器，代理，进程管理及应用监控等功能。它支持WSGI协议，同时它也支持自有的uWSGI协议，该协议据说性能非常高，而且内存占用率低，为mod_wsgi的一半左右，它还支持多应用的管理及应用的性能监控。虽然uWSGI本身就可以直接用来当Web服务器，但一般建议将其作为应用服务器配合Nginx一起使用，这样可以更好的发挥Nginx在Web端的强大功能。">
 <meta name="keywords" content="python,nginx,uWSGI">
 <meta property="og:type" content="article">
 <meta property="og:title" content="nginx+uWSGI搭建python环境运行REST-Framework">
 <meta property="og:url" content="http://blog.ku-cat.com/2018/04/21/django-nginx-uWSGI/index.html">
 <meta property="og:site_name" content="一纸墨迹">
-<meta property="og:description" content="uWSGI是一个Web应用服务器，它具有应用服务器，代理，进程管理及应用监控等功能。它支持WSGI协议，同时它也支持自有的uWSGI协议，该协议据说性能非常高，而且内存占用率低，为mod_wsgi的一半左右，它还支持多应用的管理及应用的性能监控。虽然uWSGI本身就可以直接用来当Web服务器，但一般建议将其作为应用服务器配合Nginx一起使用，这样可以更好的发挥Nginx在Web端的强大功能。 安">
+<meta property="og:description" content="uWSGI是一个Web应用服务器，它具有应用服务器，代理，进程管理及应用监控等功能。它支持WSGI协议，同时它也支持自有的uWSGI协议，该协议据说性能非常高，而且内存占用率低，为mod_wsgi的一半左右，它还支持多应用的管理及应用的性能监控。虽然uWSGI本身就可以直接用来当Web服务器，但一般建议将其作为应用服务器配合Nginx一起使用，这样可以更好的发挥Nginx在Web端的强大功能。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-04-23T06:19:41.139Z">
+<meta property="og:updated_time" content="2018-05-04T05:48:17.881Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="nginx+uWSGI搭建python环境运行REST-Framework">
-<meta name="twitter:description" content="uWSGI是一个Web应用服务器，它具有应用服务器，代理，进程管理及应用监控等功能。它支持WSGI协议，同时它也支持自有的uWSGI协议，该协议据说性能非常高，而且内存占用率低，为mod_wsgi的一半左右，它还支持多应用的管理及应用的性能监控。虽然uWSGI本身就可以直接用来当Web服务器，但一般建议将其作为应用服务器配合Nginx一起使用，这样可以更好的发挥Nginx在Web端的强大功能。 安">
+<meta name="twitter:description" content="uWSGI是一个Web应用服务器，它具有应用服务器，代理，进程管理及应用监控等功能。它支持WSGI协议，同时它也支持自有的uWSGI协议，该协议据说性能非常高，而且内存占用率低，为mod_wsgi的一半左右，它还支持多应用的管理及应用的性能监控。虽然uWSGI本身就可以直接用来当Web服务器，但一般建议将其作为应用服务器配合Nginx一起使用，这样可以更好的发挥Nginx在Web端的强大功能。">
 
 
 
@@ -437,6 +437,8 @@
 
       
         <p>uWSGI是一个Web应用服务器，它具有应用服务器，代理，进程管理及应用监控等功能。它支持WSGI协议，同时它也支持自有的uWSGI协议，该协议据说性能非常高，而且内存占用率低，为mod_wsgi的一半左右，它还支持多应用的管理及应用的性能监控。虽然uWSGI本身就可以直接用来当Web服务器，但一般建议将其作为应用服务器配合Nginx一起使用，这样可以更好的发挥Nginx在Web端的强大功能。</p>
+<a id="more"></a>
+<p>uWSGI是一个Web应用服务器，它具有应用服务器，代理，进程管理及应用监控等功能。它支持WSGI协议，同时它也支持自有的uWSGI协议，该协议据说性能非常高，而且内存占用率低，为mod_wsgi的一半左右，它还支持多应用的管理及应用的性能监控。虽然uWSGI本身就可以直接用来当Web服务器，但一般建议将其作为应用服务器配合Nginx一起使用，这样可以更好的发挥Nginx在Web端的强大功能。</p>
 <h2 id="安装uWSGI"><a href="#安装uWSGI" class="headerlink" title="安装uWSGI"></a>安装uWSGI</h2><p>安装比较简单直接使用pip就可以安装了</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install uwsgi</span><br></pre></td></tr></table></figure>
 <p>安装成功后，你可以查看下当前的uwsgi的版本：</p>
