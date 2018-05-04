@@ -5,10 +5,10 @@
     
   <url>
     <loc>http://blog.ku-cat.com/2018/05/03/python-django-Authentication/</loc>
-    <lastmod>2018-05-03T15:34:25.404Z</lastmod>
+    <lastmod>2018-05-04T01:34:09.403Z</lastmod>
     <data>
         <display>
-        <title>django授权Authentication</title>
+        <title>django REST-Framework的授权Authentication方案</title>
         <pubTime>2018-05-03T05:13:59.000Z</pubTime>
         
         <tag>python</tag>
