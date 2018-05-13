@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>http://blog.ku-cat.com/2018/05/12/rpc-introduction-to-Remote-Procedure-calling/</loc>
+    <lastmod>2018-05-13T06:08:54.627Z</lastmod>
+    <data>
+        <display>
+        <title>introduction to Remote Procedure calling</title>
+        <pubTime>2018-05-12T04:53:54.000Z</pubTime>
+        
+        <tag>RPC</tag>
+         
+         
+           
+             
+              <breadCrumb title="Distributed" url="http://blog.ku-cat.com/categories/Distributed/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://blog.ku-cat.com/2018/05/07/life-lqz/</loc>
     <lastmod>2018-05-13T03:54:45.155Z</lastmod>
     <data>
@@ -35,26 +55,6 @@
            
              
               <breadCrumb title="Git" url="http://blog.ku-cat.com/categories/Git/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://blog.ku-cat.com/2018/05/12/rpc-introduction-to-Remote-Procedure-calling/</loc>
-    <lastmod>2018-05-13T03:53:27.292Z</lastmod>
-    <data>
-        <display>
-        <title>introduction to Remote Procedure calling</title>
-        <pubTime>2018-05-12T04:53:54.000Z</pubTime>
-        
-        <tag>RPC</tag>
-         
-         
-           
-             
-              <breadCrumb title="Distributed" url="http://blog.ku-cat.com/categories/Distributed/"/>
           
         </display>
     </data>

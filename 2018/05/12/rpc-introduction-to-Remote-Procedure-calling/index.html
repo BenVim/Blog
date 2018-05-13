@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="一纸墨迹">
 <meta property="og:description" content="Remote procedure calling allows a client to execute procedures on other networked computers or servers. Client/Server Computing原书《Power Programming with RPC》 The clinet/server model of computing is a">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-05-13T03:53:27.292Z">
+<meta property="og:updated_time" content="2018-05-13T06:08:54.627Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="introduction to Remote Procedure calling">
 <meta name="twitter:description" content="Remote procedure calling allows a client to execute procedures on other networked computers or servers. Client/Server Computing原书《Power Programming with RPC》 The clinet/server model of computing is a">
@@ -439,6 +439,7 @@
         <p>Remote procedure calling allows a client to execute procedures on other networked computers or servers.</p>
 <h2 id="Client-Server-Computing"><a href="#Client-Server-Computing" class="headerlink" title="Client/Server Computing"></a>Client/Server Computing</h2><p>原书《Power Programming with RPC》</p>
 <p>The clinet/server model of computing is a popular model for distributed processing. It applies to any processing environment where one set of entities requests work to be done and another set actually performs the work. </p>
+<a id="more"></a>
 <h2 id="远程与-versus-本地过程调用"><a href="#远程与-versus-本地过程调用" class="headerlink" title="远程与(versus)本地过程调用"></a>远程与(versus)本地过程调用</h2><p>对于应用来说，本地与远程调用两者之间有什么不同？实际两者几乎没有什么区别——就是RPC应用程序接口的主要(<code>primary</code>)目标(<code>goal</code>).</p>
 <p>图1-1(<code>Figure1-1</code>) 阐述（<code>illustrates</code>）了本地与远程程序（<code>procedure</code>）调用之间的不同，在左侧，调用（客户端）进程在自己的地址空间中执行（<code>executes</code>）一个过程。在右侧，客户端和服务器作为两个独立的进程运行，不再需要在同一台计算机上运行，RPC library 处理（<code>handles</code>）两个进程（<code>processes</code>）之间的通信（<code>communication</code>）。</p>
 <p>RPC 使用一种 <code>request-and-reply</code> 通信（communication）模式。客户端程序将请求消息发送到返回应答消息的服务器程序。客户端与服务端进程通过（<code>by means of 译：用或依靠的意思</code>）两个<code>stubs</code>进行通信，一个用户客户端，一个用于服务端。<code>stubs</code>是实现（<code>implement</code>）RPC协议(<code>protocol</code>)的通信(<code>communications</code>)接口（<code>interface</code>），并指定(<code>specify</code>)消息是如何构造(<code>construct</code>)和交换(<code>exchange</code>)的。像<code>ONC RPCGEN</code>这样(<code>typically 译：代表性的，特色的</code>)的协议编译器（<code>compiler</code>）通常用于生成<code>stub</code>。然后<code>stub</code>与客户端程序及服务器程序相连。</p>
