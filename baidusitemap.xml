@@ -4,6 +4,64 @@
 
     
   <url>
+    <loc>http://blog.ku-cat.com/2018/05/13/git-default/</loc>
+    <lastmod>2018-05-13T03:53:36.896Z</lastmod>
+    <data>
+        <display>
+        <title>Git push与pull的默认行为</title>
+        <pubTime>2018-05-13T04:53:54.000Z</pubTime>
+        
+        <tag>Git</tag>
+         
+         
+           
+             
+              <breadCrumb title="Git" url="http://blog.ku-cat.com/categories/Git/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.ku-cat.com/2018/05/12/rpc-introduction-to-Remote-Procedure-calling/</loc>
+    <lastmod>2018-05-13T03:53:27.292Z</lastmod>
+    <data>
+        <display>
+        <title>introduction to Remote Procedure calling</title>
+        <pubTime>2018-05-12T04:53:54.000Z</pubTime>
+        
+        <tag>RPC</tag>
+         
+         
+           
+             
+              <breadCrumb title="Distributed" url="http://blog.ku-cat.com/categories/Distributed/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.ku-cat.com/2018/05/07/life-lqz/</loc>
+    <lastmod>2018-05-13T03:53:15.886Z</lastmod>
+    <data>
+        <display>
+        <title>一剪梅·红藕香残玉簟秋</title>
+        <pubTime>2018-05-07T02:06:05.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="life" url="http://blog.ku-cat.com/categories/life/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://blog.ku-cat.com/2018/05/02/nodejs-pm2/</loc>
     <lastmod>2018-05-13T03:49:53.662Z</lastmod>
     <data>
@@ -20,40 +78,6 @@
              
               <breadCrumb title="nodejs" url="http://blog.ku-cat.com/categories/nodejs/"/>
           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://blog.ku-cat.com/2018/05/13/git-default/</loc>
-    <lastmod>2018-05-13T03:38:23.975Z</lastmod>
-    <data>
-        <display>
-        <title>Git push与pull的默认行为</title>
-        <pubTime>2018-05-13T04:53:54.000Z</pubTime>
-        
-        <tag>Git</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://blog.ku-cat.com/2018/05/12/rpc-introduction-to-Remote-Procedure-calling/</loc>
-    <lastmod>2018-05-13T03:25:02.476Z</lastmod>
-    <data>
-        <display>
-        <title>introduction to Remote Procedure calling</title>
-        <pubTime>2018-05-12T04:53:54.000Z</pubTime>
-        
-        <tag>RPC</tag>
-         
-         
-           
         </display>
     </data>
     </url>
@@ -93,21 +117,6 @@
              
               <breadCrumb title="node" url="http://blog.ku-cat.com/categories/node/"/>
           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://blog.ku-cat.com/2018/05/07/life-lqz/</loc>
-    <lastmod>2018-05-07T06:04:11.632Z</lastmod>
-    <data>
-        <display>
-        <title>一剪梅·红藕香残玉簟秋</title>
-        <pubTime>2018-05-07T02:06:05.000Z</pubTime>
-        
-         
-           
         </display>
     </data>
     </url>
