@@ -4,6 +4,24 @@
 
     
   <url>
+    <loc>http://blog.ku-cat.com/2018/05/07/life-lqz/</loc>
+    <lastmod>2018-05-13T03:54:45.155Z</lastmod>
+    <data>
+        <display>
+        <title>一剪梅·红藕香残玉簟秋</title>
+        <pubTime>2018-05-07T02:06:05.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="life" url="http://blog.ku-cat.com/categories/life/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://blog.ku-cat.com/2018/05/13/git-default/</loc>
     <lastmod>2018-05-13T03:53:36.896Z</lastmod>
     <data>
@@ -37,24 +55,6 @@
            
              
               <breadCrumb title="Distributed" url="http://blog.ku-cat.com/categories/Distributed/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://blog.ku-cat.com/2018/05/07/life-lqz/</loc>
-    <lastmod>2018-05-13T03:53:15.886Z</lastmod>
-    <data>
-        <display>
-        <title>一剪梅·红藕香残玉簟秋</title>
-        <pubTime>2018-05-07T02:06:05.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="life" url="http://blog.ku-cat.com/categories/life/"/>
           
         </display>
     </data>

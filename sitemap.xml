@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.ku-cat.com/2018/05/07/life-lqz/</loc>
+    
+    <lastmod>2018-05-13T03:54:45.155Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.ku-cat.com/2018/05/13/git-default/</loc>
     
     <lastmod>2018-05-13T03:53:36.896Z</lastmod>
@@ -12,13 +19,6 @@
     <loc>http://blog.ku-cat.com/2018/05/12/rpc-introduction-to-Remote-Procedure-calling/</loc>
     
     <lastmod>2018-05-13T03:53:27.292Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.ku-cat.com/2018/05/07/life-lqz/</loc>
-    
-    <lastmod>2018-05-13T03:53:15.886Z</lastmod>
     
   </url>
   
