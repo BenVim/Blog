@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="一纸墨迹">
 <meta property="og:description" content="官方文档原文 身份验证是将传入请求与一组识别凭证（例如请求来自的用户或其签名的令牌）相关联的机制。然后，权限和限制策略可以使用这些凭据来确定请求是否应该被允许. REST框架提供了许多开箱即用的身份验证方案，还允许您实施自定义方案。在许可和节流检查发生之前，在允许任何其他代码继续之前，验证总是在视图的开始运行。 request.user属性通常会设置为contrib.auth包的User类的一个实">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-05-04T05:50:56.961Z">
+<meta property="og:updated_time" content="2018-05-04T13:18:52.912Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="django REST-Framework的授权Authentication方案">
 <meta name="twitter:description" content="官方文档原文 身份验证是将传入请求与一组识别凭证（例如请求来自的用户或其签名的令牌）相关联的机制。然后，权限和限制策略可以使用这些凭据来确定请求是否应该被允许. REST框架提供了许多开箱即用的身份验证方案，还允许您实施自定义方案。在许可和节流检查发生之前，在允许任何其他代码继续之前，验证总是在视图的开始运行。 request.user属性通常会设置为contrib.auth包的User类的一个实">
@@ -453,7 +453,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> rest_framework.authentication <span class="keyword">import</span> SessionAuthentication, BasicAuthentication</span><br><span class="line"><span class="keyword">from</span> rest_framework.permissions <span class="keyword">import</span> IsAuthenticated</span><br><span class="line"><span class="keyword">from</span> rest_framework.response <span class="keyword">import</span> Response</span><br><span class="line"><span class="keyword">from</span> rest_framework.views <span class="keyword">import</span> APIView</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ExampleView</span><span class="params">(APIView)</span>:</span></span><br><span class="line">    authentication_classes = (SessionAuthentication, BasicAuthentication)</span><br><span class="line">    permission_classes = (IsAuthenticated,)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get</span><span class="params">(self, request, format=None)</span>:</span></span><br><span class="line">        content = &#123;</span><br><span class="line">            <span class="string">'user'</span>: unicode(request.user),  <span class="comment"># `django.contrib.auth.User` instance.</span></span><br><span class="line">            <span class="string">'auth'</span>: unicode(request.auth),  <span class="comment"># None</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> Response(content)</span><br></pre></td></tr></table></figure>
 <p>或者，如果你使用的是基于功能的视图<code>@api_view</code>装饰器方法，可以像下面一样设置。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@api_view(['GET'])</span></span><br><span class="line"><span class="meta">@authentication_classes((SessionAuthentication, BasicAuthentication))</span></span><br><span class="line"><span class="meta">@permission_classes((IsAuthenticated,))</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">example_view</span><span class="params">(request, format=None)</span>:</span></span><br><span class="line">    content = &#123;</span><br><span class="line">        <span class="string">'user'</span>: unicode(request.user),  <span class="comment"># `django.contrib.auth.User` instance.</span></span><br><span class="line">        <span class="string">'auth'</span>: unicode(request.auth),  <span class="comment"># None</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> Response(content)</span><br></pre></td></tr></table></figure>
-<h2 id="未经授权和禁止的响应"><a href="#未经授权和禁止的响应" class="headerlink" title="未经授权和禁止的响应"></a>未经授权和禁止的响应</h2><p>当未经身份验证的请求被拒绝时，有两种不同的错误代码比较合适。</p>
+<h2 id="未经授权和禁止的响应"><a href="#未经授权和禁止的响应" class="headerlink" title="未经授权和禁止的响应"></a>未经授权和禁止的响应</h2><p>当未经身份验证的请求被拒绝时，有两种不同的错误提示：</p>
 <ul>
 <li><a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2" target="_blank" rel="noopener">HTTP 401 Unauthorized</a></li>
 <li><a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4" target="_blank" rel="noopener">HTTP 403 Permission Denied</a></li>
@@ -664,7 +664,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-count">36</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -675,7 +675,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -686,7 +686,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">27</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

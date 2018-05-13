@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="nodejs pm2的简单应用 待完善">
+<meta name="description" content="pm2是一个进程管理工具,可以用它来管理你的node进程，并查看node进程的状态，当然也支持性能监控，进程守护，负载均衡等功能。 开发过程中建议时不时的参看官方详细命令行使用">
 <meta name="keywords" content="nodejs,pm2">
 <meta property="og:type" content="article">
 <meta property="og:title" content="nodejs pm2的简单应用">
 <meta property="og:url" content="http://blog.ku-cat.com/2018/05/02/nodejs-pm2/index.html">
 <meta property="og:site_name" content="一纸墨迹">
-<meta property="og:description" content="nodejs pm2的简单应用 待完善">
+<meta property="og:description" content="pm2是一个进程管理工具,可以用它来管理你的node进程，并查看node进程的状态，当然也支持性能监控，进程守护，负载均衡等功能。 开发过程中建议时不时的参看官方详细命令行使用">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-05-03T05:14:34.566Z">
+<meta property="og:updated_time" content="2018-05-13T03:49:53.662Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="nodejs pm2的简单应用">
-<meta name="twitter:description" content="nodejs pm2的简单应用 待完善">
+<meta name="twitter:description" content="pm2是一个进程管理工具,可以用它来管理你的node进程，并查看node进程的状态，当然也支持性能监控，进程守护，负载均衡等功能。 开发过程中建议时不时的参看官方详细命令行使用">
 
 
 
@@ -436,8 +436,24 @@
       
 
       
-        <p><a href="https://www.linuxprobe.com/nodejs-pm2-sample.html" target="_blank" rel="noopener">nodejs pm2的简单应用</a></p>
-<p>待完善</p>
+        <p>pm2是一个进程管理工具,可以用它来管理你的node进程，并查看node进程的状态，当然也支持性能监控，进程守护，负载均衡等功能。</p>
+<p>开发过程中建议时不时的参看官方详细命令行使用</p>
+<a id="more"></a>
+<p><a href="https://www.linuxprobe.com/nodejs-pm2-sample.html" target="_blank" rel="noopener">nodejs pm2的简单应用</a>[转载]</p>
+<h3 id="一、简介"><a href="#一、简介" class="headerlink" title="一、简介"></a>一、简介</h3><p>pm2是一个带有负载均衡功能的应用进程管理器，类似有Supervisor，forever，详细参数见<a href="http://pm2.keymetrics.io" target="_blank" rel="noopener">官网:http://pm2.keymetrics.io</a></p>
+<h3 id="二、安装"><a href="#二、安装" class="headerlink" title="二、安装"></a>二、安装</h3><p>Linux Binaries <a href="https://nodejs.org/dist" target="_blank" rel="noopener">下载地址：https://nodejs.org/dist</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cd oneinstack/src</span><br><span class="line">wget https://nodejs.org/dist/v4.2.4/node-v4.2.4-linux-x64.tar.gz</span><br><span class="line">tar xzf node-v4.2.4-linux-x64.tar.gz</span><br><span class="line">cp node-v4.2.4-linux-x64/bin/node /usr/local/bin/</span><br><span class="line">cp -R node-v4.2.4-linux-x64/lib/node_modules /usr/local/lib/</span><br><span class="line">ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm</span><br><span class="line">npm install pm2@latest -g                 #安装最新版本pm2模块</span><br></pre></td></tr></table></figure>
+<h3 id="三、PM2常用命令"><a href="#三、PM2常用命令" class="headerlink" title="三、PM2常用命令"></a>三、PM2常用命令</h3><p>假设你现在已经写好了一个app.js的文件，需要启动，你可以使用pm2进行管理</p>
+<h4 id="1-启动"><a href="#1-启动" class="headerlink" title="1.启动"></a>1.启动</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># pm2 start app.js</span><br><span class="line"># pm2 start app.js --name my-api       #my-api为PM2进程名称</span><br><span class="line"># pm2 start app.js -i 0                #根据CPU核数启动进程个数</span><br><span class="line"># pm2 start app.js --watch             #实时监控app.js的方式启动，当app.js文件有变动时，pm2会自动reload</span><br></pre></td></tr></table></figure>
+<h4 id="2-查看进程"><a href="#2-查看进程" class="headerlink" title="2.查看进程"></a>2.查看进程</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># pm2 list</span><br><span class="line"># pm2 show 0 或者 # pm2 info 0         #查看进程详细信息，0为PM2进程id</span><br></pre></td></tr></table></figure>
+<h4 id="3-监控"><a href="#3-监控" class="headerlink" title="3.监控"></a>3.监控</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># pm2 stop all                        #停止PM2列表中所有的进程</span><br><span class="line"># pm2 stop 0                          #停止PM2列表中进程为0的进程</span><br></pre></td></tr></table></figure>
+<h4 id="4-停止"><a href="#4-停止" class="headerlink" title="4. 停止"></a>4. 停止</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># pm2 stop all                        #停止PM2列表中所有的进程</span><br><span class="line"># pm2 stop 0                          #停止PM2列表中进程为0的进程</span><br></pre></td></tr></table></figure>
+<h4 id="5-重载"><a href="#5-重载" class="headerlink" title="5. 重载"></a>5. 重载</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># pm2 reload all                      #重载PM2列表中所有的进程</span><br><span class="line"># pm2 reload 0                        #重载PM2列表中进程为0的进程</span><br></pre></td></tr></table></figure>
+<h4 id="6-重启"><a href="#6-重启" class="headerlink" title="6. 重启"></a>6. 重启</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># pm2 restart all                     #重启PM2列表中所有的进程</span><br><span class="line"># pm2 restart 0                       #重启PM2列表中进程为0的进程</span><br></pre></td></tr></table></figure>
+<h4 id="7-删除PM2进程"><a href="#7-删除PM2进程" class="headerlink" title="7. 删除PM2进程"></a>7. 删除PM2进程</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># pm2 delete 0                        #删除PM2列表中进程为0的进程</span><br><span class="line"># pm2 delete all                      #删除PM2列表中所有的进程</span><br></pre></td></tr></table></figure>
+<h4 id="8-日志操作"><a href="#8-日志操作" class="headerlink" title="8. 日志操作"></a>8. 日志操作</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># pm2 logs [--raw]                    #Display all processes logs in streaming</span><br><span class="line"># pm2 flush                           #Empty all log file</span><br><span class="line"># pm2 reloadLogs                      #Reload all logs</span><br></pre></td></tr></table></figure>
+<h4 id="9-升级PM2"><a href="#9-升级PM2" class="headerlink" title="9. 升级PM2"></a>9. 升级PM2</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># npm install pm2@lastest -g          #安装最新的PM2版本</span><br><span class="line"># pm2 updatePM2                       #升级pm2</span><br></pre></td></tr></table></figure>
+<h4 id="10-更多命令参数请查看帮助"><a href="#10-更多命令参数请查看帮助" class="headerlink" title="10. 更多命令参数请查看帮助"></a>10. 更多命令参数请查看帮助</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># pm2 --help</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -470,8 +486,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/30/code-x/" rel="next" title="code-x">
-                <i class="fa fa-chevron-left"></i> code-x
+              <a href="/2018/04/30/code-x/" rel="next" title="Pycharm 激活码激活方法及有效激活码">
+                <i class="fa fa-chevron-left"></i> Pycharm 激活码激活方法及有效激活码
               </a>
             
           </div>
@@ -544,8 +560,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -564,7 +589,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-count">36</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -575,7 +600,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -586,7 +611,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">27</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -656,6 +681,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、简介"><span class="nav-number">1.</span> <span class="nav-text">一、简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、安装"><span class="nav-number">2.</span> <span class="nav-text">二、安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、PM2常用命令"><span class="nav-number">3.</span> <span class="nav-text">三、PM2常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-启动"><span class="nav-number">3.1.</span> <span class="nav-text">1.启动</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-查看进程"><span class="nav-number">3.2.</span> <span class="nav-text">2.查看进程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-监控"><span class="nav-number">3.3.</span> <span class="nav-text">3.监控</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-停止"><span class="nav-number">3.4.</span> <span class="nav-text">4. 停止</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-重载"><span class="nav-number">3.5.</span> <span class="nav-text">5. 重载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-重启"><span class="nav-number">3.6.</span> <span class="nav-text">6. 重启</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-删除PM2进程"><span class="nav-number">3.7.</span> <span class="nav-text">7. 删除PM2进程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-日志操作"><span class="nav-number">3.8.</span> <span class="nav-text">8. 日志操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-升级PM2"><span class="nav-number">3.9.</span> <span class="nav-text">9. 升级PM2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10-更多命令参数请查看帮助"><span class="nav-number">3.10.</span> <span class="nav-text">10. 更多命令参数请查看帮助</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
