@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.ku-cat.com/"/>
-  <updated>2018-05-30T07:37:17.261Z</updated>
+  <updated>2018-05-30T07:54:27.421Z</updated>
   <id>http://blog.ku-cat.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>古城深巷、青砖黛瓦，惊艳了谁的时光？深度美文!</title>
+    <link href="http://blog.ku-cat.com/2018/05/30/ben-ci/"/>
+    <id>http://blog.ku-cat.com/2018/05/30/ben-ci/</id>
+    <published>2018-05-30T07:46:37.000Z</published>
+    <updated>2018-05-30T07:54:27.421Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="http://blog.sina.com.cn/s/blog_14de1cf2f0102wg4g.html" target="_blank" rel="noopener">古城深巷、青砖黛瓦，惊艳了谁的时光</a></p><p>长相思『雨』句。</p><p>蟋蟀瑟，蟋蟀息。瓦上沙沙压虫鸣，夜已到何时？<br>昨天去，明日来。信那庭前青砖道，新苔又一地。</p><p>青砖黛瓦，古城深巷</p><p>玉砌雕栏、石碑石像静静地伫立，无声地讲述着被岁月尘封的历史，一段段从前的沧桑。</p><p>青山环抱，百鸟啁啾，千百年过去了，记录下岁月的流逝，历史的痕迹</p><p>霏微的蒙蒙细雨和风中摇曳的一排梧桐，宁静的江南，一如一帘华美的幽梦！</p><p>记得那青葱的群山，记得那涓涓流淌的秦淮河，记得那悠长的青石板路，记得那碧波荡漾！</p><p>步入轻烟细雨。想起杜牧的一句古诗“南朝四百八十寺，多少楼台烟雨中”</p><p>繁花似锦，碧草如茵，水面上波光粼粼，东风吹拂，泛起一道道涟漪。</p><p>傍晚时分，星星点点的灯火好似星斗阑干，密密匝匝地排布在河水周遭。</p><p>十里锦绣，江南水乡。两岸的青砖黛瓦，水面上桨声灯影。山围故国绕清江，髻寰对起！</p><p>烟雨痴缠的江南，白墙黑瓦将心事温柔诉说。指缝缠绕间，惊艳了谁的时光？</p><p>依稀潺潺的细雨，轻轻扣在寂静的古城。南京，六朝金粉，江南锦绣。桨声灯影中的十里秦淮，青砖黛瓦下的曲院深墙，悠长的柏油马路边栽植着枝繁叶茂的梧桐树，随熏风摇曳，笼罩在蒙蒙烟雨中。</p><p>村庄里，重峦叠嶂，葱茏的树和青翠的草漫山遍野。村庄的山，显得灵秀，没有其他地方的大气磅礴，直耸云霄。放眼望去，一片片的葱绿点缀出青山难以掩映的优雅，就像质地精美的锦缎丝绢，环绕城垣。</p><p>庭前花木满 院外小径芳</p><p>遥望远处炊烟袅，阵阵缥缈，近处树荫绿意搅；高处凝望河流笑，丝丝缠绕，夜幕星空点满梢。</p><p>遥想那个久远的午后，斟一杯清茶，看庭前花开花落，望天上云卷云舒。叹如今，越来越多的老建筑消失在城市化的进程中，也许，昔日那些美丽，只有在回忆中去追寻了。</p><p>遥望远处炊烟袅，阵阵缥缈，近处树荫绿意搅；高处凝望河流笑，丝丝缠绕，夜幕星空点满梢。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;a href=&quot;http://blog.sina.com.cn/s/blog_14de1cf2f0102wg4g.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;古城深巷、青砖黛瓦，惊艳了谁的时光&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;长相思『雨』句。&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+      <category term="poem" scheme="http://blog.ku-cat.com/categories/poem/"/>
+    
+    
+      <category term="poem" scheme="http://blog.ku-cat.com/tags/poem/"/>
+    
+  </entry>
   
   <entry>
     <title>Mac系统mds、mds_stores、mdworker疯狂工作的问题</title>
@@ -475,37 +502,6 @@
       <category term="python" scheme="http://blog.ku-cat.com/tags/python/"/>
     
       <category term="django" scheme="http://blog.ku-cat.com/tags/django/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>django-rest-framework调试工具 httpie</title>
-    <link href="http://blog.ku-cat.com/2018/04/17/django-debug-httpie/"/>
-    <id>http://blog.ku-cat.com/2018/04/17/django-debug-httpie/</id>
-    <published>2018-04-17T13:35:59.000Z</published>
-    <updated>2018-04-21T03:06:07.071Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="/img/city.jpg" alt=""></p><p>使用django-rest-framework可以方便快捷的写出优美的restfull API，同样django也有非常方便的调试工具httpie。</p><h3 id="安装httpie"><a href="#安装httpie" class="headerlink" title="安装httpie"></a>安装httpie</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install httpie</span><br></pre></td></tr></table></figure><h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><h2 id="使用GET"><a href="#使用GET" class="headerlink" title="使用GET"></a>使用GET</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http http://127.0.0.1:8000/domain/4/</span><br></pre></td></tr></table></figure><p>返回的结果以非常友好的形式显示，而且还是彩色的！</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Allow: GET, POST, HEAD, OPTIONS</span><br><span class="line">Content-Length: 200</span><br><span class="line">Content-Type: application/json</span><br><span class="line">Date: Fri, 20 Apr 2018 15:02:48 GMT</span><br><span class="line">Server: WSGIServer/0.2 CPython/3.6.4</span><br><span class="line">Vary: Accept, Cookie</span><br><span class="line">X-Frame-Options: SAMEORIGIN</span><br><span class="line"></span><br><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">"ICP"</span>: null,</span><br><span class="line">        <span class="string">"ICP_master"</span>: null,</span><br><span class="line">        <span class="string">"ICP_type"</span>: null,</span><br><span class="line">        <span class="string">"addDate"</span>: <span class="string">"2018-04-12T15:31:03.291517+08:00"</span>,</span><br><span class="line">        <span class="string">"domain"</span>: <span class="string">"acc.s1.ilaputa.cn"</span>,</span><br><span class="line">        <span class="string">"expire"</span>: <span class="string">"2018-04-12T15:31:03.291571+08:00"</span>,</span><br><span class="line">        <span class="string">"status"</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="string">"type"</span>: 3,</span><br><span class="line">        <span class="string">"userId"</span>: 4</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure><p>可以指定返回的数据格式。</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">http http://127.0.0.1:8000/domain/4/ Accept:text/html</span><br><span class="line"><span class="comment"># 返回网页形式，是django-rest-framework的界面代码</span></span><br><span class="line">http http://127.0.0.1:8000/domain/4/ Accept:application/json</span><br><span class="line"><span class="comment"># 返回json格式</span></span><br></pre></td></tr></table></figure><h2 id="使用POST方法"><a href="#使用POST方法" class="headerlink" title="使用POST方法"></a>使用POST方法</h2><p>调试post接口如下使用</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http --form POST http://127.0.0.1:8000/user/ username=18657986877 password=123456 verify=abc</span><br></pre></td></tr></table></figure><p>返回结果</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">HTTP/1.1 400 Bad Request</span><br><span class="line">Allow: POST, OPTIONS</span><br><span class="line">Content-Length: 59</span><br><span class="line">Content-Type: application/json</span><br><span class="line">Date: Fri, 20 Apr 2018 15:08:38 GMT</span><br><span class="line">Server: WSGIServer/0.2 CPython/3.6.4</span><br><span class="line">Vary: Accept, Cookie</span><br><span class="line">X-Frame-Options: SAMEORIGIN</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"username"</span>: [</span><br><span class="line">        <span class="string">"已存在一位使用该名字的用户。"</span></span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>调用登录信息的使用方法</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http -a admin:admin123 POST http://127.0.0.1:8000/user/</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;&lt;img src=&quot;/img/city.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;使用django-rest-framework可以方便快捷的写出优美的restfull API，同样django也有非常方便的调试工具httpie。&lt;/p&gt;
-&lt;h3 id=&quot;安装httpie&quot;&gt;
-      
-    
-    </summary>
-    
-      <category term="python" scheme="http://blog.ku-cat.com/categories/python/"/>
-    
-    
-      <category term="python" scheme="http://blog.ku-cat.com/tags/python/"/>
-    
-      <category term="django" scheme="http://blog.ku-cat.com/tags/django/"/>
-    
-      <category term="httpie" scheme="http://blog.ku-cat.com/tags/httpie/"/>
     
   </entry>
   
