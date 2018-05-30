@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.ku-cat.com/"/>
-  <updated>2018-05-13T03:53:36.896Z</updated>
+  <updated>2018-05-30T07:37:17.261Z</updated>
   <id>http://blog.ku-cat.com/</id>
   
   <author>
@@ -15,6 +15,101 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Mac系统mds、mds_stores、mdworker疯狂工作的问题</title>
+    <link href="http://blog.ku-cat.com/2018/05/30/mac-mdwork/"/>
+    <id>http://blog.ku-cat.com/2018/05/30/mac-mdwork/</id>
+    <published>2018-05-30T07:33:35.000Z</published>
+    <updated>2018-05-30T07:37:17.261Z</updated>
+    
+    <content type="html"><![CDATA[<p>这几个进程都是为了Spotlight索引而疯狂的，解决方案：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mdutil -a -i off</span><br></pre></td></tr></table></figure><p>打开</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mdutil -a -i on</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;这几个进程都是为了Spotlight索引而疯狂的，解决方案：&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pr
+      
+    
+    </summary>
+    
+      <category term="mac" scheme="http://blog.ku-cat.com/categories/mac/"/>
+    
+    
+      <category term="mac" scheme="http://blog.ku-cat.com/tags/mac/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>node-grpc</title>
+    <link href="http://blog.ku-cat.com/2018/05/21/node-grpc/"/>
+    <id>http://blog.ku-cat.com/2018/05/21/node-grpc/</id>
+    <published>2018-05-21T02:44:12.000Z</published>
+    <updated>2018-05-21T02:44:12.669Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>node的库</title>
+    <link href="http://blog.ku-cat.com/2018/05/21/node-Ramda/"/>
+    <id>http://blog.ku-cat.com/2018/05/21/node-Ramda/</id>
+    <published>2018-05-21T02:15:51.000Z</published>
+    <updated>2018-05-30T07:37:15.519Z</updated>
+    
+    <content type="html"><![CDATA[<p>牛逼的node库，先供着</p><ul><li>Ramda</li><li>immutable </li><li>mobx 数据模型框架</li><li>redux 数据模型框架</li><li>graphql</li><li>loadash</li><li>loadash.merge</li><li>Electron就是使用node+chrome的应用程序框架</li><li>yarn</li><li>npm</li><li>webpack</li><li>react</li><li>gulp</li><li>babel</li><li>jest</li><li>es6</li><li>react</li><li>react-router-dom</li><li>classnames</li><li>webpack</li><li>type Script</li><li>promise <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise" target="_blank" rel="noopener">promise</a> [重点]</li><li>await [重点]</li><li>async <a href="https://caolan.github.io/async/" target="_blank" rel="noopener">async官网</a> [重点]</li><li>fetch [重点] then (then不是框架，是Promise里的一个方法)</li><li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects" target="_blank" rel="noopener">JavaScript 标准库</a> </li><li>DNode 一个基于Node.Js的JSON协议的RPC解决方案</li><li>node-json-rpc</li><li>mqtt lot 物联网相关包</li></ul><p>比较es6-promise就是promise的polyfill，但是bluebird就在promise的功能基础上又加了很多新的功能。</p><p><a href="http://zh.highscore.de/cpp/boost/" target="_blank" rel="noopener">boost c++库</a></p><p>===============<br>机器学习教程</p><p><a href="https://www.youtube.com/watch?v=aircAruvnKk&amp;list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi" target="_blank" rel="noopener">https://www.youtube.com/watch?v=aircAruvnKk&amp;list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi</a></p><p><a href="https://space.bilibili.com/88461692/#/" target="_blank" rel="noopener">3Blue1Brown</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;牛逼的node库，先供着&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Ramda&lt;/li&gt;
+&lt;li&gt;immutable &lt;/li&gt;
+&lt;li&gt;mobx 数据模型框架&lt;/li&gt;
+&lt;li&gt;redux 数据模型框架&lt;/li&gt;
+&lt;li&gt;graphql&lt;/li&gt;
+&lt;li&gt;loadash&lt;/li&gt;
+&lt;li
+      
+    
+    </summary>
+    
+      <category term="node" scheme="http://blog.ku-cat.com/categories/node/"/>
+    
+    
+      <category term="node" scheme="http://blog.ku-cat.com/tags/node/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>三极管工作原理分析</title>
+    <link href="http://blog.ku-cat.com/2018/05/18/electron-audion/"/>
+    <id>http://blog.ku-cat.com/2018/05/18/electron-audion/</id>
+    <published>2018-05-18T04:13:54.000Z</published>
+    <updated>2018-05-18T07:22:17.394Z</updated>
+    
+    <content type="html"><![CDATA[<p>电器最基本的元器件之一得好好学习一下该电器特性。<br>待完善</p><a id="more"></a><p>三极管工作原理分析</p><p><a href="https://blog.csdn.net/a10615/article/details/51627619" target="_blank" rel="noopener">三极管工作原理分析</a></p><p>待完善。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;电器最基本的元器件之一得好好学习一下该电器特性。&lt;br&gt;待完善&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="electron" scheme="http://blog.ku-cat.com/categories/electron/"/>
+    
+    
+      <category term="audion" scheme="http://blog.ku-cat.com/tags/audion/"/>
+    
+  </entry>
   
   <entry>
     <title>Git push与pull的默认行为</title>
@@ -44,7 +139,7 @@
     <link href="http://blog.ku-cat.com/2018/05/12/rpc-introduction-to-Remote-Procedure-calling/"/>
     <id>http://blog.ku-cat.com/2018/05/12/rpc-introduction-to-Remote-Procedure-calling/</id>
     <published>2018-05-12T04:53:54.000Z</published>
-    <updated>2018-05-13T06:08:54.627Z</updated>
+    <updated>2018-05-17T09:53:14.946Z</updated>
     
     <content type="html"><![CDATA[<p>Remote procedure calling allows a client to execute procedures on other networked computers or servers.</p><h2 id="Client-Server-Computing"><a href="#Client-Server-Computing" class="headerlink" title="Client/Server Computing"></a>Client/Server Computing</h2><p>原书《Power Programming with RPC》</p><p>The clinet/server model of computing is a popular model for distributed processing. It applies to any processing environment where one set of entities requests work to be done and another set actually performs the work. </p><a id="more"></a><h2 id="远程与-versus-本地过程调用"><a href="#远程与-versus-本地过程调用" class="headerlink" title="远程与(versus)本地过程调用"></a>远程与(versus)本地过程调用</h2><p>对于应用来说，本地与远程调用两者之间有什么不同？实际两者几乎没有什么区别——就是RPC应用程序接口的主要(<code>primary</code>)目标(<code>goal</code>).</p><p>图1-1(<code>Figure1-1</code>) 阐述（<code>illustrates</code>）了本地与远程程序（<code>procedure</code>）调用之间的不同，在左侧，调用（客户端）进程在自己的地址空间中执行（<code>executes</code>）一个过程。在右侧，客户端和服务器作为两个独立的进程运行，不再需要在同一台计算机上运行，RPC library 处理（<code>handles</code>）两个进程（<code>processes</code>）之间的通信（<code>communication</code>）。</p><p>RPC 使用一种 <code>request-and-reply</code> 通信（communication）模式。客户端程序将请求消息发送到返回应答消息的服务器程序。客户端与服务端进程通过（<code>by means of 译：用或依靠的意思</code>）两个<code>stubs</code>进行通信，一个用户客户端，一个用于服务端。<code>stubs</code>是实现（<code>implement</code>）RPC协议(<code>protocol</code>)的通信(<code>communications</code>)接口（<code>interface</code>），并指定(<code>specify</code>)消息是如何构造(<code>construct</code>)和交换(<code>exchange</code>)的。像<code>ONC RPCGEN</code>这样(<code>typically 译：代表性的，特色的</code>)的协议编译器（<code>compiler</code>）通常用于生成<code>stub</code>。然后<code>stub</code>与客户端程序及服务器程序相连。</p><p><code>stub</code> 包含（<code>contain</code>）将简单的本地过程调用映射(<code>map your..</code>)到一系列(<code>series</code>)网络RPC函数调用的函数。客户端调用其存根中找到的使用RPC库的过程来查找远程进程，然后发出请求。这个远程进程反过来通过（<code>through</code>）服务器<code>stub</code>监听网络。服务器<code>stub</code>执行低级函数，用本地程序调用接口调用（<code>invoke</code>）你的服务例程（<code>routines</code>）。</p>]]></content>
     
@@ -68,9 +163,9 @@
     <link href="http://blog.ku-cat.com/2018/05/11/node-pomelo-add-server/"/>
     <id>http://blog.ku-cat.com/2018/05/11/node-pomelo-add-server/</id>
     <published>2018-05-11T13:19:49.000Z</published>
-    <updated>2018-05-11T13:50:58.363Z</updated>
+    <updated>2018-05-17T09:52:42.772Z</updated>
     
-    <content type="html"><![CDATA[<p>学习笔记：  先记个大概。  </p><p>使用pomelo开发的棋牌类游戏，目前的功能完善，并且满足分布式多服务器扩容的需求，在此基础上需要开发牌友圈，同样需要满足分布式的需求，因此，采用的是创建一个牌友圈的服务放在一个主机上，其它的服务器与其通信，确保各服务器数据一致和完整。</p><a id="more"></a><p>遇到的问题：<br>1.新添加的服务未正常启动，报rpcinvoker方法没找到的错误</p><p>原因：在server.json里添加了一个公会牌友圈的服务,除了gate，connector，game外新增一个union服力后，没有在adminServer.json中添加该服务的token</p><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">"union":[</span><br><span class="line">            &#123;<span class="attr">"id"</span>:<span class="string">"union-server-1"</span>, <span class="attr">"host"</span>:<span class="string">"127.0.0.1"</span>, <span class="attr">"port"</span>:<span class="number">5050</span>&#125;</span><br><span class="line">        ]</span><br></pre></td></tr></table></figure><p>adminServer.json</p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"type"</span>:<span class="string">"union"</span>,</span><br><span class="line">    <span class="attr">"token"</span>: <span class="string">"agarxhqb98rpajloaxn34ga8xrunpagkjwlaw3ruxnpaagl29w4rxn"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>添加后，就正常了。开始出现其它bug，最后查出是rpc调用的传参数不对导致的。</p><p>另外rpc调用的第一个参数是路由规则需要的参数，自定义路由里面可以设计路由规则。</p><p>js里面大多数的是参数错误导致各种bug，仔细点就好了。</p><p>/////<br>A服务器的用户加入到B服务器用户创建的房间中，由于内存数据在B服务器，所以A服务器用户注销自己的连接，把自己的areaid改为B服务器用户的，然后再连接服务器，因为后端服务器是使用areaid路由的，所以就可以路由到同一台服务器上去。</p><p>这个我有问题，为什么不能在服务端直接完成这个重连操作。而要通过客户端重新发起连接，而且连接的服务器还是A服务器，只是前端服务器connector对后端服务器的路由参数变了。</p><p>还有不太明白的就是pomelo的handler连的原理及与rpc的请求原理的差别在哪里。</p>]]></content>
+    <content type="html"><![CDATA[<p>学习笔记：  先记个大概。  </p><p>使用pomelo开发的棋牌类游戏，目前的功能完善，并且满足分布式多服务器扩容的需求，在此基础上需要开发牌友圈，同样需要满足分布式的需求，因此，采用的是创建一个牌友圈的服务放在一个主机上，其它的服务器与其通信，确保各服务器数据一致和完整。</p><a id="more"></a><p>遇到的问题：</p><ol><li>新添加的服务未正常启动，报rpcinvoker方法没找到的错误</li></ol><p>原因：在server.json里添加了一个公会牌友圈的服务,除了gate，connector，game外新增一个union服力后，没有在adminServer.json中添加该服务的token</p><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">"union":[</span><br><span class="line">            &#123;<span class="attr">"id"</span>:<span class="string">"union-server-1"</span>, <span class="attr">"host"</span>:<span class="string">"127.0.0.1"</span>, <span class="attr">"port"</span>:<span class="number">5050</span>&#125;</span><br><span class="line">        ]</span><br></pre></td></tr></table></figure><p>adminServer.json</p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"type"</span>:<span class="string">"union"</span>,</span><br><span class="line">    <span class="attr">"token"</span>: <span class="string">"agarxhqb98rpajloaxn34ga8xrunpagkjwlaw3ruxnpaagl29w4rxn"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>添加后，就正常了。开始出现其它bug，最后查出是rpc调用的传参数不对导致的。</p><ol start="2"><li><p>rpc调用的第一个参数是路由规则需要的参数，自定义路由里面可以设计路由规则。</p></li><li><p>app.rpc.game.gameRemote.onUserConnect(session, uid, sid, cb);</p></li></ol><blockquote><p>gameRemote 调用的时候，gameRemote是小写。如果写成GameRemote则会不成功。</p></blockquote><p>js里面大多数的是参数错误导致各种bug，仔细点就好了。</p><ol start="4"><li>rpc调用必须要执行回调函数。否则会报异常错误。</li><li>布署到服务器发现没有正常运行，最后检查是新加的服务的端口没有开导至的。新服务的端口是用域名的，rpc调用，感觉rpc调用端口最好使用ip，减少cdn解析的时间。如果初始化后，是保持连接的，那就没有必要了，用域名更加方便。（是否为初始化后保持连接，还要进下学习rpc原理才可知道）</li></ol><p>/////<br>A服务器的用户加入到B服务器用户创建的房间中，由于内存数据在B服务器，所以A服务器用户注销自己的连接，把自己的areaid改为B服务器用户的，然后再连接服务器，因为后端服务器是使用areaid路由的，所以就可以路由到同一台服务器上去。</p><p>这个我有问题，为什么不能在服务端直接完成这个重连操作。而要通过客户端重新发起连接，而且连接的服务器还是A服务器，只是前端服务器connector对后端服务器的路由参数变了。</p><p>还有不太明白的就是pomelo的handler连的原理及与rpc的请求原理的差别在哪里。</p>]]></content>
     
     <summary type="html">
     
@@ -411,117 +506,6 @@
       <category term="django" scheme="http://blog.ku-cat.com/tags/django/"/>
     
       <category term="httpie" scheme="http://blog.ku-cat.com/tags/httpie/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>django-rest-framework</title>
-    <link href="http://blog.ku-cat.com/2018/04/13/python-django-rest/"/>
-    <id>http://blog.ku-cat.com/2018/04/13/python-django-rest/</id>
-    <published>2018-04-13T07:50:59.000Z</published>
-    <updated>2018-04-20T14:57:06.377Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="/img/logo2.png" alt=""></p><p>Django REST framework is a powerful and flexible toolkit for building Web APIs.</p><p>Some reasons you might want to use REST framework:</p><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pip install djangorestframework</span><br><span class="line">pip install markdown       <span class="comment"># Markdown support for the browsable API.</span></span><br><span class="line">pip install django-filter  <span class="comment"># Filtering support</span></span><br></pre></td></tr></table></figure><p>我使用的是python3.6, 所以使用pip3安装</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">➜  ngrok git:(master) pip3 install djangorestframework</span><br><span class="line">Collecting djangorestframework</span><br><span class="line">  Downloading djangorestframework-3.8.2-py2.py3-none-any.whl (923kB)</span><br><span class="line">    100% |████████████████████████████████| 931kB 1.1MB/s</span><br><span class="line">Installing collected packages: djangorestframework</span><br><span class="line">Successfully installed djangorestframework-3.8.2</span><br><span class="line">You are using pip version 9.0.1, however version 9.0.3 is available.</span><br><span class="line">You should consider upgrading via the <span class="string">'pip install --upgrade pip'</span> <span class="built_in">command</span>.</span><br><span class="line"></span><br><span class="line"><span class="comment"># ... 安装完成</span></span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;&lt;img src=&quot;/img/logo2.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;Django REST framework is a powerful and flexible toolkit for building Web APIs.&lt;/p&gt;
-&lt;p&gt;Some reas
-      
-    
-    </summary>
-    
-      <category term="python" scheme="http://blog.ku-cat.com/categories/python/"/>
-    
-    
-      <category term="python" scheme="http://blog.ku-cat.com/tags/python/"/>
-    
-      <category term="django" scheme="http://blog.ku-cat.com/tags/django/"/>
-    
-      <category term="REST" scheme="http://blog.ku-cat.com/tags/REST/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>php调试技巧,使用debug_print_backtrace调用堆栈信息</title>
-    <link href="http://blog.ku-cat.com/2018/04/13/php-debug-print-backtrace/"/>
-    <id>http://blog.ku-cat.com/2018/04/13/php-debug-print-backtrace/</id>
-    <published>2018-04-13T03:41:58.000Z</published>
-    <updated>2018-05-04T05:50:32.810Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="/img/v2-02ee40eb71cae2a6b06657fea246f70f_1200x500.jpg" alt=""></p><p>很语言在调试的时候都有堆栈信息显示，调试起来很方便，php使用断点调试也可以显示堆栈信息，但是环境配置有点麻烦。最简单的办法就是使用debug_print_backtrace()函数，直接打印出堆栈，方便快捷，最重要的是比较符合广大php开发人员的习惯（用输出进行调试）</p><a id="more"></a><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//在需要调试的地方使用该函数</span></span><br><span class="line">debug_print_backtrace();</span><br></pre></td></tr></table></figure><p>我这里是swoole控制台的程序，所以在控制台打印结果信息。这里要查的问题是operateLock()方法被连接调用了两次的bug。调用堆栈信息，一切都很清楚了。</p><p>打印显示Command类的方法被调用两次。第一次是QuickStartCommand.php对象里面调用了。</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#0  lib\core\Command-&gt;operateLock(197) called at [/home/niuniu/crazyService/src/command/QuickStartCommand.php:27]</span></span><br><span class="line"><span class="comment">#1  src\command\QuickStartCommand-&gt;logicalProcessing() called at [/home/niuniu/crazyService/lib/core/Command.php:74]</span></span><br><span class="line"><span class="comment">#2  lib\core\Command-&gt;receiveCommand() called at [/home/niuniu/crazyService/src/GameMain.php:167]</span></span><br></pre></td></tr></table></figure><p>第二次是JoinCommand.php调用了该方法，</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#0  lib\core\Command-&gt;operateLock(197) called at [/home/niuniu/crazyService/src/command/JoinCommand.php:27]</span></span><br><span class="line"><span class="comment">#1  src\command\JoinCommand-&gt;logicalProcessing() called at [/home/niuniu/crazyService/lib/core/Command.php:74]</span></span><br><span class="line"><span class="comment">#2  lib\core\Command-&gt;receiveCommand() called at [/home/niuniu/crazyService/src/command/QuickStartCommand.php:110]</span></span><br><span class="line"><span class="comment">#3  src\command\QuickStartCommand-&gt;joinRoom(880460) called at [/home/niuniu/crazyService/src/command/QuickStartCommand.php:47]</span></span><br><span class="line"><span class="comment">#4  src\command\QuickStartCommand-&gt;logicalProcessing() called at [/home/niuniu/crazyService/lib/core/Command.php:74]</span></span><br><span class="line"><span class="comment">#5  lib\core\Command-&gt;receiveCommand() called at [/home/niuniu/crazyService/src/GameMain.php:167]</span></span><br></pre></td></tr></table></figure><p>问题找到，fix bug就是很easy的事情了。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;/img/v2-02ee40eb71cae2a6b06657fea246f70f_1200x500.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;很语言在调试的时候都有堆栈信息显示，调试起来很方便，php使用断点调试也可以显示堆栈信息，但是环境配置有点麻烦。最简单的办法就是使用debug_print_backtrace()函数，直接打印出堆栈，方便快捷，最重要的是比较符合广大php开发人员的习惯（用输出进行调试）&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="php" scheme="http://blog.ku-cat.com/categories/php/"/>
-    
-    
-      <category term="php" scheme="http://blog.ku-cat.com/tags/php/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>django 数据库操作</title>
-    <link href="http://blog.ku-cat.com/2018/04/09/django-db/"/>
-    <id>http://blog.ku-cat.com/2018/04/09/django-db/</id>
-    <published>2018-04-09T01:08:05.000Z</published>
-    <updated>2018-04-12T01:59:59.412Z</updated>
-    
-    <content type="html"><![CDATA[<p>django1.7以后的版本，数据库迁移只有三个命令</p><ul><li>migrate：用来迁移数据库</li><li>makemigrations：用来检测数据库变更和生成数据库迁移文件。</li><li>sqlmigrate：用来把数据库迁移文件转换成数据库语言(displays the SQL statements for a migratioin.）</li></ul><h3 id="1-makemigrations检查models更新创建initial-py文件的操作"><a href="#1-makemigrations检查models更新创建initial-py文件的操作" class="headerlink" title="1. makemigrations检查models更新创建initial.py文件的操作"></a>1. makemigrations检查models更新创建initial.py文件的操作</h3><p>django2.0和1.0对于数据库的操作有些区别了。比如我们对model进行修改，需要执行以下命令进行操作。相当于在bookApp目录下建立migrations目录，并记录下你所有关于modes.py的改动。</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">python3 manage.py makemigrations bookApp <span class="comment"># bookApp为应用名称</span></span><br><span class="line"><span class="comment"># 运行显示如下内容：</span></span><br><span class="line">Migrations <span class="keyword">for</span> <span class="string">'bookApp'</span>:</span><br><span class="line">  bookApp/migrations/0003_auto_20180412_0846.py </span><br><span class="line">  <span class="comment"># 我这里已经是第3次修改了，所以是0003_auto_20180412_0846.py</span></span><br><span class="line">    - Alter field fontDomain on tunnel</span><br></pre></td></tr></table></figure><p>执行以上的命令会在bookApp下创建migrations目录，并生成类似0001_initial.py的文件，但是这个改动还没有作用到数据。</p><p>打开0001_initial.py文件显示如下内容。但并没有更新数据库。记录的是每次对数据库的修改，更像是<font color="red">数据库的版本控制</font></p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Generated by Django 2.0.1 on 2018-04-11 06:45</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> migrations, models</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Migration</span><span class="params">(migrations.Migration)</span>:</span></span><br><span class="line"></span><br><span class="line">    initial = <span class="keyword">True</span></span><br><span class="line"></span><br><span class="line">    dependencies = [</span><br><span class="line">    ]</span><br><span class="line"></span><br><span class="line">    operations = [</span><br><span class="line">        migrations.CreateModel(</span><br><span class="line">            name=<span class="string">'PhoneVerify'</span>,</span><br><span class="line">            fields=[</span><br><span class="line">                (<span class="string">'id'</span>, models.AutoField(auto_created=<span class="keyword">True</span>, primary_key=<span class="keyword">True</span>, serialize=<span class="keyword">False</span>, verbose_name=<span class="string">'ID'</span>)),</span><br><span class="line">                (<span class="string">'phone'</span>, models.CharField(default=<span class="number">0</span>, max_length=<span class="number">11</span>)),</span><br><span class="line">                (<span class="string">'sendDate'</span>, models.DateField(auto_now=<span class="keyword">True</span>)),</span><br><span class="line">            ],</span><br><span class="line">        ),</span><br><span class="line">    ]</span><br></pre></td></tr></table></figure><p>生成这个文件后下面我们可以执行migrate命令把变更更新到数据库。</p><h3 id="2-migrate用来迁移数据库"><a href="#2-migrate用来迁移数据库" class="headerlink" title="2. migrate用来迁移数据库"></a>2. migrate用来迁移数据库</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py migrate     <span class="comment">#用来迁移数据库</span></span><br></pre></td></tr></table></figure><p>数据操作</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">python3 manage.py makemigrations ngrokApp</span><br><span class="line"></span><br><span class="line">Migrations <span class="keyword">for</span> <span class="string">'ngrokApp'</span>:</span><br><span class="line">  ngrokApp/migrations/0002_domain_fans_flowpackage_message_recharge_score_tunnel.py</span><br><span class="line">    - Create model Domain</span><br><span class="line">    - Create model Fans</span><br><span class="line">    - Create model FlowPackage</span><br><span class="line">    - Create model Message</span><br><span class="line">    - Create model Recharge</span><br><span class="line">    - Create model Score</span><br><span class="line">    - Create model Tunnel</span><br><span class="line"></span><br><span class="line">python3 manage.py migrate</span><br><span class="line"></span><br><span class="line">Operations to perform:</span><br><span class="line">  Apply all migrations: admin, auth, contenttypes, ngrokApp, sessions</span><br><span class="line">Running migrations:</span><br><span class="line">  Applying ngrokApp.0002_domain_fans_flowpackage_message_recharge_score_tunnel... OK</span><br><span class="line">  </span><br><span class="line">python3 manage.py sqlmigrate ngrokApp 0002</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;django1.7以后的版本，数据库迁移只有三个命令&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;migrate：用来迁移数据库&lt;/li&gt;
-&lt;li&gt;makemigrations：用来检测数据库变更和生成数据库迁移文件。&lt;/li&gt;
-&lt;li&gt;sqlmigrate：用来把数据库迁移文件转换成数据库
-      
-    
-    </summary>
-    
-      <category term="python" scheme="http://blog.ku-cat.com/categories/python/"/>
-    
-    
-      <category term="python" scheme="http://blog.ku-cat.com/tags/python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>python多线程并发数的控制</title>
-    <link href="http://blog.ku-cat.com/2018/04/08/python-Thread/"/>
-    <id>http://blog.ku-cat.com/2018/04/08/python-Thread/</id>
-    <published>2018-04-08T01:08:05.000Z</published>
-    <updated>2018-04-13T04:01:53.673Z</updated>
-    
-    <content type="html"><![CDATA[<p>多线程能够有效的提升执行效率，但是在我们压扎机器资源的时候也要适当进行，否则可能导致资源消耗过大，得不偿失，因此对并发的控制就变得很重要了。python正好有比较好的控制方法。使用semaphore进行控制。</p><h3 id="信号量：class-threading-Semaphore-value"><a href="#信号量：class-threading-Semaphore-value" class="headerlink" title="信号量：class threading.Semaphore([value])"></a>信号量：class threading.Semaphore([value])</h3><blockquote><p>values是一个内部计数，values默认是1，如果小于0，则会抛出 ValueError 异常，可以用于控制线程数并发数<br>1.acquire([blocking])<br>2.release()</p></blockquote><p>例：数据库的连接数控制</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">maxconnections = <span class="number">5</span> <span class="comment"># 最多5个线程同时运行</span></span><br><span class="line">...</span><br><span class="line">pool_sema = BoundedSemaphore(value=maxconnections)</span><br><span class="line"></span><br><span class="line">pool_sema.acquire() <span class="comment"># 开始时候计数</span></span><br><span class="line">conn = connectdb()</span><br><span class="line"><span class="meta">... </span>use connection ...</span><br><span class="line">conn.close()</span><br><span class="line">pool_sema.release() <span class="comment"># 完成释放，新的线程可以继续运行</span></span><br></pre></td></tr></table></figure><p>SpiderRobot类的pageAnalysis函数创建队列中数量的线程。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">pageAnalysis</span><span class="params">(self)</span>:</span></span><br><span class="line">    semlock = threading.BoundedSemaphore(self.maxconnections)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(self.queue.qsize()):</span><br><span class="line">        semlock.acquire() <span class="comment"># 开始时候计数</span></span><br><span class="line">        details = DetailsAnalysis() <span class="comment"># 该对象继承threading</span></span><br><span class="line">        details.initData(self.queue.get(), semlock)</span><br><span class="line">        details.start() <span class="comment">#线程开始</span></span><br></pre></td></tr></table></figure><p>数据保存线程结束，调用self.semlock.release() 释放线程，进程继续进行。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">saveData</span><span class="params">(self)</span>:</span></span><br><span class="line">    cursor = self.db.cursor()</span><br><span class="line">    sql = <span class="string">"insert into company (company_name,name,mobile,phone,address) value ('"</span> + self.companyName + <span class="string">"','"</span> + self.name + <span class="string">"','"</span> + self.mobile + <span class="string">"','"</span> + self.telephone + <span class="string">"','"</span> + self.address + <span class="string">"')"</span></span><br><span class="line">    print(<span class="string">"sql:"</span>,sql)</span><br><span class="line">    cursor.execute(sql)</span><br><span class="line">    self.db.commit()</span><br><span class="line">    self.semlock.release() <span class="comment"># 当前任务完成，线程释放</span></span><br></pre></td></tr></table></figure><p>以上的代码我们有self.queue.qsize()数量的任务需要去做，我们希望使用多线程并发的形式去处理这些任务，以达到高效的处理，但是由于资源是有限的，所以我们不能够有多少任务就创建多少线程，每个线程是需要占用内存和系统资源的，数量过大可能会消耗掉机器所有资源最终可能导致系统启机，我们肯定希望在同一时间有多少线程在运行是可控的。</p><p>以上的方法可以有效的控制同一时间运行的线程数量。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;多线程能够有效的提升执行效率，但是在我们压扎机器资源的时候也要适当进行，否则可能导致资源消耗过大，得不偿失，因此对并发的控制就变得很重要了。python正好有比较好的控制方法。使用semaphore进行控制。&lt;/p&gt;
-&lt;h3 id=&quot;信号量：class-threading-
-      
-    
-    </summary>
-    
-      <category term="python" scheme="http://blog.ku-cat.com/categories/python/"/>
-    
-    
-      <category term="python" scheme="http://blog.ku-cat.com/tags/python/"/>
-    
-      <category term="thread" scheme="http://blog.ku-cat.com/tags/thread/"/>
     
   </entry>
   

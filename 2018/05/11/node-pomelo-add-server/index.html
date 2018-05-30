@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="一纸墨迹">
 <meta property="og:description" content="学习笔记：  先记个大概。   使用pomelo开发的棋牌类游戏，目前的功能完善，并且满足分布式多服务器扩容的需求，在此基础上需要开发牌友圈，同样需要满足分布式的需求，因此，采用的是创建一个牌友圈的服务放在一个主机上，其它的服务器与其通信，确保各服务器数据一致和完整。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-05-11T13:50:58.363Z">
+<meta property="og:updated_time" content="2018-05-17T09:52:42.772Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="pomelo 添加新的服务模块以及为服务新增组件">
 <meta name="twitter:description" content="学习笔记：  先记个大概。   使用pomelo开发的棋牌类游戏，目前的功能完善，并且满足分布式多服务器扩容的需求，在此基础上需要开发牌友圈，同样需要满足分布式的需求，因此，采用的是创建一个牌友圈的服务放在一个主机上，其它的服务器与其通信，确保各服务器数据一致和完整。">
@@ -439,14 +439,29 @@
         <p>学习笔记：  先记个大概。  </p>
 <p>使用pomelo开发的棋牌类游戏，目前的功能完善，并且满足分布式多服务器扩容的需求，在此基础上需要开发牌友圈，同样需要满足分布式的需求，因此，采用的是创建一个牌友圈的服务放在一个主机上，其它的服务器与其通信，确保各服务器数据一致和完整。</p>
 <a id="more"></a>
-<p>遇到的问题：<br>1.新添加的服务未正常启动，报rpcinvoker方法没找到的错误</p>
+<p>遇到的问题：</p>
+<ol>
+<li>新添加的服务未正常启动，报rpcinvoker方法没找到的错误</li>
+</ol>
 <p>原因：在server.json里添加了一个公会牌友圈的服务,除了gate，connector，game外新增一个union服力后，没有在adminServer.json中添加该服务的token</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">"union":[</span><br><span class="line">            &#123;<span class="attr">"id"</span>:<span class="string">"union-server-1"</span>, <span class="attr">"host"</span>:<span class="string">"127.0.0.1"</span>, <span class="attr">"port"</span>:<span class="number">5050</span>&#125;</span><br><span class="line">        ]</span><br></pre></td></tr></table></figure>
 <p>adminServer.json</p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"type"</span>:<span class="string">"union"</span>,</span><br><span class="line">    <span class="attr">"token"</span>: <span class="string">"agarxhqb98rpajloaxn34ga8xrunpagkjwlaw3ruxnpaagl29w4rxn"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>添加后，就正常了。开始出现其它bug，最后查出是rpc调用的传参数不对导致的。</p>
-<p>另外rpc调用的第一个参数是路由规则需要的参数，自定义路由里面可以设计路由规则。</p>
+<ol start="2">
+<li><p>rpc调用的第一个参数是路由规则需要的参数，自定义路由里面可以设计路由规则。</p>
+</li>
+<li><p>app.rpc.game.gameRemote.onUserConnect(session, uid, sid, cb);</p>
+</li>
+</ol>
+<blockquote>
+<p>gameRemote 调用的时候，gameRemote是小写。如果写成GameRemote则会不成功。</p>
+</blockquote>
 <p>js里面大多数的是参数错误导致各种bug，仔细点就好了。</p>
+<ol start="4">
+<li>rpc调用必须要执行回调函数。否则会报异常错误。</li>
+<li>布署到服务器发现没有正常运行，最后检查是新加的服务的端口没有开导至的。新服务的端口是用域名的，rpc调用，感觉rpc调用端口最好使用ip，减少cdn解析的时间。如果初始化后，是保持连接的，那就没有必要了，用域名更加方便。（是否为初始化后保持连接，还要进下学习rpc原理才可知道）</li>
+</ol>
 <p>/////<br>A服务器的用户加入到B服务器用户创建的房间中，由于内存数据在B服务器，所以A服务器用户注销自己的连接，把自己的areaid改为B服务器用户的，然后再连接服务器，因为后端服务器是使用areaid路由的，所以就可以路由到同一台服务器上去。</p>
 <p>这个我有问题，为什么不能在服务端直接完成这个重连操作。而要通过客户端重新发起连接，而且连接的服务器还是A服务器，只是前端服务器connector对后端服务器的路由参数变了。</p>
 <p>还有不太明白的就是pomelo的handler连的原理及与rpc的请求原理的差别在哪里。</p>
@@ -576,7 +591,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -587,7 +602,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -598,7 +613,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-count">29</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
