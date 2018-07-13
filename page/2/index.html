@@ -324,7 +324,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/05/03/Paxos/">
+    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/05/31/js-operator/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben">
@@ -343,7 +343,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/03/Paxos/" itemprop="url">Paxos</a></h1>
+                <a class="post-title-link" href="/2018/05/31/js-operator/" itemprop="url">js的操作符及运算规则细节</a></h1>
         
 
         <div class="post-meta">
@@ -355,8 +355,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-03T18:21:46+08:00">
-                2018-05-03
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-31T09:27:19+08:00">
+                2018-05-31
               </time>
             
 
@@ -366,6 +366,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/js/" itemprop="url" rel="index">
+                    <span itemprop="name">js</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -374,9 +396,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/05/03/Paxos/#comments" itemprop="discussionUrl">
+                <a href="/2018/05/31/js-operator/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/05/03/Paxos/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/05/31/js-operator/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -384,7 +406,7 @@
 
           
           
-             <span id="/2018/05/03/Paxos/" class="leancloud_visitors" data-flag-title="Paxos">
+             <span id="/2018/05/31/js-operator/" class="leancloud_visitors" data-flag-title="js的操作符及运算规则细节">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -417,7 +439,157 @@
       
         
           
-            
+            <h2 id="一、一元操作符"><a href="#一、一元操作符" class="headerlink" title="一、一元操作符"></a>一、一元操作符</h2><p>1.递增和递减操作符</p>
+<p>前置型    ++i    –i</p>
+<p>后置型    i++    i–</p>
+<p>执行前置递增和递减操作时，变量的值都是在语句被求值之前改变的。</p>
+<p>示例1：</p>
+<p>var a = 10;</p>
+<p>var b = 20;</p>
+<p>var c = ++a + b;    </p>
+<p>var d = a + b;    </p>
+<p>console.log(c);    //31</p>
+<p>console.log(d);    //31</p>
+<p>示例2：</p>
+<p>var a = 10;</p>
+<p>var b = 20;</p>
+<p>var c = a++ + b;</p>
+<p>var d = a + b;</p>
+<p>console.log(c);    //30</p>
+<p>console.log(d);    //31</p>
+<p>示例3：</p>
+<p>var a = 1;</p>
+<p>var b = ++a +a;</p>
+<p>var c = a++ +a;</p>
+<p>console.log(b);    //4</p>
+<p>console.log(c);    //5</p>
+<p>数值、字符串、布尔值、对象都能使用递增和递减操作符；如果不是数值数据，则调用转型函数Number()转换为数值，再进行相应的操作。</p>
+<p>2.一元加和减操作符</p>
+<p>一元加和减操作符，主要用于基本的算术运算，也可以用于转换数据类型。</p>
+<p> 一元加操作符，放在数值前面，对数值不会产生任何影响；但是放在非数值前面，则会调用Number()函数，对该非数值的值进行转换。</p>
+<p>一元减操作符，用于表示负数；应用于非数值时，先调用Number()函数，再将得到的结果转换为负数。</p>
+<p>二、位操作符    ——    好高大上的感觉，先行跳过，有待补充</p>
+<p>三、布尔操作符</p>
+<p>1.逻辑非（！）</p>
+<p>逻辑非操作符可用于JS中的任何值，首先将它的操作数转换为布尔值，然后对其取反。</p>
+<p>规则如下：</p>
+<p>如果操作数是一个对象，转换为布尔值为true，取反，为false；</p>
+<p>如果操作数是null，转换为布尔值为false，取反，为true；</p>
+<p>空字符串，false，取反，为true；</p>
+<p>非空字符串，true，取反，为false；</p>
+<p>数值0/NaN，为false，取反，为true；</p>
+<p>非0数值（Infinite），为true，取反，为false；</p>
+<p>undefined，为false，取反，为true。</p>
+<p>同时使用两个逻辑非操作符（!!）可将一个值转换为其对应的布尔值，其结果与调用Boolean()函数一致。</p>
+<p>2.逻辑与（&amp;&amp;）</p>
+<p>逻辑与操作属于短路操作，如果第一个操作数是false，则结果直接为false；如果第一个操作数为true，则结果为第二个操作数。</p>
+<p>在有一个（或两个）操作数不是布尔值的情况下，把操作数转换为布尔值进行逻辑与操作，但是返回结果为原值。</p>
+<p>示例1：</p>
+<p>var a = 0;</p>
+<p>var b = “string”;</p>
+<p>console.log(a&amp;&amp;b);    //0</p>
+<p>console.log(b&amp;&amp;a);    //0</p>
+<p>注意：在逻辑与操作中使用未定义的值可能会导致错误。</p>
+<p>var x = 5;</p>
+<p>alert(x&amp;&amp;y);    //ReferenceError: y is not defined</p>
+<p>3.逻辑或（||）</p>
+<p>逻辑或也是短路操作，如果第一个值为true，则直接返回true，无需对第二个操作数求值；如果第一个操作数为false，则返回第二个操作数；即使第二个操作数也是false，也是返回第二个操作数。</p>
+<p>在有一个（或两个）操作数不是布尔值的情况下，把操作数转换为布尔值进行逻辑或操作，但是返回结果为原值。</p>
+<p>var x = 0;</p>
+<p>var y = null;</p>
+<p>console.log(x||y);    //null</p>
+<p>注意：在逻辑或操作中使用未定义的值可能会导致错误。</p>
+<p>利用逻辑或，避免为变量赋null或undefined值：</p>
+<p>var myObject = preferredObject || backupObject;</p>
+<p>四、乘性操作符</p>
+<p>1.乘法（*）</p>
+<p>如果操作数都是数值，执行常规乘法计算；</p>
+<p>如果有一个数是NaN，结构为NaN；</p>
+<p>如果Infinite与0相乘，结果为NaN；</p>
+<p>如果Infinite与非0数值相乘，结果为Infinite；</p>
+<p>如果Infinite与Infinite相乘，结果为Infinite；</p>
+<p>如果有一个操作数不是数值，则调用Number()函数，将其转换为数值，再应用上述规则。</p>
+<p>2.除法（/）</p>
+<p>如果操作数都是数值，执行常规除法计算；</p>
+<p>如果有一个数是NaN，结果为NaN；</p>
+<p>Infinite除以Infinite，结果为NaN；</p>
+<p>Infinite除以非0数值，结果为Infinite；</p>
+<p>Infinite除以0，结果为Infinite；</p>
+<p>0除以0，结果为NaN；</p>
+<p>非0有穷数除以0，结果为Infinite；</p>
+<p>如果有一个操作数不是数值，则调用Number()函数，将其转换为数值，再应用上述规则。</p>
+<p>3.求模（%）</p>
+<p>如果操作数都是数值，执行常规除法计算，返回所得的余数；</p>
+<p>如果有一个数是NaN，结果为NaN；</p>
+<p>如果Infinite除以Infinite，结果为NaN；</p>
+<p>如果Infinite除以有穷数，结果为NaN；</p>
+<p>如果有穷数除以0，结果为NaN；</p>
+<p>如果被除数有穷除以Infinite，结果为被除数。</p>
+<p>0除以任何数，结果为0；</p>
+<p>如果有一个操作数不是数值，则调用Number()函数，将其转换为数值，再应用上述规则。</p>
+<p>五、加性操作符</p>
+<p>1.加法</p>
+<p>如果有一个数是NaN，结果为NaN；</p>
+<p>如果是Infinite加Infinite，结果为Infinite；</p>
+<p>如果是-Infinite加-Infinite，结果为-Infinite；</p>
+<p>如果是Infinite加-Infinite，结果为NaN；</p>
+<p>如果是+0加+0，结果为+0；</p>
+<p>如果是-0加-0，结果为-0；</p>
+<p>如果是+0加-0，结果为+0；</p>
+<p>如果两个操作数都是字符串，则将两个字符串拼接起来；</p>
+<p>如果只有一个操作数是字符串，则将另一个操作数转换为字符串，然后将两个字符串拼接起来。</p>
+<p>如果有一个操作数是对象、数值或布尔值，则调用它们的toString()方法取得相应的字符串值；</p>
+<p>对于undefined和null，则调用String()函数并取得相应的字符串“undefined”和“null”。</p>
+<p>var a = 5;</p>
+<p>var b = 10;</p>
+<p>var message = “The sum of a and b is” + a + b;    //结果为510</p>
+<p>var message = “The sum of a and b is” + (a + b);    //结果为15</p>
+<p>2.减法</p>
+<p>如果有一个数是NaN，结果为NaN；</p>
+<p>如果是Infinite减Infinite，结果为NaN；</p>
+<p>如果是-Infinite减-Infinite，结果为NaN；</p>
+<p>如果是Infinite减-Infinite，结果为Infinite；</p>
+<p>如果是-Infinite减Infinite，结果为-Infinite；</p>
+<p>如果是+0减+0，结果为+0；</p>
+<p>如果是-0减-0，结果为+0；</p>
+<p>如果是+0减-0，结果为-0；</p>
+<p>如果有一个操作数是字符串、布尔值、null或undefined，则先调用Number()函数；</p>
+<p>如果有一个操作数是对象，则先调用valueOf()方法，如果得到的值是NaN，则减法的结果就是NaN；如果没有valueOf()方法，则调用其toString()方法。</p>
+<p>六、关系操作符</p>
+<p>小于（&lt;）、小于等于（&lt;=）、大于（&gt;）、大于等于（&gt;=）</p>
+<p>如果两个操作数都是数值，则执行数值比较；</p>
+<p>如果两个操作数都是字符串，则比较两个字符串对应的字符编码值；</p>
+<p>如果一个操作数是数值，则将另一个操作数转换为数值；</p>
+<p>如果一个操作数是对象，则调用这个对象的valueOf()方法；如果对象没有valueOf()方法，则调用toString()方法。</p>
+<p>如果一个操作数是布尔值，则将其转换为数值；</p>
+<p>任何操作数与NaN进行比较，结果都会返回false。</p>
+<p>七、相等操作符</p>
+<p>1.相等（==）与不相等（!=）</p>
+<p>先转换操作数，再比较相等性；基本规则：</p>
+<p>如果有一个操作数是布尔值，在比较之前先转换为数值；</p>
+<p>如果有一个操作数是字符串，另一个操作数是数值，在比较之前先将字符串转换为数值；</p>
+<p>如果有一个操作数是对象，另一个不是，则调用对象的valueOf()方法；</p>
+<p>如果两个操作数都是对象，则比较它们是不是同一个对象；如果两个操作数都指向同一个对象，则返回true，否则返回false；</p>
+<p>null值与undefined值相等；</p>
+<p>在比较相等性之前，不能将null值或undefined转换成其它任何值；</p>
+<p>NaN不等于任何值，即使是它自己。</p>
+<p>2.全等（===）和不全等（!===）</p>
+<p>只有在不转换数值类型的情况下相等，全等才会返回true；</p>
+<p>null == undefined；但是null !== undefined</p>
+<p>八、条件操作符</p>
+<p>variable = boolean_expression ? true_value : false_value;</p>
+<p>对布尔值表达式求值，若为true，则返回第一个值；若为false，则返回第二个值。</p>
+<p>九、赋值操作符</p>
+<p>赋值操作符的作用，将右边的值赋给左边的变量。</p>
+<p>如果在赋值操作符的左边添加其它操作符，可以完成复合赋值操作，简化赋值操作；</p>
+<p>var num = 10;</p>
+<p>num +=10 ;    //num = num +10;</p>
+<p>十、逗号操作符</p>
+<p>在一条语句中声明多个变量；</p>
+<p>用于赋值，表达式中的每一项都会被计算，但是返回最后一项；</p>
+<p>var num = (1,2,3,4,5);</p>
+<p>alert(num);    //5</p>
+
           
         
       
@@ -465,7 +637,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/05/03/python-django-Authentication/">
+    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/05/30/ben-ci/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben">
@@ -484,7 +656,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/03/python-django-Authentication/" itemprop="url">django REST-Framework的授权Authentication方案</a></h1>
+                <a class="post-title-link" href="/2018/05/30/ben-ci/" itemprop="url">古城深巷、青砖黛瓦，惊艳了谁的时光？深度美文!</a></h1>
         
 
         <div class="post-meta">
@@ -496,8 +668,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-03T13:13:59+08:00">
-                2018-05-03
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-30T15:46:37+08:00">
+                2018-05-30
               </time>
             
 
@@ -519,8 +691,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
+                  <a href="/categories/poem/" itemprop="url" rel="index">
+                    <span itemprop="name">poem</span>
                   </a>
                 </span>
 
@@ -537,9 +709,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/05/03/python-django-Authentication/#comments" itemprop="discussionUrl">
+                <a href="/2018/05/30/ben-ci/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/05/03/python-django-Authentication/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/05/30/ben-ci/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -547,7 +719,7 @@
 
           
           
-             <span id="/2018/05/03/python-django-Authentication/" class="leancloud_visitors" data-flag-title="django REST-Framework的授权Authentication方案">
+             <span id="/2018/05/30/ben-ci/" class="leancloud_visitors" data-flag-title="古城深巷、青砖黛瓦，惊艳了谁的时光？深度美文!">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -579,13 +751,13 @@
 
       
         
-          <p><a href="http://www.django-rest-framework.org/api-guide/authentication/" target="_blank" rel="noopener">官方文档原文</a></p>
-<p>身份验证是将传入请求与一组识别凭证（例如请求来自的用户或其签名的令牌）相关联的机制。然后，权限和限制策略可以使用这些凭据来确定请求是否应该被允许.</p>
-<p>REST框架提供了许多开箱即用的身份验证方案，还允许您实施自定义方案。<br>在许可和节流检查发生之前，在允许任何其他代码继续之前，验证总是在视图的开始运行。</p>
-<p><code>request.user</code>属性通常会设置为<code>contrib.auth</code>包的<code>User</code>类的一个实例。<br><code>request.auth</code>属性用于任何其他身份验证信息，例如，它可以用来表示请求已签名的身份验证令牌。</p>
+          <p><a href="http://blog.sina.com.cn/s/blog_14de1cf2f0102wg4g.html" target="_blank" rel="noopener">古城深巷、青砖黛瓦，惊艳了谁的时光</a></p>
+<p>长相思『雨』句。</p>
+<p>蟋蟀瑟，蟋蟀息。瓦上沙沙压虫鸣，夜已到何时？<br>昨天去，明日来。信那庭前青砖道，新苔又一地。</p>
+<p>青砖黛瓦，古城深巷</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/05/03/python-django-Authentication/#more" rel="contents">
+            <a class="btn" href="/2018/05/30/ben-ci/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -636,7 +808,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/05/02/nodejs-pm2/">
+    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/05/30/mac-mdwork/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben">
@@ -655,7 +827,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/02/nodejs-pm2/" itemprop="url">nodejs pm2的简单应用</a></h1>
+                <a class="post-title-link" href="/2018/05/30/mac-mdwork/" itemprop="url">Mac系统mds、mds_stores、mdworker疯狂工作的问题</a></h1>
         
 
         <div class="post-meta">
@@ -667,8 +839,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-02T17:01:41+08:00">
-                2018-05-02
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-30T15:33:35+08:00">
+                2018-05-30
               </time>
             
 
@@ -690,8 +862,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/nodejs/" itemprop="url" rel="index">
-                    <span itemprop="name">nodejs</span>
+                  <a href="/categories/mac/" itemprop="url" rel="index">
+                    <span itemprop="name">mac</span>
                   </a>
                 </span>
 
@@ -708,9 +880,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/05/02/nodejs-pm2/#comments" itemprop="discussionUrl">
+                <a href="/2018/05/30/mac-mdwork/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/05/02/nodejs-pm2/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/05/30/mac-mdwork/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -718,322 +890,7 @@
 
           
           
-             <span id="/2018/05/02/nodejs-pm2/" class="leancloud_visitors" data-flag-title="nodejs pm2的简单应用">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>pm2是一个进程管理工具,可以用它来管理你的node进程，并查看node进程的状态，当然也支持性能监控，进程守护，负载均衡等功能。</p>
-<p>开发过程中建议时不时的参看官方详细命令行使用</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/05/02/nodejs-pm2/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/30/code-x/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ben">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/img/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一纸墨迹">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/30/code-x/" itemprop="url">Pycharm 激活码激活方法及有效激活码</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-30T00:21:32+08:00">
-                2018-04-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/04/30/code-x/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/04/30/code-x/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2018/04/30/code-x/" class="leancloud_visitors" data-flag-title="Pycharm 激活码激活方法及有效激活码">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>pycharm 非常好用，网络授权突然被封了，各种网络授权地址都不起作用了。最后找到一个激活码授权方式，正好激活使用，土豪们还是建议买正版。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/30/code-x/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/29/swoole-mysql-redis-connection/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ben">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/img/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一纸墨迹">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/29/swoole-mysql-redis-connection/" itemprop="url">swoole 创建数据库连接的问题以及如何配置 task_worker_num</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-29T23:30:26+08:00">
-                2018-04-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/swoole/" itemprop="url" rel="index">
-                    <span itemprop="name">swoole</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/04/29/swoole-mysql-redis-connection/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/04/29/swoole-mysql-redis-connection/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2018/04/29/swoole-mysql-redis-connection/" class="leancloud_visitors" data-flag-title="swoole 创建数据库连接的问题以及如何配置 task_worker_num">
+             <span id="/2018/05/30/mac-mdwork/" class="leancloud_visitors" data-flag-title="Mac系统mds、mds_stores、mdworker疯狂工作的问题">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1066,33 +923,10 @@
       
         
           
-            <p>swoole是多进程的运行的，共用1个redis或mysql连接，那么返回的结果无法保证被哪个进程处理。持有连接的进程理论上都可以对这个连接进行读写，这样数据就发生错乱了。所以是不能共用1个连接的。</p>
-<h6 id="所以在多个进程之间，一定不能共用连接"><a href="#所以在多个进程之间，一定不能共用连接" class="headerlink" title="所以在多个进程之间，一定不能共用连接"></a>所以在多个进程之间，一定不能共用连接</h6><ul>
-<li>在swoole_server中，应当在 <code>onWorkerStart</code> 中创建连接对象</li>
-<li>在swoole_process中，应当在 <code>swoole_process-&gt;start</code> 后，子进程的回调函数中创建连接对象</li>
-<li>对使用<code>pcntl_fork</code>的程序同样有效</li>
-</ul>
-<h3 id="示例："><a href="#示例：" class="headerlink" title="示例："></a>示例：</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$serv = <span class="keyword">new</span> swoole_server(<span class="string">"0.0.0.0"</span>, <span class="number">9502</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//必须在onWorkerStart回调中创建redis/mysql连接</span></span><br><span class="line">$serv-&gt;on(<span class="string">'workerstart'</span>, <span class="function"><span class="keyword">function</span><span class="params">($serv, $id)</span> </span>&#123;</span><br><span class="line">    $redis = <span class="keyword">new</span> redis;</span><br><span class="line">    $redis-&gt;connect(<span class="string">'127.0.0.1'</span>, <span class="number">6379</span>);</span><br><span class="line">    $serv-&gt;redis = $redis;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">$serv-&gt;on(<span class="string">'receive'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(swoole_server $serv, $fd, $from_id, $data)</span> </span>&#123; </span><br><span class="line">    $value = $serv-&gt;redis-&gt;get(<span class="string">"key"</span>);</span><br><span class="line">    $serv-&gt;send($fd, <span class="string">"Swoole: "</span>.$value);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">$serv-&gt;start();</span><br></pre></td></tr></table></figure>
-<p>task进程也是worker进程的一种,上面的案例中给每个worker进程分配一个redis链接并保存到了serv对象中,你在ontask回调函数中,参数第一个就是serv,和worker一样,直接在函数体内进行调用就可以了。</p>
-<p>不管是<code>event worker</code> 还是 <code>task workder</code> 启动的时候都会触发 <code>onWorkStart</code> 事件。</p>
-<h2 id="如何配置-task-worker-num-参数"><a href="#如何配置-task-worker-num-参数" class="headerlink" title="如何配置 task_worker_num 参数"></a>如何配置 <code>task_worker_num</code> 参数</h2><p>配置Task进程的数量，配置此参数后将会启用task功能。所以Server务必要注册onTask、onFinish2个事件回调函数。如果没有注册，服务器程序将无法启动。</p>
-<p>Task进程是同步阻塞的，配置方式与Worker同步模式一致。</p>
-<h4 id="计算方法"><a href="#计算方法" class="headerlink" title="计算方法"></a>计算方法</h4><ul>
-<li>单个task的处理耗时，如100ms，那一个进程1秒就可以处理1/0.1=10个task</li>
-<li>task投递的速度，如每秒产生2000个task</li>
-<li>2000/10=200，需要设置task_worker_num =&gt; 200，启用200个task进程</li>
-</ul>
-<blockquote>
-<p>Task进程内不能使用swoole_server-&gt;task<br>Task进程内不能使用swoole_mysql、swoole_redis、swoole_event等异步IO函数</p>
-</blockquote>
-<hr>
-<h2 id="优化连接数，提高swoole对mysql或redis连接资源的性能优化"><a href="#优化连接数，提高swoole对mysql或redis连接资源的性能优化" class="headerlink" title="优化连接数，提高swoole对mysql或redis连接资源的性能优化"></a>优化连接数，提高swoole对mysql或redis连接资源的性能优化</h2><p>优化连接数的性能方面的操作有以下几个步骤</p>
-<ol>
-<li>mysql需要有断线重连的功能设计</li>
-<li>创建连接必须在onWorkStart方法中创建连接，确保一个进程只使用一个连接</li>
-<li>根据项目计算并设置合理的<code>task_worker_num</code>参数值</li>
-</ol>
-
+            <p>这几个进程都是为了Spotlight索引而疯狂的，解决方案：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mdutil -a -i off</span><br></pre></td></tr></table></figure>
+<p>打开</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mdutil -a -i on</span><br></pre></td></tr></table></figure>
           
         
       
@@ -1140,7 +974,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/29/swoole-worker-task/">
+    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/05/21/node-grpc/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben">
@@ -1159,7 +993,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/04/29/swoole-worker-task/" itemprop="url">如何识别swoole的worker进程和task进程</a></h1>
+                <a class="post-title-link" href="/2018/05/21/node-grpc/" itemprop="url">node-grpc</a></h1>
         
 
         <div class="post-meta">
@@ -1171,8 +1005,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-29T23:18:58+08:00">
-                2018-04-29
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-21T10:44:12+08:00">
+                2018-05-21
               </time>
             
 
@@ -1182,28 +1016,6 @@
           </span>
 
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/swoole/" itemprop="url" rel="index">
-                    <span itemprop="name">swoole</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
 
           
             
@@ -1212,9 +1024,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/04/29/swoole-worker-task/#comments" itemprop="discussionUrl">
+                <a href="/2018/05/21/node-grpc/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/04/29/swoole-worker-task/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/05/21/node-grpc/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1222,7 +1034,7 @@
 
           
           
-             <span id="/2018/04/29/swoole-worker-task/" class="leancloud_visitors" data-flag-title="如何识别swoole的worker进程和task进程">
+             <span id="/2018/05/21/node-grpc/" class="leancloud_visitors" data-flag-title="node-grpc">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1255,9 +1067,7 @@
       
         
           
-            <p>本质上workder和task进程是没有什么区别的，只是在设计上各自分工不同，在使用的过程中，我们可以通过<code>worker_id</code>来区分当前的进程是worker进程还是task进程。分析源码可以知道<code>$worker_id</code> <code>&gt;=</code> <code>$serv-&gt;setting[&#39;worker_num&#39;]</code>都是<strong>task workder</strong>进程，否则都 <strong>event worker</strong></p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">my_onWorkerStart</span><span class="params">($serv, $worker_id)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">global</span> $argv;  </span><br><span class="line">    <span class="keyword">if</span> ($worker_id &gt;= $serv-&gt;setting[<span class="string">'worker_num'</span>]) &#123;  </span><br><span class="line">        swoole_set_process_name(<span class="string">"php &#123;$argv[0]&#125; task worker"</span>);  </span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;  </span><br><span class="line">        swoole_set_process_name(<span class="string">"php &#123;$argv[0]&#125; event worker"</span>);  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="comment">//echo "WorkerStart|MasterPid=&#123;$serv-&gt;master_pid&#125;|Manager_pid=&#123;$serv-&gt;manager_pid&#125;|WorkerId=$worker_id\n";  </span></span><br><span class="line">    <span class="comment">//$serv-&gt;addtimer(500); //500ms  </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="不管是event-worker-还是-task-workder-启动的时候都会触发-onWorkStart-事件。"><a href="#不管是event-worker-还是-task-workder-启动的时候都会触发-onWorkStart-事件。" class="headerlink" title="不管是event worker 还是 task workder 启动的时候都会触发 onWorkStart 事件。"></a>不管是event worker 还是 task workder 启动的时候都会触发 <code>onWorkStart</code> 事件。</h5>
+            
           
         
       
@@ -1305,7 +1115,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/26/nodejs-pomelo-monitor/">
+    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/05/21/node-Ramda/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben">
@@ -1324,7 +1134,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/04/26/nodejs-pomelo-monitor/" itemprop="url">pomelo 组件概述</a></h1>
+                <a class="post-title-link" href="/2018/05/21/node-Ramda/" itemprop="url">node的库</a></h1>
         
 
         <div class="post-meta">
@@ -1336,8 +1146,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-26T19:41:06+08:00">
-                2018-04-26
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-21T10:15:51+08:00">
+                2018-05-21
               </time>
             
 
@@ -1359,8 +1169,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/pomelo/" itemprop="url" rel="index">
-                    <span itemprop="name">pomelo</span>
+                  <a href="/categories/node/" itemprop="url" rel="index">
+                    <span itemprop="name">node</span>
                   </a>
                 </span>
 
@@ -1377,9 +1187,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/04/26/nodejs-pomelo-monitor/#comments" itemprop="discussionUrl">
+                <a href="/2018/05/21/node-Ramda/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/04/26/nodejs-pomelo-monitor/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/05/21/node-Ramda/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1387,175 +1197,7 @@
 
           
           
-             <span id="/2018/04/26/nodejs-pomelo-monitor/" class="leancloud_visitors" data-flag-title="pomelo 组件概述">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><strong>组件概述</strong><br>我们知道，pomelo的应用程序执行的全部过程，就是对其相应组件的生命周期的管理，实际的所有逻辑功能均由pomelo组件提供。pomelo内建提供了十多个组件，这些组件适用于不同的服务器，提供不同的功能。有些组件提供的功能比较复杂，有些则比较简单。下面我们将以提供的功能为主线来阐述pomelo提供的内建组件。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/26/nodejs-pomelo-monitor/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/23/python-captcha/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ben">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/img/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一纸墨迹">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/23/python-captcha/" itemprop="url">python使用captcha模块生成图形验证码</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-23T16:05:52+08:00">
-                2018-04-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/04/23/python-captcha/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/04/23/python-captcha/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2018/04/23/python-captcha/" class="leancloud_visitors" data-flag-title="python使用captcha模块生成图形验证码">
+             <span id="/2018/05/21/node-Ramda/" class="leancloud_visitors" data-flag-title="node的库">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1588,26 +1230,43 @@
       
         
           
-            <p>captcha模块是专门用于生成图形验证码和语音验证码的Python三方库。图形验证码支持数字和英文单词。</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>可以直接使用 pip 安装，或者到<a href="https://github.com/lepture/captcha" target="_blank" rel="noopener">项目地址</a>下载安装。</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install captcha</span><br></pre></td></tr></table></figure>
-<h2 id="模块依赖"><a href="#模块依赖" class="headerlink" title="模块依赖"></a>模块依赖</h2><p>由于 captcha 模块内部是采用 PIL 模块生成图片，所以需要安装 PIL 模块才可以正常使用。</p>
-<h2 id="生成验证码"><a href="#生成验证码" class="headerlink" title="生成验证码"></a>生成验证码</h2><h4 id="一般方法"><a href="#一般方法" class="headerlink" title="一般方法"></a>一般方法</h4><p>使用其中 image 模块中的 ImageCaptcha 类生成图形验证码：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> captcha.image <span class="keyword">import</span> ImageCaptcha</span><br><span class="line"></span><br><span class="line">img = ImageCaptcha()</span><br><span class="line">image = img.generate_image(<span class="string">'python'</span>)</span><br><span class="line">image.show()</span><br><span class="line">image.save(<span class="string">'python.jpg'</span>)</span><br></pre></td></tr></table></figure>
-<p>generate_image（） 方法接收一个字符串参数，将生成次字符串内容的验证码，返回的是 PIL 模块中的 Image 对象。可以使用 PIL 模块中 Image 对象的任何支持方法对其操作。例子中的 image.show() 和 image.save() 均是 PIL 模块的方法。</p>
-<h4 id="具体参数"><a href="#具体参数" class="headerlink" title="具体参数"></a>具体参数</h4><p>ImageCaptcha(width=160, height=60, fonts=None, font_sizes=None) 类实例化时，还可传入四个参数:</p>
+            <p>牛逼的node库，先供着</p>
 <ul>
-<li>width: 生成验证码图片的宽度，默认为160个像素；</li>
-<li>height： 生成验证码图片的高度，默认为60个像素；</li>
-<li>fonts： 字体文件路径，用于生成验证码时的字体，默认使用模块自带 DroidSansMono.ttf 字体，你可以将字体文件放入list或者tuple传入,生成验证码时将随机使用;</li>
-<li>font_sizes： 控制验证码字体大小，同fonts一样，接收一个list或者tuple,随机使用。</li>
+<li>Ramda</li>
+<li>immutable </li>
+<li>mobx 数据模型框架</li>
+<li>redux 数据模型框架</li>
+<li>graphql</li>
+<li>loadash</li>
+<li>loadash.merge</li>
+<li>Electron就是使用node+chrome的应用程序框架</li>
+<li>yarn</li>
+<li>npm</li>
+<li>webpack</li>
+<li>react</li>
+<li>gulp</li>
+<li>babel</li>
+<li>jest</li>
+<li>es6</li>
+<li>react</li>
+<li>react-router-dom</li>
+<li>classnames</li>
+<li>webpack</li>
+<li>type Script</li>
+<li>promise <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise" target="_blank" rel="noopener">promise</a> [重点]</li>
+<li>await [重点]</li>
+<li>async <a href="https://caolan.github.io/async/" target="_blank" rel="noopener">async官网</a> [重点]</li>
+<li>fetch [重点] then (then不是框架，是Promise里的一个方法)</li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects" target="_blank" rel="noopener">JavaScript 标准库</a> </li>
+<li>DNode 一个基于Node.Js的JSON协议的RPC解决方案</li>
+<li>node-json-rpc</li>
+<li>mqtt lot 物联网相关包</li>
 </ul>
-<h4 id="主要方法"><a href="#主要方法" class="headerlink" title="主要方法"></a>主要方法</h4><ul>
-<li>generate_image(chars) 生成验证码的核心方法，生成chars内容的验证码图片的Image对象。</li>
-<li>create_captcha_image(chars, color, background) generate_image的实现方法，可以通过重写此方法来实现自定义验证码样式。</li>
-<li>create_noise_dots(image, color, width=3, number=30) 生成验证码干扰点。</li>
-<li>create_noise_curve(image, color) 生成验证码干扰曲线。</li>
-</ul>
+<p>比较es6-promise就是promise的polyfill，但是bluebird就在promise的功能基础上又加了很多新的功能。</p>
+<p><a href="http://zh.highscore.de/cpp/boost/" target="_blank" rel="noopener">boost c++库</a></p>
+<p>===============<br>机器学习教程</p>
+<p><a href="https://www.youtube.com/watch?v=aircAruvnKk&amp;list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi" target="_blank" rel="noopener">https://www.youtube.com/watch?v=aircAruvnKk&amp;list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi</a></p>
+<p><a href="https://space.bilibili.com/88461692/#/" target="_blank" rel="noopener">3Blue1Brown</a></p>
 
           
         
@@ -1656,7 +1315,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/21/django-nginx-uWSGI/">
+    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/05/18/electron-audion/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben">
@@ -1675,7 +1334,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/04/21/django-nginx-uWSGI/" itemprop="url">nginx+uWSGI搭建python环境运行REST-Framework</a></h1>
+                <a class="post-title-link" href="/2018/05/18/electron-audion/" itemprop="url">三极管工作原理分析</a></h1>
         
 
         <div class="post-meta">
@@ -1687,8 +1346,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-21T18:04:46+08:00">
-                2018-04-21
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-18T12:13:54+08:00">
+                2018-05-18
               </time>
             
 
@@ -1710,8 +1369,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
+                  <a href="/categories/electron/" itemprop="url" rel="index">
+                    <span itemprop="name">electron</span>
                   </a>
                 </span>
 
@@ -1728,9 +1387,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/04/21/django-nginx-uWSGI/#comments" itemprop="discussionUrl">
+                <a href="/2018/05/18/electron-audion/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/04/21/django-nginx-uWSGI/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/05/18/electron-audion/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1738,7 +1397,7 @@
 
           
           
-             <span id="/2018/04/21/django-nginx-uWSGI/" class="leancloud_visitors" data-flag-title="nginx+uWSGI搭建python环境运行REST-Framework">
+             <span id="/2018/05/18/electron-audion/" class="leancloud_visitors" data-flag-title="三极管工作原理分析">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1770,10 +1429,10 @@
 
       
         
-          <p>uWSGI是一个Web应用服务器，它具有应用服务器，代理，进程管理及应用监控等功能。它支持WSGI协议，同时它也支持自有的uWSGI协议，该协议据说性能非常高，而且内存占用率低，为mod_wsgi的一半左右，它还支持多应用的管理及应用的性能监控。虽然uWSGI本身就可以直接用来当Web服务器，但一般建议将其作为应用服务器配合Nginx一起使用，这样可以更好的发挥Nginx在Web端的强大功能。</p>
+          <p>电器最基本的元器件之一得好好学习一下该电器特性。<br>待完善</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/04/21/django-nginx-uWSGI/#more" rel="contents">
+            <a class="btn" href="/2018/05/18/electron-audion/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1824,7 +1483,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/20/django-bug/">
+    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/05/13/git-default/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben">
@@ -1843,7 +1502,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/04/20/django-bug/" itemprop="url">django on_delete 的报错修复</a></h1>
+                <a class="post-title-link" href="/2018/05/13/git-default/" itemprop="url">Git push与pull的默认行为</a></h1>
         
 
         <div class="post-meta">
@@ -1855,8 +1514,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-20T22:35:59+08:00">
-                2018-04-20
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-13T12:53:54+08:00">
+                2018-05-13
               </time>
             
 
@@ -1878,8 +1537,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
+                  <a href="/categories/Git/" itemprop="url" rel="index">
+                    <span itemprop="name">Git</span>
                   </a>
                 </span>
 
@@ -1896,9 +1555,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/04/20/django-bug/#comments" itemprop="discussionUrl">
+                <a href="/2018/05/13/git-default/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/04/20/django-bug/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/05/13/git-default/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1906,7 +1565,7 @@
 
           
           
-             <span id="/2018/04/20/django-bug/" class="leancloud_visitors" data-flag-title="django on_delete 的报错修复">
+             <span id="/2018/05/13/git-default/" class="leancloud_visitors" data-flag-title="Git push与pull的默认行为">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1938,18 +1597,522 @@
 
       
         
-          
-            <p><img src="/img/12.jpg" alt=""></p>
-<p>给model增加外键，后报如下的错误：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">userId = models.ForeignKey(User, on_delete=models.CASCADE)</span><br></pre></td></tr></table></figure>
-<p>报以下的错误：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">....</span><br><span class="line">  File <span class="string">"/Users/ben/django/ngrokProject/ngrok/ngrokApp/models.py"</span>, line 12, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    class Tunnel(models.Model):</span><br><span class="line">  File <span class="string">"/Users/ben/django/ngrokProject/ngrok/ngrokApp/models.py"</span>, line 14, <span class="keyword">in</span> Tunnel</span><br><span class="line">    userId = models.ForeignKey(User)</span><br><span class="line">TypeError: __init__() missing 1 required positional argument: <span class="string">'on_delete'</span></span><br><span class="line">Performing system checks...</span><br></pre></td></tr></table></figure>
-<p>解决办法：<br>将第十一行的代码改为：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">herobook=models.ForeignKey(<span class="string">'BookInfo'</span>,on_delete=models.CASCADE,)</span><br></pre></td></tr></table></figure>
-<p>即在外键值的后面加上 on_delete=models.CASCADE</p>
-<p>目前还没有找到为什么。不过这样确实能解决问题，以后找到根本原因后再来补笔记。</p>
+          <p>一直以来对<code>git push</code>与<code>git pull</code>命令的默认行为感觉混乱，今天抽空总结下。</p>
+<h3 id="git-push"><a href="#git-push" class="headerlink" title="git push"></a><code>git push</code></h3><p>通常对于一个本地的新建分支，例如<code>git checkout -b develop</code>, 在<code>develop</code>分支<code>commit</code>了代码之后，如果直接执行<code>git push</code>命令，<code>develop</code>分支将不会被<code>push</code>到远程仓库（但此时<code>git push</code>操作有可能会推送一些代码到远程仓库，这取决于我们本地<code>git config</code>配置中的<code>push.default</code>默认行为，下文将会逐一详解）。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/05/13/git-default/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/05/12/rpc-introduction-to-Remote-Procedure-calling/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一纸墨迹">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/12/rpc-introduction-to-Remote-Procedure-calling/" itemprop="url">introduction to Remote Procedure calling</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-12T12:53:54+08:00">
+                2018-05-12
+              </time>
+            
+
+            
+
+            
+          </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Distributed/" itemprop="url" rel="index">
+                    <span itemprop="name">Distributed</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/12/rpc-introduction-to-Remote-Procedure-calling/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/05/12/rpc-introduction-to-Remote-Procedure-calling/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/05/12/rpc-introduction-to-Remote-Procedure-calling/" class="leancloud_visitors" data-flag-title="introduction to Remote Procedure calling">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>Remote procedure calling allows a client to execute procedures on other networked computers or servers.</p>
+<h2 id="Client-Server-Computing"><a href="#Client-Server-Computing" class="headerlink" title="Client/Server Computing"></a>Client/Server Computing</h2><p>原书《Power Programming with RPC》</p>
+<p>The clinet/server model of computing is a popular model for distributed processing. It applies to any processing environment where one set of entities requests work to be done and another set actually performs the work. </p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/05/12/rpc-introduction-to-Remote-Procedure-calling/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/05/11/node-pomelo-add-server/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一纸墨迹">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/11/node-pomelo-add-server/" itemprop="url">pomelo 添加新的服务模块以及为服务新增组件</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-11T21:19:49+08:00">
+                2018-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/node/" itemprop="url" rel="index">
+                    <span itemprop="name">node</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/11/node-pomelo-add-server/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/05/11/node-pomelo-add-server/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/05/11/node-pomelo-add-server/" class="leancloud_visitors" data-flag-title="pomelo 添加新的服务模块以及为服务新增组件">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>学习笔记：  先记个大概。  </p>
+<p>使用pomelo开发的棋牌类游戏，目前的功能完善，并且满足分布式多服务器扩容的需求，在此基础上需要开发牌友圈，同样需要满足分布式的需求，因此，采用的是创建一个牌友圈的服务放在一个主机上，其它的服务器与其通信，确保各服务器数据一致和完整。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/05/11/node-pomelo-add-server/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/05/07/life-lqz/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一纸墨迹">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/07/life-lqz/" itemprop="url">一剪梅·红藕香残玉簟秋</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-07T10:06:05+08:00">
+                2018-05-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/life/" itemprop="url" rel="index">
+                    <span itemprop="name">life</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/07/life-lqz/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/05/07/life-lqz/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/05/07/life-lqz/" class="leancloud_visitors" data-flag-title="一剪梅·红藕香残玉簟秋">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>《一剪梅·红藕香残玉簟秋》是宋代女词人李清照的作品。此词作于词人与丈夫赵明诚离别之后，寄寓着词人不忍离别的一腔深情，反映出初婚少妇沉溺于情海之中的纯洁心灵。全词以女性特有的沉挚情感，丝毫“不落俗套”的表现方式，展示出一种婉约之美，格调清新，意境幽美，称得上是一首工致精巧的别情佳作。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/05/07/life-lqz/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1987,7 +2150,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2037,7 +2200,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-count">53</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2048,7 +2211,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -2059,7 +2222,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

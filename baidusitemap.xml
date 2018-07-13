@@ -4,6 +4,218 @@
 
     
   <url>
+    <loc>http://blog.ku-cat.com/2018/07/10/c-readn-writen-readline/</loc>
+    <lastmod>2018-07-13T07:52:20.994Z</lastmod>
+    <data>
+        <display>
+        <title>read、readn、writen和readline函数</title>
+        <pubTime>2018-07-10T08:03:17.000Z</pubTime>
+        
+        <tag>c</tag>
+         
+        <tag>unix</tag>
+         
+         
+           
+             
+              <breadCrumb title="c/c++" url="http://blog.ku-cat.com/categories/c-c/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.ku-cat.com/2018/07/05/ben-01/</loc>
+    <lastmod>2018-07-05T06:43:08.611Z</lastmod>
+    <data>
+        <display>
+        <title>荀子.劝学篇</title>
+        <pubTime>2018-07-05T06:42:23.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.ku-cat.com/2018/07/03/makefile/</loc>
+    <lastmod>2018-07-03T06:21:37.100Z</lastmod>
+    <data>
+        <display>
+        <title>make命令</title>
+        <pubTime>2018-07-03T00:51:59.000Z</pubTime>
+        
+        <tag>make</tag>
+         
+        <tag>makefile</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.ku-cat.com/2018/06/28/ngrok-desc/</loc>
+    <lastmod>2018-06-29T15:17:40.848Z</lastmod>
+    <data>
+        <display>
+        <title>内网穿透-ngrok原理浅析</title>
+        <pubTime>2018-06-28T06:53:58.000Z</pubTime>
+        
+        <tag>go</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.ku-cat.com/2018/06/29/go-gob/</loc>
+    <lastmod>2018-06-29T01:53:09.819Z</lastmod>
+    <data>
+        <display>
+        <title>go语言的gob包的介绍与使用</title>
+        <pubTime>2018-06-29T01:30:04.000Z</pubTime>
+        
+        <tag>go</tag>
+         
+        <tag>gob</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.ku-cat.com/2018/06/29/go-net/</loc>
+    <lastmod>2018-06-29T01:30:09.812Z</lastmod>
+    <data>
+        <display>
+        <title>Go语言中Socket通信TCP服务端</title>
+        <pubTime>2018-06-29T00:42:47.000Z</pubTime>
+        
+        <tag>go</tag>
+         
+        <tag>net</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.ku-cat.com/2018/06/27/node-async-await/</loc>
+    <lastmod>2018-06-27T07:27:18.422Z</lastmod>
+    <data>
+        <display>
+        <title>async和await浅析</title>
+        <pubTime>2018-06-27T07:23:22.000Z</pubTime>
+        
+        <tag>node</tag>
+         
+         
+           
+             
+              <breadCrumb title="node" url="http://blog.ku-cat.com/categories/node/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.ku-cat.com/2018/06/25/poke-ai/</loc>
+    <lastmod>2018-06-25T08:11:30.979Z</lastmod>
+    <data>
+        <display>
+        <title>斗地主的Ai算法设计思路</title>
+        <pubTime>2018-06-25T08:03:17.000Z</pubTime>
+        
+        <tag>game</tag>
+         
+        <tag>poke</tag>
+         
+        <tag>ai</tag>
+         
+         
+           
+             
+              <breadCrumb title="game" url="http://blog.ku-cat.com/categories/game/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.ku-cat.com/2018/06/19/c-function/</loc>
+    <lastmod>2018-06-19T07:44:06.134Z</lastmod>
+    <data>
+        <display>
+        <title>c++ 函数指针</title>
+        <pubTime>2018-06-19T06:35:01.000Z</pubTime>
+        
+        <tag>c++</tag>
+         
+         
+           
+             
+              <breadCrumb title="c/c++" url="http://blog.ku-cat.com/categories/c-c/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.ku-cat.com/2018/05/31/js-operator/</loc>
+    <lastmod>2018-06-04T11:11:47.026Z</lastmod>
+    <data>
+        <display>
+        <title>js的操作符及运算规则细节</title>
+        <pubTime>2018-05-31T01:27:19.000Z</pubTime>
+        
+        <tag>js</tag>
+         
+        <tag>node</tag>
+         
+         
+           
+             
+              <breadCrumb title="js" url="http://blog.ku-cat.com/categories/js/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.ku-cat.com/2018/05/31/js-es6-spread/</loc>
+    <lastmod>2018-05-31T01:52:23.601Z</lastmod>
+    <data>
+        <display>
+        <title>es6 扩展运算符 spread(...)</title>
+        <pubTime>2018-05-31T01:44:30.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://blog.ku-cat.com/2018/05/30/ben-ci/</loc>
     <lastmod>2018-05-30T07:55:42.772Z</lastmod>
     <data>

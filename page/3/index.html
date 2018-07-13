@@ -324,7 +324,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/17/django-debug-httpie/">
+    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/05/05/react-webpack-eject/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben">
@@ -343,7 +343,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/04/17/django-debug-httpie/" itemprop="url">django-rest-framework调试工具 httpie</a></h1>
+                <a class="post-title-link" href="/2018/05/05/react-webpack-eject/" itemprop="url">如何创建和扩展React App的Webpack配置</a></h1>
         
 
         <div class="post-meta">
@@ -355,8 +355,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-17T21:35:59+08:00">
-                2018-04-17
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-05T15:38:34+08:00">
+                2018-05-05
               </time>
             
 
@@ -366,28 +366,6 @@
           </span>
 
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
 
           
             
@@ -396,9 +374,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/04/17/django-debug-httpie/#comments" itemprop="discussionUrl">
+                <a href="/2018/05/05/react-webpack-eject/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/04/17/django-debug-httpie/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/05/05/react-webpack-eject/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -406,7 +384,7 @@
 
           
           
-             <span id="/2018/04/17/django-debug-httpie/" class="leancloud_visitors" data-flag-title="django-rest-framework调试工具 httpie">
+             <span id="/2018/05/05/react-webpack-eject/" class="leancloud_visitors" data-flag-title="如何创建和扩展React App的Webpack配置">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -439,20 +417,9 @@
       
         
           
-            <p><img src="/img/city.jpg" alt=""></p>
-<p>使用django-rest-framework可以方便快捷的写出优美的restfull API，同样django也有非常方便的调试工具httpie。</p>
-<h3 id="安装httpie"><a href="#安装httpie" class="headerlink" title="安装httpie"></a>安装httpie</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install httpie</span><br></pre></td></tr></table></figure>
-<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><h2 id="使用GET"><a href="#使用GET" class="headerlink" title="使用GET"></a>使用GET</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http http://127.0.0.1:8000/domain/4/</span><br></pre></td></tr></table></figure>
-<p>返回的结果以非常友好的形式显示，而且还是彩色的！</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Allow: GET, POST, HEAD, OPTIONS</span><br><span class="line">Content-Length: 200</span><br><span class="line">Content-Type: application/json</span><br><span class="line">Date: Fri, 20 Apr 2018 15:02:48 GMT</span><br><span class="line">Server: WSGIServer/0.2 CPython/3.6.4</span><br><span class="line">Vary: Accept, Cookie</span><br><span class="line">X-Frame-Options: SAMEORIGIN</span><br><span class="line"></span><br><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">"ICP"</span>: null,</span><br><span class="line">        <span class="string">"ICP_master"</span>: null,</span><br><span class="line">        <span class="string">"ICP_type"</span>: null,</span><br><span class="line">        <span class="string">"addDate"</span>: <span class="string">"2018-04-12T15:31:03.291517+08:00"</span>,</span><br><span class="line">        <span class="string">"domain"</span>: <span class="string">"acc.s1.ilaputa.cn"</span>,</span><br><span class="line">        <span class="string">"expire"</span>: <span class="string">"2018-04-12T15:31:03.291571+08:00"</span>,</span><br><span class="line">        <span class="string">"status"</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="string">"type"</span>: 3,</span><br><span class="line">        <span class="string">"userId"</span>: 4</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-<p>可以指定返回的数据格式。</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">http http://127.0.0.1:8000/domain/4/ Accept:text/html</span><br><span class="line"><span class="comment"># 返回网页形式，是django-rest-framework的界面代码</span></span><br><span class="line">http http://127.0.0.1:8000/domain/4/ Accept:application/json</span><br><span class="line"><span class="comment"># 返回json格式</span></span><br></pre></td></tr></table></figure>
-<h2 id="使用POST方法"><a href="#使用POST方法" class="headerlink" title="使用POST方法"></a>使用POST方法</h2><p>调试post接口如下使用</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http --form POST http://127.0.0.1:8000/user/ username=18657986877 password=123456 verify=abc</span><br></pre></td></tr></table></figure>
-<p>返回结果</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">HTTP/1.1 400 Bad Request</span><br><span class="line">Allow: POST, OPTIONS</span><br><span class="line">Content-Length: 59</span><br><span class="line">Content-Type: application/json</span><br><span class="line">Date: Fri, 20 Apr 2018 15:08:38 GMT</span><br><span class="line">Server: WSGIServer/0.2 CPython/3.6.4</span><br><span class="line">Vary: Accept, Cookie</span><br><span class="line">X-Frame-Options: SAMEORIGIN</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"username"</span>: [</span><br><span class="line">        <span class="string">"已存在一位使用该名字的用户。"</span></span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>调用登录信息的使用方法</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http -a admin:admin123 POST http://127.0.0.1:8000/user/</span><br></pre></td></tr></table></figure>
+            <p><a href="https://zhaozhiming.github.io/blog/2018/01/08/create-react-app-override-webpack-config/" target="_blank" rel="noopener">原文：如何扩展 Create React App 的 Webpack 配置
+</a></p>
+<p>待进一步学习哇</p>
 
           
         
@@ -501,7 +468,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/13/python-django-rest/">
+    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/05/03/Paxos/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben">
@@ -520,7 +487,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/04/13/python-django-rest/" itemprop="url">django-rest-framework</a></h1>
+                <a class="post-title-link" href="/2018/05/03/Paxos/" itemprop="url">Paxos</a></h1>
         
 
         <div class="post-meta">
@@ -532,8 +499,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-13T15:50:59+08:00">
-                2018-04-13
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-03T18:21:46+08:00">
+                2018-05-03
               </time>
             
 
@@ -543,28 +510,6 @@
           </span>
 
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
 
           
             
@@ -573,9 +518,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/04/13/python-django-rest/#comments" itemprop="discussionUrl">
+                <a href="/2018/05/03/Paxos/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/04/13/python-django-rest/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/05/03/Paxos/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -583,7 +528,7 @@
 
           
           
-             <span id="/2018/04/13/python-django-rest/" class="leancloud_visitors" data-flag-title="django-rest-framework">
+             <span id="/2018/05/03/Paxos/" class="leancloud_visitors" data-flag-title="Paxos">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -616,12 +561,7 @@
       
         
           
-            <p><img src="/img/logo2.png" alt=""></p>
-<p>Django REST framework is a powerful and flexible toolkit for building Web APIs.</p>
-<p>Some reasons you might want to use REST framework:</p>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pip install djangorestframework</span><br><span class="line">pip install markdown       <span class="comment"># Markdown support for the browsable API.</span></span><br><span class="line">pip install django-filter  <span class="comment"># Filtering support</span></span><br></pre></td></tr></table></figure>
-<p>我使用的是python3.6, 所以使用pip3安装</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">➜  ngrok git:(master) pip3 install djangorestframework</span><br><span class="line">Collecting djangorestframework</span><br><span class="line">  Downloading djangorestframework-3.8.2-py2.py3-none-any.whl (923kB)</span><br><span class="line">    100% |████████████████████████████████| 931kB 1.1MB/s</span><br><span class="line">Installing collected packages: djangorestframework</span><br><span class="line">Successfully installed djangorestframework-3.8.2</span><br><span class="line">You are using pip version 9.0.1, however version 9.0.3 is available.</span><br><span class="line">You should consider upgrading via the <span class="string">'pip install --upgrade pip'</span> <span class="built_in">command</span>.</span><br><span class="line"></span><br><span class="line"><span class="comment"># ... 安装完成</span></span><br></pre></td></tr></table></figure>
+            
           
         
       
@@ -669,7 +609,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/13/php-debug-print-backtrace/">
+    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/05/03/python-django-Authentication/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben">
@@ -688,7 +628,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/04/13/php-debug-print-backtrace/" itemprop="url">php调试技巧,使用debug_print_backtrace调用堆栈信息</a></h1>
+                <a class="post-title-link" href="/2018/05/03/python-django-Authentication/" itemprop="url">django REST-Framework的授权Authentication方案</a></h1>
         
 
         <div class="post-meta">
@@ -700,8 +640,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-13T11:41:58+08:00">
-                2018-04-13
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-03T13:13:59+08:00">
+                2018-05-03
               </time>
             
 
@@ -723,8 +663,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/php/" itemprop="url" rel="index">
-                    <span itemprop="name">php</span>
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
                   </a>
                 </span>
 
@@ -741,9 +681,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/04/13/php-debug-print-backtrace/#comments" itemprop="discussionUrl">
+                <a href="/2018/05/03/python-django-Authentication/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/04/13/php-debug-print-backtrace/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/05/03/python-django-Authentication/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -751,7 +691,7 @@
 
           
           
-             <span id="/2018/04/13/php-debug-print-backtrace/" class="leancloud_visitors" data-flag-title="php调试技巧,使用debug_print_backtrace调用堆栈信息">
+             <span id="/2018/05/03/python-django-Authentication/" class="leancloud_visitors" data-flag-title="django REST-Framework的授权Authentication方案">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -783,11 +723,13 @@
 
       
         
-          <p><img src="/img/v2-02ee40eb71cae2a6b06657fea246f70f_1200x500.jpg" alt=""></p>
-<p>很语言在调试的时候都有堆栈信息显示，调试起来很方便，php使用断点调试也可以显示堆栈信息，但是环境配置有点麻烦。最简单的办法就是使用debug_print_backtrace()函数，直接打印出堆栈，方便快捷，最重要的是比较符合广大php开发人员的习惯（用输出进行调试）</p>
+          <p><a href="http://www.django-rest-framework.org/api-guide/authentication/" target="_blank" rel="noopener">官方文档原文</a></p>
+<p>身份验证是将传入请求与一组识别凭证（例如请求来自的用户或其签名的令牌）相关联的机制。然后，权限和限制策略可以使用这些凭据来确定请求是否应该被允许.</p>
+<p>REST框架提供了许多开箱即用的身份验证方案，还允许您实施自定义方案。<br>在许可和节流检查发生之前，在允许任何其他代码继续之前，验证总是在视图的开始运行。</p>
+<p><code>request.user</code>属性通常会设置为<code>contrib.auth</code>包的<code>User</code>类的一个实例。<br><code>request.auth</code>属性用于任何其他身份验证信息，例如，它可以用来表示请求已签名的身份验证令牌。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/04/13/php-debug-print-backtrace/#more" rel="contents">
+            <a class="btn" href="/2018/05/03/python-django-Authentication/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -838,7 +780,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/09/django-db/">
+    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/05/02/nodejs-pm2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben">
@@ -857,7 +799,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/04/09/django-db/" itemprop="url">django 数据库操作</a></h1>
+                <a class="post-title-link" href="/2018/05/02/nodejs-pm2/" itemprop="url">nodejs pm2的简单应用</a></h1>
         
 
         <div class="post-meta">
@@ -869,360 +811,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-09T09:08:05+08:00">
-                2018-04-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/04/09/django-db/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/04/09/django-db/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2018/04/09/django-db/" class="leancloud_visitors" data-flag-title="django 数据库操作">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>django1.7以后的版本，数据库迁移只有三个命令</p>
-<ul>
-<li>migrate：用来迁移数据库</li>
-<li>makemigrations：用来检测数据库变更和生成数据库迁移文件。</li>
-<li>sqlmigrate：用来把数据库迁移文件转换成数据库语言(displays the SQL statements for a migratioin.）</li>
-</ul>
-<h3 id="1-makemigrations检查models更新创建initial-py文件的操作"><a href="#1-makemigrations检查models更新创建initial-py文件的操作" class="headerlink" title="1. makemigrations检查models更新创建initial.py文件的操作"></a>1. makemigrations检查models更新创建initial.py文件的操作</h3><p>django2.0和1.0对于数据库的操作有些区别了。比如我们对model进行修改，需要执行以下命令进行操作。相当于在bookApp目录下建立migrations目录，并记录下你所有关于modes.py的改动。</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">python3 manage.py makemigrations bookApp <span class="comment"># bookApp为应用名称</span></span><br><span class="line"><span class="comment"># 运行显示如下内容：</span></span><br><span class="line">Migrations <span class="keyword">for</span> <span class="string">'bookApp'</span>:</span><br><span class="line">  bookApp/migrations/0003_auto_20180412_0846.py </span><br><span class="line">  <span class="comment"># 我这里已经是第3次修改了，所以是0003_auto_20180412_0846.py</span></span><br><span class="line">    - Alter field fontDomain on tunnel</span><br></pre></td></tr></table></figure>
-<p>执行以上的命令会在bookApp下创建migrations目录，并生成类似0001_initial.py的文件，但是这个改动还没有作用到数据。</p>
-<p>打开0001_initial.py文件显示如下内容。但并没有更新数据库。记录的是每次对数据库的修改，更像是<font color="red">数据库的版本控制</font></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Generated by Django 2.0.1 on 2018-04-11 06:45</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> migrations, models</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Migration</span><span class="params">(migrations.Migration)</span>:</span></span><br><span class="line"></span><br><span class="line">    initial = <span class="keyword">True</span></span><br><span class="line"></span><br><span class="line">    dependencies = [</span><br><span class="line">    ]</span><br><span class="line"></span><br><span class="line">    operations = [</span><br><span class="line">        migrations.CreateModel(</span><br><span class="line">            name=<span class="string">'PhoneVerify'</span>,</span><br><span class="line">            fields=[</span><br><span class="line">                (<span class="string">'id'</span>, models.AutoField(auto_created=<span class="keyword">True</span>, primary_key=<span class="keyword">True</span>, serialize=<span class="keyword">False</span>, verbose_name=<span class="string">'ID'</span>)),</span><br><span class="line">                (<span class="string">'phone'</span>, models.CharField(default=<span class="number">0</span>, max_length=<span class="number">11</span>)),</span><br><span class="line">                (<span class="string">'sendDate'</span>, models.DateField(auto_now=<span class="keyword">True</span>)),</span><br><span class="line">            ],</span><br><span class="line">        ),</span><br><span class="line">    ]</span><br></pre></td></tr></table></figure>
-<p>生成这个文件后下面我们可以执行migrate命令把变更更新到数据库。</p>
-<h3 id="2-migrate用来迁移数据库"><a href="#2-migrate用来迁移数据库" class="headerlink" title="2. migrate用来迁移数据库"></a>2. migrate用来迁移数据库</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py migrate     <span class="comment">#用来迁移数据库</span></span><br></pre></td></tr></table></figure>
-<p>数据操作</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">python3 manage.py makemigrations ngrokApp</span><br><span class="line"></span><br><span class="line">Migrations <span class="keyword">for</span> <span class="string">'ngrokApp'</span>:</span><br><span class="line">  ngrokApp/migrations/0002_domain_fans_flowpackage_message_recharge_score_tunnel.py</span><br><span class="line">    - Create model Domain</span><br><span class="line">    - Create model Fans</span><br><span class="line">    - Create model FlowPackage</span><br><span class="line">    - Create model Message</span><br><span class="line">    - Create model Recharge</span><br><span class="line">    - Create model Score</span><br><span class="line">    - Create model Tunnel</span><br><span class="line"></span><br><span class="line">python3 manage.py migrate</span><br><span class="line"></span><br><span class="line">Operations to perform:</span><br><span class="line">  Apply all migrations: admin, auth, contenttypes, ngrokApp, sessions</span><br><span class="line">Running migrations:</span><br><span class="line">  Applying ngrokApp.0002_domain_fans_flowpackage_message_recharge_score_tunnel... OK</span><br><span class="line">  </span><br><span class="line">python3 manage.py sqlmigrate ngrokApp 0002</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/08/python-Thread/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ben">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/img/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一纸墨迹">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/08/python-Thread/" itemprop="url">python多线程并发数的控制</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-08T09:08:05+08:00">
-                2018-04-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/04/08/python-Thread/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/04/08/python-Thread/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2018/04/08/python-Thread/" class="leancloud_visitors" data-flag-title="python多线程并发数的控制">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>多线程能够有效的提升执行效率，但是在我们压扎机器资源的时候也要适当进行，否则可能导致资源消耗过大，得不偿失，因此对并发的控制就变得很重要了。python正好有比较好的控制方法。使用semaphore进行控制。</p>
-<h3 id="信号量：class-threading-Semaphore-value"><a href="#信号量：class-threading-Semaphore-value" class="headerlink" title="信号量：class threading.Semaphore([value])"></a>信号量：class threading.Semaphore([value])</h3><blockquote>
-<p>values是一个内部计数，values默认是1，如果小于0，则会抛出 ValueError 异常，可以用于控制线程数并发数<br>1.acquire([blocking])<br>2.release()</p>
-</blockquote>
-<p>例：数据库的连接数控制</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">maxconnections = <span class="number">5</span> <span class="comment"># 最多5个线程同时运行</span></span><br><span class="line">...</span><br><span class="line">pool_sema = BoundedSemaphore(value=maxconnections)</span><br><span class="line"></span><br><span class="line">pool_sema.acquire() <span class="comment"># 开始时候计数</span></span><br><span class="line">conn = connectdb()</span><br><span class="line"><span class="meta">... </span>use connection ...</span><br><span class="line">conn.close()</span><br><span class="line">pool_sema.release() <span class="comment"># 完成释放，新的线程可以继续运行</span></span><br></pre></td></tr></table></figure>
-<p>SpiderRobot类的pageAnalysis函数创建队列中数量的线程。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">pageAnalysis</span><span class="params">(self)</span>:</span></span><br><span class="line">    semlock = threading.BoundedSemaphore(self.maxconnections)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(self.queue.qsize()):</span><br><span class="line">        semlock.acquire() <span class="comment"># 开始时候计数</span></span><br><span class="line">        details = DetailsAnalysis() <span class="comment"># 该对象继承threading</span></span><br><span class="line">        details.initData(self.queue.get(), semlock)</span><br><span class="line">        details.start() <span class="comment">#线程开始</span></span><br></pre></td></tr></table></figure>
-<p>数据保存线程结束，调用self.semlock.release() 释放线程，进程继续进行。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">saveData</span><span class="params">(self)</span>:</span></span><br><span class="line">    cursor = self.db.cursor()</span><br><span class="line">    sql = <span class="string">"insert into company (company_name,name,mobile,phone,address) value ('"</span> + self.companyName + <span class="string">"','"</span> + self.name + <span class="string">"','"</span> + self.mobile + <span class="string">"','"</span> + self.telephone + <span class="string">"','"</span> + self.address + <span class="string">"')"</span></span><br><span class="line">    print(<span class="string">"sql:"</span>,sql)</span><br><span class="line">    cursor.execute(sql)</span><br><span class="line">    self.db.commit()</span><br><span class="line">    self.semlock.release() <span class="comment"># 当前任务完成，线程释放</span></span><br></pre></td></tr></table></figure>
-<p>以上的代码我们有self.queue.qsize()数量的任务需要去做，我们希望使用多线程并发的形式去处理这些任务，以达到高效的处理，但是由于资源是有限的，所以我们不能够有多少任务就创建多少线程，每个线程是需要占用内存和系统资源的，数量过大可能会消耗掉机器所有资源最终可能导致系统启机，我们肯定希望在同一时间有多少线程在运行是可控的。</p>
-<p>以上的方法可以有效的控制同一时间运行的线程数量。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/04/nodejs-process/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ben">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/img/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一纸墨迹">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/04/nodejs-process/" itemprop="url">nodejs的process.nextTick()的原理及应用场景</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-04T16:17:42+08:00">
-                2018-04-04
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-02T17:01:41+08:00">
+                2018-05-02
               </time>
             
 
@@ -1262,9 +852,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/04/04/nodejs-process/#comments" itemprop="discussionUrl">
+                <a href="/2018/05/02/nodejs-pm2/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/04/04/nodejs-process/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/05/02/nodejs-pm2/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1272,7 +862,7 @@
 
           
           
-             <span id="/2018/04/04/nodejs-process/" class="leancloud_visitors" data-flag-title="nodejs的process.nextTick()的原理及应用场景">
+             <span id="/2018/05/02/nodejs-pm2/" class="leancloud_visitors" data-flag-title="nodejs pm2的简单应用">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1304,18 +894,11 @@
 
       
         
-          <p>nodejs的API原型：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">process.nextTick(callback[, ...args])</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>callback &lt;Function&gt;</code></li>
-<li><code>...args &lt;any&gt;</code> 调用 callback时传递给它的额外参数</li>
-</ul>
-<p>说明：<code>process.nextTick()</code>方法将 callback 添加到”next tick 队列”。 一旦当前事件轮询队列的任务全部完成，在next tick队列中的所有callbacks会被依次调用。</p>
-<p>这种方式不是<code>setTimeout(fn, 0)</code>的别名。它更加有效率。事件轮询随后的ticks 调用，会在任何I/O事件（包括定时器）之前运行。</p>
-<p>以上的是API的原文说明，说得比较明白了。</p>
+          <p>pm2是一个进程管理工具,可以用它来管理你的node进程，并查看node进程的状态，当然也支持性能监控，进程守护，负载均衡等功能。</p>
+<p>开发过程中建议时不时的参看官方详细命令行使用</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/04/04/nodejs-process/#more" rel="contents">
+            <a class="btn" href="/2018/05/02/nodejs-pm2/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1366,7 +949,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/04/python-django-session/">
+    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/30/code-x/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben">
@@ -1385,7 +968,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/04/04/python-django-session/" itemprop="url">django登录写入session的操作</a></h1>
+                <a class="post-title-link" href="/2018/04/30/code-x/" itemprop="url">Pycharm 激活码激活方法及有效激活码</a></h1>
         
 
         <div class="post-meta">
@@ -1397,8 +980,154 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-04T08:25:42+08:00">
-                2018-04-04
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-30T00:21:32+08:00">
+                2018-04-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/04/30/code-x/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/04/30/code-x/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/04/30/code-x/" class="leancloud_visitors" data-flag-title="Pycharm 激活码激活方法及有效激活码">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>pycharm 非常好用，网络授权突然被封了，各种网络授权地址都不起作用了。最后找到一个激活码授权方式，正好激活使用，土豪们还是建议买正版。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/30/code-x/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/29/swoole-mysql-redis-connection/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一纸墨迹">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/29/swoole-mysql-redis-connection/" itemprop="url">swoole 创建数据库连接的问题以及如何配置 task_worker_num</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-29T23:30:26+08:00">
+                2018-04-29
               </time>
             
 
@@ -1420,8 +1149,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
+                  <a href="/categories/swoole/" itemprop="url" rel="index">
+                    <span itemprop="name">swoole</span>
                   </a>
                 </span>
 
@@ -1438,9 +1167,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/04/04/python-django-session/#comments" itemprop="discussionUrl">
+                <a href="/2018/04/29/swoole-mysql-redis-connection/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/04/04/python-django-session/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/04/29/swoole-mysql-redis-connection/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1448,7 +1177,7 @@
 
           
           
-             <span id="/2018/04/04/python-django-session/" class="leancloud_visitors" data-flag-title="django登录写入session的操作">
+             <span id="/2018/04/29/swoole-mysql-redis-connection/" class="leancloud_visitors" data-flag-title="swoole 创建数据库连接的问题以及如何配置 task_worker_num">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1481,12 +1210,32 @@
       
         
           
-            <p>用户登录是需要把用户的相关数据写入session的，在django中用户登录的操作代码如下所示：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">checkuser</span><span class="params">(request)</span>:</span>  </span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">'POST'</span>:  </span><br><span class="line">        user = request.POST.get(<span class="string">'username'</span>)  </span><br><span class="line">        passwd = request.POST.get(<span class="string">'password'</span>)  </span><br><span class="line">        <span class="keyword">print</span> user,passwd  </span><br><span class="line">        <span class="keyword">try</span>:  </span><br><span class="line">            passwd_db = User.objects.get(username=user).password  </span><br><span class="line">        <span class="keyword">except</span>:  </span><br><span class="line">            messages.add_message(request,messages.WARNING,<span class="string">'找不到用户'</span>)  </span><br><span class="line">            <span class="keyword">return</span> render(request, <span class="string">'showdb/login.html'</span>,&#123;<span class="string">'login_info_list'</span>:<span class="string">"请使用正确的账号密码登陆"</span>&#125;,)  </span><br><span class="line">        <span class="keyword">if</span> passwd == passwd_db :  </span><br><span class="line">            request.session[<span class="string">'username'</span>] = user  </span><br><span class="line">            request.session.set_expiry(<span class="number">600</span>)  </span><br><span class="line">            <span class="keyword">return</span> render(request, <span class="string">'showdb/index.html'</span>,&#123;  </span><br><span class="line">            <span class="string">'welcome'</span>:<span class="string">"欢迎你"</span>&#125;)  </span><br><span class="line">        <span class="keyword">else</span>:  </span><br><span class="line">            messages.add_message(request,messages.WARNING,<span class="string">'密码错误'</span>)  </span><br><span class="line">            <span class="keyword">return</span> render(request, <span class="string">'showdb/login.html'</span>,&#123;<span class="string">'login_info_list'</span>:<span class="string">"请使用正确的账号密码登陆"</span>&#125;,)</span><br></pre></td></tr></table></figure>
-<p>以上是登录部分的代码，写入session的部分</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">request.session[<span class="string">'username'</span>] = user  <span class="comment"># 用户名写入session</span></span><br><span class="line">request.session.set_expiry(<span class="number">600</span>) <span class="comment"># 设置session有效时间。</span></span><br></pre></td></tr></table></figure>
-<p>前端代码示例</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;% <span class="keyword">if</span> request.session.username %&#125;  </span><br><span class="line">    &lt;h4 style='font-family:楷体;'&gt;&#123;&#123; welcome&#125;&#125; &#123;&#123; request.session.username &#125;&#125; &lt;/h4&gt;  </span><br><span class="line">&#123;% <span class="keyword">else</span> %&#125;  </span><br><span class="line">    &lt;h3 style='font-family:楷体;'&gt;请重新登陆&lt;/h3&gt;  </span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure>
+            <p>swoole是多进程的运行的，共用1个redis或mysql连接，那么返回的结果无法保证被哪个进程处理。持有连接的进程理论上都可以对这个连接进行读写，这样数据就发生错乱了。所以是不能共用1个连接的。</p>
+<h6 id="所以在多个进程之间，一定不能共用连接"><a href="#所以在多个进程之间，一定不能共用连接" class="headerlink" title="所以在多个进程之间，一定不能共用连接"></a>所以在多个进程之间，一定不能共用连接</h6><ul>
+<li>在swoole_server中，应当在 <code>onWorkerStart</code> 中创建连接对象</li>
+<li>在swoole_process中，应当在 <code>swoole_process-&gt;start</code> 后，子进程的回调函数中创建连接对象</li>
+<li>对使用<code>pcntl_fork</code>的程序同样有效</li>
+</ul>
+<h3 id="示例："><a href="#示例：" class="headerlink" title="示例："></a>示例：</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$serv = <span class="keyword">new</span> swoole_server(<span class="string">"0.0.0.0"</span>, <span class="number">9502</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//必须在onWorkerStart回调中创建redis/mysql连接</span></span><br><span class="line">$serv-&gt;on(<span class="string">'workerstart'</span>, <span class="function"><span class="keyword">function</span><span class="params">($serv, $id)</span> </span>&#123;</span><br><span class="line">    $redis = <span class="keyword">new</span> redis;</span><br><span class="line">    $redis-&gt;connect(<span class="string">'127.0.0.1'</span>, <span class="number">6379</span>);</span><br><span class="line">    $serv-&gt;redis = $redis;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">$serv-&gt;on(<span class="string">'receive'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(swoole_server $serv, $fd, $from_id, $data)</span> </span>&#123; </span><br><span class="line">    $value = $serv-&gt;redis-&gt;get(<span class="string">"key"</span>);</span><br><span class="line">    $serv-&gt;send($fd, <span class="string">"Swoole: "</span>.$value);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">$serv-&gt;start();</span><br></pre></td></tr></table></figure>
+<p>task进程也是worker进程的一种,上面的案例中给每个worker进程分配一个redis链接并保存到了serv对象中,你在ontask回调函数中,参数第一个就是serv,和worker一样,直接在函数体内进行调用就可以了。</p>
+<p>不管是<code>event worker</code> 还是 <code>task workder</code> 启动的时候都会触发 <code>onWorkStart</code> 事件。</p>
+<h2 id="如何配置-task-worker-num-参数"><a href="#如何配置-task-worker-num-参数" class="headerlink" title="如何配置 task_worker_num 参数"></a>如何配置 <code>task_worker_num</code> 参数</h2><p>配置Task进程的数量，配置此参数后将会启用task功能。所以Server务必要注册onTask、onFinish2个事件回调函数。如果没有注册，服务器程序将无法启动。</p>
+<p>Task进程是同步阻塞的，配置方式与Worker同步模式一致。</p>
+<h4 id="计算方法"><a href="#计算方法" class="headerlink" title="计算方法"></a>计算方法</h4><ul>
+<li>单个task的处理耗时，如100ms，那一个进程1秒就可以处理1/0.1=10个task</li>
+<li>task投递的速度，如每秒产生2000个task</li>
+<li>2000/10=200，需要设置task_worker_num =&gt; 200，启用200个task进程</li>
+</ul>
+<blockquote>
+<p>Task进程内不能使用swoole_server-&gt;task<br>Task进程内不能使用swoole_mysql、swoole_redis、swoole_event等异步IO函数</p>
+</blockquote>
+<hr>
+<h2 id="优化连接数，提高swoole对mysql或redis连接资源的性能优化"><a href="#优化连接数，提高swoole对mysql或redis连接资源的性能优化" class="headerlink" title="优化连接数，提高swoole对mysql或redis连接资源的性能优化"></a>优化连接数，提高swoole对mysql或redis连接资源的性能优化</h2><p>优化连接数的性能方面的操作有以下几个步骤</p>
+<ol>
+<li>mysql需要有断线重连的功能设计</li>
+<li>创建连接必须在onWorkStart方法中创建连接，确保一个进程只使用一个连接</li>
+<li>根据项目计算并设置合理的<code>task_worker_num</code>参数值</li>
+</ol>
 
           
         
@@ -1535,7 +1284,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/03/python-django/">
+    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/29/swoole-worker-task/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben">
@@ -1554,7 +1303,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/04/03/python-django/" itemprop="url">mac下搭建django2.0的开发环境</a></h1>
+                <a class="post-title-link" href="/2018/04/29/swoole-worker-task/" itemprop="url">如何识别swoole的worker进程和task进程</a></h1>
         
 
         <div class="post-meta">
@@ -1566,8 +1315,341 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-03T21:32:13+08:00">
-                2018-04-03
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-29T23:18:58+08:00">
+                2018-04-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/swoole/" itemprop="url" rel="index">
+                    <span itemprop="name">swoole</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/04/29/swoole-worker-task/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/04/29/swoole-worker-task/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/04/29/swoole-worker-task/" class="leancloud_visitors" data-flag-title="如何识别swoole的worker进程和task进程">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>本质上workder和task进程是没有什么区别的，只是在设计上各自分工不同，在使用的过程中，我们可以通过<code>worker_id</code>来区分当前的进程是worker进程还是task进程。分析源码可以知道<code>$worker_id</code> <code>&gt;=</code> <code>$serv-&gt;setting[&#39;worker_num&#39;]</code>都是<strong>task workder</strong>进程，否则都 <strong>event worker</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">my_onWorkerStart</span><span class="params">($serv, $worker_id)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">global</span> $argv;  </span><br><span class="line">    <span class="keyword">if</span> ($worker_id &gt;= $serv-&gt;setting[<span class="string">'worker_num'</span>]) &#123;  </span><br><span class="line">        swoole_set_process_name(<span class="string">"php &#123;$argv[0]&#125; task worker"</span>);  </span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;  </span><br><span class="line">        swoole_set_process_name(<span class="string">"php &#123;$argv[0]&#125; event worker"</span>);  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="comment">//echo "WorkerStart|MasterPid=&#123;$serv-&gt;master_pid&#125;|Manager_pid=&#123;$serv-&gt;manager_pid&#125;|WorkerId=$worker_id\n";  </span></span><br><span class="line">    <span class="comment">//$serv-&gt;addtimer(500); //500ms  </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="不管是event-worker-还是-task-workder-启动的时候都会触发-onWorkStart-事件。"><a href="#不管是event-worker-还是-task-workder-启动的时候都会触发-onWorkStart-事件。" class="headerlink" title="不管是event worker 还是 task workder 启动的时候都会触发 onWorkStart 事件。"></a>不管是event worker 还是 task workder 启动的时候都会触发 <code>onWorkStart</code> 事件。</h5>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/26/nodejs-pomelo-monitor/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一纸墨迹">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/26/nodejs-pomelo-monitor/" itemprop="url">pomelo 组件概述</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-26T19:41:06+08:00">
+                2018-04-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/pomelo/" itemprop="url" rel="index">
+                    <span itemprop="name">pomelo</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/04/26/nodejs-pomelo-monitor/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/04/26/nodejs-pomelo-monitor/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/04/26/nodejs-pomelo-monitor/" class="leancloud_visitors" data-flag-title="pomelo 组件概述">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p><strong>组件概述</strong><br>我们知道，pomelo的应用程序执行的全部过程，就是对其相应组件的生命周期的管理，实际的所有逻辑功能均由pomelo组件提供。pomelo内建提供了十多个组件，这些组件适用于不同的服务器，提供不同的功能。有些组件提供的功能比较复杂，有些则比较简单。下面我们将以提供的功能为主线来阐述pomelo提供的内建组件。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/26/nodejs-pomelo-monitor/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/23/python-captcha/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一纸墨迹">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/23/python-captcha/" itemprop="url">python使用captcha模块生成图形验证码</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-23T16:05:52+08:00">
+                2018-04-23
               </time>
             
 
@@ -1607,9 +1689,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/04/03/python-django/#comments" itemprop="discussionUrl">
+                <a href="/2018/04/23/python-captcha/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/04/03/python-django/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/04/23/python-captcha/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1617,7 +1699,7 @@
 
           
           
-             <span id="/2018/04/03/python-django/" class="leancloud_visitors" data-flag-title="mac下搭建django2.0的开发环境">
+             <span id="/2018/04/23/python-captcha/" class="leancloud_visitors" data-flag-title="python使用captcha模块生成图形验证码">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1650,22 +1732,26 @@
       
         
           
-            <p>mac 下搭建django2.0的开发环境，mac上默认的python版本是2.7，django需要的是python3以上的版本。所以我们需要再安装一个python3.5的版本。python2.7和python3.5可以共存的。直接安装就可以了。</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -V <span class="comment">#查看python版本，默认的mac上的python版本是2.7</span></span><br></pre></td></tr></table></figure>
-<p>我们可以到<a href="https://www.python.org上下载安装python3.0安装文件，是pyton-3.6.5-macos.pkg文件，双击安装即可。" target="_blank" rel="noopener">https://www.python.org上下载安装python3.0安装文件，是pyton-3.6.5-macos.pkg文件，双击安装即可。</a></p>
-<p>安装完成后，查看版本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">➜  django python -V</span><br><span class="line">Python 2.7.10</span><br><span class="line">➜  django python -V</span><br><span class="line">Python 2.7.10</span><br><span class="line">➜  django python3 -V</span><br><span class="line">Python 3.6.5</span><br></pre></td></tr></table></figure>
-<p>如果没有安装pip，先安装pip</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">➜  django sudo easy_install pip</span><br><span class="line">Password:</span><br><span class="line">Searching for pip</span><br><span class="line">Reading https://pypi.python.org/simple/pip/</span><br><span class="line">....</span><br></pre></td></tr></table></figure>
-<p>这里的pip是2.7的pip，只能安装django1.x版本，要安装django2.0的版本需要安装pip3版本。安装pip3的方法如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl https://bootstrap.pypa.io/get-pip.py | python3</span><br></pre></td></tr></table></figure>
-<p>使用上面的命令用python3，安装pip3</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">➜  django curl https://bootstrap.pypa.io/get-pip.py | python3</span><br><span class="line">  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current</span><br><span class="line">                                 Dload  Upload   Total   Spent    Left  Speed</span><br><span class="line">100 1738k  100 1738k    0     0  1610k      0  0:00:01  0:00:01 --:--:-- 1612k</span><br><span class="line">Cache entry deserialization failed, entry ignored</span><br><span class="line">Requirement already up-to-date: pip in /Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages</span><br><span class="line">Collecting wheel</span><br><span class="line">  Downloading wheel-0.31.0-py2.py3-none-any.whl (41kB)</span><br><span class="line">    100% |████████████████████████████████| 51kB 533kB/s </span><br><span class="line">Installing collected packages: wheel</span><br><span class="line">Successfully installed wheel-0.31.0</span><br></pre></td></tr></table></figure>
-<p>安装成功后，检查版本</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">➜  django pip -V</span><br><span class="line">pip 10.0.0b2 from /Library/Python/2.7/site-packages/pip-10.0.0b2-py2.7.egg/pip (python 2.7)</span><br><span class="line">➜  django pip --version</span><br><span class="line">pip 10.0.0b2 from /Library/Python/2.7/site-packages/pip-10.0.0b2-py2.7.egg/pip (python 2.7)</span><br><span class="line">➜  django pip3</span><br></pre></td></tr></table></figure>
-<p>使用pip3 安装django pip3</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">➜  django pip3 install Django==2.0.4</span><br><span class="line">Collecting Django==2.0.4</span><br><span class="line">  Cache entry deserialization failed, entry ignored</span><br><span class="line">  Downloading Django-2.0.4-py3-none-any.whl (7.1MB)</span><br><span class="line">    100% |████████████████████████████████| 7.1MB 267kB/s </span><br><span class="line">Collecting pytz (from Django==2.0.4)</span><br><span class="line">  Downloading pytz-2018.3-py2.py3-none-any.whl (509kB)</span><br><span class="line">    100% |████████████████████████████████| 512kB 2.5MB/s </span><br><span class="line">Installing collected packages: pytz, Django</span><br><span class="line">Successfully installed Django-2.0.4 pytz-2018.3</span><br></pre></td></tr></table></figure>
-<p>成功安装django2.0.4版本。</p>
+            <p>captcha模块是专门用于生成图形验证码和语音验证码的Python三方库。图形验证码支持数字和英文单词。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>可以直接使用 pip 安装，或者到<a href="https://github.com/lepture/captcha" target="_blank" rel="noopener">项目地址</a>下载安装。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install captcha</span><br></pre></td></tr></table></figure>
+<h2 id="模块依赖"><a href="#模块依赖" class="headerlink" title="模块依赖"></a>模块依赖</h2><p>由于 captcha 模块内部是采用 PIL 模块生成图片，所以需要安装 PIL 模块才可以正常使用。</p>
+<h2 id="生成验证码"><a href="#生成验证码" class="headerlink" title="生成验证码"></a>生成验证码</h2><h4 id="一般方法"><a href="#一般方法" class="headerlink" title="一般方法"></a>一般方法</h4><p>使用其中 image 模块中的 ImageCaptcha 类生成图形验证码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> captcha.image <span class="keyword">import</span> ImageCaptcha</span><br><span class="line"></span><br><span class="line">img = ImageCaptcha()</span><br><span class="line">image = img.generate_image(<span class="string">'python'</span>)</span><br><span class="line">image.show()</span><br><span class="line">image.save(<span class="string">'python.jpg'</span>)</span><br></pre></td></tr></table></figure>
+<p>generate_image（） 方法接收一个字符串参数，将生成次字符串内容的验证码，返回的是 PIL 模块中的 Image 对象。可以使用 PIL 模块中 Image 对象的任何支持方法对其操作。例子中的 image.show() 和 image.save() 均是 PIL 模块的方法。</p>
+<h4 id="具体参数"><a href="#具体参数" class="headerlink" title="具体参数"></a>具体参数</h4><p>ImageCaptcha(width=160, height=60, fonts=None, font_sizes=None) 类实例化时，还可传入四个参数:</p>
+<ul>
+<li>width: 生成验证码图片的宽度，默认为160个像素；</li>
+<li>height： 生成验证码图片的高度，默认为60个像素；</li>
+<li>fonts： 字体文件路径，用于生成验证码时的字体，默认使用模块自带 DroidSansMono.ttf 字体，你可以将字体文件放入list或者tuple传入,生成验证码时将随机使用;</li>
+<li>font_sizes： 控制验证码字体大小，同fonts一样，接收一个list或者tuple,随机使用。</li>
+</ul>
+<h4 id="主要方法"><a href="#主要方法" class="headerlink" title="主要方法"></a>主要方法</h4><ul>
+<li>generate_image(chars) 生成验证码的核心方法，生成chars内容的验证码图片的Image对象。</li>
+<li>create_captcha_image(chars, color, background) generate_image的实现方法，可以通过重写此方法来实现自定义验证码样式。</li>
+<li>create_noise_dots(image, color, width=3, number=30) 生成验证码干扰点。</li>
+<li>create_noise_curve(image, color) 生成验证码干扰曲线。</li>
+</ul>
 
           
         
@@ -1714,7 +1800,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/03/python-md5/">
+    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/21/django-nginx-uWSGI/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben">
@@ -1733,7 +1819,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/04/03/python-md5/" itemprop="url">Python 用hashlib求中文字符串的MD5值</a></h1>
+                <a class="post-title-link" href="/2018/04/21/django-nginx-uWSGI/" itemprop="url">nginx+uWSGI搭建python环境运行REST-Framework</a></h1>
         
 
         <div class="post-meta">
@@ -1745,8 +1831,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-03T19:06:03+08:00">
-                2018-04-03
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-21T18:04:46+08:00">
+                2018-04-21
               </time>
             
 
@@ -1786,9 +1872,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/04/03/python-md5/#comments" itemprop="discussionUrl">
+                <a href="/2018/04/21/django-nginx-uWSGI/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/04/03/python-md5/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/04/21/django-nginx-uWSGI/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1796,7 +1882,7 @@
 
           
           
-             <span id="/2018/04/03/python-md5/" class="leancloud_visitors" data-flag-title="Python 用hashlib求中文字符串的MD5值">
+             <span id="/2018/04/21/django-nginx-uWSGI/" class="leancloud_visitors" data-flag-title="nginx+uWSGI搭建python环境运行REST-Framework">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1828,185 +1914,14 @@
 
       
         
-          
-            <p>使用过hashlib库的遇到过以下的错误:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Unicode-objects must be encoded before hashing</span><br></pre></td></tr></table></figure>
-<p>意思是在进行md5哈希运算前，需要对数据进行编码。而且在不同版本的Python下还有所不同。hashlib.md5(data)函数中，data参数的类型应该是bytes。也就是说我们在进行hash前必须把数据转换成bytes类型，对于C程序而言似乎没有类似问题，指针强制转换就OK了。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">def md5(str):</span><br><span class="line">    m2 = hashlib.md5()</span><br><span class="line">    m2.update(str.encode(&apos;utf8&apos;))</span><br><span class="line">    return m2.hexdigest()</span><br></pre></td></tr></table></figure>
-<p>先简单处理一下。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/03/python-django-static/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ben">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/img/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一纸墨迹">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/03/python-django-static/" itemprop="url">django添加css等静态文件</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-03T13:16:03+08:00">
-                2018-04-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/04/03/python-django-static/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/04/03/python-django-static/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2018/04/03/python-django-static/" class="leancloud_visitors" data-flag-title="django添加css等静态文件">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>django 中访问 css 等静态文件必须以 url 的形式去访问，即必须配置 urls.py 的访问路径<br>首先在 settings.py 中添加：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">STATIC_ROOT = os.path.join(os.path.dirname(os.path.dirname(__file__)), <span class="string">'static'</span>)</span><br><span class="line">STATICFILES_DIRS = [</span><br><span class="line">    (<span class="string">'css'</span>, os.path.join(STATIC_ROOT, <span class="string">'css'</span>).replace(<span class="string">'\\'</span>, <span class="string">'/'</span>)),</span><br><span class="line">    (<span class="string">'js'</span>, os.path.join(STATIC_ROOT, <span class="string">'js'</span>).replace(<span class="string">'\\'</span>, <span class="string">'/'</span>)),</span><br><span class="line">    (<span class="string">'image'</span>, os.path.join(STATIC_ROOT, <span class="string">'image'</span>).replace(<span class="string">'\\'</span>, <span class="string">'/'</span>)),</span><br><span class="line">    (<span class="string">'upload'</span>, os.path.join(STATIC_ROOT, <span class="string">'upload'</span>).replace(<span class="string">'\\'</span>, <span class="string">'/'</span>)),</span><br><span class="line"> ]</span><br></pre></td></tr></table></figure>
-<p>其中__file__ 指的是调用 css 的html 文件所在的路径</p>
-<p>然后在 urls.py 中添加</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">url(<span class="string">r'^static/(?P&lt;path&gt;.*)$'</span>, <span class="string">'django.views.static.serve'</span>, &#123;<span class="string">'document_root'</span>: settings.STATIC_ROOT&#125;)</span><br></pre></td></tr></table></figure>
-<p>最后在 register.html 中引用 css 文件</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel=<span class="string">"stylesheet"</span> type=<span class="string">"text/css"</span> href=<span class="string">"/static/css/register.css"</span>&gt;</span><br></pre></td></tr></table></figure>
-<p>此处调用 django.views.static.serve 方法去解析具体的路径</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># …or create a new repository on the command line</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"# test1"</span> &gt;&gt; README.md</span><br><span class="line">git init</span><br><span class="line">git add README.md</span><br><span class="line">git commit -m <span class="string">"first commit"</span></span><br><span class="line">git remote add origin git@github.com:BenVim/test1.git</span><br><span class="line">git push -u origin master</span><br><span class="line"><span class="comment"># …or push an existing repository from the command line</span></span><br><span class="line">git remote add origin git@github.com:BenVim/test1.git</span><br><span class="line">git push -u origin master</span><br><span class="line"><span class="comment"># …or import code from another repository</span></span><br><span class="line">You can initialize this repository with code from a Subversion, Mercurial, or TFS project.</span><br></pre></td></tr></table></figure>
-          
+          <p>uWSGI是一个Web应用服务器，它具有应用服务器，代理，进程管理及应用监控等功能。它支持WSGI协议，同时它也支持自有的uWSGI协议，该协议据说性能非常高，而且内存占用率低，为mod_wsgi的一半左右，它还支持多应用的管理及应用的性能监控。虽然uWSGI本身就可以直接用来当Web服务器，但一般建议将其作为应用服务器配合Nginx一起使用，这样可以更好的发挥Nginx在Web端的强大功能。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/21/django-nginx-uWSGI/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2044,7 +1959,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2094,7 +2009,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-count">53</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2105,7 +2020,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -2116,7 +2031,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

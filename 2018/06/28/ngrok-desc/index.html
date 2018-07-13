@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="go," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="一纸墨迹" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="转载地址:https://blog.csdn.net/sunansheng/article/details/48372149 家里服务器的访问使用的就是ngrok服务：ngrok在其github官方页面上的自我诠释是 “introspected tunnels to localhost”，这个诠释有两层含义：  可以用来建立public到localhost的tunnel，让居于内网主机上的服务可以">
+<meta name="keywords" content="go">
+<meta property="og:type" content="article">
+<meta property="og:title" content="内网穿透-ngrok原理浅析">
+<meta property="og:url" content="http://blog.ku-cat.com/2018/06/28/ngrok-desc/index.html">
+<meta property="og:site_name" content="一纸墨迹">
+<meta property="og:description" content="转载地址:https://blog.csdn.net/sunansheng/article/details/48372149 家里服务器的访问使用的就是ngrok服务：ngrok在其github官方页面上的自我诠释是 “introspected tunnels to localhost”，这个诠释有两层含义：  可以用来建立public到localhost的tunnel，让居于内网主机上的服务可以">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://blog.ku-cat.com/2018/06/28/ngrok-desc/ngrok-desc/ngrok-tunnel.png">
+<meta property="og:image" content="http://blog.ku-cat.com/2018/06/28/ngrok-desc/ngrok-desc/ngrok-deployment.png">
+<meta property="og:image" content="http://blog.ku-cat.com/2018/06/28/ngrok-desc/ngrok-desc/ngrok-control-connection.png">
+<meta property="og:image" content="http://blog.ku-cat.com/2018/06/28/ngrok-desc/ngrok-desc/ngrok-tunnel-creation.png">
+<meta property="og:image" content="http://blog.ku-cat.com/2018/06/28/ngrok-desc/ngrok-desc/ngrok-proxy-connection.png">
+<meta property="og:updated_time" content="2018-06-29T15:17:40.848Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="内网穿透-ngrok原理浅析">
+<meta name="twitter:description" content="转载地址:https://blog.csdn.net/sunansheng/article/details/48372149 家里服务器的访问使用的就是ngrok服务：ngrok在其github官方页面上的自我诠释是 “introspected tunnels to localhost”，这个诠释有两层含义：  可以用来建立public到localhost的tunnel，让居于内网主机上的服务可以">
+<meta name="twitter:image" content="http://blog.ku-cat.com/2018/06/28/ngrok-desc/ngrok-desc/ngrok-tunnel.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blog.ku-cat.com/2018/06/28/ngrok-desc/"/>
+
+
+
+
+
+  <title>内网穿透-ngrok原理浅析 | 一纸墨迹</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?54b5db6d135edf920a975b75b9ca41b7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">一纸墨迹</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            Schedule
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            Sitemap
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'gjvyxGfZJ_CYTmv4_n3D','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/06/28/ngrok-desc/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一纸墨迹">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">内网穿透-ngrok原理浅析</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-28T14:53:58+08:00">
+                2018-06-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/06/28/ngrok-desc/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/06/28/ngrok-desc/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/06/28/ngrok-desc/" class="leancloud_visitors" data-flag-title="内网穿透-ngrok原理浅析">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a href="https://blog.csdn.net/sunansheng/article/details/48372149" target="_blank" rel="noopener">转载地址:https://blog.csdn.net/sunansheng/article/details/48372149</a></p>
+<p>家里服务器的访问使用的就是ngrok服务：ngrok在其github官方页面上的自我诠释是 “introspected tunnels to localhost”，这个诠释有两层含义：</p>
+<ol>
+<li>可以用来建立public到localhost的tunnel，让居于内网主机上的服务可以暴露给public，俗称内网穿透。</li>
+<li>支持对隧道中数据的introspection（内省），支持可视化的观察隧道内数据，并replay（重放）相关请求（诸如http请 求）。</li>
+</ol>
+<p>因此ngrok可以很便捷的协助进行服务端程序调试，尤其在进行一些Web server开发中。ngrok更强大的一点是它支持tcp层之上的所有应用协议或者说与应用层协议无关。比如：你可以通过ngrok实现ssh登录到内 网主 机，也可以通过ngrok实现远程桌面(VNC)方式访问内网主机。</p>
+<p>今天我们就来简单分析一下这款强大工具的实现原理。ngrok本身是用go语言实现的，需要go 1.1以上版本编译。ngrok官方代码最新版为1.7，作者似乎已经完成了ngrok 2.0版本，但不知为何迟迟不放出最新代码。因此这里我们就以ngrok 1.7版本源码作为原理分析的基础。</p>
+<a id="more"></a>
+<h2 id="一、ngrok-tunnel与ngrok部署"><a href="#一、ngrok-tunnel与ngrok部署" class="headerlink" title="一、ngrok tunnel与ngrok部署"></a>一、ngrok tunnel与ngrok部署</h2><p>网络tunnel（隧道）对多数人都是很”神秘“的概念，tunnel种类很多，没有标准定义，我了解的也不多（日常工作较少涉及），这里也就不 深入了。在《HTTP权威指南》中有关于HTTP tunnel（http上承载非web流量）和SSL tunnel的说明，但ngrok中的tunnel又与这些有所不同。</p>
+<p>ngrok实现了一个tcp之上的端到端的tunnel，两端的程序在ngrok实现的Tunnel内透明的进行数据交互。</p>
+<p><img src="ngrok-desc/ngrok-tunnel.png" alt="tunnel"></p>
+<p>ngrok分为client端(ngrok)和服务端(ngrokd)，实际使用中的部署如下：</p>
+<p><img src="ngrok-desc/ngrok-deployment.png" alt="tunnel"></p>
+<p>内网服务程序可以与ngrok client部署在同一主机，也可以部署在内网可达的其他主机上。ngrok和ngrokd会为建立与public client间的专用通道（tunnel）。</p>
+<h3 id="二、ngrok开发调试环境搭建"><a href="#二、ngrok开发调试环境搭建" class="headerlink" title="二、ngrok开发调试环境搭建"></a>二、ngrok开发调试环境搭建</h3><p>在学习ngrok代码或试验ngrok功能的时候，我们可能需要搭建一个ngrok的开发调试环境。ngrok作者在ngrok developer guide中给出了步骤：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$&gt; git clone https://github.com/inconshreveable/ngrok</span><br><span class="line">$&gt; cd ngrok</span><br><span class="line">$&gt; make client</span><br><span class="line">$&gt; make server</span><br></pre></td></tr></table></figure>
+<p><code>make client</code>和<code>make server</code>执行后，会建构出ngrok和ngrokd的debug版本。如果要得到release版本，请使用<code>make release-client</code>和<code>make release-server</code>。debug版本与release版本的区别在于debug版本不打包 assets下的资源文件，执行时通过文件系统访问。</p>
+<p>修改/etc/hosts文件，添加两行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1 ngrok.me</span><br><span class="line">127.0.0.1 test.ngrok.me</span><br></pre></td></tr></table></figure>
+<p>创建客户端配置文件debug.yml：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">server_addr: ngrok.me:4443</span><br><span class="line">trust_host_root_certs: false</span><br><span class="line">tunnels:</span><br><span class="line">      test:</span><br><span class="line">        proto:</span><br><span class="line">           http: 8080</span><br></pre></td></tr></table></figure>
+<p>不过要想让ngrok与ngrokd顺利建立通信，我们还得制作数字证书(自签发)，源码中自带的证书是无法使用的，证书制作方法可参见<a href="http://tonybai.com/2015/03/14/selfhost-ngrok-service/" target="_blank" rel="noopener">《搭建自 己的ngrok服务》</a>一文，相关原理可参考<a href="http://tonybai.com/2015/04/30/go-and-https/" target="_blank" rel="noopener">《Go和HTTPS》</a>一文，这里就不赘述了。</p>
+<p>直接使用的是release版本(放在bin/release下)，这样在执行命令时可以少传入几个参数：</p>
+<p>启动服务端：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$&gt; sudo ./bin/release/ngrokd -domain ngrok.me</span><br><span class="line">[05/13/15 17:15:37] [INFO] Listening for public http connections on [::]:80</span><br><span class="line">[05/13/15 17:15:37] [INFO] Listening for public https connections on [::]:443</span><br><span class="line">[05/13/15 17:15:37] [INFO] Listening for control and proxy connections on [::]:4443</span><br></pre></td></tr></table></figure>
+<p>启动客户端：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$&gt; ./bin/release/ngrok -config=debug.yml -log=ngrok.log -subdomain=test 8080</span><br></pre></td></tr></table></figure>
+<p>有了调试环境，我们就可以通过debug日志验证我们的分析了。</p>
+<p>ngrok的源码结构如下：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">drwxr-xr-x   3 tony  staff  102  3 31 16:09 cache/</span><br><span class="line">drwxr-xr-x  16 tony  staff  544  5 13 17:21 client/</span><br><span class="line">drwxr-xr-x   4 tony  staff  136  5 13 15:02 conn/</span><br><span class="line">drwxr-xr-x   3 tony  staff  102  3 31 16:09 <span class="built_in">log</span>/</span><br><span class="line">drwxr-xr-x   4 tony  staff  136  3 31 16:09 main/</span><br><span class="line">drwxr-xr-x   5 tony  staff  170  5 12 16:17 msg/</span><br><span class="line">drwxr-xr-x   5 tony  staff  170  3 31 16:09 proto/</span><br><span class="line">drwxr-xr-x  11 tony  staff  374  5 13 17:21 server/</span><br><span class="line">drwxr-xr-x   7 tony  staff  238  3 31 16:09 util/</span><br><span class="line">drwxr-xr-x   3 tony  staff  102  3 31 16:09 version/</span><br></pre></td></tr></table></figure>
+<p>main目录下的ngrok/和ngrokd/分别是ngrok和ngrokd main包，main函数存放的位置，但这里仅仅是一个stub。以ngrok为例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ngrok/src/ngrok/main/ngrok/ngrok.go</span></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"ngrok/client"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    client.Main()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>真正的main被client包的Main函数实现。</p>
+<p>client和server目录分别对应ngrok和ngrokd的主要逻辑，其它目录（或包）都是一些工具类的实现。</p>
+<h2 id="二、第一阶段：Control-Connection建立"><a href="#二、第一阶段：Control-Connection建立" class="headerlink" title="二、第一阶段：Control Connection建立"></a>二、第一阶段：Control Connection建立</h2><p>在ngrokd的启动日志中我们可以看到这样一行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[INFO] Listening for control and proxy connections on [::]:4443</span><br></pre></td></tr></table></figure>
+<p>ngrokd在4443端口（默认）监听control和proxy connection。Control Connection，顾名思义“控制连接”，有些类似于FTP协议的控制连接。该连接 只用于收发控制类消息。作为客户端的ngrok启动后的第一件事就是与ngrokd建立Control Connection，建立过程序列图如下：</p>
+<p><img src="ngrok-desc/ngrok-control-connection.png" alt="ngrok-desc"></p>
+<p>前面提到过，ngrok客户端的实际entrypoint在ngrok/src/ngrok/client目录下，包名client，实际入口是 client.Main函数。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//ngrok/src/ngrok/client/main.go</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// parse options</span></span><br><span class="line">    <span class="comment">// set up logging</span></span><br><span class="line">    <span class="comment">// read configuration file</span></span><br><span class="line">    … …</span><br><span class="line">    NewController().Run(config)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ngrok采用了MVC模式构架代码，这既包括ngrok与ngrokd之间的逻辑处理，也包括ngrok本地web页面（用于隧道数据的 introspection）的处理。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//ngrok/src/ngrok/client/controller.go</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(ctl *Controller)</span> <span class="title">Run</span><span class="params">(config *Configuration)</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> model *ClientModel</span><br><span class="line">    <span class="keyword">if</span> ctl.model == <span class="literal">nil</span> &#123;</span><br><span class="line">        model = ctl.SetupModel(config)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        model = ctl.model.(*ClientModel)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// init the model</span></span><br><span class="line">    <span class="comment">// init web ui</span></span><br><span class="line">    <span class="comment">// init term ui</span></span><br><span class="line">   … …</span><br><span class="line">   ctl.Go(ctl.model.Run)</span><br><span class="line">   … …</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们来继续看看model.Run都做了些什么。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//ngrok/src/ngrok/client/model.go</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *ClientModel)</span> <span class="title">Run</span><span class="params">()</span></span> &#123;</span><br><span class="line">    … …</span><br><span class="line">    <span class="keyword">for</span> &#123;</span><br><span class="line">        <span class="comment">// run the control channel</span></span><br><span class="line">        c.control()</span><br><span class="line">        … …</span><br><span class="line">        <span class="keyword">if</span> c.connStatus == mvc.ConnOnline &#123;</span><br><span class="line">            wait = <span class="number">1</span> * time.Second</span><br><span class="line">        &#125;</span><br><span class="line">        … …</span><br><span class="line">        c.connStatus = mvc.ConnReconnecting</span><br><span class="line">        c.update()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Run函数调用c.control来运行Control Connection的主逻辑，并在control connection断开后，尝试重连。</p>
+<p>c.control是ClientModel的一个method，用来真正建立ngrok到ngrokd的control connection，并完成基于ngrok的鉴权（用户名、密码配置在配置文件中）。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//ngrok/src/ngrok/client/model.go</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *ClientModel)</span> <span class="title">control</span><span class="params">()</span></span> &#123;</span><br><span class="line">    … …</span><br><span class="line">    <span class="keyword">var</span> (</span><br><span class="line">        ctlConn conn.Conn</span><br><span class="line">        err     error</span><br><span class="line">    )</span><br><span class="line">    <span class="keyword">if</span> c.proxyUrl == <span class="string">""</span> &#123;</span><br><span class="line">        <span class="comment">// simple non-proxied case, just connect to the server</span></span><br><span class="line">        ctlConn, err = conn.Dial(c.serverAddr, <span class="string">"ctl"</span>, c.tlsConfig)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;……&#125;</span><br><span class="line">    … …</span><br><span class="line"></span><br><span class="line">    <span class="comment">// authenticate with the server</span></span><br><span class="line">    auth := &amp;msg.Auth&#123;</span><br><span class="line">        ClientId:  c.id,</span><br><span class="line">        OS:        runtime.GOOS,</span><br><span class="line">        Arch:      runtime.GOARCH,</span><br><span class="line">        Version:   version.Proto,</span><br><span class="line">        MmVersion: version.MajorMinor(),</span><br><span class="line">        User:      c.authToken,</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> err = msg.WriteMsg(ctlConn, auth); err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="built_in">panic</span>(err)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// wait for the server to authenticate us</span></span><br><span class="line">    <span class="keyword">var</span> authResp msg.AuthResp</span><br><span class="line">    <span class="keyword">if</span> err = msg.ReadMsgInto(ctlConn, &amp;authResp); err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="built_in">panic</span>(err)</span><br><span class="line">    &#125;</span><br><span class="line">    … …</span><br><span class="line">    c.id = authResp.ClientId</span><br><span class="line">    … ..</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ngrok封装了connection相关操作，代码在<code>ngrok/src/ngrok/conn</code>下面，包名conn。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//ngrok/src/ngrok/conn/conn.go</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Dial</span><span class="params">(addr, typ <span class="keyword">string</span>, tlsCfg *tls.Config)</span> <span class="params">(conn *loggedConn, err error)</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> rawConn net.Conn</span><br><span class="line">    <span class="keyword">if</span> rawConn, err = net.Dial(<span class="string">"tcp"</span>, addr); err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    conn = wrapConn(rawConn, typ)</span><br><span class="line">    conn.Debug(<span class="string">"New connection to: %v"</span>, rawConn.RemoteAddr())</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> tlsCfg != <span class="literal">nil</span> &#123;</span><br><span class="line">        conn.StartTLS(tlsCfg)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ngrok首先创建一条TCP连接，并基于该连接创建了TLS client：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *loggedConn)</span> <span class="title">StartTLS</span><span class="params">(tlsCfg *tls.Config)</span></span> &#123;</span><br><span class="line">    c.Conn = tls.Client(c.Conn, tlsCfg)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>不过此时并未进行TLS的初始化，即handshake(三次握手)。handshake发生在ngrok首次向ngrokd发送auth消息（msg.WriteMsg, ngrok/src/ngrok/msg/msg.go）时，go标准库的TLS相关函数默默的完成这一handshake过程。我们经常遇到的ngrok证书验证失败等问题，就发生在该过程中。</p>
+<p>在AuthResp中，ngrokd为该<code>Control Connection</code>分配一个ClientID，该ClientID在后续<code>Proxy Connection</code>建立时使用，用于关联和校验之用。可以理解成首先建的Control Connection连接是登录操作，需要进行auth帐号授权，授权成功后获得一个token（这里是ClientID），然后用这个token进行Proxy Connection建立连接。</p>
+<p>前面的逻辑和代码都是ngrok客户端的，现在我们再从ngrokd server端代码review一遍<code>Control Connection</code>的建立过程。</p>
+<p>ngrokd的代码放在<code>ngrok/src/ngrok/server</code>下面，entrypoint如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//ngrok/src/ngrok/server/main.go</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// parse options</span></span><br><span class="line">    opts = parseArgs()</span><br><span class="line">    <span class="comment">// init logging</span></span><br><span class="line">    <span class="comment">// init tunnel/control registry</span></span><br><span class="line">    … …</span><br><span class="line">    <span class="comment">// start listeners</span></span><br><span class="line">    listeners = <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]*conn.Listener)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// load tls configuration</span></span><br><span class="line">    tlsConfig, err := LoadTLSConfig(opts.tlsCrt, opts.tlsKey)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="built_in">panic</span>(err)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// listen for http</span></span><br><span class="line">    <span class="comment">// listen for https</span></span><br><span class="line">    … …</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ngrok clients</span></span><br><span class="line">    tunnelListener(opts.tunnelAddr, tlsConfig)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ngrokd启动了三个监听，其中最后一个tunnelListenner用于监听ngrok发起的Control Connection或者后续的proxy connection，作者意图通过一个端口，监听两种类型连接，旨在于方便部署。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//ngrok/src/ngrok/server/main.go</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">tunnelListener</span><span class="params">(addr <span class="keyword">string</span>, tlsConfig *tls.Config)</span></span> &#123;</span><br><span class="line">    <span class="comment">// listen for incoming connections</span></span><br><span class="line">    listener, err := conn.Listen(addr, <span class="string">"tun"</span>, tlsConfig)</span><br><span class="line">    … …</span><br><span class="line">    <span class="keyword">for</span> c := <span class="keyword">range</span> listener.Conns &#123;</span><br><span class="line">        <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">(tunnelConn conn.Conn)</span></span> &#123;</span><br><span class="line">            … …</span><br><span class="line">            <span class="keyword">var</span> rawMsg msg.Message</span><br><span class="line">            <span class="keyword">if</span> rawMsg, err = msg.ReadMsg(tunnelConn); err != <span class="literal">nil</span> &#123;</span><br><span class="line">                tunnelConn.Warn(<span class="string">"Failed to read message: %v"</span>, err)</span><br><span class="line">                tunnelConn.Close()</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line">            &#125;</span><br><span class="line">            … …</span><br><span class="line">            <span class="keyword">switch</span> m := rawMsg.(<span class="keyword">type</span>) &#123;</span><br><span class="line">            <span class="keyword">case</span> *msg.Auth:</span><br><span class="line">                NewControl(tunnelConn, m)</span><br><span class="line">            … …</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;(c)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>从tunnelListener可以看到，当ngrokd在新建立的Control Connection上收到Auth消息后，ngrokd执行NewControl来处理该Control Connection上的后续事情。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//ngrok/src/ngrok/server/control.go</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewControl</span><span class="params">(ctlConn conn.Conn, authMsg *msg.Auth)</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> err error</span><br><span class="line"></span><br><span class="line">    <span class="comment">// create the object</span></span><br><span class="line">    c := &amp;Control&#123;</span><br><span class="line">        … …</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// register the clientid</span></span><br><span class="line">    … …</span><br><span class="line">    <span class="comment">// register the control</span></span><br><span class="line">    … …</span><br><span class="line"></span><br><span class="line">    <span class="comment">// start the writer first so that</span></span><br><span class="line">    <span class="comment">// the following messages get sent</span></span><br><span class="line">    <span class="keyword">go</span> c.writer()</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Respond to authentication</span></span><br><span class="line">    c.out &lt;- &amp;msg.AuthResp&#123;</span><br><span class="line">        Version:   version.Proto,</span><br><span class="line">        MmVersion: version.MajorMinor(),</span><br><span class="line">        ClientId:  c.id,</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// As a performance optimization,</span></span><br><span class="line">    <span class="comment">// ask for a proxy connection up front</span></span><br><span class="line">    c.out &lt;- &amp;msg.ReqProxy&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// manage the connection</span></span><br><span class="line">    <span class="keyword">go</span> c.manager()</span><br><span class="line">    <span class="keyword">go</span> c.reader()</span><br><span class="line">    <span class="keyword">go</span> c.stopper()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在NewControl中，ngrokd返回了AuthResp。到这里，一条新的Control Connection建立完毕。</p>
+<p>我们最后再来看一下Control Connection建立过程时ngrok和ngrokd的输出日志，增强一下感性认知：</p>
+<p>ngrok Server:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[INFO] [tun:d866234] New connection from 127.0.0.1:59949</span><br><span class="line">[DEBG] [tun:d866234] Waiting to <span class="built_in">read</span> message</span><br><span class="line">[DEBG] [tun:d866234] Reading message with length: 126</span><br><span class="line">[DEBG] [tun:d866234] Read message &#123;<span class="string">"Type"</span>:<span class="string">"Auth"</span>,</span><br><span class="line"><span class="string">"Payload"</span>:&#123;<span class="string">"Version"</span>:<span class="string">"2"</span>,<span class="string">"MmVersion"</span>:<span class="string">"1.7"</span>,<span class="string">"User"</span>:<span class="string">""</span>,<span class="string">"Password"</span>:<span class="string">""</span>,<span class="string">"OS"</span>:<span class="string">"darwin"</span>,<span class="string">"Arch"</span>:<span class="string">"amd64"</span>,<span class="string">"ClientId"</span>:<span class="string">""</span>&#125;&#125;</span><br><span class="line">[INFO] [ctl:d866234] Renamed connection tun:d866234</span><br><span class="line">[INFO] [registry] [ctl] Registered control with id ac1d14e0634f243f8a0cc2306bb466af</span><br><span class="line">[DEBG] [ctl:d866234] [ac1d14e0634f243f8a0cc2306bb466af] Writing message: &#123;<span class="string">"Type"</span>:<span class="string">"AuthResp"</span>,<span class="string">"Payload"</span>:&#123;<span class="string">"Version"</span>:<span class="string">"2"</span>,<span class="string">"MmVersion"</span>:<span class="string">"1.7"</span>,<span class="string">"ClientId"</span>:<span class="string">"ac1d14e0634f243f8a0cc2306bb466af"</span>,<span class="string">"Error"</span>:<span class="string">""</span>&#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>Client:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[INFO] (ngrok/log.Info:112) Reading configuration file debug.yml</span><br><span class="line">[INFO] (ngrok/<span class="built_in">log</span>.(*PrefixLogger).Info:83) [client] Trusting root CAs: [assets/client/tls/ngrokroot.crt]</span><br><span class="line">[INFO] (ngrok/<span class="built_in">log</span>.(*PrefixLogger).Info:83) [view] [web] Serving web interface on 127.0.0.1:4040</span><br><span class="line">[INFO] (ngrok/log.Info:112) Checking <span class="keyword">for</span> update</span><br><span class="line">[DEBG] (ngrok/<span class="built_in">log</span>.(*PrefixLogger).Debug:79) [view] [term] Waiting <span class="keyword">for</span> update</span><br><span class="line">[DEBG] (ngrok/<span class="built_in">log</span>.(*PrefixLogger).Debug:79) [ctl:31deb681] New connection to: 127.0.0.1:4443</span><br><span class="line">[DEBG] (ngrok/<span class="built_in">log</span>.(*PrefixLogger).Debug:79) [ctl:31deb681] Writing message: &#123;<span class="string">"Type"</span>:<span class="string">"Auth"</span>,<span class="string">"Payload"</span>:&#123;<span class="string">"Version"</span>:<span class="string">"2"</span>,<span class="string">"MmVersion"</span>:<span class="string">"1.7"</span>,<span class="string">"User"</span>:<span class="string">""</span>,<span class="string">"Password"</span>:<span class="string">""</span>,<span class="string">"OS"</span>:<span class="string">"darwin"</span>,<span class="string">"Arch"</span>:<span class="string">"amd64"</span>,<span class="string">"ClientId"</span>:<span class="string">""</span>&#125;&#125;</span><br><span class="line">[DEBG] (ngrok/<span class="built_in">log</span>.(*PrefixLogger).Debug:79) [ctl:31deb681] Waiting to <span class="built_in">read</span> message</span><br><span class="line">(ngrok/<span class="built_in">log</span>.(*PrefixLogger).Debug:79) [ctl:31deb681] Reading message with length: 120</span><br><span class="line">(ngrok/<span class="built_in">log</span>.(*PrefixLogger).Debug:79) [ctl:31deb681] Read message &#123;<span class="string">"Type"</span>:<span class="string">"AuthResp"</span>,<span class="string">"Payload"</span>:&#123;<span class="string">"Version"</span>:<span class="string">"2"</span>,<span class="string">"MmVersion"</span>:<span class="string">"1.7"</span>,<span class="string">"ClientId"</span>:<span class="string">"ac1d14e0634f243f8a0cc2306bb466af"</span>,<span class="string">"Error"</span>:<span class="string">""</span>&#125;&#125;</span><br><span class="line">[INFO] (ngrok/<span class="built_in">log</span>.(*PrefixLogger).Info:83) [client] Authenticated with server, client id: ac1d14e0634f243f8a0cc2306bb466af</span><br></pre></td></tr></table></figure>
+<h2 id="四、Tunnel-Creation"><a href="#四、Tunnel-Creation" class="headerlink" title="四、Tunnel Creation"></a>四、Tunnel Creation</h2><p>隧道的创建时序图如下：</p>
+<p><img src="ngrok-desc/ngrok-tunnel-creation.png" alt=""></p>
+<p>Tunnel Creation是ngrok将配置文件中的tunnel信息通过刚刚建立的Control Connection传输给 ngrokd，ngrokd登记、启动相应端口监听（如果配置了remote_port或多路复用ngrokd默认监听的http和https端口）并返回相应应答。ngrok和ngrokd之间并未真正建立新连接。</p>
+<p>我们回到ngrok的model.go，继续看ClientModel的control方法。在收到AuthResp后，ngrok还做了如下事情：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//ngrok/src/ngrok/client/model.go</span></span><br><span class="line"> </span><br><span class="line">   <span class="comment">// request tunnels</span></span><br><span class="line">    reqIdToTunnelConfig := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]*TunnelConfiguration)</span><br><span class="line">    <span class="keyword">for</span> _, config := <span class="keyword">range</span> c.tunnelConfig &#123;</span><br><span class="line">        <span class="comment">// create the protocol list to ask for</span></span><br><span class="line">        <span class="keyword">var</span> protocols []<span class="keyword">string</span></span><br><span class="line">        <span class="keyword">for</span> proto, _ := <span class="keyword">range</span> config.Protocols &#123;</span><br><span class="line">            protocols = <span class="built_in">append</span>(protocols, proto)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        reqTunnel := &amp;msg.ReqTunnel&#123;</span><br><span class="line">            … …</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// send the tunnel request</span></span><br><span class="line">        <span class="keyword">if</span> err = msg.WriteMsg(ctlConn, reqTunnel); err != <span class="literal">nil</span> &#123;</span><br><span class="line">            <span class="built_in">panic</span>(err)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// save request id association so we know which local address</span></span><br><span class="line">        <span class="comment">// to proxy to later</span></span><br><span class="line">        reqIdToTunnelConfig[reqTunnel.ReqId] = config</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// main control loop</span></span><br><span class="line">    <span class="keyword">for</span> &#123;</span><br><span class="line">        <span class="keyword">var</span> rawMsg msg.Message</span><br><span class="line">       </span><br><span class="line">        <span class="keyword">switch</span> m := rawMsg.(<span class="keyword">type</span>) &#123;</span><br><span class="line">        … …</span><br><span class="line">        <span class="keyword">case</span> *msg.NewTunnel:</span><br><span class="line">            … …</span><br><span class="line"></span><br><span class="line">            tunnel := mvc.Tunnel&#123;</span><br><span class="line">                … …</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            c.tunnels[tunnel.PublicUrl] = tunnel</span><br><span class="line">            c.connStatus = mvc.ConnOnline</span><br><span class="line">           </span><br><span class="line">            c.update()</span><br><span class="line">        … …</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>ngrok将配置的Tunnel信息逐一以ReqTunnel消息发送给ngrokd以注册登记Tunnel，并在随后的main control loop中处理ngrokd回送的NewTunnel消息，完成一些登记索引工作。</p>
+<p>ngrokd Server端对tunnel creation的处理是在NewControl的结尾处：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//ngrok/src/ngrok/server/control.go</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewControl</span><span class="params">(ctlConn conn.Conn, authMsg *msg.Auth)</span></span> &#123;</span><br><span class="line">    … …</span><br><span class="line">    <span class="comment">// manage the connection</span></span><br><span class="line">    <span class="keyword">go</span> c.manager()</span><br><span class="line">    … …</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Control)</span> <span class="title">manager</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">//… …</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> &#123;</span><br><span class="line">        <span class="keyword">select</span> &#123;</span><br><span class="line">        <span class="keyword">case</span> &lt;-reap.C:</span><br><span class="line">            … …</span><br><span class="line"></span><br><span class="line">        <span class="keyword">case</span> mRaw, ok := &lt;-c.in:</span><br><span class="line">            <span class="comment">// c.in closes to indicate shutdown</span></span><br><span class="line">            <span class="keyword">if</span> !ok &#123;</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">switch</span> m := mRaw.(<span class="keyword">type</span>) &#123;</span><br><span class="line">            <span class="keyword">case</span> *msg.ReqTunnel:</span><br><span class="line">                c.registerTunnel(m)</span><br><span class="line"></span><br><span class="line">            … …</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Control的manager在收到ngrok发来的ReqTunnel消息后，调用registerTunnel进行处理。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ngrok/src/ngrok/server/control.go</span></span><br><span class="line"><span class="comment">// Register a new tunnel on this control connection</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Control)</span> <span class="title">registerTunnel</span><span class="params">(rawTunnelReq *msg.ReqTunnel)</span></span> &#123;</span><br><span class="line">    <span class="keyword">for</span> _, proto := <span class="keyword">range</span> strings.Split(rawTunnelReq.Protocol, <span class="string">"+"</span>) &#123;</span><br><span class="line">        tunnelReq := *rawTunnelReq</span><br><span class="line">        tunnelReq.Protocol = proto</span><br><span class="line"></span><br><span class="line">        c.conn.Debug(<span class="string">"Registering new tunnel"</span>)</span><br><span class="line">        t, err := NewTunnel(&amp;tunnelReq, c)</span><br><span class="line">        <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">            c.out &lt;- &amp;msg.NewTunnel&#123;Error: err.Error()&#125;</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(c.tunnels) == <span class="number">0</span> &#123;</span><br><span class="line">                c.shutdown.Begin()</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// we're done</span></span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// add it to the list of tunnels</span></span><br><span class="line">        c.tunnels = <span class="built_in">append</span>(c.tunnels, t)</span><br><span class="line"></span><br><span class="line">        <span class="comment">// acknowledge success</span></span><br><span class="line">        c.out &lt;- &amp;msg.NewTunnel&#123;</span><br><span class="line">            Url:      t.url,</span><br><span class="line">            Protocol: proto,</span><br><span class="line">            ReqId:    rawTunnelReq.ReqId,</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        rawTunnelReq.Hostname = strings.Replace(t.url, proto+<span class="string">"://"</span>, <span class="string">""</span>, <span class="number">1</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Server端创建tunnel的实际工作由NewTunnel完成：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ngrok/src/ngrok/server/tunnel.go</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewTunnel</span><span class="params">(m *msg.ReqTunnel, ctl *Control)</span> <span class="params">(t *Tunnel, err error)</span></span> &#123;</span><br><span class="line">    t = &amp;Tunnel&#123;</span><br><span class="line">      … …</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    proto := t.req.Protocol</span><br><span class="line">    <span class="keyword">switch</span> proto &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">"tcp"</span>:</span><br><span class="line">        bindTcp := <span class="function"><span class="keyword">func</span><span class="params">(port <span class="keyword">int</span>)</span> <span class="title">error</span></span> &#123;</span><br><span class="line">            <span class="keyword">if</span> t.listener, err = net.ListenTCP(<span class="string">"tcp"</span>,</span><br><span class="line">               &amp;net.TCPAddr&#123;IP: net.ParseIP(<span class="string">"0.0.0.0"</span>),</span><br><span class="line">               Port: port&#125;); err != <span class="literal">nil</span> &#123;</span><br><span class="line">                … …</span><br><span class="line">                <span class="keyword">return</span> err</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// create the url</span></span><br><span class="line">            addr := t.listener.Addr().(*net.TCPAddr)</span><br><span class="line">            t.url = fmt.Sprintf(<span class="string">"tcp://%s:%d"</span>, opts.domain, addr.Port)</span><br><span class="line"></span><br><span class="line">            <span class="comment">// register it</span></span><br><span class="line">            <span class="keyword">if</span> err = tunnelRegistry.RegisterAndCache(t.url, t);</span><br><span class="line">               err != <span class="literal">nil</span> &#123;</span><br><span class="line">                … …</span><br><span class="line">                <span class="keyword">return</span> err</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">go</span> t.listenTcp(t.listener)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// use the custom remote port you asked for</span></span><br><span class="line">        <span class="keyword">if</span> t.req.RemotePort != <span class="number">0</span> &#123;</span><br><span class="line">            bindTcp(<span class="keyword">int</span>(t.req.RemotePort))</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// try to return to you the same port you had before</span></span><br><span class="line">        cachedUrl := tunnelRegistry.GetCachedRegistration(t)</span><br><span class="line">        <span class="keyword">if</span> cachedUrl != <span class="string">""</span> &#123;</span><br><span class="line">            … …</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Bind for TCP connections</span></span><br><span class="line">        bindTcp(<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> <span class="string">"http"</span>, <span class="string">"https"</span>:</span><br><span class="line">        l, ok := listeners[proto]</span><br><span class="line">        <span class="keyword">if</span> !ok &#123;</span><br><span class="line">            … …</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> err = registerVhost(t, proto, l.Addr.(*net.TCPAddr).Port);</span><br><span class="line">           err != <span class="literal">nil</span> &#123;</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        err = fmt.Errorf(<span class="string">"Protocol %s is not supported"</span>, proto)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    … …</span><br><span class="line"></span><br><span class="line">    metrics.OpenTunnel(t)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看出，NewTunnel区别对待tcp和http/https隧道：</p>
+<ul>
+<li><p>对于Tcp隧道，NewTunnel先要看是否配置了<code>remote_port</code>，如果<code>remote_port</code>不为空，则启动监听这个<code>remote_port</code>。否则尝试从cache里找出你之前创建tunnel时使用的端口号，如果可用，则监听这个端口号，否则bindTcp(0)，即 随机选择一个端口作为该tcp tunnel的<code>remote_port</code>。</p>
+</li>
+<li><p>对于http/https隧道，ngrokd启动时就默认监听了80和443，如果ngrok请求建立http/https隧道(目前不支持设置<code>remote_port</code>)，则ngrokd通过一种自实现的vhost的机制实现所有http/https请求多路复用到80和443端口上。ngrokd不会新增监听端口。</p>
+</li>
+</ul>
+<p>从下面例子，我们也可以看出一些端倪。我们将debug.yml改为：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server_addr:</span> <span class="string">ngrok.me:4443</span></span><br><span class="line"><span class="attr">trust_host_root_certs:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">tunnels:</span></span><br><span class="line"><span class="attr">      test:</span></span><br><span class="line"><span class="attr">        proto:</span></span><br><span class="line"><span class="attr">           http:</span> <span class="number">8080</span></span><br><span class="line"><span class="attr">      test1:</span></span><br><span class="line"><span class="attr">        proto:</span></span><br><span class="line"><span class="attr">           http:</span> <span class="number">8081</span></span><br><span class="line"><span class="attr">      ssh1:</span></span><br><span class="line"><span class="attr">        remote_port:</span> <span class="number">50000</span></span><br><span class="line"><span class="attr">        proto:</span></span><br><span class="line"><span class="attr">            tcp:</span> <span class="number">22</span></span><br><span class="line"><span class="attr">      ssh2:</span></span><br><span class="line"><span class="attr">        proto:</span></span><br><span class="line"><span class="attr">            tcp:</span> <span class="number">22</span></span><br></pre></td></tr></table></figure>
+<p>启动ngrok：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$./bin/release/ngrok -config=debug.yml -log=ngrok.log start test test1  ssh1 ssh2</span><br><span class="line"></span><br><span class="line">Tunnel Status                 online</span><br><span class="line">Version                       1.7/1.7</span><br><span class="line">Forwarding                    tcp://ngrok.me:50000 -&gt; 127.0.0.1:22</span><br><span class="line">Forwarding                    tcp://ngrok.me:56297 -&gt; 127.0.0.1:22</span><br><span class="line">Forwarding                    http://test.ngrok.me -&gt; 127.0.0.1:8080</span><br><span class="line">Forwarding                    http://test1.ngrok.me -&gt; 127.0.0.1:8081</span><br><span class="line">Web Interface                 127.0.0.1:4040</span><br></pre></td></tr></table></figure>
+<p>可以看出ngrokd为ssh2随机挑选了一个端口56297进行了监听，而两个http隧道，则都默认使用了80端口。</p>
+<p>如果像下面这样配置会发生什么呢？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ssh1:</span><br><span class="line">        remote_port: 50000</span><br><span class="line">        proto:</span><br><span class="line">            tcp: 22</span><br><span class="line">      ssh2:</span><br><span class="line">        remote_port: 50000</span><br><span class="line">        proto:</span><br><span class="line">            tcp: 22</span><br></pre></td></tr></table></figure>
+<p>ngrok启动会得到错误信息：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Server failed to allocate tunnel: [ctl:5332a293] [a87bd111bcc804508c835714c18a5664] Error binding TCP listener: listen tcp 0.0.0.0:50000: <span class="built_in">bind</span>: address already <span class="keyword">in</span> use</span><br></pre></td></tr></table></figure>
+<p>客户端ngrok在ClientModel control方法的main control loop中收到NewTunnel并处理该消息：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">case</span> *msg.NewTunnel:</span><br><span class="line">            <span class="keyword">if</span> m.Error != <span class="string">""</span> &#123;</span><br><span class="line">                … …</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            tunnel := mvc.Tunnel&#123;</span><br><span class="line">                PublicUrl: m.Url,</span><br><span class="line">                LocalAddr: reqIdToTunnelConfig[m.ReqId].Protocols[m.Protocol],</span><br><span class="line">                Protocol:  c.protoMap[m.Protocol],</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            c.tunnels[tunnel.PublicUrl] = tunnel</span><br><span class="line">            c.connStatus = mvc.ConnOnline</span><br><span class="line">            c.Info(<span class="string">"Tunnel established at %v"</span>, tunnel.PublicUrl)</span><br><span class="line">            c.update()</span><br></pre></td></tr></table></figure>
+<h2 id="五、Proxy-Connection和Private-Connection"><a href="#五、Proxy-Connection和Private-Connection" class="headerlink" title="五、Proxy Connection和Private Connection"></a>五、Proxy Connection和Private Connection</h2><p>到目前为止，我们知道了Control Connection：用于ngrok和ngrokd之间传输命令；Public Connection：外部发起的，尝试向内网服务建立的链接。</p>
+<p>这节当中，我们要接触到Proxy Connection和Private Connection。</p>
+<p>Proxy Connection以及Private Connection的建立过程如下：</p>
+<p><img src="ngrok-desc/ngrok-proxy-connection.png" alt=""></p>
+<p>前面ngrok和ngrokd的交互进行到了NewTunnel，这些数据都是通过之前已经建立的Control Connection上传输的。</p>
+<p>ngrokd侧，NewControl方法的结尾有这样一行代码：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// As a performance optimization, ask for a proxy connection up front</span></span><br><span class="line">c.out &lt;- &amp;msg.ReqProxy&#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>服务端ngrokd在Control Connection上向ngrok发送了”ReqProxy”的消息，意为请求ngrok向ngrokd建立一条Proxy Connection，该链接将作为隧道数据流的承载者。</p>
+<p>客户端ngrok在ClientModel control方法的main control loop中收到ReqProxy并处理该消息：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">case</span> *msg.ReqProxy:</span><br><span class="line">            c.ctl.Go(c.proxy)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Establishes and manages a tunnel proxy connection with the server</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *ClientModel)</span> <span class="title">proxy</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> c.proxyUrl == <span class="string">""</span> &#123;</span><br><span class="line">        remoteConn, err = conn.Dial(c.serverAddr, <span class="string">"pxy"</span>, c.tlsConfig)</span><br><span class="line">    &#125;……</span><br><span class="line"></span><br><span class="line">    err = msg.WriteMsg(remoteConn, &amp;msg.RegProxy&#123;ClientId: c.id&#125;)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        remoteConn.Error(<span class="string">"Failed to write RegProxy: %v"</span>, err)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    … …</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ngrok客户端收到ReqProxy后，创建一条新连接到ngrokd，该连接即为Proxy Connection。并且ngrok将RegProxy消息通过该新建立的Proxy Connection发到ngrokd，以便ngrokd将该Proxy Connection与对应的Control Connection以及tunnel关联在一起</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ngrok服务端</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">tunnelListener</span><span class="params">(addr <span class="keyword">string</span>, tlsConfig *tls.Config)</span></span> &#123;</span><br><span class="line">    …. …</span><br><span class="line">    <span class="keyword">case</span> *msg.RegProxy:</span><br><span class="line">                NewProxy(tunnelConn, m)</span><br><span class="line">    … …</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>到目前为止, tunnel、Proxy Connection都已经建立了，万事俱备，就等待Public发起Public connection到ngrokd了。</p>
+<p>下面我们以Public发起一个http连接到ngrokd为例，比如我们通过curl 命令，向test.ngrok.me发起一次http请求。</p>
+<p>前面说过，ngrokd在启动时默认启动了80和443端口的监听，并且与其他http/https隧道共同多路复用该端口（通过vhost机制)。ngrokd server对80端口的处理代码如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ngrok/src/ngrok/server/main.go</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    … …</span><br><span class="line"> <span class="comment">// listen for http</span></span><br><span class="line">    <span class="keyword">if</span> opts.httpAddr != <span class="string">""</span> &#123;</span><br><span class="line">        listeners[<span class="string">"http"</span>] =</span><br><span class="line">          startHttpListener(opts.httpAddr, <span class="literal">nil</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    … …</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>startHttpListener针对每个连接，启动一个goroutine专门处理：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//ngrok/src/ngrok/server/http.go</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">startHttpListener</span><span class="params">(addr <span class="keyword">string</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">    tlsCfg *tls.Config)</span> <span class="params">(listener *conn.Listener)</span></span> &#123;</span><br><span class="line">    <span class="comment">// bind/listen for incoming connections</span></span><br><span class="line">    <span class="keyword">var</span> err error</span><br><span class="line">    <span class="keyword">if</span> listener, err = conn.Listen(addr, <span class="string">"pub"</span>, tlsCfg);</span><br><span class="line">        err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="built_in">panic</span>(err)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    proto := <span class="string">"http"</span></span><br><span class="line">    <span class="keyword">if</span> tlsCfg != <span class="literal">nil</span> &#123;</span><br><span class="line">        proto = <span class="string">"https"</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">   … …</span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">for</span> conn := <span class="keyword">range</span> listener.Conns &#123;</span><br><span class="line">            <span class="keyword">go</span> httpHandler(conn, proto)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Handles a new http connection from the public internet</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">httpHandler</span><span class="params">(c conn.Conn, proto <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">    … …</span><br><span class="line">    <span class="comment">// let the tunnel handle the connection now</span></span><br><span class="line">    tunnel.HandlePublicConnection(c)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们终于看到server端处理public connection的真正方法了:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//ngrok/src/ngrok/server/tunnel.go</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t *Tunnel)</span> <span class="title">HandlePublicConnection</span><span class="params">(publicConn conn.Conn)</span></span> &#123;</span><br><span class="line">    … …</span><br><span class="line">    <span class="keyword">var</span> proxyConn conn.Conn</span><br><span class="line">    <span class="keyword">var</span> err error</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; (<span class="number">2</span> * proxyMaxPoolSize); i++ &#123;</span><br><span class="line">        <span class="comment">// get a proxy connection</span></span><br><span class="line">        <span class="keyword">if</span> proxyConn, err = t.ctl.GetProxy();</span><br><span class="line">           err != <span class="literal">nil</span> &#123;</span><br><span class="line">            … …</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">defer</span> proxyConn.Close()</span><br><span class="line">       … …</span><br><span class="line"></span><br><span class="line">        <span class="comment">// tell the client we're going to</span></span><br><span class="line">        <span class="comment">// start using this proxy connection</span></span><br><span class="line">        startPxyMsg := &amp;msg.StartProxy&#123;</span><br><span class="line">            Url:        t.url,</span><br><span class="line">            ClientAddr: publicConn.RemoteAddr().String(),</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> err = msg.WriteMsg(proxyConn, startPxyMsg);</span><br><span class="line">            err != <span class="literal">nil</span> &#123;</span><br><span class="line">           … …</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    … …</span><br><span class="line">    <span class="comment">// join the public and proxy connections</span></span><br><span class="line">    bytesIn, bytesOut := conn.Join(publicConn, proxyConn)</span><br><span class="line">    …. …</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>HandlePublicConnection通过选出的Proxy connection向ngrok client发送StartProxy信息，告知ngrok proxy启动。然后通过conn.Join方法将publicConn和proxyConn关联到一起。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ngrok/src/ngrok/conn/conn.go</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Join</span><span class="params">(c Conn, c2 Conn)</span> <span class="params">(<span class="keyword">int64</span>, <span class="keyword">int64</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> wait sync.WaitGroup</span><br><span class="line"></span><br><span class="line">    pipe := <span class="function"><span class="keyword">func</span><span class="params">(to Conn, from Conn, bytesCopied *<span class="keyword">int64</span>)</span></span> &#123;</span><br><span class="line">        <span class="keyword">defer</span> to.Close()</span><br><span class="line">        <span class="keyword">defer</span> from.Close()</span><br><span class="line">        <span class="keyword">defer</span> wait.Done()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> err error</span><br><span class="line">        *bytesCopied, err = io.Copy(to, from)</span><br><span class="line">        <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">            from.Warn(<span class="string">"Copied %d bytes to %s before failing with error %v"</span>, *bytesCopied, to.Id(), err)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            from.Debug(<span class="string">"Copied %d bytes to %s"</span>, *bytesCopied, to.Id())</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    wait.Add(<span class="number">2</span>)</span><br><span class="line">    <span class="keyword">var</span> fromBytes, toBytes <span class="keyword">int64</span></span><br><span class="line">    <span class="keyword">go</span> pipe(c, c2, &amp;fromBytes)</span><br><span class="line">    <span class="keyword">go</span> pipe(c2, c, &amp;toBytes)</span><br><span class="line">    c.Info(<span class="string">"Joined with connection %s"</span>, c2.Id())</span><br><span class="line">    wait.Wait()</span><br><span class="line">    <span class="keyword">return</span> fromBytes, toBytes</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Join通过io.Copy实现public conn和proxy conn数据流的转发，单向被称作一个pipe，Join建立了两个Pipe，实现了双向转发，每个Pipe直到一方返回EOF或异常失败才会退出。后续在ngrok端，proxy conn和private conn也是通过conn.Join关联到一起的。</p>
+<p>我们现在就来看看ngrok在收到StartProxy消息后是如何处理的。我们回到ClientModel的proxy方法中。在向ngrokd成功建立proxy connection后，ngrok等待ngrokd的StartProxy指令。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// wait for the server to ack our register</span></span><br><span class="line">    <span class="keyword">var</span> startPxy msg.StartProxy</span><br><span class="line">    <span class="keyword">if</span> err = msg.ReadMsgInto(remoteConn, &amp;startPxy);</span><br><span class="line">             err != <span class="literal">nil</span> &#123;</span><br><span class="line">        remoteConn.Error(<span class="string">"Server failed to write StartProxy: %v"</span>,</span><br><span class="line">                   err)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>一旦收到StartProxy，ngrok将建立一条private connection：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// start up the private connection</span></span><br><span class="line">    start := time.Now()</span><br><span class="line">    localConn, err := conn.Dial(tunnel.LocalAddr, <span class="string">"prv"</span>, <span class="literal">nil</span>)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">       … …</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>并将private connection和proxy connection通过conn.Join关联在一起，实现数据透明转发。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">m.connTimer.Time(<span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        localConn := tunnel.Protocol.WrapConn(localConn,</span><br><span class="line">             mvc.ConnectionContext&#123;Tunnel: tunnel,</span><br><span class="line">              ClientAddr: startPxy.ClientAddr&#125;)</span><br><span class="line">        bytesIn, bytesOut := conn.Join(localConn, remoteConn)</span><br><span class="line">        m.bytesIn.Update(bytesIn)</span><br><span class="line">        m.bytesOut.Update(bytesOut)</span><br><span class="line">        m.bytesInCount.Inc(bytesIn)</span><br><span class="line">        m.bytesOutCount.Inc(bytesOut)</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure>
+<p>这样一来，public connection上的数据通过proxy connection到达ngrok，ngrok再通过private connection将数据转发给本地启动的服务程序，从而实现所谓的内网穿透。从public视角来看，就像是与内网中的那个服务直接交互一样。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/go/" rel="tag"># go</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/27/node-async-await/" rel="next" title="async和await浅析">
+                <i class="fa fa-chevron-left"></i> async和await浅析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/29/go-net/" rel="prev" title="Go语言中Socket通信TCP服务端">
+                Go语言中Socket通信TCP服务端 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/img/avatar.png"
+                alt="Ben" />
+            
+              <p class="site-author-name" itemprop="name">Ben</p>
+              <p class="site-description motion-element" itemprop="description">曾经沧海难为水，除却巫山不是云</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/benvim" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:smoilbig@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/smoilbig" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.facebook.com/smoilbig" target="_blank" title="FB Page">
+                      
+                        <i class="fa fa-fw fa-facebook"></i>FB Page</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://stackoverflow.com/users/1583535/benvim" target="_blank" title="StackOverflow">
+                      
+                        <i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://instagram.com/smoilbig" target="_blank" title="Instagram">
+                      
+                        <i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、ngrok-tunnel与ngrok部署"><span class="nav-number">1.</span> <span class="nav-text">一、ngrok tunnel与ngrok部署</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#二、ngrok开发调试环境搭建"><span class="nav-number">1.1.</span> <span class="nav-text">二、ngrok开发调试环境搭建</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、第一阶段：Control-Connection建立"><span class="nav-number">2.</span> <span class="nav-text">二、第一阶段：Control Connection建立</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、Tunnel-Creation"><span class="nav-number">3.</span> <span class="nav-text">四、Tunnel Creation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、Proxy-Connection和Private-Connection"><span class="nav-number">4.</span> <span class="nav-text">五、Proxy Connection和Private Connection</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ben</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://blog-ku-cat-com.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://blog.ku-cat.com/2018/06/28/ngrok-desc/';
+          this.page.identifier = '2018/06/28/ngrok-desc/';
+          this.page.title = '内网穿透-ngrok原理浅析';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://blog-ku-cat-com.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("nYTmpXuOnvdr7W9zLgY953XO-gzGzoHsz", "A5aGs1oDGq6UfXzYL2kPLewQ");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

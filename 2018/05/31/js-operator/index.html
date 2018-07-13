@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="js,node," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="一纸墨迹" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="一、一元操作符1.递增和递减操作符 前置型    ++i    –i 后置型    i++    i– 执行前置递增和递减操作时，变量的值都是在语句被求值之前改变的。 示例1： var a = 10; var b = 20; var c = ++a + b;     var d = a + b;     console.log(c);    //31 console.log(d);    //31">
+<meta name="keywords" content="js,node">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js的操作符及运算规则细节">
+<meta property="og:url" content="http://blog.ku-cat.com/2018/05/31/js-operator/index.html">
+<meta property="og:site_name" content="一纸墨迹">
+<meta property="og:description" content="一、一元操作符1.递增和递减操作符 前置型    ++i    –i 后置型    i++    i– 执行前置递增和递减操作时，变量的值都是在语句被求值之前改变的。 示例1： var a = 10; var b = 20; var c = ++a + b;     var d = a + b;     console.log(c);    //31 console.log(d);    //31">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-06-04T11:11:47.026Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="js的操作符及运算规则细节">
+<meta name="twitter:description" content="一、一元操作符1.递增和递减操作符 前置型    ++i    –i 后置型    i++    i– 执行前置递增和递减操作时，变量的值都是在语句被求值之前改变的。 示例1： var a = 10; var b = 20; var c = ++a + b;     var d = a + b;     console.log(c);    //31 console.log(d);    //31">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blog.ku-cat.com/2018/05/31/js-operator/"/>
+
+
+
+
+
+  <title>js的操作符及运算规则细节 | 一纸墨迹</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?54b5db6d135edf920a975b75b9ca41b7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">一纸墨迹</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            Schedule
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            Sitemap
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'gjvyxGfZJ_CYTmv4_n3D','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/05/31/js-operator/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一纸墨迹">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">js的操作符及运算规则细节</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-31T09:27:19+08:00">
+                2018-05-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/js/" itemprop="url" rel="index">
+                    <span itemprop="name">js</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/31/js-operator/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/05/31/js-operator/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/05/31/js-operator/" class="leancloud_visitors" data-flag-title="js的操作符及运算规则细节">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一、一元操作符"><a href="#一、一元操作符" class="headerlink" title="一、一元操作符"></a>一、一元操作符</h2><p>1.递增和递减操作符</p>
+<p>前置型    ++i    –i</p>
+<p>后置型    i++    i–</p>
+<p>执行前置递增和递减操作时，变量的值都是在语句被求值之前改变的。</p>
+<p>示例1：</p>
+<p>var a = 10;</p>
+<p>var b = 20;</p>
+<p>var c = ++a + b;    </p>
+<p>var d = a + b;    </p>
+<p>console.log(c);    //31</p>
+<p>console.log(d);    //31</p>
+<p>示例2：</p>
+<p>var a = 10;</p>
+<p>var b = 20;</p>
+<p>var c = a++ + b;</p>
+<p>var d = a + b;</p>
+<p>console.log(c);    //30</p>
+<p>console.log(d);    //31</p>
+<p>示例3：</p>
+<p>var a = 1;</p>
+<p>var b = ++a +a;</p>
+<p>var c = a++ +a;</p>
+<p>console.log(b);    //4</p>
+<p>console.log(c);    //5</p>
+<p>数值、字符串、布尔值、对象都能使用递增和递减操作符；如果不是数值数据，则调用转型函数Number()转换为数值，再进行相应的操作。</p>
+<p>2.一元加和减操作符</p>
+<p>一元加和减操作符，主要用于基本的算术运算，也可以用于转换数据类型。</p>
+<p> 一元加操作符，放在数值前面，对数值不会产生任何影响；但是放在非数值前面，则会调用Number()函数，对该非数值的值进行转换。</p>
+<p>一元减操作符，用于表示负数；应用于非数值时，先调用Number()函数，再将得到的结果转换为负数。</p>
+<p>二、位操作符    ——    好高大上的感觉，先行跳过，有待补充</p>
+<p>三、布尔操作符</p>
+<p>1.逻辑非（！）</p>
+<p>逻辑非操作符可用于JS中的任何值，首先将它的操作数转换为布尔值，然后对其取反。</p>
+<p>规则如下：</p>
+<p>如果操作数是一个对象，转换为布尔值为true，取反，为false；</p>
+<p>如果操作数是null，转换为布尔值为false，取反，为true；</p>
+<p>空字符串，false，取反，为true；</p>
+<p>非空字符串，true，取反，为false；</p>
+<p>数值0/NaN，为false，取反，为true；</p>
+<p>非0数值（Infinite），为true，取反，为false；</p>
+<p>undefined，为false，取反，为true。</p>
+<p>同时使用两个逻辑非操作符（!!）可将一个值转换为其对应的布尔值，其结果与调用Boolean()函数一致。</p>
+<p>2.逻辑与（&amp;&amp;）</p>
+<p>逻辑与操作属于短路操作，如果第一个操作数是false，则结果直接为false；如果第一个操作数为true，则结果为第二个操作数。</p>
+<p>在有一个（或两个）操作数不是布尔值的情况下，把操作数转换为布尔值进行逻辑与操作，但是返回结果为原值。</p>
+<p>示例1：</p>
+<p>var a = 0;</p>
+<p>var b = “string”;</p>
+<p>console.log(a&amp;&amp;b);    //0</p>
+<p>console.log(b&amp;&amp;a);    //0</p>
+<p>注意：在逻辑与操作中使用未定义的值可能会导致错误。</p>
+<p>var x = 5;</p>
+<p>alert(x&amp;&amp;y);    //ReferenceError: y is not defined</p>
+<p>3.逻辑或（||）</p>
+<p>逻辑或也是短路操作，如果第一个值为true，则直接返回true，无需对第二个操作数求值；如果第一个操作数为false，则返回第二个操作数；即使第二个操作数也是false，也是返回第二个操作数。</p>
+<p>在有一个（或两个）操作数不是布尔值的情况下，把操作数转换为布尔值进行逻辑或操作，但是返回结果为原值。</p>
+<p>var x = 0;</p>
+<p>var y = null;</p>
+<p>console.log(x||y);    //null</p>
+<p>注意：在逻辑或操作中使用未定义的值可能会导致错误。</p>
+<p>利用逻辑或，避免为变量赋null或undefined值：</p>
+<p>var myObject = preferredObject || backupObject;</p>
+<p>四、乘性操作符</p>
+<p>1.乘法（*）</p>
+<p>如果操作数都是数值，执行常规乘法计算；</p>
+<p>如果有一个数是NaN，结构为NaN；</p>
+<p>如果Infinite与0相乘，结果为NaN；</p>
+<p>如果Infinite与非0数值相乘，结果为Infinite；</p>
+<p>如果Infinite与Infinite相乘，结果为Infinite；</p>
+<p>如果有一个操作数不是数值，则调用Number()函数，将其转换为数值，再应用上述规则。</p>
+<p>2.除法（/）</p>
+<p>如果操作数都是数值，执行常规除法计算；</p>
+<p>如果有一个数是NaN，结果为NaN；</p>
+<p>Infinite除以Infinite，结果为NaN；</p>
+<p>Infinite除以非0数值，结果为Infinite；</p>
+<p>Infinite除以0，结果为Infinite；</p>
+<p>0除以0，结果为NaN；</p>
+<p>非0有穷数除以0，结果为Infinite；</p>
+<p>如果有一个操作数不是数值，则调用Number()函数，将其转换为数值，再应用上述规则。</p>
+<p>3.求模（%）</p>
+<p>如果操作数都是数值，执行常规除法计算，返回所得的余数；</p>
+<p>如果有一个数是NaN，结果为NaN；</p>
+<p>如果Infinite除以Infinite，结果为NaN；</p>
+<p>如果Infinite除以有穷数，结果为NaN；</p>
+<p>如果有穷数除以0，结果为NaN；</p>
+<p>如果被除数有穷除以Infinite，结果为被除数。</p>
+<p>0除以任何数，结果为0；</p>
+<p>如果有一个操作数不是数值，则调用Number()函数，将其转换为数值，再应用上述规则。</p>
+<p>五、加性操作符</p>
+<p>1.加法</p>
+<p>如果有一个数是NaN，结果为NaN；</p>
+<p>如果是Infinite加Infinite，结果为Infinite；</p>
+<p>如果是-Infinite加-Infinite，结果为-Infinite；</p>
+<p>如果是Infinite加-Infinite，结果为NaN；</p>
+<p>如果是+0加+0，结果为+0；</p>
+<p>如果是-0加-0，结果为-0；</p>
+<p>如果是+0加-0，结果为+0；</p>
+<p>如果两个操作数都是字符串，则将两个字符串拼接起来；</p>
+<p>如果只有一个操作数是字符串，则将另一个操作数转换为字符串，然后将两个字符串拼接起来。</p>
+<p>如果有一个操作数是对象、数值或布尔值，则调用它们的toString()方法取得相应的字符串值；</p>
+<p>对于undefined和null，则调用String()函数并取得相应的字符串“undefined”和“null”。</p>
+<p>var a = 5;</p>
+<p>var b = 10;</p>
+<p>var message = “The sum of a and b is” + a + b;    //结果为510</p>
+<p>var message = “The sum of a and b is” + (a + b);    //结果为15</p>
+<p>2.减法</p>
+<p>如果有一个数是NaN，结果为NaN；</p>
+<p>如果是Infinite减Infinite，结果为NaN；</p>
+<p>如果是-Infinite减-Infinite，结果为NaN；</p>
+<p>如果是Infinite减-Infinite，结果为Infinite；</p>
+<p>如果是-Infinite减Infinite，结果为-Infinite；</p>
+<p>如果是+0减+0，结果为+0；</p>
+<p>如果是-0减-0，结果为+0；</p>
+<p>如果是+0减-0，结果为-0；</p>
+<p>如果有一个操作数是字符串、布尔值、null或undefined，则先调用Number()函数；</p>
+<p>如果有一个操作数是对象，则先调用valueOf()方法，如果得到的值是NaN，则减法的结果就是NaN；如果没有valueOf()方法，则调用其toString()方法。</p>
+<p>六、关系操作符</p>
+<p>小于（&lt;）、小于等于（&lt;=）、大于（&gt;）、大于等于（&gt;=）</p>
+<p>如果两个操作数都是数值，则执行数值比较；</p>
+<p>如果两个操作数都是字符串，则比较两个字符串对应的字符编码值；</p>
+<p>如果一个操作数是数值，则将另一个操作数转换为数值；</p>
+<p>如果一个操作数是对象，则调用这个对象的valueOf()方法；如果对象没有valueOf()方法，则调用toString()方法。</p>
+<p>如果一个操作数是布尔值，则将其转换为数值；</p>
+<p>任何操作数与NaN进行比较，结果都会返回false。</p>
+<p>七、相等操作符</p>
+<p>1.相等（==）与不相等（!=）</p>
+<p>先转换操作数，再比较相等性；基本规则：</p>
+<p>如果有一个操作数是布尔值，在比较之前先转换为数值；</p>
+<p>如果有一个操作数是字符串，另一个操作数是数值，在比较之前先将字符串转换为数值；</p>
+<p>如果有一个操作数是对象，另一个不是，则调用对象的valueOf()方法；</p>
+<p>如果两个操作数都是对象，则比较它们是不是同一个对象；如果两个操作数都指向同一个对象，则返回true，否则返回false；</p>
+<p>null值与undefined值相等；</p>
+<p>在比较相等性之前，不能将null值或undefined转换成其它任何值；</p>
+<p>NaN不等于任何值，即使是它自己。</p>
+<p>2.全等（===）和不全等（!===）</p>
+<p>只有在不转换数值类型的情况下相等，全等才会返回true；</p>
+<p>null == undefined；但是null !== undefined</p>
+<p>八、条件操作符</p>
+<p>variable = boolean_expression ? true_value : false_value;</p>
+<p>对布尔值表达式求值，若为true，则返回第一个值；若为false，则返回第二个值。</p>
+<p>九、赋值操作符</p>
+<p>赋值操作符的作用，将右边的值赋给左边的变量。</p>
+<p>如果在赋值操作符的左边添加其它操作符，可以完成复合赋值操作，简化赋值操作；</p>
+<p>var num = 10;</p>
+<p>num +=10 ;    //num = num +10;</p>
+<p>十、逗号操作符</p>
+<p>在一条语句中声明多个变量；</p>
+<p>用于赋值，表达式中的每一项都会被计算，但是返回最后一项；</p>
+<p>var num = (1,2,3,4,5);</p>
+<p>alert(num);    //5</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/js/" rel="tag"># js</a>
+          
+            <a href="/tags/node/" rel="tag"># node</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/30/ben-ci/" rel="next" title="古城深巷、青砖黛瓦，惊艳了谁的时光？深度美文!">
+                <i class="fa fa-chevron-left"></i> 古城深巷、青砖黛瓦，惊艳了谁的时光？深度美文!
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/31/js-es6-spread/" rel="prev" title="es6 扩展运算符 spread(...)">
+                es6 扩展运算符 spread(...) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/img/avatar.png"
+                alt="Ben" />
+            
+              <p class="site-author-name" itemprop="name">Ben</p>
+              <p class="site-description motion-element" itemprop="description">曾经沧海难为水，除却巫山不是云</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/benvim" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:smoilbig@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/smoilbig" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.facebook.com/smoilbig" target="_blank" title="FB Page">
+                      
+                        <i class="fa fa-fw fa-facebook"></i>FB Page</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://stackoverflow.com/users/1583535/benvim" target="_blank" title="StackOverflow">
+                      
+                        <i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://instagram.com/smoilbig" target="_blank" title="Instagram">
+                      
+                        <i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、一元操作符"><span class="nav-number">1.</span> <span class="nav-text">一、一元操作符</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ben</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://blog-ku-cat-com.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://blog.ku-cat.com/2018/05/31/js-operator/';
+          this.page.identifier = '2018/05/31/js-operator/';
+          this.page.title = 'js的操作符及运算规则细节';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://blog-ku-cat-com.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("nYTmpXuOnvdr7W9zLgY953XO-gzGzoHsz", "A5aGs1oDGq6UfXzYL2kPLewQ");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
