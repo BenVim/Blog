@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="一纸墨迹">
 <meta property="og:description" content="readn、writen和readline函数字节流套接字（例如TCP套接字）上的read和write函数所表现的行为不同于通常的文件I/O。字节流套接字上调用read或write输入或输出的字节数可能比请求的数量少， 然而这不是出错的状态。这个现象的原因在于内核中用于套接字的缓冲区可能已达到了极限。此时所需的是调用者再次调用read或write函数，以输入或输出剩余的字节。有些版本的Unix在往">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-13T07:52:20.994Z">
+<meta property="og:updated_time" content="2018-07-13T09:36:57.026Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="read、readn、writen和readline函数">
 <meta name="twitter:description" content="readn、writen和readline函数字节流套接字（例如TCP套接字）上的read和write函数所表现的行为不同于通常的文件I/O。字节流套接字上调用read或write输入或输出的字节数可能比请求的数量少， 然而这不是出错的状态。这个现象的原因在于内核中用于套接字的缓冲区可能已达到了极限。此时所需的是调用者再次调用read或write函数，以输入或输出剩余的字节。有些版本的Unix在往">
@@ -439,6 +439,7 @@
         <h1 id="readn、writen和readline函数"><a href="#readn、writen和readline函数" class="headerlink" title="readn、writen和readline函数"></a>readn、writen和readline函数</h1><p>字节流套接字（例如TCP套接字）上的read和write函数所表现的行为不同于通常的文件I/O。字节流套接字上调用read或write输入或输出的字节数可能比请求的数量少， 然而这不是出错的状态。这个现象的原因在于内核中用于套接字的缓冲区可能已达到了极限。此时所需的是调用者再次调用read或write函数，以输入或输出剩余的字节。有些版本的Unix在往一个管道中写多于4096字节的数据时也会表现出这样的行为。这个现象在read一个字节流套接字时很常，但是在write一个字节流套接字时只能在该套接字为非阻塞的前提下才出现。尽管如此，为预防万一，不让实现返回一个不足的字节计数值，我们总是改为调用writen函数来取代write函数。</p>
 <p>我们提供的以下3个函数是每当我们读或写一个字节流套接字时总要使用的函数。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"unp.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;  </span></span></span><br><span class="line"><span class="keyword">ssize_t</span> read(<span class="keyword">int</span> fd, <span class="keyword">void</span> *buf, <span class="keyword">size_t</span> count);</span><br><span class="line"><span class="comment">// 返回值：成功返回读取的字节数，出错返回-1并设置errno，</span></span><br><span class="line"><span class="comment">// 如果在调read之前已到达文件末尾，则这次read返回0</span></span><br><span class="line"><span class="keyword">ssize_t</span> readn(<span class="keyword">int</span> fileds, <span class="keyword">void</span> * fuff, <span class="keyword">size_t</span> nbytes);</span><br><span class="line"><span class="keyword">ssize_t</span> writeent(<span class="keyword">int</span> filedes, <span class="keyword">const</span> <span class="keyword">void</span> *buff, <span class="keyword">size_t</span> nbytes);</span><br><span class="line"><span class="keyword">ssize_t</span> readline(<span class="keyword">int</span> filedes, <span class="keyword">void</span> * buff, <span class="keyword">size_t</span> maxlen);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 均返回读或写的字节数，若出错则为-1</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <h3 id="read-函数相关内容："><a href="#read-函数相关内容：" class="headerlink" title="read 函数相关内容："></a>read 函数相关内容：</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ssize_t</span> read(<span class="keyword">int</span> fd, <span class="keyword">void</span> *buf, <span class="keyword">size_t</span> count);</span><br></pre></td></tr></table></figure>
 <p>参数count是请求读取的字节数，读上来的数据保存在缓冲区buf中，同时文件的当前读写位置向后移。注意这个读写位置和使用C标准I/O库时的读写位置有可能不同，这个读写位置是记在内核中的，而使用C标准I/O库时的读写位置是用户空间I/O缓冲区中的位置。</p>
 <p>fread就是通过read来实现的，fread是C语言的库，而read是系统调用。</p>
@@ -459,6 +460,9 @@
 <li><p>从网络读，根据不同的传输层协议和内核缓存机制，返回值可能小于请求的字节数，后面socket编程部分会详细讲解。</p>
 </li>
 </ul>
+<h3 id="write函数向打开的设备或文件中写数据"><a href="#write函数向打开的设备或文件中写数据" class="headerlink" title="write函数向打开的设备或文件中写数据"></a>write函数向打开的设备或文件中写数据</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;  ssize_t write(int fd, const void *buf, size_t count); 返回值：成功返回写入的字节数，出错返回-1并设置errno</span></span></span><br></pre></td></tr></table></figure>
+<p>写常规文件时，write的返回值通常等于请求写的字节数count，而向终端设备或网络写则不一定。</p>
+<p>读常规文件是不会阻塞的，不管读多少字节，read一定会在有限的时间内返回。从终端设备或网络读则不一定，<strong>如果从终端输入的数据没有换行符，调用read读终端设备就会阻塞，如果网络上没有接收到数据包，调用read从网络读就会阻塞，至于会阻塞多长时间也是不确定的，如果一直没有数据到达就一直阻塞在那里。</strong>同样，写常规文件是不会阻塞的，而向终端设备或网络写则不一定。</p>
 <h3 id="readn函数的实现"><a href="#readn函数的实现" class="headerlink" title="readn函数的实现"></a>readn函数的实现</h3><pre><code class="c"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"unp.h"</span></span>
 <span class="keyword">ssize_t</span> readn(<span class="keyword">int</span> fd, <span class="keyword">void</span> *vptr, <span class="keyword">size_t</span> n);
 {
@@ -484,7 +488,7 @@
 }
 
 </code></pre>
-
+<h3 id="writen函数的实现"><a href="#writen函数的实现" class="headerlink" title="writen函数的实现"></a>writen函数的实现</h3>
       
     </div>
     
@@ -717,7 +721,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#readn、writen和readline函数"><span class="nav-number">1.</span> <span class="nav-text">readn、writen和readline函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#read-函数相关内容："><span class="nav-number">1.0.1.</span> <span class="nav-text">read 函数相关内容：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#readn函数的实现"><span class="nav-number">1.0.2.</span> <span class="nav-text">readn函数的实现</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#readn、writen和readline函数"><span class="nav-number">1.</span> <span class="nav-text">readn、writen和readline函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#read-函数相关内容："><span class="nav-number">1.0.1.</span> <span class="nav-text">read 函数相关内容：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#write函数向打开的设备或文件中写数据"><span class="nav-number">1.0.2.</span> <span class="nav-text">write函数向打开的设备或文件中写数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#readn函数的实现"><span class="nav-number">1.0.3.</span> <span class="nav-text">readn函数的实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#writen函数的实现"><span class="nav-number">1.0.4.</span> <span class="nav-text">writen函数的实现</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
