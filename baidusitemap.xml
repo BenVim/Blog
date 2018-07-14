@@ -4,17 +4,22 @@
 
     
   <url>
-    <loc>http://blog.ku-cat.com/2018/06/28/ngrok-desc/</loc>
-    <lastmod>2018-07-13T10:02:15.465Z</lastmod>
+    <loc>http://blog.ku-cat.com/2018/07/14/unix-socket-base01/</loc>
+    <lastmod>2018-07-14T06:41:14.185Z</lastmod>
     <data>
         <display>
-        <title>内网穿透-ngrok原理浅析</title>
-        <pubTime>2018-06-28T06:53:58.000Z</pubTime>
+        <title>Unix字节排序函数</title>
+        <pubTime>2018-07-14T05:41:11.000Z</pubTime>
         
-        <tag>go</tag>
+        <tag>c</tag>
+         
+        <tag>unix</tag>
          
          
            
+             
+              <breadCrumb title="c/c++" url="http://blog.ku-cat.com/categories/c-c/"/>
+          
         </display>
     </data>
     </url>
@@ -22,7 +27,7 @@
     
   <url>
     <loc>http://blog.ku-cat.com/2018/07/10/c-readn-writen-readline/</loc>
-    <lastmod>2018-07-13T09:36:57.026Z</lastmod>
+    <lastmod>2018-07-14T05:40:24.805Z</lastmod>
     <data>
         <display>
         <title>read、readn、writen和readline函数</title>
@@ -37,6 +42,23 @@
              
               <breadCrumb title="c/c++" url="http://blog.ku-cat.com/categories/c-c/"/>
           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.ku-cat.com/2018/06/28/ngrok-desc/</loc>
+    <lastmod>2018-07-13T10:02:15.465Z</lastmod>
+    <data>
+        <display>
+        <title>内网穿透-ngrok原理浅析</title>
+        <pubTime>2018-06-28T06:53:58.000Z</pubTime>
+        
+        <tag>go</tag>
+         
+         
+           
         </display>
     </data>
     </url>

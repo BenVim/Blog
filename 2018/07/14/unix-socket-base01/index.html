@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="c,unix," />
 
 
 
@@ -81,16 +81,18 @@
 
 
 
-<meta name="description" content="曾经沧海难为水，除却巫山不是云">
-<meta property="og:type" content="website">
-<meta property="og:title" content="一纸墨迹">
-<meta property="og:url" content="http://blog.ku-cat.com/tags/poke/index.html">
+<meta name="description" content="一个16位整数，它由2个字节组成。内存中存储这两个字节有两种方法：  一种是将低序字节存储在起始地址，这称为小端(little-endian)字节序； 另一种方法是将高序字节存储在起始地址，这称大端（big-endian）字节序；   术语“大端”和“小端”表示多个字节值的哪一端（大端或小端）存储在该值的起始地址。">
+<meta name="keywords" content="c,unix">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Unix字节排序函数">
+<meta property="og:url" content="http://blog.ku-cat.com/2018/07/14/unix-socket-base01/index.html">
 <meta property="og:site_name" content="一纸墨迹">
-<meta property="og:description" content="曾经沧海难为水，除却巫山不是云">
+<meta property="og:description" content="一个16位整数，它由2个字节组成。内存中存储这两个字节有两种方法：  一种是将低序字节存储在起始地址，这称为小端(little-endian)字节序； 另一种方法是将高序字节存储在起始地址，这称大端（big-endian）字节序；   术语“大端”和“小端”表示多个字节值的哪一端（大端或小端）存储在该值的起始地址。">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-07-14T06:41:14.185Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一纸墨迹">
-<meta name="twitter:description" content="曾经沧海难为水，除却巫山不是云">
+<meta name="twitter:title" content="Unix字节排序函数">
+<meta name="twitter:description" content="一个16位整数，它由2个字节组成。内存中存储这两个字节有两种方法：  一种是将低序字节存储在起始地址，这称为小端(little-endian)字节序； 另一种方法是将高序字节存储在起始地址，这称大端（big-endian）字节序；   术语“大端”和“小端”表示多个字节值的哪一端（大端或小端）存储在该值的起始地址。">
 
 
 
@@ -120,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.ku-cat.com/tags/poke/"/>
+  <link rel="canonical" href="http://blog.ku-cat.com/2018/07/14/unix-socket-base01/"/>
 
 
 
 
 
-  <title>Tag: poke | 一纸墨迹</title>
+  <title>Unix字节排序函数 | 一纸墨迹</title>
   
 
 
@@ -155,7 +157,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -309,54 +311,207 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>poke<small>Tag</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/07/14/unix-socket-base01/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一纸墨迹">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/06/25/poke-ai/" itemprop="url">
-              
-                <span itemprop="name">斗地主的Ai算法设计思路</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">Unix字节排序函数</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-06-25T16:03:17+08:00"
-              content="2018-06-25" >
-          06-25
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-14T13:41:11+08:00">
+                2018-07-14
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/c-c/" itemprop="url" rel="index">
+                    <span itemprop="name">c/c++</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/07/14/unix-socket-base01/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/07/14/unix-socket-base01/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/07/14/unix-socket-base01/" class="leancloud_visitors" data-flag-title="Unix字节排序函数">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>一个16位整数，它由2个字节组成。内存中存储这两个字节有两种方法：</p>
+<ul>
+<li>一种是将低序字节存储在起始地址，这称为小端(little-endian)字节序；</li>
+<li>另一种方法是将高序字节存储在起始地址，这称大端（big-endian）字节序；</li>
+</ul>
+<blockquote>
+<p>术语“大端”和“小端”表示多个字节值的哪一端（大端或小端）存储在该值的起始地址。</p>
+</blockquote>
+<a id="more"></a>
+<p>两个字节序没有标准，有的系统用的是大端，有的则用的是小端。可以通过下面的程序输出主机字节序。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"unp.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> ** argv)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">union</span>&#123;</span><br><span class="line">		<span class="keyword">short</span> s;</span><br><span class="line">		<span class="keyword">char</span> c[<span class="keyword">sizeof</span>(<span class="keyword">short</span>)];</span><br><span class="line">	&#125; un;</span><br><span class="line">	</span><br><span class="line">	un.s = <span class="number">0x0102</span>; <span class="comment">//短整数变量存入2个字节值0x0102 。</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%s: "</span>, CPU_VENDOR_OS);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span>(<span class="keyword">sizeof</span>(<span class="keyword">short</span>) == <span class="number">2</span>)&#123;</span><br><span class="line">		<span class="keyword">if</span>(un.c[<span class="number">0</span>] == <span class="number">1</span> &amp;&amp; un.c[<span class="number">1</span>] == <span class="number">2</span>) <span class="comment">//检查起始地址的值 un.c[0]==1,表示大的在起始端了。</span></span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"big-endian \n"</span>);</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(un.c[<span class="number">0</span>] == <span class="number">2</span> &amp;&amp; un.c[<span class="number">1</span>] == <span class="number">1</span>)</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"little-endian \n"</span>);</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"unknown \n"</span>);</span><br><span class="line">	&#125; <span class="keyword">else</span></span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"sizeof(short) = %d \n"</span>, <span class="keyword">sizeof</span>(<span class="keyword">short</span>));</span><br><span class="line">	<span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们在一个短的整数变量存放2个字节的值0x0102,然后查看他的两个连续字节c[0]和c[1]来确定字节序</p>
+<p>网络协议必须指定一个网络字节序（network byte order)</p>
+<h3 id="字节排序函数"><a href="#字节排序函数" class="headerlink" title="字节排序函数"></a>字节排序函数</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;netinet/in.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">uint16_t</span> htons(<span class="keyword">uint16_t</span> host16bitvalue);</span><br><span class="line"><span class="keyword">uint32_t</span> htonl(<span class="keyword">uint32_t</span> host32bitvalue);<span class="comment">//均返回：网络字节序的值</span></span><br><span class="line"><span class="keyword">uint16_t</span> ntohs(<span class="keyword">uint16_t</span> net16bitvalue);</span><br><span class="line"><span class="keyword">uint32_t</span> ntohl(<span class="keyword">uint32_t</span> net32bitvalue);<span class="comment">//均返回：主机字节序的值</span></span><br></pre></td></tr></table></figure>
+<p>以上函数的名字中，h代表host， n代表network， s代表short，l代表long。short和long这两个称谓是出自4.2BSD的Digital VAX实现的历史产物。如今我们应该把s视为一个16位的值（例如TCP或UDP端口号），把1视为一个32位的值。事实上即使在64位的Digital Alpha中，尽管长整数占用64位，htonl和ntohl函数操作的仍然是32位的值。</p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/c/" rel="tag"># c</a>
+          
+            <a href="/tags/unix/" rel="tag"># unix</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/10/c-readn-writen-readline/" rel="next" title="read、readn、writen和readline函数">
+                <i class="fa fa-chevron-left"></i> read、readn、writen和readline函数
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -364,6 +519,20 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -384,8 +553,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -496,6 +674,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#字节排序函数"><span class="nav-number">1.</span> <span class="nav-text">字节排序函数</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -636,6 +830,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -653,6 +851,18 @@
       <script id="dsq-count-scr" src="https://blog-ku-cat-com.disqus.com/count.js" async></script>
     
 
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://blog.ku-cat.com/2018/07/14/unix-socket-base01/';
+          this.page.identifier = '2018/07/14/unix-socket-base01/';
+          this.page.title = 'Unix字节排序函数';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://blog-ku-cat-com.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
     
 
   

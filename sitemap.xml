@@ -2,16 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://blog.ku-cat.com/2018/06/28/ngrok-desc/</loc>
+    <loc>http://blog.ku-cat.com/2018/07/14/unix-socket-base01/</loc>
     
-    <lastmod>2018-07-13T10:02:15.465Z</lastmod>
+    <lastmod>2018-07-14T06:41:14.185Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.ku-cat.com/2018/07/10/c-readn-writen-readline/</loc>
     
-    <lastmod>2018-07-13T09:36:57.026Z</lastmod>
+    <lastmod>2018-07-14T05:40:24.805Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.ku-cat.com/2018/06/28/ngrok-desc/</loc>
+    
+    <lastmod>2018-07-13T10:02:15.465Z</lastmod>
     
   </url>
   
