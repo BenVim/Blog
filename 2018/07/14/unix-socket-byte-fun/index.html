@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="c,unix," />
 
 
 
@@ -81,16 +81,18 @@
 
 
 
-<meta name="description" content="曾经沧海难为水，除却巫山不是云">
-<meta property="og:type" content="website">
-<meta property="og:title" content="一纸墨迹">
-<meta property="og:url" content="http://blog.ku-cat.com/archives/2018/07/index.html">
+<meta name="description" content="名字以b(表示字节)开阔大的第一组函数起源于4.2BSD，几乎所有现今支持套接字函数的系统仍然提供他们这些函数。名字以mem(表示内存) 开头的第二组函数起源于ANSI C标准，支持ANSI C函数库的所有系统都提供它他。 4.2BSD 函数12345#include &amp;lt;string.h&amp;gt;void bzero(void *dest, size_t nbytes);void bcopy(">
+<meta name="keywords" content="c,unix">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Unix字节操作函数 bzero,bcopy,bcmp,memset,memcpy,memcmp">
+<meta property="og:url" content="http://blog.ku-cat.com/2018/07/14/unix-socket-byte-fun/index.html">
 <meta property="og:site_name" content="一纸墨迹">
-<meta property="og:description" content="曾经沧海难为水，除却巫山不是云">
+<meta property="og:description" content="名字以b(表示字节)开阔大的第一组函数起源于4.2BSD，几乎所有现今支持套接字函数的系统仍然提供他们这些函数。名字以mem(表示内存) 开头的第二组函数起源于ANSI C标准，支持ANSI C函数库的所有系统都提供它他。 4.2BSD 函数12345#include &amp;lt;string.h&amp;gt;void bzero(void *dest, size_t nbytes);void bcopy(">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-07-14T07:14:27.579Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一纸墨迹">
-<meta name="twitter:description" content="曾经沧海难为水，除却巫山不是云">
+<meta name="twitter:title" content="Unix字节操作函数 bzero,bcopy,bcmp,memset,memcpy,memcmp">
+<meta name="twitter:description" content="名字以b(表示字节)开阔大的第一组函数起源于4.2BSD，几乎所有现今支持套接字函数的系统仍然提供他们这些函数。名字以mem(表示内存) 开头的第二组函数起源于ANSI C标准，支持ANSI C函数库的所有系统都提供它他。 4.2BSD 函数12345#include &amp;lt;string.h&amp;gt;void bzero(void *dest, size_t nbytes);void bcopy(">
 
 
 
@@ -120,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.ku-cat.com/archives/2018/07/"/>
+  <link rel="canonical" href="http://blog.ku-cat.com/2018/07/14/unix-socket-byte-fun/"/>
 
 
 
 
 
-  <title>Archive | 一纸墨迹</title>
+  <title>Unix字节操作函数 bzero,bcopy,bcmp,memset,memcpy,memcmp | 一纸墨迹</title>
   
 
 
@@ -155,7 +157,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -309,221 +311,206 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/07/14/unix-socket-byte-fun/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一纸墨迹">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
-         
+          <h1 class="post-title" itemprop="name headline">Unix字节操作函数 bzero,bcopy,bcmp,memset,memcpy,memcmp</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-14T14:45:01+08:00">
+                2018-07-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        Nice! 55 posts in total. Keep on posting.
-      </span>
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/c-c/" itemprop="url" rel="index">
+                    <span itemprop="name">c/c++</span>
+                  </a>
+                </span>
 
-      
-
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2018">2018</h1>
-          </div>
-        
-        
 
-        
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/07/14/unix-socket-byte-fun/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/07/14/unix-socket-byte-fun/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
+          
+             <span id="/2018/07/14/unix-socket-byte-fun/" class="leancloud_visitors" data-flag-title="Unix字节操作函数 bzero,bcopy,bcmp,memset,memcpy,memcmp">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/07/14/unix-socket-byte-fun/" itemprop="url">
-              
-                <span itemprop="name">Unix字节操作函数 bzero,bcopy,bcmp,memset,memcpy,memcmp</span>
-              
-            </a>
-        
-      </h2>
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-07-14T14:45:01+08:00"
-              content="2018-07-14" >
-          07-14
-        </time>
-      </div>
+          
 
-    </header>
-  </article>
+          
 
+        </div>
+      </header>
+    
 
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/07/14/unix-socket-base01/" itemprop="url">
-              
-                <span itemprop="name">Unix字节排序函数</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-07-14T13:41:11+08:00"
-              content="2018-07-14" >
-          07-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/07/10/c-readn-writen-readline/" itemprop="url">
-              
-                <span itemprop="name">read、readn、writen和readline函数</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-07-10T16:03:17+08:00"
-              content="2018-07-10" >
-          07-10
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/07/05/ben-01/" itemprop="url">
-              
-                <span itemprop="name">荀子.劝学篇</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-07-05T14:42:23+08:00"
-              content="2018-07-05" >
-          07-05
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <p>名字以b(表示字节)开阔大的第一组函数起源于4.2BSD，几乎所有现今支持套接字函数的系统仍然提供他们这些函数。名字以mem(表示内存) 开头的第二组函数起源于ANSI C标准，支持ANSI C函数库的所有系统都提供它他。</p>
+<h3 id="4-2BSD-函数"><a href="#4-2BSD-函数" class="headerlink" title="4.2BSD 函数"></a>4.2BSD 函数</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bzero</span><span class="params">(<span class="keyword">void</span> *dest, <span class="keyword">size_t</span> nbytes)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bcopy</span><span class="params">(<span class="keyword">const</span> <span class="keyword">void</span> * src, <span class="keyword">void</span> * dest, <span class="keyword">size_t</span> nbytes)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bcmp</span><span class="params">(<span class="keyword">const</span> <span class="keyword">void</span> * ptrl, <span class="keyword">const</span> <span class="keyword">void</span> * ptr2, <span class="keyword">size_t</span> nbytes)</span></span>;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>const 限定词，在这里的作用表示，所限定的指针src、ptrl和ptr2所指的内容不会被函数更改。换句话说，函数只是读而不修改由const指针所指的内存单元。</p>
+</blockquote>
+<p>bzero把目标字节串中指定数目的字节置为0.我们经常使用该函数来把一个套接字地址结构初始化为0。bcopy将指定数目的字节从源字节串移到目标字节串。bcmp比较两个任意的字节串，若相同则返回值为0， 否则返回值为非0.</p>
+<h3 id="ANSI-C函数"><a href="#ANSI-C函数" class="headerlink" title="ANSI C函数"></a>ANSI C函数</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt; string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> * <span class="title">memset</span><span class="params">(<span class="keyword">void</span> *dest, <span class="keyword">int</span> c, <span class="keyword">size_t</span> len)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> * <span class="title">memcpy</span><span class="params">(<span class="keyword">void</span> *dest, <span class="keyword">const</span> <span class="keyword">void</span> * src, <span class="keyword">size_t</span> nbytes)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">memcmp</span><span class="params">(<span class="keyword">const</span> <span class="keyword">void</span> *ptrl, <span class="keyword">const</span> <span class="keyword">void</span> *ptr2, <span class="keyword">size_t</span> nbytes)</span></span>;</span><br><span class="line"><span class="comment">// 返回：若相等则为0，否则为&lt;0或&gt;0 第一个字节大于第二个字节返回值大于0，否则小于0.</span></span><br></pre></td></tr></table></figure>
+<p>memset把目标字节串指定数目的字节置为值c。memcpy类似bcopy，不过两个指针参数的顺序是相反的。当源字节串与目标字节串重叠时，bcopy能够正确处理，但是memcpy的操作结果却不可知。这种情况下必须改用ANSI C的memmove函数。</p>
+<blockquote>
+<p>记住memcpy两个指针参数顺序的方法之一是记着他们是按照与c中的赋值语句相同的顺序从左到右书写的：dest = src;</p>
+</blockquote>
+<blockquote>
+<p>记住memset最后两个参数顺序的方法之一是认识到所有ANSI C的memxxx函数都需要一个长度参数，而且它总是最后一个参数。</p>
+</blockquote>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/07/03/makefile/" itemprop="url">
-              
-                <span itemprop="name">make命令</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-07-03T08:51:59+08:00"
-              content="2018-07-03" >
-          07-03
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/c/" rel="tag"># c</a>
+          
+            <a href="/tags/unix/" rel="tag"># unix</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/14/unix-socket-base01/" rel="next" title="Unix字节排序函数">
+                <i class="fa fa-chevron-left"></i> Unix字节排序函数
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -531,6 +518,20 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -551,8 +552,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -663,6 +673,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2BSD-函数"><span class="nav-number">1.</span> <span class="nav-text">4.2BSD 函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ANSI-C函数"><span class="nav-number">2.</span> <span class="nav-text">ANSI C函数</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -803,6 +829,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -820,6 +850,18 @@
       <script id="dsq-count-scr" src="https://blog-ku-cat-com.disqus.com/count.js" async></script>
     
 
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://blog.ku-cat.com/2018/07/14/unix-socket-byte-fun/';
+          this.page.identifier = '2018/07/14/unix-socket-byte-fun/';
+          this.page.title = 'Unix字节操作函数 bzero,bcopy,bcmp,memset,memcpy,memcmp';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://blog-ku-cat-com.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
     
 
   

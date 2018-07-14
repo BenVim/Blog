@@ -4,6 +4,28 @@
 
     
   <url>
+    <loc>http://blog.ku-cat.com/2018/07/14/unix-socket-byte-fun/</loc>
+    <lastmod>2018-07-14T07:14:27.579Z</lastmod>
+    <data>
+        <display>
+        <title>Unix字节操作函数 bzero,bcopy,bcmp,memset,memcpy,memcmp</title>
+        <pubTime>2018-07-14T06:45:01.000Z</pubTime>
+        
+        <tag>c</tag>
+         
+        <tag>unix</tag>
+         
+         
+           
+             
+              <breadCrumb title="c/c++" url="http://blog.ku-cat.com/categories/c-c/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://blog.ku-cat.com/2018/07/14/unix-socket-base01/</loc>
     <lastmod>2018-07-14T06:41:14.185Z</lastmod>
     <data>
