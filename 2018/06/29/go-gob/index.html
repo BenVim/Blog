@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="Go语言的gob包主要的功能是对go的数据进行序列化与反序列化操作。我们在其它语言使用json或是xml的方式对数据进行序列化操作，go语言有自己的序列化和反序列包，就是gob了。 gob是Golang自带的一个数据结构序列化的编码与解码工具。 编码使用Encoder方法，解码使用Decode方法，最典型的应用场景就是RPC通信。 方法介绍func Register 1func Register(">
+<meta name="description" content="Go语言的gob包主要的功能是对go的数据进行序列化与反序列化操作。我们在其它语言使用json或是xml的方式对数据进行序列化操作，go语言有自己的序列化和反序列包，就是gob了。 gob是Golang自带的一个数据结构序列化的编码与解码工具。 编码使用Encoder方法，解码使用Decode方法，最典型的应用场景就是RPC通信。">
 <meta name="keywords" content="go,gob">
 <meta property="og:type" content="article">
 <meta property="og:title" content="go语言的gob包的介绍与使用">
 <meta property="og:url" content="http://blog.ku-cat.com/2018/06/29/go-gob/index.html">
 <meta property="og:site_name" content="一纸墨迹">
-<meta property="og:description" content="Go语言的gob包主要的功能是对go的数据进行序列化与反序列化操作。我们在其它语言使用json或是xml的方式对数据进行序列化操作，go语言有自己的序列化和反序列包，就是gob了。 gob是Golang自带的一个数据结构序列化的编码与解码工具。 编码使用Encoder方法，解码使用Decode方法，最典型的应用场景就是RPC通信。 方法介绍func Register 1func Register(">
+<meta property="og:description" content="Go语言的gob包主要的功能是对go的数据进行序列化与反序列化操作。我们在其它语言使用json或是xml的方式对数据进行序列化操作，go语言有自己的序列化和反序列包，就是gob了。 gob是Golang自带的一个数据结构序列化的编码与解码工具。 编码使用Encoder方法，解码使用Decode方法，最典型的应用场景就是RPC通信。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-20T06:44:00.678Z">
+<meta property="og:updated_time" content="2018-07-20T06:59:22.314Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="go语言的gob包的介绍与使用">
-<meta name="twitter:description" content="Go语言的gob包主要的功能是对go的数据进行序列化与反序列化操作。我们在其它语言使用json或是xml的方式对数据进行序列化操作，go语言有自己的序列化和反序列包，就是gob了。 gob是Golang自带的一个数据结构序列化的编码与解码工具。 编码使用Encoder方法，解码使用Decode方法，最典型的应用场景就是RPC通信。 方法介绍func Register 1func Register(">
+<meta name="twitter:description" content="Go语言的gob包主要的功能是对go的数据进行序列化与反序列化操作。我们在其它语言使用json或是xml的方式对数据进行序列化操作，go语言有自己的序列化和反序列包，就是gob了。 gob是Golang自带的一个数据结构序列化的编码与解码工具。 编码使用Encoder方法，解码使用Decode方法，最典型的应用场景就是RPC通信。">
 
 
 
@@ -439,6 +439,7 @@
         <p>Go语言的gob包主要的功能是对go的数据进行序列化与反序列化操作。我们在其它语言使用json或是xml的方式对数据进行序列化操作，go语言有自己的序列化和反序列包，就是gob了。</p>
 <p>gob是Golang自带的一个数据结构序列化的编码与解码工具。</p>
 <p>编码使用Encoder方法，解码使用Decode方法，最典型的应用场景就是RPC通信。</p>
+<a id="more"></a>
 <h2 id="方法介绍"><a href="#方法介绍" class="headerlink" title="方法介绍"></a>方法介绍</h2><p>func Register</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Register</span><span class="params">(value <span class="keyword">interface</span>&#123;&#125;)</span></span></span><br></pre></td></tr></table></figure>
 <p>在其内部类型名称下注册记录类型，由该类型的值标识。</p>

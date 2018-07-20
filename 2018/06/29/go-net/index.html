@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="package netimport “net” net包提供了可移植的网络I/O接口，包括TCP/IP、UDP、域名解析和Unix域socket。 虽然本包提供了对网络原语的访问，大部分使用者只需要Dial、Listen和Accept函数提供的基本接口；以及相关的Conn和Listener接口。crypto/tls包提供了相同的接口和类似的Dial和Listen函数。 Dial函数和服务端建立连接">
+<meta name="description" content="package netimport “net” net包提供了可移植的网络I/O接口，包括TCP/IP、UDP、域名解析和Unix域socket。 虽然本包提供了对网络原语的访问，大部分使用者只需要Dial、Listen和Accept函数提供的基本接口；以及相关的Conn和Listener接口。crypto/tls包提供了相同的接口和类似的Dial和Listen函数。">
 <meta name="keywords" content="go,net">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Go语言中Socket通信TCP服务端">
 <meta property="og:url" content="http://blog.ku-cat.com/2018/06/29/go-net/index.html">
 <meta property="og:site_name" content="一纸墨迹">
-<meta property="og:description" content="package netimport “net” net包提供了可移植的网络I/O接口，包括TCP/IP、UDP、域名解析和Unix域socket。 虽然本包提供了对网络原语的访问，大部分使用者只需要Dial、Listen和Accept函数提供的基本接口；以及相关的Conn和Listener接口。crypto/tls包提供了相同的接口和类似的Dial和Listen函数。 Dial函数和服务端建立连接">
+<meta property="og:description" content="package netimport “net” net包提供了可移植的网络I/O接口，包括TCP/IP、UDP、域名解析和Unix域socket。 虽然本包提供了对网络原语的访问，大部分使用者只需要Dial、Listen和Accept函数提供的基本接口；以及相关的Conn和Listener接口。crypto/tls包提供了相同的接口和类似的Dial和Listen函数。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-20T06:57:42.767Z">
+<meta property="og:updated_time" content="2018-07-20T06:58:58.715Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Go语言中Socket通信TCP服务端">
-<meta name="twitter:description" content="package netimport “net” net包提供了可移植的网络I/O接口，包括TCP/IP、UDP、域名解析和Unix域socket。 虽然本包提供了对网络原语的访问，大部分使用者只需要Dial、Listen和Accept函数提供的基本接口；以及相关的Conn和Listener接口。crypto/tls包提供了相同的接口和类似的Dial和Listen函数。 Dial函数和服务端建立连接">
+<meta name="twitter:description" content="package netimport “net” net包提供了可移植的网络I/O接口，包括TCP/IP、UDP、域名解析和Unix域socket。 虽然本包提供了对网络原语的访问，大部分使用者只需要Dial、Listen和Accept函数提供的基本接口；以及相关的Conn和Listener接口。crypto/tls包提供了相同的接口和类似的Dial和Listen函数。">
 
 
 
@@ -439,6 +439,7 @@
         <h2 id="package-net"><a href="#package-net" class="headerlink" title="package net"></a>package net</h2><p>import “net”</p>
 <p>net包提供了可移植的网络I/O接口，包括TCP/IP、UDP、域名解析和Unix域socket。</p>
 <p>虽然本包提供了对网络原语的访问，大部分使用者只需要Dial、Listen和Accept函数提供的基本接口；以及相关的Conn和Listener接口。crypto/tls包提供了相同的接口和类似的Dial和Listen函数。</p>
+<a id="more"></a>
 <p>Dial函数和服务端建立连接：</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">conn, err := net.Dial(<span class="string">"tcp"</span>, <span class="string">"google.com:80"</span>)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	<span class="comment">// handle error</span></span><br><span class="line">&#125;</span><br><span class="line">fmt.Fprintf(conn, <span class="string">"GET / HTTP/1.0\r\n\r\n"</span>)</span><br><span class="line">status, err := bufio.NewReader(conn).ReadString(<span class="string">'\n'</span>)</span><br><span class="line"><span class="comment">// ...</span></span><br></pre></td></tr></table></figure>
 <p>Listen函数创建的服务端：</p>
