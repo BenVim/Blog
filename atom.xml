@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.ku-cat.com/"/>
-  <updated>2018-07-20T06:36:18.621Z</updated>
+  <updated>2018-07-20T06:38:59.691Z</updated>
   <id>http://blog.ku-cat.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://blog.ku-cat.com/2018/07/20/pomelo-get-client-ip/"/>
     <id>http://blog.ku-cat.com/2018/07/20/pomelo-get-client-ip/</id>
     <published>2018-07-20T06:25:29.000Z</published>
-    <updated>2018-07-20T06:36:18.621Z</updated>
+    <updated>2018-07-20T06:38:59.691Z</updated>
     
     <content type="html"><![CDATA[<p>pomelo获取客户端的IP地址，正常的情况可以使用socket的address参数来获取。</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">session.__session__.__socket__.remoteAddress.ip</span><br><span class="line"><span class="comment">//通过session的原型链访问socket,通过socket的属性获取client的IP</span></span><br></pre></td></tr></table></figure><p>如果使用nginx转发后，以上的方法就只能获得nginx所在的服务器的IP。我遇到的情况是前端wss访问nginx转发访问game服务器的ws服务。game的ws服务中始终获得的IP是<code>127.0.0.1</code>。首先配置nginx转发时配置<code>x-frorwarded-for</code>在头部信息中增加原始clinet的IP信息。最后使用以下方法获取用户的真实IP。</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (session &amp;&amp; session.__session__ &amp;&amp; session.__session__.__socket__ &amp;&amp; session.__session__.__socket__.socket &amp;&amp; session.__session__.__socket__.socket.handshake) &#123;</span><br><span class="line">        <span class="keyword">var</span> handshake = session.__session__.__socket__.socket.handshake;</span><br><span class="line">        <span class="keyword">if</span> (handshake &amp;&amp; handshake.headers) &#123;</span><br><span class="line">            <span class="keyword">var</span> headers = handshake.headers;</span><br><span class="line">            <span class="keyword">var</span> realIP = <span class="literal">null</span>;</span><br><span class="line">            <span class="keyword">var</span> frorwardedIP = <span class="literal">null</span>;</span><br><span class="line">            <span class="keyword">if</span> (headers &amp;&amp; headers[<span class="string">'x-real-ip'</span>]) &#123;</span><br><span class="line">                realIP = headers[<span class="string">'x-real-ip'</span>];</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (headers &amp;&amp; headers[<span class="string">'x-frorwarded-for'</span>]) &#123;</span><br><span class="line">                frorwardedIP = headers[<span class="string">'x-frorwarded-for'</span>];</span><br><span class="line">            &#125;</span><br><span class="line">            IP = realIP ? realIP : frorwardedIP;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><p>session必须是前端服务器connector的handler中获取，使用CacheService保存用户的IP</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//</span></span><br><span class="line">CacheService.prototype.getUserIP = <span class="function"><span class="keyword">function</span>(<span class="params">uid</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.userIP[uid];</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">CacheService.prototype.setUserIP = <span class="function"><span class="keyword">function</span> (<span class="params">uid, IP</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.userIP[uid]= IP;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
     
@@ -34,6 +34,8 @@
       
     
     </summary>
+    
+      <category term="pomelo" scheme="http://blog.ku-cat.com/categories/pomelo/"/>
     
     
       <category term="pomelo" scheme="http://blog.ku-cat.com/tags/pomelo/"/>
