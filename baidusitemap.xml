@@ -4,6 +4,28 @@
 
     
   <url>
+    <loc>http://blog.ku-cat.com/2018/06/29/go-net/</loc>
+    <lastmod>2018-07-20T06:57:42.767Z</lastmod>
+    <data>
+        <display>
+        <title>Go语言中Socket通信TCP服务端</title>
+        <pubTime>2018-06-29T00:42:47.000Z</pubTime>
+        
+        <tag>go</tag>
+         
+        <tag>net</tag>
+         
+         
+           
+             
+              <breadCrumb title="go" url="http://blog.ku-cat.com/categories/go/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://blog.ku-cat.com/2018/06/29/go-gob/</loc>
     <lastmod>2018-07-20T06:44:00.678Z</lastmod>
     <data>
@@ -204,25 +226,6 @@
         <tag>make</tag>
          
         <tag>makefile</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://blog.ku-cat.com/2018/06/29/go-net/</loc>
-    <lastmod>2018-06-29T01:30:09.812Z</lastmod>
-    <data>
-        <display>
-        <title>Go语言中Socket通信TCP服务端</title>
-        <pubTime>2018-06-29T00:42:47.000Z</pubTime>
-        
-        <tag>go</tag>
-         
-        <tag>net</tag>
          
          
            

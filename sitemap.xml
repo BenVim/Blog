@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.ku-cat.com/2018/06/29/go-net/</loc>
+    
+    <lastmod>2018-07-20T06:57:42.767Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.ku-cat.com/2018/06/29/go-gob/</loc>
     
     <lastmod>2018-07-20T06:44:00.678Z</lastmod>
@@ -68,13 +75,6 @@
     <loc>http://blog.ku-cat.com/2018/07/03/makefile/</loc>
     
     <lastmod>2018-07-03T06:21:37.100Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.ku-cat.com/2018/06/29/go-net/</loc>
-    
-    <lastmod>2018-06-29T01:30:09.812Z</lastmod>
     
   </url>
   
