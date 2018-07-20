@@ -4,6 +4,65 @@
 
     
   <url>
+    <loc>http://blog.ku-cat.com/2018/07/20/pomelo-get-client-ip/</loc>
+    <lastmod>2018-07-20T06:36:18.621Z</lastmod>
+    <data>
+        <display>
+        <title>pomelo获取客户端的IP地址</title>
+        <pubTime>2018-07-20T06:25:29.000Z</pubTime>
+        
+        <tag>pomelo</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.ku-cat.com/2018/07/17/life-learn/</loc>
+    <lastmod>2018-07-17T01:05:05.079Z</lastmod>
+    <data>
+        <display>
+        <title>如何阅读</title>
+        <pubTime>2018-07-17T01:02:15.000Z</pubTime>
+        
+        <tag>learn</tag>
+         
+         
+           
+             
+              <breadCrumb title="life" url="http://blog.ku-cat.com/categories/life/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.ku-cat.com/2018/07/14/unix-socket-inet-aton/</loc>
+    <lastmod>2018-07-16T06:11:59.251Z</lastmod>
+    <data>
+        <display>
+        <title>Unix地址转换函数</title>
+        <pubTime>2018-07-14T07:27:02.000Z</pubTime>
+        
+        <tag>c</tag>
+         
+        <tag>unix</tag>
+         
+         
+           
+             
+              <breadCrumb title="c/c++" url="http://blog.ku-cat.com/categories/c-c/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://blog.ku-cat.com/2018/07/14/unix-socket-byte-fun/</loc>
     <lastmod>2018-07-14T07:14:27.579Z</lastmod>
     <data>

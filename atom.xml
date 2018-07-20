@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.ku-cat.com/"/>
-  <updated>2018-07-14T07:14:27.579Z</updated>
+  <updated>2018-07-20T06:36:18.621Z</updated>
   <id>http://blog.ku-cat.com/</id>
   
   <author>
@@ -15,6 +15,92 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>pomelo获取客户端的IP地址</title>
+    <link href="http://blog.ku-cat.com/2018/07/20/pomelo-get-client-ip/"/>
+    <id>http://blog.ku-cat.com/2018/07/20/pomelo-get-client-ip/</id>
+    <published>2018-07-20T06:25:29.000Z</published>
+    <updated>2018-07-20T06:36:18.621Z</updated>
+    
+    <content type="html"><![CDATA[<p>pomelo获取客户端的IP地址，正常的情况可以使用socket的address参数来获取。</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">session.__session__.__socket__.remoteAddress.ip</span><br><span class="line"><span class="comment">//通过session的原型链访问socket,通过socket的属性获取client的IP</span></span><br></pre></td></tr></table></figure><p>如果使用nginx转发后，以上的方法就只能获得nginx所在的服务器的IP。我遇到的情况是前端wss访问nginx转发访问game服务器的ws服务。game的ws服务中始终获得的IP是<code>127.0.0.1</code>。首先配置nginx转发时配置<code>x-frorwarded-for</code>在头部信息中增加原始clinet的IP信息。最后使用以下方法获取用户的真实IP。</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (session &amp;&amp; session.__session__ &amp;&amp; session.__session__.__socket__ &amp;&amp; session.__session__.__socket__.socket &amp;&amp; session.__session__.__socket__.socket.handshake) &#123;</span><br><span class="line">        <span class="keyword">var</span> handshake = session.__session__.__socket__.socket.handshake;</span><br><span class="line">        <span class="keyword">if</span> (handshake &amp;&amp; handshake.headers) &#123;</span><br><span class="line">            <span class="keyword">var</span> headers = handshake.headers;</span><br><span class="line">            <span class="keyword">var</span> realIP = <span class="literal">null</span>;</span><br><span class="line">            <span class="keyword">var</span> frorwardedIP = <span class="literal">null</span>;</span><br><span class="line">            <span class="keyword">if</span> (headers &amp;&amp; headers[<span class="string">'x-real-ip'</span>]) &#123;</span><br><span class="line">                realIP = headers[<span class="string">'x-real-ip'</span>];</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (headers &amp;&amp; headers[<span class="string">'x-frorwarded-for'</span>]) &#123;</span><br><span class="line">                frorwardedIP = headers[<span class="string">'x-frorwarded-for'</span>];</span><br><span class="line">            &#125;</span><br><span class="line">            IP = realIP ? realIP : frorwardedIP;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><p>session必须是前端服务器connector的handler中获取，使用CacheService保存用户的IP</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//</span></span><br><span class="line">CacheService.prototype.getUserIP = <span class="function"><span class="keyword">function</span>(<span class="params">uid</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.userIP[uid];</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">CacheService.prototype.setUserIP = <span class="function"><span class="keyword">function</span> (<span class="params">uid, IP</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.userIP[uid]= IP;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;pomelo获取客户端的IP地址，正常的情况可以使用socket的address参数来获取。&lt;/p&gt;
+&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/
+      
+    
+    </summary>
+    
+    
+      <category term="pomelo" scheme="http://blog.ku-cat.com/tags/pomelo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>如何阅读</title>
+    <link href="http://blog.ku-cat.com/2018/07/17/life-learn/"/>
+    <id>http://blog.ku-cat.com/2018/07/17/life-learn/</id>
+    <published>2018-07-17T01:02:15.000Z</published>
+    <updated>2018-07-17T01:05:05.079Z</updated>
+    
+    <content type="html"><![CDATA[<ol><li>阅读速度</li><li>理解</li><li>注意每章节，每小段的中心内容</li><li>学习的知识点的功能及应用场景</li><li>使用思维导图组织知识点</li><li>输出</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;ol&gt;
+&lt;li&gt;阅读速度&lt;/li&gt;
+&lt;li&gt;理解&lt;/li&gt;
+&lt;li&gt;注意每章节，每小段的中心内容&lt;/li&gt;
+&lt;li&gt;学习的知识点的功能及应用场景&lt;/li&gt;
+&lt;li&gt;使用思维导图组织知识点&lt;/li&gt;
+&lt;li&gt;输出&lt;/li&gt;
+&lt;/ol&gt;
+
+      
+    
+    </summary>
+    
+      <category term="life" scheme="http://blog.ku-cat.com/categories/life/"/>
+    
+    
+      <category term="learn" scheme="http://blog.ku-cat.com/tags/learn/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Unix地址转换函数</title>
+    <link href="http://blog.ku-cat.com/2018/07/14/unix-socket-inet-aton/"/>
+    <id>http://blog.ku-cat.com/2018/07/14/unix-socket-inet-aton/</id>
+    <published>2018-07-14T07:27:02.000Z</published>
+    <updated>2018-07-16T06:11:59.251Z</updated>
+    
+    <content type="html"><![CDATA[<p>地址转换函数负责ASCII字符串与网络字节的二进制值之间转换网际地址。</p><ul><li><p>函数<code>inet_ato</code>、<code>inet_addr</code>和<code>inet_ntoa</code>在点分十进制数串（例如：206.168.112.96)与长度为32位的网络字节序二进制值间转换IPv4地址。</p></li><li><p>两个较新的函数<code>inet_pton</code>和<code>inet_ntop</code>对于IPv4地址和IPv6地址都适用。</p></li></ul><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;arpa/inet.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">inet_aton</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> * strptr, struct in_addr *addrptr)</span></span>;</span><br><span class="line"><span class="comment">// 将strptr所指C字符串转换成一个32位的网络字节序二进制值</span></span><br><span class="line"><span class="comment">// 若成功则返回1，否则返回0。</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">in_addr_t</span> inet_addr(<span class="keyword">const</span> <span class="keyword">char</span> *strptr);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">char</span> *<span class="title">inet_ntoa</span><span class="params">(struct in_addr inaddr)</span></span>;</span><br></pre></td></tr></table></figure><p>第一个函数<code>inet_aton</code> 将strptr所指C字符串转换成一个32位的网络字节序二进制值，并通过指针addrptr来存储。若成功则返回1，否则返回0。</p><blockquote><p>inet_aton 函数有一个没定入正式文档中的特征：如果addrptr指针为空， 那么该函数仍然对输入的字符串执行有效性检查，但是不存储任何结果。</p></blockquote><p><code>inet_addr</code>进行相同的转换，返回值为32位的网络字节二进制值。该函数存在一个问题：所有32位可能的二进制值都是有效的IP地址（从0.0.0.0到255.255.255.255），但是当出错时该函数返回的<code>INADDR_NONE</code>常值（通过是一个32位均为1的值）。这意味着点分十进制数串255.255.255.255（这是IPv4的有限广播地址，见20.2节）不能由该函数处理，因为它的二进制值被用来指示该函数失败。</p><blockquote><p>inet_addr 函数还存在一个潜在的问题：一些手册页面声明该函数出错时返回-1而不是INADDR_NONE。这样在对该函数的返回值（一个无符号的值）和一个负常值（-1）进行比较时可能会发生问题，具体取决于C编译器。</p></blockquote><p><code>inet_ntoa</code> 函数将一个32位的网络字节序二进制IPv4地址转换成相应的点分十进制数串。由该函数的返回值所指向的字符串驻留在静态内存中。这意味着该函数是不可重入的。</p><h3 id="inet-pton-和-inet-ntop函数"><a href="#inet-pton-和-inet-ntop函数" class="headerlink" title="inet_pton 和 inet_ntop函数"></a><code>inet_pton</code> 和 <code>inet_ntop</code>函数</h3><p>函数应用IPv4和IPv6地址，函数中的p和n分别代表表达(presentaion)和数值(numeric)。</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;arpa/inet.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">inet_pton</span><span class="params">(<span class="keyword">int</span> family, <span class="keyword">const</span> <span class="keyword">char</span> *strptr, <span class="keyword">void</span> *addrptr)</span></span>;</span><br><span class="line"><span class="comment">//返回 ： 若成功则为1，若输入不是有效的表达格式则为0.若出错则为-1</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">const</span> <span class="keyword">char</span> *<span class="title">inet_ntop</span><span class="params">(<span class="keyword">int</span> family, <span class="keyword">const</span> <span class="keyword">void</span> *addrptr, <span class="keyword">char</span> *strptr, <span class="keyword">size_t</span> len)</span></span>;</span><br><span class="line"><span class="comment">//返回：若成功则为指向结果的指针，若出错则为null</span></span><br></pre></td></tr></table></figure><p>这两个函数的family参数既可以是<code>AF_INET</code>, 也可以是<code>AF_INET6</code>, 如果以不被支持的地址族作为family参数，这两个函数就都返回一个错误，并将errno置为EAFNOSUPPORT。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;地址转换函数负责ASCII字符串与网络字节的二进制值之间转换网际地址。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;函数&lt;code&gt;inet_ato&lt;/code&gt;、&lt;code&gt;inet_addr&lt;/code&gt;和&lt;code&gt;inet_ntoa&lt;/code&gt;在点分十进制数串（例如：206.
+      
+    
+    </summary>
+    
+      <category term="c/c++" scheme="http://blog.ku-cat.com/categories/c-c/"/>
+    
+    
+      <category term="c" scheme="http://blog.ku-cat.com/tags/c/"/>
+    
+      <category term="unix" scheme="http://blog.ku-cat.com/tags/unix/"/>
+    
+  </entry>
   
   <entry>
     <title>Unix字节操作函数 bzero,bcopy,bcmp,memset,memcpy,memcmp</title>
@@ -456,75 +542,6 @@
     
     
       <category term="node" scheme="http://blog.ku-cat.com/tags/node/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>三极管工作原理分析</title>
-    <link href="http://blog.ku-cat.com/2018/05/18/electron-audion/"/>
-    <id>http://blog.ku-cat.com/2018/05/18/electron-audion/</id>
-    <published>2018-05-18T04:13:54.000Z</published>
-    <updated>2018-05-18T07:22:17.394Z</updated>
-    
-    <content type="html"><![CDATA[<p>电器最基本的元器件之一得好好学习一下该电器特性。<br>待完善</p><a id="more"></a><p>三极管工作原理分析</p><p><a href="https://blog.csdn.net/a10615/article/details/51627619" target="_blank" rel="noopener">三极管工作原理分析</a></p><p>待完善。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;电器最基本的元器件之一得好好学习一下该电器特性。&lt;br&gt;待完善&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="electron" scheme="http://blog.ku-cat.com/categories/electron/"/>
-    
-    
-      <category term="audion" scheme="http://blog.ku-cat.com/tags/audion/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Git push与pull的默认行为</title>
-    <link href="http://blog.ku-cat.com/2018/05/13/git-default/"/>
-    <id>http://blog.ku-cat.com/2018/05/13/git-default/</id>
-    <published>2018-05-13T04:53:54.000Z</published>
-    <updated>2018-05-13T03:53:36.896Z</updated>
-    
-    <content type="html"><![CDATA[<p>一直以来对<code>git push</code>与<code>git pull</code>命令的默认行为感觉混乱，今天抽空总结下。</p><h3 id="git-push"><a href="#git-push" class="headerlink" title="git push"></a><code>git push</code></h3><p>通常对于一个本地的新建分支，例如<code>git checkout -b develop</code>, 在<code>develop</code>分支<code>commit</code>了代码之后，如果直接执行<code>git push</code>命令，<code>develop</code>分支将不会被<code>push</code>到远程仓库（但此时<code>git push</code>操作有可能会推送一些代码到远程仓库，这取决于我们本地<code>git config</code>配置中的<code>push.default</code>默认行为，下文将会逐一详解）。</p><a id="more"></a><p><a href="http://blog.angular.in/git-pushmo-ren-fen-zhi/?nsukey=7cgZ1HC9Ji%2BZGIfBzMdYo7W1YN872IY1ydlpqgoR5XIROl9bAlF%2FIjA6RpOKB6GNOBlLPJhFuZy0BaNz6ZYmNphYVA33e991n1ujEjar3wDNPUnn04Vsvfk9wV4fYj%2FLu3sehvgKnKXEHJAvvWIcRuZNGMIu%2FmW3Goc6XrLPW0h1QoyqDtK2YtUswY%2FdV4bgfS2Y%2FJrDAdtJcWOP%2FEnWzw%3D%3D" target="_blank" rel="noopener">Git push与pull的默认行为</a>[转载]</p><p>因此我们至少需要显式指定将要推送的分支名，例如<code>git push origin develop</code>，才能将本地新分支推送到远程仓库。</p><p>当我们通过显式指定分支名进行初次<code>push</code>操作后，本地有了新的<code>commit</code>，此时执行<code>git push</code>命令会有什么效果呢？</p><ol><li>develop分支中本地新增的commit被push到远程仓库</li><li>push失败，并收到git如下的警告</li></ol><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fatal: The current branch new has no upstream branch.  </span><br><span class="line">To push the current branch and <span class="built_in">set</span> the remote as upstream, use</span><br><span class="line"></span><br><span class="line">    git push --<span class="built_in">set</span>-upstream origin develop</span><br></pre></td></tr></table></figure><p>为什么git版本不同会有两种不同的push行为？</p><p>因为在git的全局配置中，有一个push.default属性，其决定了git push操作的默认行为。在Git 2.0之前，这个属性的默认被设为’matching’，2.0之后则被更改为了’simple’。<br>或者也可直接编辑~/.gitconfig文件）。</p><p><code>push.default</code> 有以下几个可选值：<br><code>nothing</code>, <code>current</code>, <code>upstream</code>, <code>simple</code>, <code>matching</code></p><p>其用途分别为：</p><ul><li><p>nothing - push操作无效，除非显式指定远程分支，例如git push origin develop（我觉得。。。可以给那些不愿学git的同事配上此项）。</p></li><li><p>current - push当前分支到远程同名分支，如果远程同名分支不存在则自动创建同名分支。</p></li><li><p>upstream - push当前分支到它的upstream分支上（这一项其实用于经常从本地分支push/pull到同一远程仓库的情景，这种模式叫做central workflow）。</p></li><li><p>simple - simple和upstream是相似的，只有一点不同，simple必须保证本地分支和它的远程 upstream分支同名，否则会拒绝push操作。</p></li><li><p>matching - push所有本地和远程两端都存在的同名分支。</p></li></ul><p>因此如果我们使用了git2.0之前的版本，push.default = matching，git push后则会推送当前分支代码到远程分支，而2.0之后，push.default = simple，如果没有指定当前分支的upstream分支，就会收到上文的fatal提示。</p><h3 id="upstream-amp-downstream"><a href="#upstream-amp-downstream" class="headerlink" title="upstream &amp; downstream"></a>upstream &amp; downstream</h3><p>说到这里，需要解释一下git中的upstream到底是什么：</p><blockquote><p>git中存在upstream和downstream，简言之，当我们把仓库A中某分支x的代码push到仓库B分支y，此时仓库B的这个分支y就叫做A中x分支的upstream，而x则被称作y的downstream，这是一个相对关系，每一个本地分支都相对地可以有一个远程的upstream分支（注意这个upstream分支可以不同名，但通常我们都会使用同名分支作为upstream）。</p></blockquote><p>初次提交本地分支，例如<code>git push origin develop</code>操作，并不会定义当前本地分支的<code>upstream</code>分支，我们可以通过<code>git push --set-upstream origin develop</code>，关联本地<code>develop</code>分支的<code>upstream</code>分支，另一个更为简洁的方式是初次push时，加入-u参数，例如<code>git push -u origin develop</code>，这个操作在<code>push</code>的同时会指定当前分支的<code>upstream</code>。</p><p>注意push.default = current可以在远程同名分支不存在的情况下自动创建同名分支，有些时候这也是个极其方便的模式，比如初次push你可以直接输入 git push 而不必显示指定远程分支。</p><h3 id="git-pull"><a href="#git-pull" class="headerlink" title="git pull"></a>git pull</h3><p>弄清楚<code>git push</code>的默认行为后，再来看看<code>git pull</code>。</p><p>当我们未指定当前分支的<code>upstream</code>时，通常<code>git pull</code>操作会得到如下的提示：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">There is no tracking information for the current branch.  </span><br><span class="line">Please specify which branch you want to merge with.  </span><br><span class="line">See git-pull(1) for details</span><br><span class="line"></span><br><span class="line">    git pull &lt;remote&gt; &lt;branch&gt;</span><br><span class="line"></span><br><span class="line">If you wish to set tracking information for this branch you can do so with:</span><br><span class="line"></span><br><span class="line">    git branch --set-upstream-to=origin/&lt;branch&gt; new1</span><br></pre></td></tr></table></figure><p><code>git pull</code>的默认行为和<code>git push</code>完全不同。当我们执行<code>git pull</code>的时候，实际上是做了<code>git fetch</code> + <code>git merge</code>操作，<code>fetch</code>操作将会更新本地仓库的<code>remote tracking</code>，也就是<code>refs/remotes</code>中的代码，并不会对<code>refs/heads</code>中本地当前的代码造成影响。</p><p>当我们进行<code>pull</code>的第二个行为<code>merge</code>时，对<code>git</code>来说，如果我们没有设定当前分支的<code>upstream</code>，它并不知道我们要合并哪个分支到当前分支，所以我们需要通过下面的代码指定当前分支的<code>upstream</code>：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git branch --set-upstream-to=origin/&lt;branch&gt; develop  </span><br><span class="line">// 或者git push --set-upstream origin develop</span><br></pre></td></tr></table></figure><p>实际上，如果我们没有指定upstream，git在merge时会访问git config中当前分支(develop)merge的默认配置，我们可以通过配置下面的内容指定某个分支的默认merge操作</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[branch &quot;develop&quot;]</span><br><span class="line">    remote = origin</span><br><span class="line">    merge = refs/heads/develop // [1]为什么不是refs/remotes/develop?</span><br></pre></td></tr></table></figure><p>或者通过command-line直接设置：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config branch.develop.merge refs/heads/develop</span><br></pre></td></tr></table></figure><p>这样当我们在<code>develop</code>分支<code>git pull</code>时，如果没有指定<code>upstream</code>分支，<code>git</code>将根据我们的<code>config</code>文件去<code>merge origin/develop</code>；如果指定了<code>upstream</code>分支，则会忽略<code>config</code>中的<code>merge</code>默认配置。</p><p>以上就是git push和git pull操作的全部默认行为.</p><p>[ps：原作者写得很详细，转载过来收藏。]</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;一直以来对&lt;code&gt;git push&lt;/code&gt;与&lt;code&gt;git pull&lt;/code&gt;命令的默认行为感觉混乱，今天抽空总结下。&lt;/p&gt;
-&lt;h3 id=&quot;git-push&quot;&gt;&lt;a href=&quot;#git-push&quot; class=&quot;headerlink&quot; title=&quot;git push&quot;&gt;&lt;/a&gt;&lt;code&gt;git push&lt;/code&gt;&lt;/h3&gt;&lt;p&gt;通常对于一个本地的新建分支，例如&lt;code&gt;git checkout -b develop&lt;/code&gt;, 在&lt;code&gt;develop&lt;/code&gt;分支&lt;code&gt;commit&lt;/code&gt;了代码之后，如果直接执行&lt;code&gt;git push&lt;/code&gt;命令，&lt;code&gt;develop&lt;/code&gt;分支将不会被&lt;code&gt;push&lt;/code&gt;到远程仓库（但此时&lt;code&gt;git push&lt;/code&gt;操作有可能会推送一些代码到远程仓库，这取决于我们本地&lt;code&gt;git config&lt;/code&gt;配置中的&lt;code&gt;push.default&lt;/code&gt;默认行为，下文将会逐一详解）。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Git" scheme="http://blog.ku-cat.com/categories/Git/"/>
-    
-    
-      <category term="Git" scheme="http://blog.ku-cat.com/tags/Git/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>introduction to Remote Procedure calling</title>
-    <link href="http://blog.ku-cat.com/2018/05/12/rpc-introduction-to-Remote-Procedure-calling/"/>
-    <id>http://blog.ku-cat.com/2018/05/12/rpc-introduction-to-Remote-Procedure-calling/</id>
-    <published>2018-05-12T04:53:54.000Z</published>
-    <updated>2018-05-17T09:53:14.946Z</updated>
-    
-    <content type="html"><![CDATA[<p>Remote procedure calling allows a client to execute procedures on other networked computers or servers.</p><h2 id="Client-Server-Computing"><a href="#Client-Server-Computing" class="headerlink" title="Client/Server Computing"></a>Client/Server Computing</h2><p>原书《Power Programming with RPC》</p><p>The clinet/server model of computing is a popular model for distributed processing. It applies to any processing environment where one set of entities requests work to be done and another set actually performs the work. </p><a id="more"></a><h2 id="远程与-versus-本地过程调用"><a href="#远程与-versus-本地过程调用" class="headerlink" title="远程与(versus)本地过程调用"></a>远程与(versus)本地过程调用</h2><p>对于应用来说，本地与远程调用两者之间有什么不同？实际两者几乎没有什么区别——就是RPC应用程序接口的主要(<code>primary</code>)目标(<code>goal</code>).</p><p>图1-1(<code>Figure1-1</code>) 阐述（<code>illustrates</code>）了本地与远程程序（<code>procedure</code>）调用之间的不同，在左侧，调用（客户端）进程在自己的地址空间中执行（<code>executes</code>）一个过程。在右侧，客户端和服务器作为两个独立的进程运行，不再需要在同一台计算机上运行，RPC library 处理（<code>handles</code>）两个进程（<code>processes</code>）之间的通信（<code>communication</code>）。</p><p>RPC 使用一种 <code>request-and-reply</code> 通信（communication）模式。客户端程序将请求消息发送到返回应答消息的服务器程序。客户端与服务端进程通过（<code>by means of 译：用或依靠的意思</code>）两个<code>stubs</code>进行通信，一个用户客户端，一个用于服务端。<code>stubs</code>是实现（<code>implement</code>）RPC协议(<code>protocol</code>)的通信(<code>communications</code>)接口（<code>interface</code>），并指定(<code>specify</code>)消息是如何构造(<code>construct</code>)和交换(<code>exchange</code>)的。像<code>ONC RPCGEN</code>这样(<code>typically 译：代表性的，特色的</code>)的协议编译器（<code>compiler</code>）通常用于生成<code>stub</code>。然后<code>stub</code>与客户端程序及服务器程序相连。</p><p><code>stub</code> 包含（<code>contain</code>）将简单的本地过程调用映射(<code>map your..</code>)到一系列(<code>series</code>)网络RPC函数调用的函数。客户端调用其存根中找到的使用RPC库的过程来查找远程进程，然后发出请求。这个远程进程反过来通过（<code>through</code>）服务器<code>stub</code>监听网络。服务器<code>stub</code>执行低级函数，用本地程序调用接口调用（<code>invoke</code>）你的服务例程（<code>routines</code>）。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Remote procedure calling allows a client to execute procedures on other networked computers or servers.&lt;/p&gt;
-&lt;h2 id=&quot;Client-Server-Computing&quot;&gt;&lt;a href=&quot;#Client-Server-Computing&quot; class=&quot;headerlink&quot; title=&quot;Client/Server Computing&quot;&gt;&lt;/a&gt;Client/Server Computing&lt;/h2&gt;&lt;p&gt;原书《Power Programming with RPC》&lt;/p&gt;
-&lt;p&gt;The clinet/server model of computing is a popular model for distributed processing. It applies to any processing environment where one set of entities requests work to be done and another set actually performs the work. &lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Distributed" scheme="http://blog.ku-cat.com/categories/Distributed/"/>
-    
-    
-      <category term="RPC" scheme="http://blog.ku-cat.com/tags/RPC/"/>
     
   </entry>
   
