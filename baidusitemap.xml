@@ -4,6 +4,28 @@
 
     
   <url>
+    <loc>http://blog.ku-cat.com/2018/06/29/go-net/</loc>
+    <lastmod>2018-07-20T07:05:10.776Z</lastmod>
+    <data>
+        <display>
+        <title>Go语言中Socket通信TCP服务端</title>
+        <pubTime>2018-06-29T00:42:47.000Z</pubTime>
+        
+        <tag>go</tag>
+         
+        <tag>net</tag>
+         
+         
+           
+             
+              <breadCrumb title="go" url="http://blog.ku-cat.com/categories/go/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://blog.ku-cat.com/2018/07/17/life-learn/</loc>
     <lastmod>2018-07-20T06:59:31.418Z</lastmod>
     <data>
@@ -59,28 +81,6 @@
            
              
               <breadCrumb title="life" url="http://blog.ku-cat.com/categories/life/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://blog.ku-cat.com/2018/06/29/go-net/</loc>
-    <lastmod>2018-07-20T06:58:58.715Z</lastmod>
-    <data>
-        <display>
-        <title>Go语言中Socket通信TCP服务端</title>
-        <pubTime>2018-06-29T00:42:47.000Z</pubTime>
-        
-        <tag>go</tag>
-         
-        <tag>net</tag>
-         
-         
-           
-             
-              <breadCrumb title="go" url="http://blog.ku-cat.com/categories/go/"/>
           
         </display>
     </data>
