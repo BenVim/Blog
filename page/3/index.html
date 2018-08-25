@@ -324,6 +324,997 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/05/31/js-operator/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一纸墨迹">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/31/js-operator/" itemprop="url">js的操作符及运算规则细节</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-31T09:27:19+08:00">
+                2018-05-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/js/" itemprop="url" rel="index">
+                    <span itemprop="name">js</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/31/js-operator/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/05/31/js-operator/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/05/31/js-operator/" class="leancloud_visitors" data-flag-title="js的操作符及运算规则细节">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="一、一元操作符"><a href="#一、一元操作符" class="headerlink" title="一、一元操作符"></a>一、一元操作符</h2><p>1.递增和递减操作符</p>
+<p>前置型    ++i    –i</p>
+<p>后置型    i++    i–</p>
+<p>执行前置递增和递减操作时，变量的值都是在语句被求值之前改变的。</p>
+<p>示例1：</p>
+<p>var a = 10;</p>
+<p>var b = 20;</p>
+<p>var c = ++a + b;    </p>
+<p>var d = a + b;    </p>
+<p>console.log(c);    //31</p>
+<p>console.log(d);    //31</p>
+<p>示例2：</p>
+<p>var a = 10;</p>
+<p>var b = 20;</p>
+<p>var c = a++ + b;</p>
+<p>var d = a + b;</p>
+<p>console.log(c);    //30</p>
+<p>console.log(d);    //31</p>
+<p>示例3：</p>
+<p>var a = 1;</p>
+<p>var b = ++a +a;</p>
+<p>var c = a++ +a;</p>
+<p>console.log(b);    //4</p>
+<p>console.log(c);    //5</p>
+<p>数值、字符串、布尔值、对象都能使用递增和递减操作符；如果不是数值数据，则调用转型函数Number()转换为数值，再进行相应的操作。</p>
+<p>2.一元加和减操作符</p>
+<p>一元加和减操作符，主要用于基本的算术运算，也可以用于转换数据类型。</p>
+<p> 一元加操作符，放在数值前面，对数值不会产生任何影响；但是放在非数值前面，则会调用Number()函数，对该非数值的值进行转换。</p>
+<p>一元减操作符，用于表示负数；应用于非数值时，先调用Number()函数，再将得到的结果转换为负数。</p>
+<p>二、位操作符    ——    好高大上的感觉，先行跳过，有待补充</p>
+<p>三、布尔操作符</p>
+<p>1.逻辑非（！）</p>
+<p>逻辑非操作符可用于JS中的任何值，首先将它的操作数转换为布尔值，然后对其取反。</p>
+<p>规则如下：</p>
+<p>如果操作数是一个对象，转换为布尔值为true，取反，为false；</p>
+<p>如果操作数是null，转换为布尔值为false，取反，为true；</p>
+<p>空字符串，false，取反，为true；</p>
+<p>非空字符串，true，取反，为false；</p>
+<p>数值0/NaN，为false，取反，为true；</p>
+<p>非0数值（Infinite），为true，取反，为false；</p>
+<p>undefined，为false，取反，为true。</p>
+<p>同时使用两个逻辑非操作符（!!）可将一个值转换为其对应的布尔值，其结果与调用Boolean()函数一致。</p>
+<p>2.逻辑与（&amp;&amp;）</p>
+<p>逻辑与操作属于短路操作，如果第一个操作数是false，则结果直接为false；如果第一个操作数为true，则结果为第二个操作数。</p>
+<p>在有一个（或两个）操作数不是布尔值的情况下，把操作数转换为布尔值进行逻辑与操作，但是返回结果为原值。</p>
+<p>示例1：</p>
+<p>var a = 0;</p>
+<p>var b = “string”;</p>
+<p>console.log(a&amp;&amp;b);    //0</p>
+<p>console.log(b&amp;&amp;a);    //0</p>
+<p>注意：在逻辑与操作中使用未定义的值可能会导致错误。</p>
+<p>var x = 5;</p>
+<p>alert(x&amp;&amp;y);    //ReferenceError: y is not defined</p>
+<p>3.逻辑或（||）</p>
+<p>逻辑或也是短路操作，如果第一个值为true，则直接返回true，无需对第二个操作数求值；如果第一个操作数为false，则返回第二个操作数；即使第二个操作数也是false，也是返回第二个操作数。</p>
+<p>在有一个（或两个）操作数不是布尔值的情况下，把操作数转换为布尔值进行逻辑或操作，但是返回结果为原值。</p>
+<p>var x = 0;</p>
+<p>var y = null;</p>
+<p>console.log(x||y);    //null</p>
+<p>注意：在逻辑或操作中使用未定义的值可能会导致错误。</p>
+<p>利用逻辑或，避免为变量赋null或undefined值：</p>
+<p>var myObject = preferredObject || backupObject;</p>
+<p>四、乘性操作符</p>
+<p>1.乘法（*）</p>
+<p>如果操作数都是数值，执行常规乘法计算；</p>
+<p>如果有一个数是NaN，结构为NaN；</p>
+<p>如果Infinite与0相乘，结果为NaN；</p>
+<p>如果Infinite与非0数值相乘，结果为Infinite；</p>
+<p>如果Infinite与Infinite相乘，结果为Infinite；</p>
+<p>如果有一个操作数不是数值，则调用Number()函数，将其转换为数值，再应用上述规则。</p>
+<p>2.除法（/）</p>
+<p>如果操作数都是数值，执行常规除法计算；</p>
+<p>如果有一个数是NaN，结果为NaN；</p>
+<p>Infinite除以Infinite，结果为NaN；</p>
+<p>Infinite除以非0数值，结果为Infinite；</p>
+<p>Infinite除以0，结果为Infinite；</p>
+<p>0除以0，结果为NaN；</p>
+<p>非0有穷数除以0，结果为Infinite；</p>
+<p>如果有一个操作数不是数值，则调用Number()函数，将其转换为数值，再应用上述规则。</p>
+<p>3.求模（%）</p>
+<p>如果操作数都是数值，执行常规除法计算，返回所得的余数；</p>
+<p>如果有一个数是NaN，结果为NaN；</p>
+<p>如果Infinite除以Infinite，结果为NaN；</p>
+<p>如果Infinite除以有穷数，结果为NaN；</p>
+<p>如果有穷数除以0，结果为NaN；</p>
+<p>如果被除数有穷除以Infinite，结果为被除数。</p>
+<p>0除以任何数，结果为0；</p>
+<p>如果有一个操作数不是数值，则调用Number()函数，将其转换为数值，再应用上述规则。</p>
+<p>五、加性操作符</p>
+<p>1.加法</p>
+<p>如果有一个数是NaN，结果为NaN；</p>
+<p>如果是Infinite加Infinite，结果为Infinite；</p>
+<p>如果是-Infinite加-Infinite，结果为-Infinite；</p>
+<p>如果是Infinite加-Infinite，结果为NaN；</p>
+<p>如果是+0加+0，结果为+0；</p>
+<p>如果是-0加-0，结果为-0；</p>
+<p>如果是+0加-0，结果为+0；</p>
+<p>如果两个操作数都是字符串，则将两个字符串拼接起来；</p>
+<p>如果只有一个操作数是字符串，则将另一个操作数转换为字符串，然后将两个字符串拼接起来。</p>
+<p>如果有一个操作数是对象、数值或布尔值，则调用它们的toString()方法取得相应的字符串值；</p>
+<p>对于undefined和null，则调用String()函数并取得相应的字符串“undefined”和“null”。</p>
+<p>var a = 5;</p>
+<p>var b = 10;</p>
+<p>var message = “The sum of a and b is” + a + b;    //结果为510</p>
+<p>var message = “The sum of a and b is” + (a + b);    //结果为15</p>
+<p>2.减法</p>
+<p>如果有一个数是NaN，结果为NaN；</p>
+<p>如果是Infinite减Infinite，结果为NaN；</p>
+<p>如果是-Infinite减-Infinite，结果为NaN；</p>
+<p>如果是Infinite减-Infinite，结果为Infinite；</p>
+<p>如果是-Infinite减Infinite，结果为-Infinite；</p>
+<p>如果是+0减+0，结果为+0；</p>
+<p>如果是-0减-0，结果为+0；</p>
+<p>如果是+0减-0，结果为-0；</p>
+<p>如果有一个操作数是字符串、布尔值、null或undefined，则先调用Number()函数；</p>
+<p>如果有一个操作数是对象，则先调用valueOf()方法，如果得到的值是NaN，则减法的结果就是NaN；如果没有valueOf()方法，则调用其toString()方法。</p>
+<p>六、关系操作符</p>
+<p>小于（&lt;）、小于等于（&lt;=）、大于（&gt;）、大于等于（&gt;=）</p>
+<p>如果两个操作数都是数值，则执行数值比较；</p>
+<p>如果两个操作数都是字符串，则比较两个字符串对应的字符编码值；</p>
+<p>如果一个操作数是数值，则将另一个操作数转换为数值；</p>
+<p>如果一个操作数是对象，则调用这个对象的valueOf()方法；如果对象没有valueOf()方法，则调用toString()方法。</p>
+<p>如果一个操作数是布尔值，则将其转换为数值；</p>
+<p>任何操作数与NaN进行比较，结果都会返回false。</p>
+<p>七、相等操作符</p>
+<p>1.相等（==）与不相等（!=）</p>
+<p>先转换操作数，再比较相等性；基本规则：</p>
+<p>如果有一个操作数是布尔值，在比较之前先转换为数值；</p>
+<p>如果有一个操作数是字符串，另一个操作数是数值，在比较之前先将字符串转换为数值；</p>
+<p>如果有一个操作数是对象，另一个不是，则调用对象的valueOf()方法；</p>
+<p>如果两个操作数都是对象，则比较它们是不是同一个对象；如果两个操作数都指向同一个对象，则返回true，否则返回false；</p>
+<p>null值与undefined值相等；</p>
+<p>在比较相等性之前，不能将null值或undefined转换成其它任何值；</p>
+<p>NaN不等于任何值，即使是它自己。</p>
+<p>2.全等（===）和不全等（!===）</p>
+<p>只有在不转换数值类型的情况下相等，全等才会返回true；</p>
+<p>null == undefined；但是null !== undefined</p>
+<p>八、条件操作符</p>
+<p>variable = boolean_expression ? true_value : false_value;</p>
+<p>对布尔值表达式求值，若为true，则返回第一个值；若为false，则返回第二个值。</p>
+<p>九、赋值操作符</p>
+<p>赋值操作符的作用，将右边的值赋给左边的变量。</p>
+<p>如果在赋值操作符的左边添加其它操作符，可以完成复合赋值操作，简化赋值操作；</p>
+<p>var num = 10;</p>
+<p>num +=10 ;    //num = num +10;</p>
+<p>十、逗号操作符</p>
+<p>在一条语句中声明多个变量；</p>
+<p>用于赋值，表达式中的每一项都会被计算，但是返回最后一项；</p>
+<p>var num = (1,2,3,4,5);</p>
+<p>alert(num);    //5</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/05/30/ben-ci/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一纸墨迹">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/30/ben-ci/" itemprop="url">古城深巷、青砖黛瓦，惊艳了谁的时光？深度美文!</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-30T15:46:37+08:00">
+                2018-05-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/poem/" itemprop="url" rel="index">
+                    <span itemprop="name">poem</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/30/ben-ci/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/05/30/ben-ci/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/05/30/ben-ci/" class="leancloud_visitors" data-flag-title="古城深巷、青砖黛瓦，惊艳了谁的时光？深度美文!">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p><a href="http://blog.sina.com.cn/s/blog_14de1cf2f0102wg4g.html" target="_blank" rel="noopener">古城深巷、青砖黛瓦，惊艳了谁的时光</a></p>
+<p>长相思『雨』句。</p>
+<p>蟋蟀瑟，蟋蟀息。瓦上沙沙压虫鸣，夜已到何时？<br>昨天去，明日来。信那庭前青砖道，新苔又一地。</p>
+<p>青砖黛瓦，古城深巷</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/05/30/ben-ci/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/05/30/mac-mdwork/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一纸墨迹">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/30/mac-mdwork/" itemprop="url">Mac系统mds、mds_stores、mdworker疯狂工作的问题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-30T15:33:35+08:00">
+                2018-05-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mac/" itemprop="url" rel="index">
+                    <span itemprop="name">mac</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/30/mac-mdwork/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/05/30/mac-mdwork/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/05/30/mac-mdwork/" class="leancloud_visitors" data-flag-title="Mac系统mds、mds_stores、mdworker疯狂工作的问题">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>这几个进程都是为了Spotlight索引而疯狂的，解决方案：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mdutil -a -i off</span><br></pre></td></tr></table></figure>
+<p>打开</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mdutil -a -i on</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/05/21/node-grpc/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一纸墨迹">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/21/node-grpc/" itemprop="url">node-grpc</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-21T10:44:12+08:00">
+                2018-05-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/21/node-grpc/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/05/21/node-grpc/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/05/21/node-grpc/" class="leancloud_visitors" data-flag-title="node-grpc">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/05/21/node-Ramda/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一纸墨迹">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/21/node-Ramda/" itemprop="url">node的库</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-21T10:15:51+08:00">
+                2018-05-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/node/" itemprop="url" rel="index">
+                    <span itemprop="name">node</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/21/node-Ramda/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/05/21/node-Ramda/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/05/21/node-Ramda/" class="leancloud_visitors" data-flag-title="node的库">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>牛逼的node库，先供着</p>
+<ul>
+<li>Ramda</li>
+<li>immutable </li>
+<li>mobx 数据模型框架</li>
+<li>redux 数据模型框架</li>
+<li>graphql</li>
+<li>loadash</li>
+<li>loadash.merge</li>
+<li>Electron就是使用node+chrome的应用程序框架</li>
+<li>yarn</li>
+<li>npm</li>
+<li>webpack</li>
+<li>react</li>
+<li>gulp</li>
+<li>babel</li>
+<li>jest</li>
+<li>es6</li>
+<li>react</li>
+<li>react-router-dom</li>
+<li>classnames</li>
+<li>webpack</li>
+<li>type Script</li>
+<li>promise <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise" target="_blank" rel="noopener">promise</a> [重点]</li>
+<li>await [重点]</li>
+<li>async <a href="https://caolan.github.io/async/" target="_blank" rel="noopener">async官网</a> [重点]</li>
+<li>fetch [重点] then (then不是框架，是Promise里的一个方法)</li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects" target="_blank" rel="noopener">JavaScript 标准库</a> </li>
+<li>DNode 一个基于Node.Js的JSON协议的RPC解决方案</li>
+<li>node-json-rpc</li>
+<li>mqtt lot 物联网相关包</li>
+</ul>
+<p>比较es6-promise就是promise的polyfill，但是bluebird就在promise的功能基础上又加了很多新的功能。</p>
+<p><a href="http://zh.highscore.de/cpp/boost/" target="_blank" rel="noopener">boost c++库</a></p>
+<p>===============<br>机器学习教程</p>
+<p><a href="https://www.youtube.com/watch?v=aircAruvnKk&amp;list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi" target="_blank" rel="noopener">https://www.youtube.com/watch?v=aircAruvnKk&amp;list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi</a></p>
+<p><a href="https://space.bilibili.com/88461692/#/" target="_blank" rel="noopener">3Blue1Brown</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/05/18/electron-audion/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1155,782 +2146,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/05/05/react-webpack-eject/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ben">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/img/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一纸墨迹">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/05/react-webpack-eject/" itemprop="url">如何创建和扩展React App的Webpack配置</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-05T15:38:34+08:00">
-                2018-05-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/05/05/react-webpack-eject/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/05/05/react-webpack-eject/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2018/05/05/react-webpack-eject/" class="leancloud_visitors" data-flag-title="如何创建和扩展React App的Webpack配置">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><a href="https://zhaozhiming.github.io/blog/2018/01/08/create-react-app-override-webpack-config/" target="_blank" rel="noopener">原文：如何扩展 Create React App 的 Webpack 配置
-</a></p>
-<p>待进一步学习哇</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/05/03/Paxos/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ben">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/img/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一纸墨迹">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/03/Paxos/" itemprop="url">Paxos</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-03T18:21:46+08:00">
-                2018-05-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/05/03/Paxos/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/05/03/Paxos/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2018/05/03/Paxos/" class="leancloud_visitors" data-flag-title="Paxos">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/05/03/python-django-Authentication/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ben">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/img/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一纸墨迹">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/03/python-django-Authentication/" itemprop="url">django REST-Framework的授权Authentication方案</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-03T13:13:59+08:00">
-                2018-05-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/05/03/python-django-Authentication/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/05/03/python-django-Authentication/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2018/05/03/python-django-Authentication/" class="leancloud_visitors" data-flag-title="django REST-Framework的授权Authentication方案">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><a href="http://www.django-rest-framework.org/api-guide/authentication/" target="_blank" rel="noopener">官方文档原文</a></p>
-<p>身份验证是将传入请求与一组识别凭证（例如请求来自的用户或其签名的令牌）相关联的机制。然后，权限和限制策略可以使用这些凭据来确定请求是否应该被允许.</p>
-<p>REST框架提供了许多开箱即用的身份验证方案，还允许您实施自定义方案。<br>在许可和节流检查发生之前，在允许任何其他代码继续之前，验证总是在视图的开始运行。</p>
-<p><code>request.user</code>属性通常会设置为<code>contrib.auth</code>包的<code>User</code>类的一个实例。<br><code>request.auth</code>属性用于任何其他身份验证信息，例如，它可以用来表示请求已签名的身份验证令牌。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/05/03/python-django-Authentication/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/05/02/nodejs-pm2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ben">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/img/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一纸墨迹">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/02/nodejs-pm2/" itemprop="url">nodejs pm2的简单应用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-02T17:01:41+08:00">
-                2018-05-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/nodejs/" itemprop="url" rel="index">
-                    <span itemprop="name">nodejs</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/05/02/nodejs-pm2/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/05/02/nodejs-pm2/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2018/05/02/nodejs-pm2/" class="leancloud_visitors" data-flag-title="nodejs pm2的简单应用">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>pm2是一个进程管理工具,可以用它来管理你的node进程，并查看node进程的状态，当然也支持性能监控，进程守护，负载均衡等功能。</p>
-<p>开发过程中建议时不时的参看官方详细命令行使用</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/05/02/nodejs-pm2/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/04/30/code-x/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ben">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/img/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一纸墨迹">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/30/code-x/" itemprop="url">Pycharm 激活码激活方法及有效激活码</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-30T00:21:32+08:00">
-                2018-04-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/04/30/code-x/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/04/30/code-x/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2018/04/30/code-x/" class="leancloud_visitors" data-flag-title="Pycharm 激活码激活方法及有效激活码">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>pycharm 非常好用，网络授权突然被封了，各种网络授权地址都不起作用了。最后找到一个激活码授权方式，正好激活使用，土豪们还是建议买正版。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/30/code-x/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1980,7 +2200,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">58</span>
+                  <span class="site-state-item-count">63</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1991,7 +2211,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -2002,7 +2222,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
