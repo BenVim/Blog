@@ -324,6 +324,183 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/07/14/unix-socket-byte-fun/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一纸墨迹">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/14/unix-socket-byte-fun/" itemprop="url">Unix字节操作函数 bzero,bcopy,bcmp,memset,memcpy,memcmp</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-14T14:45:01+08:00">
+                2018-07-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/c-c/" itemprop="url" rel="index">
+                    <span itemprop="name">c/c++</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/07/14/unix-socket-byte-fun/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/07/14/unix-socket-byte-fun/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/07/14/unix-socket-byte-fun/" class="leancloud_visitors" data-flag-title="Unix字节操作函数 bzero,bcopy,bcmp,memset,memcpy,memcmp">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>名字以b(表示字节)开阔大的第一组函数起源于4.2BSD，几乎所有现今支持套接字函数的系统仍然提供他们这些函数。名字以mem(表示内存) 开头的第二组函数起源于ANSI C标准，支持ANSI C函数库的所有系统都提供它他。</p>
+<h3 id="4-2BSD-函数"><a href="#4-2BSD-函数" class="headerlink" title="4.2BSD 函数"></a>4.2BSD 函数</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bzero</span><span class="params">(<span class="keyword">void</span> *dest, <span class="keyword">size_t</span> nbytes)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bcopy</span><span class="params">(<span class="keyword">const</span> <span class="keyword">void</span> * src, <span class="keyword">void</span> * dest, <span class="keyword">size_t</span> nbytes)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bcmp</span><span class="params">(<span class="keyword">const</span> <span class="keyword">void</span> * ptrl, <span class="keyword">const</span> <span class="keyword">void</span> * ptr2, <span class="keyword">size_t</span> nbytes)</span></span>;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>const 限定词，在这里的作用表示，所限定的指针src、ptrl和ptr2所指的内容不会被函数更改。换句话说，函数只是读而不修改由const指针所指的内存单元。</p>
+</blockquote>
+<p>bzero把目标字节串中指定数目的字节置为0.我们经常使用该函数来把一个套接字地址结构初始化为0。bcopy将指定数目的字节从源字节串移到目标字节串。bcmp比较两个任意的字节串，若相同则返回值为0， 否则返回值为非0.</p>
+<h3 id="ANSI-C函数"><a href="#ANSI-C函数" class="headerlink" title="ANSI C函数"></a>ANSI C函数</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt; string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> * <span class="title">memset</span><span class="params">(<span class="keyword">void</span> *dest, <span class="keyword">int</span> c, <span class="keyword">size_t</span> len)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> * <span class="title">memcpy</span><span class="params">(<span class="keyword">void</span> *dest, <span class="keyword">const</span> <span class="keyword">void</span> * src, <span class="keyword">size_t</span> nbytes)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">memcmp</span><span class="params">(<span class="keyword">const</span> <span class="keyword">void</span> *ptrl, <span class="keyword">const</span> <span class="keyword">void</span> *ptr2, <span class="keyword">size_t</span> nbytes)</span></span>;</span><br><span class="line"><span class="comment">// 返回：若相等则为0，否则为&lt;0或&gt;0 第一个字节大于第二个字节返回值大于0，否则小于0.</span></span><br></pre></td></tr></table></figure>
+<p>memset把目标字节串指定数目的字节置为值c。memcpy类似bcopy，不过两个指针参数的顺序是相反的。当源字节串与目标字节串重叠时，bcopy能够正确处理，但是memcpy的操作结果却不可知。这种情况下必须改用ANSI C的memmove函数。</p>
+<blockquote>
+<p>记住memcpy两个指针参数顺序的方法之一是记着他们是按照与c中的赋值语句相同的顺序从左到右书写的：dest = src;</p>
+</blockquote>
+<blockquote>
+<p>记住memset最后两个参数顺序的方法之一是认识到所有ANSI C的memxxx函数都需要一个长度参数，而且它总是最后一个参数。</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/07/14/unix-socket-base01/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1831,175 +2008,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.ku-cat.com/2018/06/19/c-function/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ben">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/img/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一纸墨迹">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/19/c-function/" itemprop="url">c++ 函数指针</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-19T14:35:01+08:00">
-                2018-06-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/c-c/" itemprop="url" rel="index">
-                    <span itemprop="name">c/c++</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/06/19/c-function/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/06/19/c-function/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2018/06/19/c-function/" class="leancloud_visitors" data-flag-title="c++ 函数指针">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="函数指针的基础知识"><a href="#函数指针的基础知识" class="headerlink" title="函数指针的基础知识"></a>函数指针的基础知识</h3><h3 id="函数绵是针示例"><a href="#函数绵是针示例" class="headerlink" title="函数绵是针示例"></a>函数绵是针示例</h3><h3 id="深入探讨函数指针"><a href="#深入探讨函数指针" class="headerlink" title="深入探讨函数指针"></a>深入探讨函数指针</h3><h4 id="函数指针数组的表示"><a href="#函数指针数组的表示" class="headerlink" title="函数指针数组的表示"></a>函数指针数组的表示</h4><p>鉴于需要使用三个函数，如果有一个函数指针数组将很方便，这样，将可使用for循环通过指针依次调用每个函数。如何声明这样的数组呢？显然，这种声明类似单个函数指针的声明，但必须在某个地方加上<figure class="highlight plain"><figcaption><span>。答案如下：</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">```c++</span><br><span class="line">const double * (*pa[3])(const double *, int) = &#123;f1, f2, f3&#125;;</span><br></pre></td></tr></table></figure></p>
-<p>为何将[3]放在这个地方呢？pa是一个包含三个元素的数组，而要声明这样的数组，首先要使用pa[3]。该声明的其它部分指出了数组包含的元素是什么样的。运算符[]的优先级高于*，因此<figure class="highlight plain"><figcaption><span>double *, int```，且返回值类型为 ```const double *```的函数。 因此， pa是一个包含三个指针的数组，其中每个指针都指向这样的函数，即将```const double * 和 int作为参数，并返回一个````const duble*```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#####如何使用：</span><br><span class="line"></span><br><span class="line">因为 pa[i] 都表示数组中的指针，因此可将任何一种函数调用表示法用于它们：</span><br><span class="line"></span><br><span class="line">```c++</span><br><span class="line">const double * px = pa[0](av, 3);</span><br><span class="line">const double * py = (*pb[1])(av, 3);</span><br></pre></td></tr></table></figure></p>
-<p>要获取指向double的值，可以使用运算符*：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> x= *pa[<span class="number">0</span>](av, <span class="number">3</span>);</span><br><span class="line"><span class="keyword">double</span> y = *(*pb[<span class="number">1</span>])(av, <span class="number">3</span>);</span><br></pre></td></tr></table></figure>
-<p>可做的另一件事是创建指向整个数组的指针。由于数组名pa是指向函数指针的指针，因此指向数组的指针将是这样的指针，即它指向指针的指针。看上去挺复杂的，但是由于可使用单个值对其进行初始化，因此可使用auto：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> pc = &amp;pa;<span class="comment">//c++11 automatic type deduction</span></span><br><span class="line"></span><br><span class="line">*pd[<span class="number">3</span>] <span class="comment">//an array of 3 pointers</span></span><br><span class="line">(*pd)[<span class="number">3</span>] <span class="comment">//a pointer to an array of 3 elements</span></span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2054,7 +2062,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-count">65</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
